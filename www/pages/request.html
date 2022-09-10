@@ -1,0 +1,49 @@
+<ion-view cache-view="true">
+        
+    <ion-nav-bar class="bar bar-light">
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back dark"></i></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        </ion-nav-buttons>
+  
+      <ion-nav-title>
+        <b>Request</b>
+      </ion-nav-title>
+    </ion-nav-bar>
+    
+        <ion-content class="padding text-center">
+ 
+     <div class="padding">
+             <br>
+             <div ui-sref="profilepic" class="ppa" style="margin-top: -7px;margin-left:auto;margin-right: auto;" ng-style="{'background-image':'url('+media + chatter(request).photo+')'}">
+             </div>
+             <div class="text-center">
+              <h4>{{chatter(request).full_name ||  chatter(request).first_name  +' '+ chatter(request).last_name | capitalize}}</h4>
+             <h5><b class="assertive">@{{chatter(request).user_name}}</b></h5> 
+             <br/>
+             <button class="button button-small button-light button-outline button-dark" ui-sref="aprofile({id:chatter(request).t_id})" style="border-radius: 4px !important;">view profile</button>
+
+             </div>
+     </div>
+     <div class="text-center">
+      <b ng-if="request.members.length <=2"><b class="assertive">@{{chatter(request).user_name}}</b> wants to start a conversation with you, do want to accept?</b>
+      <b ng-if="request.members.length > 2"><b class="assertive">@{{chatter(request.user_name}}</b> wants you to join the conversation in <b>{{request.title}}</b>, do want to accept?</b>
+  
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-balanced" ng-click="accept_chat(request)">Accept</button>
+      </div>
+      <div class="col">
+        <button class="button button-block button-assertive button-clear" ng-click="decline_chat(request)">Decline</button>
+      </div>
+    </div>
+    </div>
+   
+     <br>
+ 
+   </ion-content>
+ 
+ 
+   </ion-view>

@@ -1,0 +1,14 @@
+<div class="pull-right" style="float: right !important;margin-top:0px !important;">
+    <div ng-if="!topic.expired">
+       <button ng-if="topic.bar > 0 && topic.casting" ng-click="pause_cast()" class="button button-clear button-small">
+           <span class="ion-pause button-trans" style="font-size: 30px !important;"></span>
+       </button>
+       <button ng-if="!topic.casting" ng-disabled="!topic.cast || topic.expired" ng-click="play_cast(topic)" class="button button-clear button-small">
+           <span class="ion-play button-trans" style="font-size: 30px !important;"></span>
+       </button>
+       <h6 ng-if="topic.casting && topic.bar <=0" class="grey">
+           <ion-spinner icon="crescent" class="spinner-dark" style="font-size: 10px !important;"></ion-spinner>  
+       </h6>
+   </div>
+   <h6 ng-if="topic.expired" class="assertive">&nbsp;&nbsp;Expired</h6>
+</div>

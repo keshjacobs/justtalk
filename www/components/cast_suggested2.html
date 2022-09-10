@@ -1,0 +1,10 @@
+
+     <div ng-if="!suggested_casts" class="text-center padding">
+        <ion-spinner class="listening" icon="crescent"></ion-spinner> 
+      </div>
+      
+    <div ng-if="suggested_casts.length > 0" class="padding">     
+        <h4 class="title">Suggested casts</h4>
+       <div ng-include="'components/cast.html'" style="margin-left: 0px !important;" ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:12">
+       </div>
+    </div>

@@ -1,0 +1,22 @@
+<div class="profile_header text-center" ng-style="{'background-image':'url('+media+user.photo_header+')'}">
+
+<div class="profile_photo_big text-center" ui-sref="change_photo" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>  
+
+
+<h3 class="text-center">
+    <b class="light">{{user.full_name || user.first_name + ' ' + user.last_name}}</b>  <span ng-if="user.verified" class="ion ion-checkmark-circled assertive"></span>
+    <br/>
+<small class="text-center light">@{{user.user_name || '...'}}</small>
+</h3>      
+<div class="text-center light">
+    <b>{{user.casts.length || 0 | number}}</b>
+    <i style="opacity: 0.4;"> Casts</i>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    <b ui-sref="subscribers({user_id:user.t_id})">
+    {{user.subscribers.length || 0 | number}}
+    </b>
+    <i style="opacity: 0.4;"> Subscribers</i>
+</div>
+
+</div>
+

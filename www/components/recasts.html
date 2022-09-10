@@ -1,0 +1,10 @@
+<div ng-if="cast.recasts.length > 0">
+        
+    <div class="item item-divider text-left">
+       <h5>Recasts</h5>
+    </div>
+
+   <div ng-include="'components/cast.html'" ng-repeat="cast in cast.recasts">
+   </div>
+
+</div>

@@ -1,0 +1,82 @@
+
+.dark{
+    color: black !important;
+}
+.assertive,.red,.dark-red{
+    color: rgb(246, 78, 78) !important;
+}
+.item-divider,ion-item,.text-left,.text-center{
+    background-color: transparent !important;
+}
+body,.modal,.view-container,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bar,.tabs-striped .tabs,.bg-grey,.billboard,ion-view,.chat_board{
+    color:#fff !important;
+    background-color: rgb(0, 0, 0) !important;
+    border:none !important;
+    background-image: none !important;
+}
+.reply-box{
+    background-color: rgb(34, 34, 34) !important;
+}
+.jt-mic{
+    background-color: rgb(3, 127, 12) !important;
+}
+.jt-mic2{
+    background-color: rgb(127, 90, 3) !important;
+}
+.jt-mic2 span{
+        color:#000 !important;
+}
+input,textarea{
+    background-color: rgba(96, 96, 96, 0) !important;
+    color: #fff !important;
+}
+.item-input,.input-light,.input-lable,.backdrop{
+    background-color: rgba(96, 96, 96, 0.528) !important;
+    color: #fff !important;
+    border: none !important;
+}
+*,.title,.dark,.button{
+    color: #fff !important;
+}
+
+
+
+.tabs .tab-item{
+    opacity: 0.6 !important;
+  }
+  
+  
+  
+  .tabs .tab-item .icon{
+    opacity: 0.6 !important;
+  }
+  
+  
+.icon{
+    color: #fff !important;
+}
+
+
+.tabs .tab-item-active .icon{
+    color: #ff9249 !important;
+    font-size: 24px !important;
+    opacity: 1 !important;
+  }
+  
+  .profile_photo_big,.profile_photo,.tiny-photo,.ppa{
+    border: 2px solid #000 !important;
+  }
+
+  .splash_screen{
+    background-color: #000 !important;
+  }
+
+  .button-light, .button-dark , .item-options, .item-options button,ion-option-button{
+    background-color: rgb(32, 32, 32) !important;
+  }
+
+
+  .recast-box{
+    background-color: rgb(0, 12, 10) !important;
+    border: none !important;
+  }

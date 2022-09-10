@@ -1,0 +1,32 @@
+<div class="padding text-center">
+    <div ng-show="file_added">
+
+      <br>    
+              <ion-spinner ng-hide="post.file" icon="crescent"></ion-spinner> 
+              <audio id="aud" ng-show="post.file" controls data-tap-disabled="true">                                        
+                      <source ngf-src="post.file" type="audio/aac">                                                        
+              </audio>
+              <br>
+              <br>
+              <br>
+              <button ng-show="post.file" ng-click="clear()" class="button button-small button-outline button-small button-balanced">&nbsp;&nbsp;&nbsp;Clear&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <div ng-hide="file_added">
+              <ion-spinner ng-show="recording" icon="ripple" class="listening"></ion-spinner>
+              <b ng-show="recording" class="grey">Listening...</b>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <div ng-show="!recording" ng-click="start_recording()" style="background-color: rgb(173, 63, 30) !important;width:80px !important;height:80px !important;padding: 25px !important;margin: auto !important;border-radius: 360px !important;" ng-click="start_record()">
+                  <span class="icon ti-microphone light" style="font-size: 30px !important;margin: auto !important;"></span>
+              </div>
+              <h6 class="dark" ng-show="recording">{{timer || 0}}s Left</h6>
+              <div ng-show="recording" ng-click="stop_recording()" style="background-color: rgb(228, 50, 50) !important;color:white !important;width:auto !important;height:40px !important;padding: 10px 16px 10px 16px !important;margin: auto !important;border-radius: 10px !important;" ng-click="start_record()">
+                Stop
+                  <!-- <span class="icon ion-stop light" style="font-size: 15px !important;margin: auto !important;"></span> -->
+              </div>
+              <h6 ng-show="!recording">Tap to start recording</h6>
+    </div>
+</div>

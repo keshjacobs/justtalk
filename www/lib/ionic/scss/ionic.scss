@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+@import
+  // Ionicons
+  "ionicons/ionicons.scss",
+
+  // Variables
+  "mixins",
+  "variables",
+
+  // Base
+  "reset",
+  "scaffolding",
+  "type",
+
+  // Components
+  "action-sheet",
+  "backdrop",
+  "bar",
+  "tabs",
+  "menu",
+  "modal",
+  "popover",
+  "popup",
+  "loading",
+  "items",
+  "list",
+  "badge",
+  "slide-box",
+  "slides",
+  "refresher",
+  "spinner",
+
+  // Forms
+  "form",
+  "checkbox",
+  "toggle",
+  "radio",
+  "range",
+  "select",
+  "progress",
+
+  // Buttons
+  "button",
+  "button-bar",
+
+  // Util
+  "grid",
+  "util",
+  "platform",
+
+  // Animations
+  "animations",
+  "transitions";
+
+
+  ion-view.main-container.pane {
+    opacity:1!important;
+    &[nav-view="cached"] {
+        @include animation(slideOutLeft 400ms ease);
+        display:block!important;
+    }
+    //This second part makes sure that the header slides too
+    .a-tab-view-class.pane ion-nav-bar.hide {
+        display:block!important;
+    }
+}

@@ -1,0 +1,58 @@
+<ion-view cache-view="true" class="bg-grey">
+
+        <ion-nav-bar class="bar bg-grey">
+  
+                <ion-nav-title>
+                        <b>Contact List</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        <ion-nav-buttons side="right">
+             
+        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+        
+        
+          <ion-content class="bg-white" ng-init="get_contacts()">
+
+                <ion-refresher  icon="ion-loading-d" 
+                pulling-text="Pull to refresh"
+                on-refresh="get_contacts()">
+                    </ion-refresher>
+
+<div class="text-center padding">
+
+<label class="item item-input item-light" style="height: 35px !important;">
+        <input type="text" ng-model="query" placeholder="Search for people" style="border:none !important;color:rgb(8, 8, 8) !important; width: 80% !important;">
+    </label>
+    
+        <h5>Send a request to start a conversation</h5>
+</div>
+
+
+
+<div ng-if="contact_loader" class="text-center padding">
+        <br>
+        <ion-spinner icon="crescent"></ion-spinner> 
+</div>
+
+<div class="list">
+
+          
+            <div ng-include="'components/request_user.html'" ng-repeat="caster in contact_list | unique:'t_id' | filter:query">
+            </div>
+    
+               
+</div>
+                 
+                
+        
+          </ion-content>
+        </ion-view>

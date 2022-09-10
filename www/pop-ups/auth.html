@@ -1,0 +1,26 @@
+<ion-modal-view class="bg-white">
+    <ion-header-bar class="bar bar-header bar-light">
+        <button title="close" ng-click="auth_box.hide()" class="button button-clear button-light button-sm button-small">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+        <ion-title><b class="dark">Signin or Signup</b></ion-title>
+      </ion-header-bar>
+
+
+          <ion-content class="padding text-center" style="padding-top: 3vh;">
+        <div class="text-center padding">
+            <button ui-sref="auth" ng-click="auth_box.hide()" class="button button-block button-oran-alt">
+                <i class="icon ion-android-social-user"></i> &nbsp;&nbsp; Login / Register
+            </button>
+
+            <br><br>
+
+            <small class="text-center">
+                By continuing you agree to our <a>T&Cs</a>. Please also check out our <a>Privacy</a>.
+            </small>
+            <br>
+            <small class="text-center">
+                We use our data to offer you a personalised experience and to better understand and improve our services.
+            </small>
+        </div>
+    </ion-content>
+
+     </ion-modal-view>

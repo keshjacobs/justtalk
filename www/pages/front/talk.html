@@ -1,0 +1,82 @@
+<ion-view cache-view="true" class="bg-white"  ng-init="get_talk()">
+   <!-- <div class="blur"> -->
+    <ion-nav-bar class="bar"  ng-hide="!t_id">
+                    <ion-nav-title class="text-center" align="center">
+                        <b>Home</b>
+                    </ion-nav-title>
+
+                    <ion-nav-buttons side="left">
+                        <img title="profile-photo2" side="left" menu-toggle="left"  ng-if="!user"  style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
+                        <div ng-if="user" side="left" menu-toggle="left"  style="margin-top: 4px !important;" class="profile-photo2" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+                    </ion-nav-buttons>
+                    
+                    <ion-nav-buttons side="right">
+                    <!-- <button  ng-click="search_box.show()" title="search" class="button button-sm button-clear button-dark">
+                            <span class="icon ion-ios-search"></span>
+                        </button> -->
+                    </ion-nav-buttons>
+    </ion-nav-bar>
+    <!-- </div> -->
+
+    <ion-content class="bg-grey" ng-class="home_loader ? ' edge_loader':''">
+
+       <ion-refresher pulling-text="Pull to refresh" on-refresh="get_talk()"></ion-refresher>
+
+       
+       <div ng-include src="'components/auth.html'"></div>
+
+            <ion-list ng-if="timeline.length > 0">
+                <div ng-include="'components/cast.html'" ng-hide="cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created'">
+                </div>
+            </ion-list>
+
+
+
+
+        <div ng-if="timeline.length < 1" class="text-center padding">
+   
+            <br>
+            <br>
+            <h4><b>You don't have any new feed</b></h4>
+            <h5>Subscribe to a pod and listen to updates daily</h5>
+                <br>
+                <div class="text-center">
+                    <button ng-click="start_talk()" class="button button-small button-icon-left button-balanced">
+                        &nbsp;&nbsp;&nbsp;<span class="icon ion-plus"></span>&nbsp;
+                        Make your first cast&nbsp;&nbsp;&nbsp;
+                    </button>
+                    </div>
+            
+        
+        </div>
+    
+
+
+
+
+        <ion-infinite-scroll on-infinite="load_more(pages)" distance="100">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data..."
+            >
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+
+    
+           
+            
+            
+    <br><Br><br><br><br>
+    </ion-content>
+
+    
+    <div ng-include src="'components/mic.html'"></div>
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+      
+  </ion-view>
+  
+  
+  

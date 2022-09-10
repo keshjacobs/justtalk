@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width,viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src * blob: data: 'unsafe-eval'; style-src * 'unsafe-inline' blob:; script-src * 'unsafe-inline' 'unsafe-eval' blob:; img-src * blob: data: 'unsafe-inline'; connect-src * 'unsafe-inline' file: blob:;object-src * blob: file:">
+    <title>JustTalk</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/app-font.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="css/ionic-segment/dist/ionic.segment.css">
+    <link rel="stylesheet" href="css/moves.css">
+    <div ng-switch="settings.dark_mode">
+      <div ng-switch-when="true">
+        <link rel="stylesheet" href="css/dark-mode.css">
+      </div>
+       <div ng-switch-when="false">
+      </div>
+      <div ng-switch-default>
+      </div>
+    </div>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="js/socket.io.min.js"  integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="js/ionic.bundle.js"></script>
+<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+<script src="lib/ngStorage.min.js"></script>
+<script src="lib/ionic-native/ionic.native.min.js"></script>
+<script src="lib/ionic-native/ionic.native.js"></script>
+<script src="cordova.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/ng-file-upload-shim.js"></script>
+<script src="js/ng-file-upload.js"></script>
+<script src="lib/ionic-segment/dist/ionic.segment.js"></script>
+<!-- <script src="lib/angular-animate/angular-animate.js"></script> -->
+<script src="js/moment.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script src="js/lazy-scroll.js"></script>
+<script src="engine/App.js"></script>
+<script src="engine/Library.js"></script>
+<script src="engine/API.js"></script>
+<script src="engine/Routes.js"></script>
+<script src="engine/Services.js"></script>
+<script src="engine/Filter.js"></script>
+
+
+<script src="controller/Splash.js"></script>
+<script src="controller/Auth.js"></script>
+<script src="controller/Profile.js"></script>
+<script src="controller/Subs.js"></script>
+<script src="controller/Cast.js"></script>
+<script src="controller/Messages.js"></script>
+<script src="controller/Explore.js"></script>
+
+
+  </head>
+
+  <body ng-app="justtalk">
+    <ion-side-menus enable-menu-with-back-views="false">
+
+    <ion-side-menu-content> 
+      <ion-nav-view animation="slide-in-up"></ion-nav-view>
+    </ion-side-menu-content>
+
+<ion-side-menu side="left" class="menu">
+<ion-content ng-controller="profile"  style="margin-top: -10px !important;">
+
+<div menu-close ng-include="'components/profile_card2.html'">
+</div>
+    <ion-list class="transparent">
+     
+      <ion-item menu-close ui-sref="edit_profile" class="text-left item-icon-left button-small transparent" style="font-size: 18px !important;">
+        <i class="icon ion-android-person" style="font-size: 30px !important;"></i> Profile
+      </ion-item>
+
+
+      <ion-item menu-close ui-sref="my_profile" class="text-left item-icon-left button-small transparent" style="font-size: 18px !important;">
+        <i class="icon ion-android-radio-button-on" style="font-size: 30px !important;"></i> Casts
+      </ion-item>
+    
+      <ion-item menu-close ui-sref="subscription({user_id:user.t_id})" class="text-left item-icon-left button-small transparent" style="font-size: 18px !important;">
+        <i class="icon ion-android-list" style="font-size: 30px !important;"></i>  Subscriptions
+      </ion-item>   
+     
+      <ion-item menu-close ui-sref="settings" class="text-left item-icon-left button-small transparent" style="font-size: 18px !important;">
+        <i class="icon ion-gear-b" style="font-size: 30px !important;"></i>  Settings
+      </ion-item> 
+
+      <ion-item menu-close ui-sref="settings" ng-click="logout()" class="text-left item-icon-left button-small transparent assertive" style="font-size: 18px !important;">
+        <i class="icon ion-log-out" style="font-size: 30px !important;"></i>  Logout
+      </ion-item> 
+      
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar menu-close>
+      <ion-toggle class="bg-light no-border toggle-dark" ng-change="change_mode()" ng-model="settings.dark_mode" style="margin-top: -33px !important;width: 100% !important;float: left !important;">Dark Mode</ion-toggle>
+   </ion-footer>
+  </ion-footer-bar>
+</ion-side-menu>
+</ion-side-menus>
+
+
+
+
+</ion-side-menus>
+
+
+
+
+  </body>
+</html>

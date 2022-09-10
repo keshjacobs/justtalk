@@ -1,0 +1,81 @@
+body {
+    background: #F6F6F6;
+  }
+  
+  div.menu {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: #F6F6F6;
+  }
+  
+  div.menu ul {
+      width: 100%;
+      list-style: none;
+      margin: 95px 0 0 45px;
+      height: 206px;
+  }
+  
+  div.menu li {
+      font-weight: 200;
+      font-size: 19px;
+      line-height: 19px;
+      margin-bottom: 28px;
+      -webkit-transition: all 400ms ease-in-out,opacity 1000ms ease;
+      -moz-transition: all 400ms ease-in-out,opacity 1000ms ease;
+      -ms-transition: all 400ms ease-in-out,opacity 1000ms ease;
+      -o-transition: all 400ms ease-in-out,opacity 1000ms ease;
+      transition: all 400ms ease-in-out,opacity 1000ms ease;
+      -webkit-transform: translate3d(-150px,0,0) scale(0.2);
+      opacity: 0;
+  }
+  
+  div.menu li.visible {
+      -webkit-transform: translate3d(0px,0,0) scale(1);
+      opacity: 1;
+  }
+  
+  div.menu li a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  div.menu li a i {
+      width: 30px;
+      text-align: center;
+  }
+  
+  div.menu li a span {
+      margin-left: 20px;
+  }
+  
+  .pane {
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+  }
+  
+  .pane.inactive {
+    -webkit-transform: translate3d(160px,0,0) scale(0.7);
+    -moz-transform: translate3d(160px,0,0) scale(0.7);
+    -ms-transform: translate3d(160px,0,0) scale(0.7);
+    transform: translate3d(160px,0,0) scale(0.7);
+  }
+
+
+
+
+
+  .menu-open .menu {
+	box-shadow: 200px 0px 205px rgba(0, 0, 0, 0.342) !important;
+    z-index: 1000 !important;
+    -webkit-transition: all 400ms ease-in-out,opacity 1000ms ease;
+    -moz-transition: all 400ms ease-in-out,opacity 1000ms ease;
+    -ms-transition: all 400ms ease-in-out,opacity 1000ms ease;
+    -o-transition: all 400ms ease-in-out,opacity 1000ms ease;
+    transition: all 400ms ease-in-out,opacity 1000ms ease;
+    
+}

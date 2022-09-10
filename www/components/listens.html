@@ -1,0 +1,9 @@
+<div style="padding: 10px !important;float: left !important;width: 100% !important;display: block;" ng-click="open_listens(cast.listens)" ng-if="(cast.listens | filter:'!'+cast.caster.t_id).length > 0">
+        <div class="tiny-photo" ng-repeat="listener in cast.listens | filter:'!'+cast.caster.t_id | limitTo:4 | unique:'t_id'" ng-style="{'background-image':'url('+media+listener.photo+')'}"></div>
+        <h5 style="margin-top: 9px !important;">&nbsp;&nbsp;{{(cast.listens | filter:'!'+cast.caster.t_id | unique:'t_id').length || 0}} listened
+             <!-- by <b>{{(cast.listens | filter:'!'+cast.caster.t_id)[0].user_name}}</b>
+            <v ng-if="(cast.listens | filter:'!'+cast.caster.t_id | unique:'t_id').length > 1">
+                and {{(cast.listens | filter:'!'+cast.caster.t_id | unique:'t_id').length - 1 || 0 | number:0}} others
+            </v> -->
+        </h5>
+</div>

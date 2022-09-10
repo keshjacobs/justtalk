@@ -1,0 +1,11 @@
+
+    <div ng-if="suggested_casts.length > 0">
+        
+         <div class="item item-divider">
+            <h2>Suggested Casts</h2>
+         </div>
+
+        <div  ng-include="'components/cast.html'"  ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:12">
+        </div>
+
+   </div>

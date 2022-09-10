@@ -1,0 +1,15 @@
+.but1{
+   background-color: rgb(236, 153, 27) !important;
+}
+
+
+.oran{
+   color: rgb(236, 153, 27) !important;
+}
+
+.button-oran{
+   color: rgb(236, 153, 27) !important;
+}
+.button-round, .button{
+   border-radius: 20px !important;
+}

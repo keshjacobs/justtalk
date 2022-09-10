@@ -1,0 +1,64 @@
+<div ng-controller="Cast">
+
+
+    
+<div  ng-switch="categories" ng-class="fetching_casts ? 'edge_loader':''">
+   
+       <ion-list ng-switch-when="casts">
+        <div ng-include="'components/cast.html'" ng-repeat="cast in my_casts | unique:'_id' | orderBy:'-date_created' track by $index">
+       </div>
+       </ion-list>
+
+       <ion-list ng-switch-when="recasts">
+       <div ng-include="'components/cast.html'" ng-repeat="cast in my_casts | filter:filterRecasts | unique:'_id' | orderBy:'-date_created' track by $index">
+      </div>
+
+
+        <div ng-if="my_casts.length > 0 && (my_casts | filter:filterRecasts).length < 1" class="text-center padding">
+        <br>
+        <br>
+        <h5>You have no recasts</h5>
+        </div>
+
+      </ion-list>
+
+
+        <ion-list ng-switch-when="replies">
+        <div ng-include="'components/cast.html'" ng-repeat="cast in my_casts | filter:filterReplies | unique:'_id' | orderBy:'-date_created' track by $index">
+       </div> 
+       <div ng-if="my_casts.length > 0 && (my_casts | filter:filterReplies).length < 1" class="text-center padding">
+        <br>
+        <br>
+        <h5>You have no reply</h5>
+        </div>
+       </ion-list>
+
+
+
+
+       <ion-list ng-switch-when="library">
+        <div ng-include="'components/book.html'" ng-repeat="book in library | unique:'_id' | orderBy:'-date_created' track by $index">
+       </div> 
+       <div ng-if="!library || library.length < 1" class="text-center padding">
+        <br>
+        <br>
+        <h5>You have nothing in your library</h5>
+        </div>
+       </ion-list>
+
+
+
+    <div ng-if="!fetching_casts && my_casts.length < 1" class="text-center padding">
+    <br>
+    <br>
+    <h5>No casts available</h5>
+    </div>
+  
+    <div ng-if="fetching_casts" class="text-center padding">
+    <Br>
+    <ion-spinner icon="crescent"></ion-spinner> 
+    </div>
+
+</div>
+
+</div>

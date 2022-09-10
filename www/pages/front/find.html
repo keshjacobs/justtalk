@@ -1,0 +1,83 @@
+<ion-view style="background-color: rgb(255, 255, 255);" cache-view="true" ng-init="discovery()">
+  
+  
+  
+  <div class="billboard">
+
+  <ion-header>
+    <div ng-include src="'components/search.html'"></div>
+    <div class="padding">
+      <ion-segment ng-model="phase" full="true"  dark>
+          <ion-segment-button value="casts">
+            Podcasts
+          </ion-segment-button>
+          <ion-segment-button value="audiobooks">
+           Audiobooks
+          </ion-segment-button>
+        </ion-segment>    
+    </div>
+  </ion-header>
+   
+  </div>
+ 
+ 
+ 
+   
+<ion-content has-header class="header-content" ng-class="casts_loading ? ' edge_loader':''">
+      
+      
+<ion-refresher pulling-text="Pull to refresh" on-refresh="discovery()"></ion-refresher>
+
+    
+<div  ng-switch="phase">
+   
+      <ion-list ng-switch-when="casts">
+
+          <div ng-include src="'components/trending_topics.html'"></div>
+
+          <div ng-include src="'components/user_suggested.html'"></div>
+
+          <div ng-include src="'components/cast_suggested.html'"></div>
+      
+      </ion-list>
+
+
+      <ion-list ng-switch-when="audiobooks">
+
+        <div class="padding text-center">
+          <h3>Audiobooks</h3>
+          <small>
+            Buy and save audiobooks on justtalk, coming soon.
+          </small>
+        </div>
+   
+      </ion-list>
+
+</div>
+        
+<br><br><br>
+       
+    </ion-content>
+
+
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+
+
+    <ion-infinite-scroll on-infinite="more_suggestions(pages)" distance="-10">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+      
+      
+<br><Br><br><br><br>
+  </ion-view>
+  
+  
+  

@@ -1,0 +1,38 @@
+<ion-view cache-view="false" class="bg-white">
+
+    <ion-nav-bar class="bar bar-light">
+  
+                <ion-nav-title>
+                        <b>Details</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+        
+        
+          
+        <ion-content class="padding">
+         
+            <h4>Members</h4>
+            
+    <div ng-click="add_member(chat)" class="item text-left item-icon-right balanced">
+        <span class="icon ti-plus"></span> Add member
+         </div>
+
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in chat.members">
+            </div>
+    
+                                
+                
+    <div ng-click="leave_chat(chat)" class="item text-left item-icon-right assertive">
+        Leave Chat
+         </div>
+        
+          </ion-content>
+        </ion-view>

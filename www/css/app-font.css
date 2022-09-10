@@ -1,0 +1,67 @@
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  src: url("fonts/roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Aargh";
+  font-weight: 400;
+  src: url("fonts/Aaargh/Aaargh.ttf");
+}
+
+
+@font-face {
+  font-family: "RadioCanada";
+  font-weight: 400;
+  src: url("fonts/RadioCanada/RadioCanada-Light.ttf");
+}
+
+
+@font-face {
+  font-family: "san-pro";
+  font-weight: 400;
+  src: url("fonts/source-sans-pro/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: "proxima";
+  font-weight: 400;
+  src: url("fonts/ProximaNovaThin/ProximaNovaThin.woff");
+}
+
+
+@font-face {
+  font-family: "nunito";
+  src: url("fonts/Nunito/Nunito-VariableFont_wght.ttf");
+  
+}
+
+
+
+@font-face {
+  font-family: "ubuntu";
+  src: url("fonts/ubuntu/Ubuntu-Regular.ttf");
+  
+}
+
+
+@font-face {
+  font-family: "Montserrat";
+  /* src:url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Work+Sans:wght@100&display=swap'); */
+  src: url("fonts/Montserrat.ttf");
+}
+
+
+*{
+  font-family: "ubuntu" !important;
+   font-weight: lighter !important;
+   border:none;
+ }
+
+
+ .nuba, h1{
+  font-family: "RadioCanada" !important;
+   font-weight: lighter !important;
+ }

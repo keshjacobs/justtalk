@@ -1,0 +1,12 @@
+<fieldset class="item text-left">
+    <button ng-disabled="mentions.length >= 5" ng-click="mention_box.show()" style="float: right !important;margin-top: 10px !important;" class="button button-small button-balanced">
+        <span class="ion ion-person-add" style="margin:4px !important;"></span>
+    </button>
+    <div class="text-left" ng-if="!mentions || mentions.length < 1" ng-click="mention_box.show()">
+        <h5>Mention people on your cast</h5>
+        <small>(optional)</small>
+    </div>
+    <div class="tag" ng-repeat="mention in mentions">
+      <b>@{{mention.user_name}}</b> &nbsp;<i ng-click="remove_mention(mention)" class="ion ion-close"></i>
+    </div>
+</fieldset>

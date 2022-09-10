@@ -1,0 +1,24 @@
+<ion-modal-view ng-style="{'background-color': settings.dark_mode ? 'bg-light':color}">
+    <ion-header-bar class="bar bar-header tranny" ng-click="close_aircast()" ng-style="{'border':'1px solid '+ settings.dark_mode ? 'bg-light':color}">
+      <button title="close" ng-click="close_aircast()" class="button button-clear button-{{text_color}} button-sm button-small"  style="float:left;font-weight: bold;">&nbsp;<i class="ion ion-chevron-down"></i>&nbsp;</button>          
+      <ion-title><b class="{{text_color}}">Now Playing</b></ion-title>
+      </ion-header-bar>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+      <div ng-include src="'components/current_cast.html'"></div>
+
+      <ion-content ng-style="{'background-color': settings.dark_mode ? 'bg-light':color}" class="text-center air_content">
+      
+                  
+<div class="list {{text_color}} transparent" ng-if="playlist.length > 1">
+ 
+
+    <div ng-include ng-repeat="cast in playlist | limitTo:6:(track+1)" src="'components/track-item.html'"></div>
+      
+</div>
+
+      </ion-content>
+    </ion-modal-view>
+    

@@ -1,0 +1,14 @@
+<div class="item item-avatar padding" ng-if="caster.t_id!=user.t_id" style="padding-bottom: 20px !important;">
+    <img ui-sref="aprofile({id:caster.t_id})" class="avatar" src="{{media+caster.photo}}" height="30" />
+       
+            <button ng-if="!mentioned(caster)" ng-click="add_mention(caster)" class="button button-dark button-icon-left button-small pull-right" style="float: right !important;">
+                &nbsp;&nbsp; <span class="icon ion-plus-round"></span> Add &nbsp;&nbsp;
+            </button>  
+
+            <button ng-if="mentioned(caster)" ng-click="remove_mention(caster)" class="button button-assertive button-icon-left button-small pull-right" style="float: right !important;">
+                &nbsp;&nbsp; Remove &nbsp;&nbsp;
+            </button> 
+
+    <h2><b>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</b></h2>
+    <h3>@{{caster.user_name || '...'}}</h3>
+</div>

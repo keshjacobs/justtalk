@@ -1,0 +1,16 @@
+<ion-modal-view class="bg-grey">
+    <ion-header-bar class="bar bg-grey">
+              <button ng-click="listen_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+              <ion-title><small><b>Listens</b></small></ion-title>
+    </ion-header-bar>
+      
+        <ion-content class="padding text-left bg-grey" style="margin-top: 0px !important;">
+            <h5 class="padding text-center"><b>{{listeners.length || 0}}</b> {{listeners.length > 1 ? 'people':'person'}} listened to this cast</h5>
+              <div ng-include="'components/subscribe_user.html'" ng-click="listen_box.hide()" ng-repeat="caster in listeners | unique:'t_id'">
+              </div>
+      
+                     
+          
+            </ion-content>
+  
+            </ion-modal-view>

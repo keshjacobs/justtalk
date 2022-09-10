@@ -1,0 +1,14 @@
+
+    <div class="pull-right" style="float: right !important;">
+        <button ng-if="post.cast.casting" ng-click="pause_cast()" class="button button-clear button-balanced button-icon">
+            <span class="ion-pause balanced" style="font-size: 22px !important;"></span>
+        </button>
+        <button ng-if="!post.cast.casting" ng-disabled="!post.cast.cast || post.cast.expired" ng-click="play_cast(post.cast)" class="button button-clear button-icon" ng-class="play_status(post.cast)">
+            <span class="ion-play balanced" style="font-size: 22px !important;"></span>
+        </button>
+        <h6 class="balanced" ng-if="post.cast.duration || !post.cast.expired">{{post.cast.duration || 0 | number:0}}s</h6>
+        <h6 ng-if="post.cast.expired" class="assertive">&nbsp;&nbsp;Expired</h6>
+    </div>
+    <br>
+    <ion-spinner ng-show="post.cast.casting" icon="lines" class="spinner-balanced"></ion-spinner>
+

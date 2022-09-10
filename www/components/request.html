@@ -1,0 +1,5 @@
+<ion-item class="item-avatar" ng-click="view_request(request)" style="padding-bottom: 20px !important;">
+    <img class="avatar" src="{{media+chatter(request).photo}}" height="30" />
+   <h2><b>{{chatter(request).full_name || chatter(request).first_name +' '+ chatter(request).last_name}}</b></h2>
+    <h3>@{{chatter(request).user_name || '...'}}</h3>
+</ion-item>

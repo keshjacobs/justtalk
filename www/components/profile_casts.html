@@ -1,0 +1,98 @@
+ <div ng-controller="Cast">
+        
+         <div ng-if="!is_blocked(profile) && profile.block_list.indexOf(t_id) == -1">
+
+
+            <div class="padding">
+               <ion-segment ng-model="categories" full="true" dark>
+                   <ion-segment-button value="casts">
+                     Casts
+                   </ion-segment-button>
+                   <ion-segment-button value="recasts">
+                    Recasts
+                   </ion-segment-button>
+                   <ion-segment-button value="replies">
+                     Replies
+                   </ion-segment-button>
+                   <ion-segment-button value="library">
+                     Library
+                   </ion-segment-button>
+                 </ion-segment>    
+            </div>
+            
+         
+            <div ng-switch="categories" ng-class="fetching_casts ? 'edge_loader':''">
+               <ion-list ng-switch-when="casts">
+               <div ng-include="'components/cast.html'" ng-repeat="cast in profile_casts | unique:'_id' | orderBy:'-date_created' | limitTo:50 track by $index">
+               </div>
+               </ion-list>
+               <ion-list ng-switch-when="recasts">
+                  <div ng-include="'components/cast.html'" ng-repeat="cast in profile_casts  | filter:filterRecasts | unique:'_id' | orderBy:'-date_created' | limitTo:50 track by $index">
+                  </div>
+                     <div ng-if="profile_casts.length > 0 && (profile_casts | filter:filterRecasts).length < 1" class="text-center padding">
+                     <br>
+                     <br>
+                     <h5>{{profile.full_name}} has no recasts</h5>
+                     </div>
+               </ion-list>
+               <ion-list ng-switch-when="replies">
+                  <div ng-include="'components/cast.html'" ng-repeat="cast in profile_casts | filter:filterReplies | unique:'_id' | orderBy:'-date_created' | limitTo:50 track by $index">
+                  </div>
+                  <div ng-if="profile_casts.length > 0 && (profile_casts | filter:filterReplies).length < 1" class="text-center padding">
+                     <br>
+                     <br>
+                     <h5>{{profile.full_name}} has no replies</h5>
+                     </div>
+               </ion-list>
+
+       <ion-list ng-switch-when="library">
+         <div ng-include="'components/book.html'" ng-repeat="book in profile_library | unique:'_id' | orderBy:'-date_created' track by $index">
+        </div> 
+        <div ng-if="!profile_library || profile_library.length < 1" class="text-center padding">
+         <br>
+         <br>
+         <h5>Empty</h5>
+         </div>
+        </ion-list>
+ 
+            </div>
+           
+    
+
+            <div ng-if="fetching_casts" class="text-center padding">
+                  <br>
+                  <ion-spinner icon="crescent"></ion-spinner> 
+            </div>
+
+            <div ng-if="!fetching_casts && profile_casts.length < 1 && !profile_library" class="text-center padding">
+         
+                  <br>
+                  <br>
+                  <h5>No casts available</h5>
+            
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="padding text-center" ng-if="is_blocked(profile)">
+            <h4><b>You blocked @{{profile.user_name}}</b></h4>
+            <h5>You can't recieve messages or see {{profile.user_name}}'s cast, also {{profile.user_name}} can't view your casts.</h5>
+            <br>
+            <button ng-click="unblock_user(profile)" class="button button-block button-dark">Unblock</button>
+         </div>
+               
+
+
+         <div class="padding text-center" ng-if="profile.block_list.indexOf(t_id) > -1">
+            <h4><b>You can't view @{{profile.user_name}}'s casts</b></h4>
+            <h5>This user has blocked you from viewing thier casts.</h5>
+         </div>
+
+
+</div>

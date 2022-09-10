@@ -1,0 +1,25 @@
+<div style="width: 100% !important;float: left !important;">
+   <ion-item ng-click="open_chat(chat)" ng-class="unheard_messages(chat) > 0 ? '':'item-grey'" style="height: 90px !important;">
+    <ion-option-button ng-click="leave_chat(chat)" class="assertive">
+        Delete
+    </ion-option-button>
+        <div style="float: right !important;" class="pull-right">
+            <h6 class="badge badge-clear pull-right" style="margin-right: -20px !important;">
+                &nbsp; {{timediff(chat.last_modified)}}
+            </h6> 
+         <div ng-if="unheard_messages(chat) > 0" class="badge badge-energized" style="margin-top: 25px !important;float: right !important;">{{unheard_messages(chat) || 0}}</div>
+        </div>
+        <div class="profile-photo" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+        <div style="padding-top: 10px !important;">
+            <h3 ng-if="chat.members.length > 2" style="font-size: 18px !important;">{{chat.title || 'Group'}}</h3>
+            <h3 ng-if="chat.members.length <= 2" style="font-size: 18px !important;">{{chatter(chat).full_name  || chatter(chat).user_name || '...'}}</h3>
+            <div ng-if="(chat.members | filter:{accepted:true}).length <= 1">
+                <h5><b class="dark">Pending...</b></h5>
+            </div>   
+            <h4  ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: 3px !important;">
+                <b class="assertive">@{{chatter(chat).user_name || '...'}}</b>
+                <v ng-if="chat.members.length > 2">with <b>{{chat.members.length-2}}</b> others</v>
+            </h4> 
+        </div>
+    </ion-item>
+</div>

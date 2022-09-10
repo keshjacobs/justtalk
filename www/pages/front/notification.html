@@ -1,0 +1,61 @@
+
+<ion-view cache-view="true" class="bg-light">
+ 
+  
+    <ion-nav-bar class="bg-light">
+        
+        <ion-nav-title class="text-center" align="center">
+              <b>Activity</b>
+        </ion-nav-title>
+        
+        <ion-nav-buttons side="left" menu-toggle="left">
+          <img ng-if="!user" src="img/icon-green.png" style="margin-top: 4px !important;" class="bar-logo"/>
+          <div ng-if="user" menu-toggle="left" class="profile-photo2" style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+      </ion-nav-buttons>
+      
+        
+        <ion-nav-buttons side="right">
+            
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+ 
+    <ion-content ng-init="get_notifications()" class="bg-grey">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="get_notifications()"></ion-refresher>
+     <div ng-include src="'components/auth.html'"></div>
+
+    <ion-list ng-if="t_id">
+     
+      <div ng-include src="'components/notification.html'" ng-repeat="note in notifications | orderBy:'-date_created' | limitTo:30"></div>
+      
+      
+      <div ng-if="!notifications || notifications.length < 1" class="padding">
+        <div class="text-center item item-body item-light">
+          <div class="padding">
+            <br><br><br>
+            <span class="ion ion-ios-bell" style="font-size: 30px !important;opacity: 0.4 !important;"></span>
+            <br><br>
+             <h4>No notifications yet</h4>  <br>
+          </div> 
+           <br>
+        </div>
+      </div>
+
+    </ion-list>
+
+  
+      
+  
+  
+  
+  
+  
+    </ion-content>
+
+
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+  </ion-view>
+  

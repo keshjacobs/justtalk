@@ -1,0 +1,20 @@
+<ion-modal-view class="bg-grey">
+
+
+
+    <ion-header-bar class="bar bg-grey">
+        <button ng-click="voice_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+        <ion-title><small><b>Voice filter</b></small></ion-title>
+    </ion-header-bar>
+
+
+    <ion-content class="text-left" style="margin-top: 0px !important;">
+        <br>
+        <div ng-include="'components/voice.html'" ng-repeat="voice in voice_filters">
+        </div>
+
+
+    </ion-content>
+
+
+</ion-modal-view>

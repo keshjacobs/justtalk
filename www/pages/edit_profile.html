@@ -1,0 +1,57 @@
+
+<ion-view align="center">
+  <ion-nav-bar class="bar bar-light">
+      <ion-nav-title>
+        <b>Profile</b>
+        </ion-nav-title>
+    <ion-nav-buttons side="left">
+      <button title="button" class="button button-clear" back-button nav-direction="back">
+        <i class="icon ion-ios-arrow-back dark"></i></button>
+    </ion-nav-buttons>
+
+
+
+    <!-- <ion-nav-buttons side="left" menu-toggle="left">
+      <img ng-if="!user" src="img/icon-green.png" class="bar-logo"/>
+      <div ng-if="user" menu-toggle="left" class="profile-photo" style="margin-top: 0px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+  </ion-nav-buttons> -->
+  
+  </ion-nav-bar>
+      <ion-content class="has-header padding" style="text-align: center;">
+
+<br>
+ <div ui-sref="change_photo" class="item text-left item-icon-right">
+  <i class="icon ion-image dark"></i> Change Profile Photo
+</div>
+<br>
+  <form ng-submit="profile_update(user)" class="list text-left">
+
+    <span class="black padding">Full name</span>
+    <br><br>
+    <label class="item item-input">
+      <div class="row">
+        <b class="text-center" style="padding-top:8px;"><i class="ion-android-social-user assertive"></i></b>  &nbsp;&nbsp;&nbsp;
+        <input class="col-90" ng-model="user.full_name" name="full_name" type="text" style="font-size: 15px;border:none !important;" placeholder="Full Name">
+      </div>
+    </label>
+
+<br>
+<br>
+  <span class="black padding">Bio</span>
+  <br>
+       <label class="item item-input">
+        <textarea class="dark" tabindex="5" style="height: 90px !important;background-color: transparent !important;" ng-model="user.bio" placeholder="Tell Us About You">
+        </textarea>
+      </label>
+
+
+<br><br>
+
+
+    <button type="submit" class="button button-block button-dark">Save</button>
+
+  </form>
+
+
+</ion-content>
+</ion-view>

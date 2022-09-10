@@ -1,0 +1,77 @@
+<ion-view cache-view="false">
+
+    <ion-nav-bar  class="bar-light">
+       
+        <ion-nav-buttons side="left" menu-toggle="left">
+            <img ng-if="!user" style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
+            <div ng-if="user" menu-toggle="left" class="profile-photo2"  style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+        </ion-nav-buttons>
+
+          <ion-nav-title>
+            <b>Library</b>
+          </ion-nav-title>
+  
+  
+    </ion-nav-bar>
+   
+   
+    <ion-content class="padding text-center">
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
+        <div ng-include src="'components/auth.html'"></div>
+<div ng-controller="Cast" ng-if="t_id">
+        
+  
+
+       <div class="padding">
+          <ion-segment ng-model="library" full="true" dark>
+              <ion-segment-button value="saved">
+                Saved
+              </ion-segment-button>
+              <ion-segment-button value="purchased">
+                Purchased
+              </ion-segment-button>
+            </ion-segment>    
+       </div>
+       
+    
+       <div ng-switch="library">
+                <ion-list ng-switch-when="saved">
+                    <div ng-include="'components/book.html'" ng-repeat="book in library | filter:{saved:true,purchased:false} | unique:'_id' | orderBy:'-date_created' track by $index">
+                    </div> 
+                    <div ng-if="!library || (library | filter:{purchased:false,saved:true}).length < 1" class="text-center padding">
+                        <br>
+                        <br>
+                        <h5>You have no saved item</h5>
+                        </div>
+                </ion-list>
+                
+
+                <ion-list ng-switch-when="purchased">
+                    <div ng-include="'components/book.html'" ng-repeat="book in library | filter:{purchased:true} | unique:'_id' | orderBy:'-date_created' track by $index">
+                </div> 
+                <div ng-if="!library || (library | filter:{purchased:true}).length < 1" class="text-center padding">
+                    <br>
+                    <br>
+                    <h5>You have not purchased anything</h5>
+                    </div>
+                </ion-list>
+       </div>
+      
+
+
+      
+
+
+
+
+
+</div>
+
+
+</ion-content>
+
+    
+<div ng-include src="'components/now_playing.html'"></div>
+
+  
+</ion-view>

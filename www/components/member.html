@@ -1,0 +1,32 @@
+<div>
+    <div class="skeleton2" ng-if="!caster.user">
+    </div>
+   <div ng-if="caster.user">
+<ion-item class="item-avatar" ng-click="dropall()" style="padding-bottom: 20px !important;">
+    <img  ui-sref="aprofile({id:caster.user.t_id})" class="avatar" src="{{media+caster.user.photo}}" height="30" />
+    
+    <div ng-if="caster.accepted && caster.user.t_id!=user.t_id">
+    <button ng-if="!subscribed(caster.user)" ng-click="subscribe()" class="button button-assertive button-icon-left button-small pull-right" style="float: right !important;">
+        &nbsp;&nbsp; <span class="icon ti-plus"></span> subscribe &nbsp;&nbsp;
+    </button>  
+
+     <button ng-if="subscribed(caster.user)" ng-click="unsubscribe()" class="button button-outline button-assertive button-icon-left button-small pull-right" style="float: right !important;">
+        &nbsp;&nbsp; unsubscribe &nbsp;&nbsp;
+    </button> 
+    </div>
+
+        <h6 class="pull-right" style="float: right !important;" ng-if="!caster.accepted">
+            <b>Pending...</b>
+        </h6>
+
+    <h3  ng-click="dropall()" ui-sref="aprofile({id:caster.user.t_id})" ><b>{{caster.user.full_name || caster.user.first_name +' '+ caster.user.last_name}}</b></h3>
+    <h5  ng-click="dropall()" ui-sref="aprofile({id:caster.user.t_id})" >@{{caster.user.user_name || '...'}}</h5>
+    <h6  ng-click="dropall()" class="balanced" ng-if="caster.admin">Admin</h6>
+
+
+</ion-item>
+
+
+
+</div>
+</div>

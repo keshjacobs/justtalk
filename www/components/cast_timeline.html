@@ -1,0 +1,22 @@
+<div ng-if="timeline.length > 0">
+    <br>
+    <div class="item item-divider">
+        <h5>Updates</h5>
+     </div>
+        <div ng-include="'components/cast.html'" ng-repeat="cast in timeline | orderBy:'-date_created'">
+        </div>
+</div>
+<div ng-if="timeline.length < 1" class="text-center padding">
+    <br>
+    <br>
+    <br>
+        <h4 style="color: rgb(68, 67, 67) !important;">
+        Get Started
+        </h4>
+    <div class="text-center item-body padding">
+        <h6>Refresh your page or tap the mic to make a cast, or subscribe to an account</h6>
+
+    <br>
+        <button ui-sref="front.find" class="button button-small button-assertive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Explore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
+</div>

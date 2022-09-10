@@ -1,0 +1,8 @@
+
+             <ion-list class="text-left padding card">
+                    <div style="float:right !important;color: red;" ng-click="tag_box.show()" class="ti ti-plus pull-right"></div>
+                    <b>Add Tags <small>(optional)</small></b>
+                    <div class="padding" ng-if="cast.tags.length > 0">
+                        <div ng-include="'components/tag.html'" ng-repeat="tag in post.tags"></div>
+                    </div>
+            </ion-list>

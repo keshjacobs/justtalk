@@ -1,0 +1,16 @@
+
+ 
+ /* h2,h3,.oran,.welcome_profile_photo,.tl_pps {
+     -webkit-animation: animateInPrimary;
+     animation: animateInPrimary;
+     -webkit-animation-duration: 750ms;
+     animation-duraton: 750ms;
+ }
+ 
+ b,h5,small,ion-footer,.item-floating-label,.on-post-button{
+   border-radius: 0px !important;
+     -webkit-animation: animateInSecondary ease-in 1;
+     animation: animateInSecondary ease-in 1;
+     -webkit-animation-duration: 750ms;
+     animation-duraton: 750ms;
+ } */

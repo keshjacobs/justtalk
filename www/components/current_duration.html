@@ -1,0 +1,5 @@
+<input type="range" ng-hide="(current_cast.timeLeft == 0) || !current_cast.cast" min="1" ng-style="{'background-size': ((current_cast.bar/current_cast.duration) * 100)+'%'}" ng-change="track_position(current_cast.bar)" max="current_cast.duration" step="1" ng-model="current_cast.bar" class="duration2" />
+<div class="">
+    <h6 class="{{text_color}} pull-right" style="float: right !important;">{{current_cast.duration || 0 | number:0}}s</h6>
+    <h6 class="{{text_color}} pull-left" style="float: left !important;">{{current_cast.bar || 0 | number:0}}s</h6>
+</div>

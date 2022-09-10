@@ -1,0 +1,52 @@
+<ion-modal-view class="bg-white">
+    <ion-header-bar class="bar">
+            <button title="close" ng-click="close_recorder()" ng-hide="recording" class="button button-clear button-dark button-sm button-small">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+             <!-- <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-clear button-balanced button-sm button-small" style="margin-top: 10px !important;"> -->
+           
+            </button>          
+    </ion-header-bar>
+    
+      <ion-content class="text-center bg-white padding">
+   
+
+            <div class="padding" ng-hide="file_added">
+                <h4 style="opacity: 0.6;">
+                  Create a story or talk about anything
+                </h4>
+             
+  
+              
+            </div>
+
+            <div ng-include="'components/recorder.html'"></div>
+
+            <ion-list  ng-show="file_added"> 
+            
+                <div ng-if="!chat._id" class="padding">
+                  <label class="item item-input">
+                    <i class="icon ion-edit placeholder-icon"></i>
+                    <input type="text" ng-model="post.title" placeholder="Cast Title" maxlength="30">
+                  </label>      
+                </div>
+                <div ng-include="'components/voice_filter.html'"></div>
+                <div ng-include="'components/add_music.html'"></div>
+
+                <div ng-include="'components/mentioner.html'"></div>
+
+
+            <div ng-show="file_added" class="padding padding text-center">
+                <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-balanced button-block" style="margin-top: 10px !important;">
+                    Post
+                </button>
+           </div>
+ 
+            </ion-list>
+
+
+
+           
+                    
+      </ion-content>
+ 
+    </ion-modal-view>
+    

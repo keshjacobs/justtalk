@@ -1,0 +1,39 @@
+<ion-modal-view class="bg-grey">
+  <ion-header-bar class="bar bg-grey">
+            <button ng-click="chat_detail_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+            <ion-title><small><b>Details</b></small></ion-title>
+  </ion-header-bar>
+    
+      <ion-content class="padding text-left bg-white" style="margin-top: 0px !important;">
+
+        <div ng-if="chat.members.length > 2" class="list list-inset">
+            <ion-label>Group Name</ion-label>
+           <label class="item item-input">
+             <input ng-disabled="!chat_admin(chat)" type="text" ng-model="chat.title" placeholder="Group title" maxlength="30">
+           </label>
+           <button style="float: right !important;" ng-if="chat_admin(chat)" ng-disabled="!chat.title" ng-click="chat_title(chat)" class="button button-dark button-sm button-small pull-right">&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;</button>          
+        </div>
+
+        <div class="item-divider item-light" style="background-color: transparent !important;">
+          <button style="float: right !important;" ng-if="chat_admin(chat)" ng-click="add_member(chat)" class="button button-balanced button-icon-right button-small pull-right">
+            &nbsp;&nbsp;&nbsp;Add <span class="icon ion-plus-round"></span>&nbsp;&nbsp;&nbsp;
+          </button>    
+          <h5>Members</h5>      
+        </div>
+        <ion-card>
+       
+            
+
+            <div ng-include="'components/member.html'" ng-repeat="caster in chat.members">
+            </div>
+    
+                   
+        </ion-card>
+                <br><Br>
+    <button ng-click="leave_chat(chat)" class="button button-clear button-assertive button-block button-long">
+        Leave Chat
+    </button>
+        
+          </ion-content>
+
+          </ion-modal-view>
