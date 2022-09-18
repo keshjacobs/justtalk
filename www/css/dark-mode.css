@@ -8,11 +8,20 @@
 .item-divider,ion-item,.text-left,.text-center{
     background-color: transparent !important;
 }
-body,.modal,.view-container,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bar,.tabs-striped .tabs,.bg-grey,.billboard,ion-view,.chat_board{
+.modal,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.bar,header,.bar-light,.tabs-striped .tabs,.billboard{
     color:#fff !important;
-    background-color: rgb(0, 0, 0) !important;
+    background-color: rgba(0, 0, 0, 0.298) !important;
     border:none !important;
-    background-image: none !important;
+    -webkit-backdrop-filter: blur(70px) !important;
+    backdrop-filter: blur(70px) !important;
+     background-image: none !important;
+}
+
+body,.view-container,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bg-grey,ion-view,.chat_board{
+  color:#fff !important;
+  background-color: rgb(0, 0, 0) !important;
+  border:none !important;
+  background-image: none !important;
 }
 .reply-box{
     background-color: rgb(34, 34, 34) !important;
@@ -41,14 +50,18 @@ input,textarea{
 
 
 
-.tabs .tab-item{
-    opacity: 0.6 !important;
+.tabs{
+  background-color: rgba(0, 0, 0, 0.298) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(70px) !important;
+  backdrop-filter: blur(70px) !important;
+   background-image: none !important;
   }
   
   
   
   .tabs .tab-item .icon{
-    opacity: 0.6 !important;
+    opacity: 0.9 !important;
   }
   
   
@@ -72,7 +85,8 @@ input,textarea{
   }
 
   .button-light, .button-dark , .item-options, .item-options button,ion-option-button{
-    background-color: rgb(32, 32, 32) !important;
+    background-color: rgba(32, 32, 32, 0.021) !important;
+    color:#fff !important;
   }
 
 

@@ -13,7 +13,7 @@ float: left !important;
 
 
 .tag {
-  background-color: #ddd;
+  background-color: rgb(41, 1, 1) !important;
   border: none;
   color: black;
   padding: 10px 20px;

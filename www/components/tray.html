@@ -5,15 +5,13 @@
             <span class="icon ion-ios-rewind {{text_color}}" style="font-size: 22px !important;"></span>
         </button>
     </div>
-    <div class="col">
-       
-            <button ng-disabled="!current_cast.cast" ng-if="current_cast.casting" ng-click="pause_cast()" class="button button-clear button-balanced button-icon">
+    <div class="col" ng-switch="current_cast.casting">
+            <button ng-disabled="!current_cast.cast" ng-switch-when="true" ng-click="pause_cast()" class="button button-clear button-balanced button-icon">
                 <span class="icon ion-pause {{text_color}}" style="font-size: 22px !important;"></span>
             </button>
-        <button ng-disabled="!current_cast.cast" ng-if="!current_cast.casting" ng-disabled="!current_cast" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
+        <button ng-disabled="!current_cast.cast" ng-switch-when="false" ng-disabled="!current_cast" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
             <span class="icon ion-play {{text_color}}" style="font-size: 22px !important;"></span>
         </button>
-
     </div>
     <div class="col">
         <button ng-click="next_cast()" ng-disabled="(track == (playlist.length-1)) || playlist.length < 1 || !playlist || !current_cast.cast" class="button button-clear button-balanced button-icon">

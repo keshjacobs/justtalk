@@ -411,9 +411,10 @@ background-image: linear-gradient(to right, rgba(255, 136, 0, 0.466) , rgba(236,
       width:100% !important;
       height:inherit !important;
       float: left !important;
-      -webkit-backdrop-filter: blur(30px) !important;
-      backdrop-filter: blur(30px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      backdrop-filter: blur(20px) !important;
       padding:20px !important;
+      background-color: rgba(0, 0, 0, 0.523);
     }
 
     .player-grade{
@@ -555,7 +556,12 @@ background-image: linear-gradient(to right, rgba(255, 136, 0, 0.466) , rgba(236,
   border: rgb(16, 0, 0) !important;
 }
 
-
+.menu-content{
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+  background-color: rgba(0, 0, 0, 0.297) !important;
+  box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.577), 1px 0px 2px rgba(0, 0, 0, 0.624);
+}
 
 .tiny-photo2{
   width:19px !important;
@@ -636,13 +642,13 @@ transition: width 2s linear;
 
 
 .green-bg{
-  background-color:#c5ffc5 !important;
+  background-color:#c5ffc580 !important;
 }
 
 
 .recast-box{
-  background-color:#c5ffc5 !important;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #94ec8a2d), color-stop(100%, #efec4e6b));
+  background-color:#c5ffc580 !important;
+  /* background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #94ec8a2d), color-stop(100%, #efec4e6b)); */
   width: 330px !important;
   float: right !important;
   padding: 4px !important;
@@ -650,6 +656,12 @@ transition: width 2s linear;
   margin-top: 10px !important;
   margin-bottom: 11px !important;
   border-radius: 5px !important;
+  background-image:url('../img/dp.png') !important;
+  --webkit-backdrop-filter: blur(5px);
+  --moz-backdrop-filter: blur(5px);
+  --o-backdrop-filter: blur(5px);
+  --ms-backdrop-filter: blur(5px);
+  --backdrop-filter: blur(5px);
 }
 
 .item-grey{
@@ -702,9 +714,6 @@ ion-footer,ion-footer-bar{
 .item{
   border-radius:0px;
   border: 1px solid rgba(0, 0, 0, 0.09);
-}
-.tranny{
-  background-color: rgba(0, 0, 0, 0.1) !important;
 }
  .item-box{
    width:32.5%;
@@ -1603,11 +1612,44 @@ font-weight: bolder !important;
   padding: 4px !important;
   margin-left: 0px !important;
 }
-
-
+.current_cast{
+  margin-top: 108px !important;
+  background-color: #000;
+  display: block !important;
+  height: auto !important;
+  float: left !important;
+  width: 100% !important;
+}
+.modal{
+  background-color: rgba(235, 255, 237, 0.204) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  box-shadow: none !important;
+}
+.bar{
+  background-color: rgba(158, 158, 158, 0.15) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(60px) !important;
+  backdrop-filter: blur(60px) !important;
+}
+.tranny{
+  background-color: rgba(0, 0, 0, 0.318) !important;
+}
+.modal .bg-light,.modal .bg-white,.modal .bar,.modal .tranny{
+  color:rgb(29, 29, 29) !important;
+  background-color: rgba(33, 33, 33, 0.085) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(40px) !important;
+  backdrop-filter: blur(40px) !important;
+   background-image: none !important;
+}
+.modal .item,.modal .cast-track{
+  background-color: transparent !important;
+  background-image: none !important;
+}
 
 .played_cast{
-  background-color: rgba(143, 232, 143, 0.683) !important;
+  background-color: rgba(208, 255, 208, 0.683) !important;
   border-radius: 5px !important;
 }
 
@@ -1628,8 +1670,7 @@ font-weight: bolder !important;
 }
 .pill-dark{
   background-color: rgb(39, 39, 39);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #591c01c5), color-stop(100%, #703b0298));
-  color: #fff;
+ color: #fff;
 }
 
 
@@ -1770,7 +1811,6 @@ font-weight: bolder !important;
   border: none !important;
   -webkit-backdrop-filter: blur(30px) !important;
   backdrop-filter: blur(30px) !important;
-backdrop-filter: drop-shadow(4px 4px 10px blue) !important;
   box-shadow: inset 0px -200px 90px -50px rgba(0, 0, 0, 0.919) !important;
 }
 
