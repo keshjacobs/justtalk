@@ -1,4 +1,6 @@
-app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionSheet,$http,socket,Chat,$ionicModal,$ionicLoading,$cordovaDeeplinks,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
+app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionSheet,$http,socket,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
+  $rootScope.media=Config.media;
+  
   $rootScope.pages=1;
 
   $rootScope.settings={
@@ -32,7 +34,6 @@ app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionS
       $rootScope.blocked=[];
       $rootScope.chat={};
       $rootScope.profile={};
-      $rootScope.media=media;
       $rootScope.recording=false;
       $rootScope.messaging=false; 
        $rootScope.device={

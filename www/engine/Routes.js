@@ -1,27 +1,16 @@
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,$httpProvider) {
     $ionicConfigProvider.views.forwardCache(true);
-    
-  $httpProvider.defaults.useXDomain = true;
-  delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  
-  
-  
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
       $ionicConfigProvider.tabs.position('bottom');
       $ionicConfigProvider.navBar.alignTitle('center');
-  
-  
       $stateProvider
-  
-  
-  
       .state('splash', {
         url: '/splash',
         cache: true,
         templateUrl: 'pages/splash.html',
         controller:"splash"
       })
-  
-  
   
       .state('account', {
         url: '/account',

@@ -1,5 +1,8 @@
 var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCordova', 'ngStorage','ngFileUpload','ionic-segment'])
-.config(function($ionicConfigProvider) {
+.constant('Config', {  
+    API:'https://justtalkapp.com/api/',
+    media:'https://storage.googleapis.com/justtalkstorage/'
+  }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.scrolling.jsScrolling(false);
   }).factory('socket', function($rootScope) {
     var socket = io(live, {
