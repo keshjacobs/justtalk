@@ -6,8 +6,6 @@
 # Node artifact files
 node_modules/
 dist/
-platforms/android/
-platforms/ios/
 bower_components/
 plugins/
 # Compiled Java class files
