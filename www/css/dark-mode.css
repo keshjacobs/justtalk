@@ -10,21 +10,22 @@
 }
 .modal,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.bar,header,.bar-light,.tabs-striped .tabs,.billboard{
     color:#fff !important;
-    background-color: rgba(0, 0, 0, 0.298) !important;
+    background-color: rgba(18, 0, 0, 0.298) !important;
     border:none !important;
     -webkit-backdrop-filter: blur(70px) !important;
     backdrop-filter: blur(70px) !important;
      background-image: none !important;
+     
 }
 
 body,.view-container,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bg-grey,ion-view,.chat_board{
   color:#fff !important;
-  background-color: rgb(0, 0, 0) !important;
+  background-color: rgb(19, 0, 0) !important;
   border:none !important;
   background-image: none !important;
 }
 .reply-box{
-    background-color: rgb(34, 34, 34) !important;
+    background-color: rgb(12, 0, 0) !important;
 }
 .jt-mic{
     background-color: rgb(3, 127, 12) !important;
@@ -84,7 +85,7 @@ input,textarea{
     background-color: #000 !important;
   }
 
-  .button-light, .button-dark , .item-options, .item-options button,ion-option-button{
+ .item-options, .item-options button,ion-option-button{
     background-color: rgba(32, 32, 32, 0.021) !important;
     color:#fff !important;
   }
@@ -93,4 +94,8 @@ input,textarea{
   .recast-box{
     background-color: rgb(0, 12, 10) !important;
     border: none !important;
+  }
+
+  .button-dark i{
+    color:#fff !important;
   }

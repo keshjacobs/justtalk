@@ -1,0 +1,29 @@
+name: Build Android
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Deploy iOS
+    runs-on: macos-latest
+    steps:
+        - name: 'Download Provisioning Profiles'
+          uses: apple-actions/download-provisioning-profiles@v1
+          with: 
+            bundle-id: 'com.stickman.ios'
+            profile-type: 'IOS_APP_STORE'
+            issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+            api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+            api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+            
+        - name: iOS Build Action
+          uses: yukiarrr/ios-build-action@v1.5.0
+          with:
+            project-path: platforms/ios/JustTalk.xcodeproj
+            p12-key-base64: ${{ secrets.P12_KEY }}
+            p12-cer-base64: ${{ secrets.P12_CER }}
+            mobileprovision-base64: ${{ secrets.MOBILEPROVISION }}
+            code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
+            team-id: ${{ secrets.TEAM_ID }}

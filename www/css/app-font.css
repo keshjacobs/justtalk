@@ -53,10 +53,14 @@
   src: url("fonts/Montserrat.ttf");
 }
 
+@font-face {
+  font-family: "Mukta";
+  src: url("fonts/Mukta/Mukta-Light.ttf");
+}
+
 
 *{
-  font-family: "ubuntu" !important;
-   font-weight: lighter !important;
+  font-family: 'Mukta', sans-serif;
    border:none;
  }
 
