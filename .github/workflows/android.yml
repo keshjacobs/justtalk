@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Build Android Release APK
-        run: ionic cordova build android --release --prod
+        run: ionic cordova platform add android
 
       - name: Generate the Android App Bundle
         id: buildRelease
@@ -53,6 +53,6 @@ jobs:
         id: deploy
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: service_account.json
+          serviceAccountJson: google-services.json
           packageName: com.something.ganik.justtalk
           releaseFile: platforms/android/app/build/outputs/bundle/release/app-release.aab
