@@ -9,7 +9,6 @@ dist/
 platforms/
 bower_components/
 plugins/
-resources/
 # Compiled Java class files
 *.class
 
