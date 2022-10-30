@@ -65,7 +65,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
     "cordova-plugin-ios-microphone-permissions": "^1.0.0",
-    "cordova-plugin-iosrtc": "^8.0.1",
+    "cordova-plugin-iosrtc": "^8.0.3",
     "cordova-plugin-media": "^5.0.4",
     "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-music-controls-plugin.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
