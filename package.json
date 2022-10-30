@@ -10,6 +10,7 @@
     "@ionic/cloud": "^0.16.2",
     "bluebird": "^3.7.2",
     "cordova": "^9.0.0",
+    "cordova-android": "^10.1.2",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
     "cordova-ios": "^6.2.0",
@@ -241,6 +242,8 @@
         "ANDROID_PATH_PREFIX": "/"
       }
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }
