@@ -1,0 +1,43 @@
+
+    <div ng-show="current_cast.cast" ng-style="{'background-color':color}" class="item padding now_playing">
+        <!-- <ion-spinner ng-click="open_aircast()" ng-if="current_cast.bar <= 0 && current_cast.casting" style="margin-top: 15px !important;float:left !important;" icon="crescent" class="spinner-assertive"></ion-spinner>
+        <ion-spinner ng-click="open_aircast()" ng-if="current_cast.bar > 0 && current_cast.casting" style="margin-top: 15px !important;float:left !important;" icon="lines" class="spinner-assertive"></ion-spinner> -->
+        <!-- <ion-icon ng-click="drop_aircast()" ng-if="!current_cast.casting" style="margin-top: 18px !important;float:left !important;margin-left:10px !important;" class="ion ion-close {{text_color}}"></ion-icon> -->
+        <div class="profile-photo" style="float: left !important;margin-left: 15px !important;margin-top: 12px !important;" ui-sref="aprofile({id:current_cast.caster.t_id})" ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}"></div>
+        <div  style="margin-left:36px !important;" class="padding">
+        <div ng-click="open_aircast()">
+            <h3 class="{{text_color}}"><b>{{current_cast.caster.full_name || current_cast.caster.first_name +' '+ current_cast.caster.last_name}}</b> &nbsp; 
+            </h3>
+            <h4 class="{{text_color}}" ng-if="current_cast.caster.user_name">@{{current_cast.caster.user_name}}</h4>
+         </div>
+    <div>
+    <div class="pull-right" style="float: right !important;margin-top: -40px !important;margin-right: 5vw !important;">
+<<<<<<< HEAD
+      
+        <button ng-disabled="!current_cast.cast || current_cast.expired" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
+            <span class="icon {{text_color}}" ng-class="current_cast.casting ? 'ion-pause':'ion-play'" style="font-size: 22px !important;"></span>
+=======
+        <button title="oause" ng-if="current_cast.casting" ng-click="pause_cast()" class="button button-clear button-balanced button-icon">
+            <span class="icon ion-pause {{text_color}}" style="font-size: 22px !important;"></span>
+        </button>
+        <button title="play" ng-if="!current_cast.casting" ng-disabled="!current_cast.cast" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
+            <span class="icon ion-play {{text_color}}" style="font-size: 22px !important;"></span>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+        </button>
+
+        <button title="close" ng-if="!current_cast.casting" ng-click="drop_aircast()" class="button button-clear button-balanced button-icon">
+            <span class="icon ion-ios-close-empty {{text_color}}" style="font-size: 22px !important;"></span>
+        </button>
+<<<<<<< HEAD
+        
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    </div>
+    <br>
+
+
+</div>
+    </div>
+    <!-- <div ng-include src="'components/current_duration.html'"></div> -->
+</div>
+

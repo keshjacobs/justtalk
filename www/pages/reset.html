@@ -1,0 +1,32 @@
+<ion-view cache-view="false">
+
+  <ion-nav-bar class="bar bar-light">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" back-button>
+      <i class="icon ion-ios-arrow-back dark"></i></button>
+  </ion-nav-buttons>
+
+
+  <ion-nav-title>
+    <b>Reset Password</b>
+  </ion-nav-title>
+
+</ion-nav-bar>
+
+  <ion-content class="padding text-center">
+<br><br>
+    <h6 style="font-size: 13px;">Right now, it seems you cant access your account or you have issues with your account, please input your email used to register and select reset, this would send a link to your mail to reset your password </h6>
+    <br>
+    <form ng-submit="reset(datr)" class="list">
+      <label class="item item-input text-left">
+  <div class="row">
+      <b class="col-10" style="padding-top:8px;"><i class="ion-email red"></i></b> 
+        <input class="col-90" type="email" ng-model="datr.email" placeholder="Email">
+  </div>
+      </label>
+      <br><br>
+      <button ng-disabled="!datr.email" type="submit" class="button button-block button-dark">RESET PASSWORD</button>
+    </form>
+  
+  </ion-content>
+</ion-view>

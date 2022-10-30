@@ -1,0 +1,99 @@
+<ion-view cache-view="false" class="bg-grey">
+
+<<<<<<< HEAD
+    <ion-nav-bar class="bar bg-grey" style="display:block;">
+=======
+    <ion-nav-bar class="bar-light bg-grey" style="display:block;">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back dark"></i></button>
+      </ion-nav-buttons>
+  
+          <ion-nav-buttons side="right">
+          <!-- <button ui-sref="login" style="font-weight: bold;" class="button button-clear button-balanced">SIGN IN</button> -->
+          </ion-nav-buttons>
+          <ion-nav-title>
+            <b>Sign up</b>
+          </ion-nav-title>
+  
+  
+    </ion-nav-bar>
+   
+   
+<<<<<<< HEAD
+        <ion-content class="text-left padding">
+      <br/>
+      <br/>
+      <form ng-submit="register(det)">
+       <div>
+          <e class="text-left" ng-if="error">{{error}}</e>
+            <h3 ng-if="det.user_name">Your username is <b class="assertive">@{{det.user_name}}</b></h3>
+            <br/>
+=======
+    <ion-content class="padding text-left">
+      <form ng-submit="register(det)">
+       <div>
+          <e class="text-left" ng-if="error">{{error}}</e>
+            <h4 ng-if="det.user_name">Your username is <v class="assertive">{{det.user_name}}</v></h4>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+          <!-- <div class="item">
+            <div class="row">
+              <div class="col col-50 item-input">
+              <input  ng-model="det.first_name" name="first_name" type="text" style="font-size: 15px;border:none !important;" placeholder="First Name">
+              </div>
+              <div class="col col-50 item-input">
+                <input class="col col-50" ng-model="det.last_name" name="last_name" type="text" style="font-size: 15px;border:none !important;" placeholder="Last Name">
+              </div>
+              </div>
+            </div> -->
+
+            <label class="item item-input">
+              <div class="row">
+                <b class="text-center" style="padding-top:8px;"><i class="ion-android-social-user assertive"></i></b>  &nbsp;&nbsp;&nbsp;
+<<<<<<< HEAD
+                <input class="col-90" ng-model="det.full_name" name="full_name" type="text" style="font-size: 15px;border:none !important;" placeholder="Full Name (eg. Max, The Daily TalkShow)">
+=======
+                <input class="col-90" ng-model="det.full_name" name="full_name" type="text" style="font-size: 15px;border:none !important;" placeholder="Full Name">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+              </div>
+            </label>
+  
+          
+          <label class="item item-input">
+            <div class="row">
+            <b class="text-center" style="padding-top:8px;"><i class="ion-ios-email assertive"></i></b>  &nbsp;&nbsp;&nbsp;
+            <input class="col-90" ng-model="det.email" name="email" type="email" style="font-size: 15px;border:none !important;" placeholder="Email">
+            </div>
+          </label>
+
+          <label class="item item-input">
+            <div class="row">
+                <b class="col-10" style="padding-top:8px;"><i class="ti ion-lock-combination red"></i></b> 
+                <input class="col-90" type="password" ng-model="det.password" placeholder="Your Password" required>
+            </div>
+          </label>
+  
+        <label class="item item-input">
+             <div class="row">
+                <b class="col-10" style="padding-top:8px;"><i class="ti ion-lock-combination red"></i></b> 
+                <input type="password" ng-model="det.rpassword" placeholder="Retype Password" required>
+            </div>
+        </label>
+
+
+    </div>
+           <br>
+           <br>
+           <small class="text-center">
+            By continuing you agree to our <a>T&Cs</a>.
+        </small>
+        <br>
+        <br>
+       <button ng-disabled="!det.full_name || !det.password || !det.rpassword || !det.email" type="submit" class="button button-full button-dark">Continue</button>
+    
+       <br>
+  </form>
+  </ion-content>
+  </ion-view>
+   

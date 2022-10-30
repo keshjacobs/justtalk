@@ -1,0 +1,108 @@
+<ion-view cache-view="true" class="bg-grey" ng-init="sink()">
+    <ion-nav-bar class="bar bar-light">
+        <ion-nav-title>
+          <div ng-if="chat.members.length > 0"> 
+            <div class="profile-photo2" style="margin-top:-5px !important;" ui-sref="aprofile({id:chatter(chat).t_id})" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+            <h4 ng-if="chat.members.length > 2">{{chat.title || 'Group'}}</h4>
+            <h4 ng-if="chat.members.length < 3">{{chatter(chat).full_name  || chatter(chat).user_name}}</h4>
+         </div>
+          </ion-nav-title>
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="exit_chat()">
+        <i class="icon ion-ios-arrow-back dark"></i></button>
+      </ion-nav-buttons>
+
+
+      <ion-nav-buttons side="right">
+        <button class="button button-clear" ng-click="chat_detail_box.show()">
+        <i class="icon ion-more dark"></i></button>
+      </ion-nav-buttons>
+  
+  
+    </ion-nav-bar>
+  
+    <ion-content class="chat_board">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="get_chat(chat._id)"></ion-refresher>
+       
+      <br/>
+
+      <div ng-show="chat.conversations.length < 1" class="padding padding">
+        <div class=" text-center item item-light">
+          <div class="padding">
+            <h2><b>No message sent yet.</b></h2>  <br>
+            <p>Be the first to break the ice.</p>
+          </div>  <br>
+        </div>
+      </div>
+  
+      <div ng-if="chat.conversations.length > 0" style="width: 100% !important;padding-bottom: 240px !important;float: right;">
+
+      <div class="padding">
+            <div ng-include="'components/message.html'" ng-repeat="cast in chat.conversations | unique:'date_created' | orderBy:'date_created'"></div>
+       </div>
+
+      </div>
+
+    </ion-content>
+
+<ion-footer style="margin-bottom: 0px !important;">
+<div class="message_bar">
+  <ion-progress-bar ng-if="messaging" type="indeterminate"></ion-progress-bar>
+  <br>
+  <div class="padding text-center" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1" ng-if="(chat.members | filter:{accepted:true}).length <= 1">
+    <b>Wait for <b class="assertive">@{{chatter(chat).user_name}}</b> to accept request....</b>
+  </div>
+
+  <div class="padding text-center" ng-if="chatter(chat).block_list.indexOf(t_id) > -1">
+    <b><b class="assertive">@{{chatter(chat).user_name}}</b> has restricted/blocked you from sending messages</b>
+  </div>
+
+  <div class="padding text-center" ng-if="is_blocked(chatter(chat))">
+    <b> You have blocked <b class="assertive">@{{chatter(chat).user_name}}</b> from sending messages</b>
+  </div>
+
+
+<<<<<<< HEAD
+  <div ng-class="file_added ? 'grey_bar':'transparent_bar2'" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1">
+    <div ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: -33px !important;">
+      <div ng-hide="messaging" ng-include="'components/recorder.html'"></div>
+        <div class="row text-center" ng-hide="messaging || recording || !file_added" style="margin-top:-19px !important; padding: 10px !important;">
+          <button  ng-click="send_message(post)" class="button button-small col button-balanced">
+              Send
+          </button>
+          &nbsp;&nbsp;
+          <button ng-click="clear()" style="border: 2px solid !important;" class="button button-small col button-outline button-assertive">
+              Clear
+          </button>
+        </div>
+        <div class="text-center" ng-hide="!messaging">
+          <ion-spinner style="margin-top: 10px !important;" class="listening" icon="dots"></ion-spinner> 
+          <h5>Sending...</h5> 
+        </div>
+=======
+  <div ng-class="post.file ? 'grey_bar':'transparent_bar2'" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1">
+    <div ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: -33px !important;">
+      <div ng-hide="messaging" ng-include="'components/recorder.html'"></div>
+      <div class="text-center padding" style="margin-top:-19px !important;">
+        <div class="button-row row" ng-if="post.file" ng-hide="messaging || recording">
+          <button ng-disabled="!file_added || recording || post.casting"  ng-click="send_message(post)" class="button button-small col button-balanced">
+              Send
+          </button>
+          &nbsp;&nbsp;
+          <button ng-disabled="!file_added || recording || post.casting" ng-click="clear()" style="border: 2px solid !important;" class="button button-small col button-outline button-assertive">
+              Clear
+          </button>
+        </div>
+      <ion-spinner style="margin-top: 10px !important;" ng-show="messaging" class="listening" icon="dots"></ion-spinner> 
+      <h5 ng-show="messaging">Sending...</h5> 
+      </div>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+      <br><br>
+      <br><br>
+      <br><br>
+    </div>
+  </div>
+</div>
+</ion-footer>
+  </ion-view>
+  

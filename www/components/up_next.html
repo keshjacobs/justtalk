@@ -1,0 +1,17 @@
+        
+<div ng-click="next_cast()" class="item item-dark2 bg-red item-avatar text-left" ng-if="up_next.caster">
+    <img class="avatar" src="{{media+up_next.caster.photo}}" height="30" />
+<<<<<<< HEAD
+   <h3 class="light"><b>{{up_next.caster.full_name || up_next.caster.first_name +' '+ up_next.caster.last_name}}</b> 
+    <b class="grey">@{{up_next.caster.user_name}}</b>
+    </h3>
+    <h4 class="black light" ng-if="up_next.title">{{up_next.title}}</h4>
+    <h6 class="grey">{{timediff(up_next.date_created)}}</h6>
+=======
+   <h3 class="light"><b>{{up_next.caster.full_name || up_next.caster.first_name +' '+ up_next.caster.last_name}}</b>&nbsp;@{{up_next.caster.user_name}}
+    </h3>
+    <h4 class="black light" ng-if="up_next.title">{{up_next.title}}</h4>
+    <h6 class="light">{{timediff(up_next.date_created)}}</h6>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    <br>
+</div>

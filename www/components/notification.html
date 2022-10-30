@@ -1,0 +1,21 @@
+<div class="item" ng-class="note.user ? 'item-avatar':'item-light'" ng-class="note.seen ? 'item-grey':'item-orange-light'" style="border: 1px solid rgba(82, 81, 81, 0.253) !important;margin-bottom:4px !important;margin:2px !important;">
+  <img ng-if="note.user" ui-sref="aprofile({id:note.user.t_id})" class="avatar" src="{{media+note.user.photo}}" style="margin-top:-8px !important;margin-right: -10px !important;" height="25" /> 
+<<<<<<< HEAD
+  <h6 class="pull-right grey" style="float: right !important;">{{timediff(note.date_created)}}</h6>
+  <div style="margin-left: -10px !important;">
+    <h3 ng-if="!note.user" style="margin: 5px !important;">{{note.title}}</h3>
+    <h4 style="margin: 5px !important;">&nbsp;&nbsp;&nbsp;{{note.message}}</h4>
+=======
+  <h6 class="pull-right" style="float: right !important;">{{timediff(note.date_created)}}</h6>
+  <div style="margin-left: -10px !important;">
+    <h3 ng-if="!note.user" style="margin: 5px !important;">{{note.title}}</h3>
+    <h4 style="margin: 5px !important;">{{note.message}}</h4>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+  </div>
+
+  <ion-list>
+    <div ng-if="note.profile" ng-include src="'components/subscribe_user2.html'" ng-init="caster = note.profile"></div>
+    <div ng-if="note.cast" ng-include src="'components/cast4.html'" ng-init="cast = note.cast"></div>
+  </ion-list>
+    
+</div>

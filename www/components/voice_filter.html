@@ -1,0 +1,14 @@
+<fieldset class="item text-left">
+    <button ng-disabled="!file_added" ng-click="voice_box.show()" style="float: right !important;margin-top: 10px !important;" class="button button-small button-dark">
+        &nbsp;&nbsp;  Set &nbsp;&nbsp;
+    </button>
+    <div>
+        <h5>Voice Filter</h5>
+    </div>
+    <div ng-if="post.filter.name">
+      <h2 class="oran"><b>{{post.filter.name | capitalize}}</b></h2>
+    </div>
+    <div ng-if="!post.filter.name">
+     <small>No filter added</small>
+    </div>
+</fieldset>

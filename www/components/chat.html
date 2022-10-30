@@ -1,0 +1,48 @@
+<div style="width: 100% !important;float: left !important;">
+<<<<<<< HEAD
+   <ion-item ng-click="open_chat(chat)" ng-class="unheard_messages(chat) > 0 ? 'new_message':'item-grey'" style="height: 80px !important;">
+=======
+   <ion-item ng-click="open_chat(chat)" ng-class="unheard_messages(chat) > 0 ? '':'item-grey'" style="height: 90px !important;">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    <ion-option-button ng-click="leave_chat(chat)" class="assertive">
+        Delete
+    </ion-option-button>
+        <div style="float: right !important;" class="pull-right">
+<<<<<<< HEAD
+            <h6 class="badge badge-clear pull-right" style="float: right !important;margin-top: -10px !important;margin-right: -30px !important;">
+=======
+            <h6 class="badge badge-clear pull-right" style="margin-right: -20px !important;">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+                &nbsp; {{timediff(chat.last_modified)}}
+            </h6> 
+         <div ng-if="unheard_messages(chat) > 0" class="badge badge-energized" style="margin-top: 25px !important;float: right !important;">{{unheard_messages(chat) || 0}}</div>
+        </div>
+<<<<<<< HEAD
+        <div class="profile-photo" style="margin-right: 10px !important;" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+        <div style="padding-top: 10px !important;">
+            <h4 ng-if="chat.members.length > 2" style="font-size: 18px !important;">{{chat.title || 'Group'}}</h4>
+            <h4 ng-if="chat.members.length <= 2" style="font-size: 18px !important;">
+                {{chatter(chat).full_name || chatter(chat).first_name +' '+ chatter(chat).last_name}} 
+                <v class="grey">@{{chatter(chat).user_name || '...'}}</v>
+            </h4>
+            <div ng-if="(chat.members | filter:{accepted:true}).length <= 1">
+                <h5><i class="dark">Pending...</i></h5>
+            </div>   
+            <h4  ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: 3px !important;">
+                <v ng-if="chat.members.length > 2">with <i>{{chat.members.length-2}}</i> others</v>
+=======
+        <div class="profile-photo" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+        <div style="padding-top: 10px !important;">
+            <h3 ng-if="chat.members.length > 2" style="font-size: 18px !important;">{{chat.title || 'Group'}}</h3>
+            <h3 ng-if="chat.members.length <= 2" style="font-size: 18px !important;">{{chatter(chat).full_name  || chatter(chat).user_name || '...'}}</h3>
+            <div ng-if="(chat.members | filter:{accepted:true}).length <= 1">
+                <h5><b class="dark">Pending...</b></h5>
+            </div>   
+            <h4  ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: 3px !important;">
+                <b class="assertive">@{{chatter(chat).user_name || '...'}}</b>
+                <v ng-if="chat.members.length > 2">with <b>{{chat.members.length-2}}</b> others</v>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+            </h4> 
+        </div>
+    </ion-item>
+</div>

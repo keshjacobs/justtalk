@@ -1,0 +1,50 @@
+<<<<<<< HEAD
+<ion-view cache-view="true" class="bg-grey">
+=======
+<ion-view cache-view="false" class="bg-grey">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+
+    <ion-nav-bar class="bar bg-grey">
+  
+                <ion-nav-title>
+                        <b>Subscriptions</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        <ion-nav-buttons side="right">
+             
+        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+        
+        
+          
+        <ion-content ng-init="get_subscriptions(user_id)">
+          <ion-refresher pulling-text="Pull to refresh" on-refresh="get_subscriptions(user_id)">
+          </ion-refresher>
+              <div ng-if="!subscriptions || subscriptions.length < 1">
+                  <div class="text-center item item-light">
+                    <div class="padding">
+                      <br>
+                       <br>
+                      <h2><b>No subscription.</b></h2>  <br>
+                      <br><br>
+                    </div> 
+                  </div>
+                </div>
+  
+  
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in subscriptions track by $index">
+            </div>
+    
+                                
+                
+        
+          </ion-content>
+        </ion-view>

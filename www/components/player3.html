@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+<div class="pull-right" style="float: right !important;margin-top:20px !important;">
+    <div ng-if="!selected_cast.expired">
+      
+       <button ng-disabled="!selected_cast.cast || selected_cast.expired" ng-click="play_cast(selected_cast)" class="button button-clear button-small button-icon button-balanced">
+        <span ng-class="selected_cast.casting ? 'ion-pause':'ion-play'" style="font-size: 26px !important;"></span>
+        </button>
+
+     
+       <h6 ng-show="!selected_cast.casting" class="grey">&nbsp;&nbsp;{{selected_cast.duration || 0 | number:0}}s</h6>
+       <h6 ng-if="selected_cast.casting && (!selected_cast.timeLeft || selected_cast.bar <=0)" class="grey">
+        <ion-spinner ng-if="selected_cast.casting && !selected_cast.timeLeft" icon="crescent" class="play_loader"></ion-spinner>
+    </h6>
+=======
+<div class="pull-right" style="float: right !important;margin-top:30px !important;">
+    <div ng-if="!selected_cast.expired">
+       <button ng-if="selected_cast.bar > 0 && selected_cast.casting" ng-click="pause_cast()" class="button button-clear button-small button-balanced button-icon">
+           <span class="ion-pause balanced" style="font-size: 24px !important;"></span>
+       </button>
+       <button ng-if="!selected_cast.casting" ng-disabled="!selected_cast.cast || selected_cast.expired" ng-click="play_directcast(selected_cast)" class="button button-clear button-small button-icon button-balanced">
+           <span class="ion-play" style="font-size: 24px !important;"></span>
+       </button>
+     
+       <h6 ng-show="!selected_cast.casting" class="grey">&nbsp;&nbsp;{{selected_cast.duration || 0 | number:0}}s</h6>
+       <h6 ng-if="selected_cast.casting && (!selected_cast.timeLeft || selected_cast.bar <=0)" class="grey">
+           <ion-spinner icon="crescent" class="spinner-dark" style="font-size: 10px !important;"></ion-spinner>  
+       </h6>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+   </div>
+   <h6 ng-if="selected_cast.expired" class="assertive">&nbsp;&nbsp;Expired</h6>
+</div>

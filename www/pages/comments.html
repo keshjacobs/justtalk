@@ -1,0 +1,52 @@
+<ion-view>
+  <ion-nav-bar class="bar-light">
+      <ion-nav-title>
+          <b>Comments</b>
+        </ion-nav-title>
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" back-button>
+      <i class="icon ion-ios-arrow-back dark"></i></button>
+    </ion-nav-buttons>
+
+  </ion-nav-bar>
+
+  <ion-content class="padding text-left">
+
+    <div ng-show="apa.comments.length < 1">
+      <div class=" text-center item item-light">
+        <div class="padding">
+          <h2><b>No comment yet.</b></h2>  <br>
+          <p>Be the first to comment on this post.</p>
+        </div>  <br>
+      </div>
+    </div>
+
+    <div class="list">
+      <div class="item item-avatar-left" ng-repeat="comment in apa.comments | orderBy:'-date'">
+              <div ng-if="comment.j_id==user.j_id">
+              <div  style="float: right; color: #2f2f2f;" href="" ng-click="delete_comment(comment)">
+              <i class="ti ti-close dark"></i>
+              </div>
+              </div>
+              <div class="pps" ui-sref="aprofile({id:comment.user.j_id})" ng-style="{'background-image':'url('+ media + comment.user.photo +')'}"></div>
+              <div style="color: #2f2f2f" ui-sref="aprofile({id:comment.user.j_id})">
+                <b ng-if="!comment.user.show_brand">{{comment.user.first_name}} {{comment.user.last_name}}</b>
+                <b ng-if="comment.user.show_brand && comment.user.user_name">{{comment.user.user_name}}</b>
+                <i ng-if="comment.user.verified" class="icon ion-checkmark-circled balanced"></i>
+              </div>
+        <small>{{comment.comment}}</small>
+        <h5>
+            {{timediff(comment.date)}}
+            </h5>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Type Your Comment" on-return="make_comment(message,apa); closeKeyboard()" ng-model="message" on-focus="inputUp()" on-blur="inputDown()" />
+    </label>
+    <button class="button button-clear" ng-click="make_comment(message,apa)">
+      <i class="icon ion-android-send"></i>
+    </button>
+  </ion-footer-bar>
+</ion-view>

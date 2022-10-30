@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b94870f5-92ed-4182-a92b-85876ce4c1b9/resourceGroups/JustTalkResources/providers/Microsoft.Web/sites/JustTalk",
+    "appService.deploySubpath": "."
+}

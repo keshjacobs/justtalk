@@ -1,0 +1,42 @@
+
+<ion-view cache-view="false">
+
+    <ion-nav-bar class="bar-light" style="display:block;">
+      <ion-nav-buttons side="left">
+        <!-- <button class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back assertive"></i></button> -->
+      </ion-nav-buttons>
+  
+          <ion-nav-buttons side="right">
+            <button ng-click="update_info(user)" style="margin-top: 0px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Done&nbsp;&nbsp;</button>
+        </ion-nav-buttons>
+          <ion-nav-title>
+            <b>Get started</b>
+          </ion-nav-title>
+  
+  
+    </ion-nav-bar>
+   
+   
+    <ion-content class="padding" style="background-color: rgb(252, 252, 252) !important;">
+        
+        <div class="text-center padding">
+            <h4>Tell us about you</h4>
+            <h6>Give an interesting bio for your subscribers</h6>
+        </div>
+      
+
+        <div class="list text-left">
+
+        <br>
+        <span class="black padding">Bio</span>
+        <br>
+        <label class="item item-input">
+            <textarea class="dark" tabindex="5" style="color:black !important;height: 90px !important;" ng-model="user.bio" placeholder="Tell Us About You">
+            </textarea>
+        </label>
+
+    </div>
+    </ion-content>
+    
+</ion-view>

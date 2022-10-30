@@ -1,0 +1,90 @@
+
+
+<<<<<<< HEAD
+<div class="row panel" ng-if="!cast.recast">
+
+    <button ng-if="!cast.reply" ng-click="reply_cast(cast)" class="button button-small button-clear button-block button-icon-right"  ng-class="replied(cast) ? 'button-played':'button-dark'">
+      <span class="ion-reply"></span> {{cast.replies.length || 0}} 
+    </button>
+
+        <button ng-click="recast(cast)" ng-disabled="recasted(cast)" class="button button-small button-clear button-block button-icon-right" ng-class="recasted(cast) ? 'button-played':'button-dark'">
+            <span class="ion-refresh"></span>  {{cast.recasts.length || 0}}
+        </button>
+    
+
+        <button ng-click="like_cast(cast)" ng-class="liked(cast) ? 'button-assertive':'button-dark'" class="button button-small button-block button-clear button-icon-right ">
+           <span class="ion-heart"></span>  {{cast.likes.length || 0}} 
+        </button>
+   
+
+
+
+        <button title="button" ng-click="cast_more(cast)" class="button button-small button-clear button-block button-icon-right button-dark-green">
+            <span class="ion ion-more"></span>
+        </button>
+=======
+<div style="height: 50px !important;float: left !important;width: 100% !important;margin-top: -18px !important;" class="row panel" ng-if="!cast.recast">
+
+    <div class="col" ng-if="!cast.reply">
+    <button ng-click="reply_cast(cast)" class="button button-sm button-clear button-icon-right"  ng-class="replied(cast) ? 'button-balanced':'button-dark-green'">
+       {{cast.replies.length || 0}} <span class="ion-reply"></span>
+    </button>
+    </div>
+
+
+
+    <div class="col">
+        <button ng-click="recast(cast)" ng-disabled="recasted(cast)" class="button button-sm button-clear button-icon-right" ng-class="recasted(cast) ? 'button-balanced':'button-dark-green'">
+            {{cast.recasts.length || 0}} <span class="ion-refresh"></span>
+        </button>
+    </div>
+
+
+
+    <div class="col" ng-switch="liked(cast)">
+        <button ng-switch-when="false" ng-click="like_cast(cast)" class="button button-sm button-clear button-icon-right button-dark-green">
+            {{cast.likes.length || 0}} <span class="ion-heart"></span>
+        </button>
+        <button  ng-switch-when="true" ng-click="unlike_cast(cast)" class="button button-sm button-clear button-icon-right button-assertive">
+            {{cast.likes.length || 0}} <span class="ion-heart red"></span>
+        </button>
+    </div>
+
+
+
+    <div class="col">
+        <button title="button" ng-click="cast_more(cast)" class="button button-sm button-clear button-icon-right button-dark-green">
+            <span class="ion ion-more"></span>
+        </button>
+    </div>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d

@@ -1,0 +1,40 @@
+<ion-view cache-view="false">
+
+  <ion-nav-bar class="bar-light" style="display:block;">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" back-button>
+        <i class="icon ion-ios-arrow-back assertive"></i></button>
+    </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+        <!-- <button ui-sref="login" style="font-weight: bold;" class="button button-clear button-assertive">SIGN IN</button> -->
+        </ion-nav-buttons>
+        <ion-nav-title>
+          <b>Sign up or log in with email</b>
+        </ion-nav-title>
+
+
+  </ion-nav-bar>
+ 
+ 
+  <ion-content class="padding text-center" style="background-color: rgb(252, 252, 252) !important;">
+   <Br><Br>
+    <form ng-submit="auth(det)">
+     <div class="col-99">
+      <label class="item item-input item-floating-label text-left">
+          <span class="input-label">Your email address</span>
+          
+          <div class="row">
+          <b class="text-center" style="padding-top:8px;"><i class="ti-email assertive"></i></b>  &nbsp;&nbsp;&nbsp;
+          <input class="col-90" ng-model="det.email" name="email" type="email" style="font-size: 15px;border:none !important;" placeholder="Your Email Address">
+          </div>
+        </label>
+  </div>
+         <br><br>
+     <button ng-disabled="!det.email" type="submit" class="button button-full button-balanced">Continue</button>
+  
+     <br>
+</form>
+</ion-content>
+</ion-view>
+ 

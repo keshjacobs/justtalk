@@ -1,0 +1,14 @@
+<form class="list padding">
+    <div class="item item-input">
+        <b>Gain:</b><br>
+        <input type="range" ng-show="filter_settings.gain" min="0" step="1" max="20" ng-change="change_filter()" />
+    </div>
+    <div class="item item-input">
+        <b>Frequency:</b><br>
+        <input type="range" ng-show="filter_settings.frequency" min="0" step="100" max="20000" ng-change="change_filter()"/>
+    </div> 
+    <div class="item item-input">
+        <b>Delay:</b><br>
+        <input type="range" ng-show="filter_settings.delay" min="0" step="1" max="10" ng-change="change_filter()"/>
+    </div> 
+</form>

@@ -1,0 +1,48 @@
+<<<<<<< HEAD
+<div class="padding current_cast">
+<div ng-click="close_aircast()" class="item item-assertive bg-red item-avatar text-left">
+    <img title="avatar" class="avatar" ui-sref="aprofile({id:current_cast.caster.t_id})" src="{{media+current_cast.caster.photo}}" height="30" />
+    <h3 ng-if="current_cast.caster" class="{{text_color}}" ui-sref="aprofile({id:current_cast.caster.t_id})">
+       <b>{{current_cast.caster.full_name || current_cast.caster.first_name +' '+ current_cast.caster.last_name}}</b> 
+       <b style="opacity: 0.8;">@{{current_cast.caster.user_name}}</b>
+=======
+<div ng-click="close_aircast()" class="item item-assertive bg-red item-avatar text-left padding current_cast">
+    <img title="avatar" class="avatar" style="margin-top: 0px !important;" ui-sref="aprofile({id:current_cast.caster.t_id})" src="{{media+current_cast.caster.photo}}" height="30" />
+    <h3 ng-if="current_cast.caster" class="{{text_color}}" ui-sref="aprofile({id:current_cast.caster.t_id})">
+       <b>{{current_cast.caster.full_name || current_cast.caster.first_name +' '+ current_cast.caster.last_name}}</b>&nbsp;
+       @{{current_cast.caster.user_name}}
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    </h3> 
+    <h6 class="{{text_color}}" ng-if="current_cast.reply">Playing from replies</h6>
+    <ion-spinner style="float:right !important;margin-top: -20px !important;" ng-show="current_cast.bar > 0 && current_cast.casting" icon="lines" class="spinner-{{text_color}}"></ion-spinner>
+    <ion-spinner ng-if="current_cast.bar >= 0 && !current_cast.casting" icon="crescent" class="spinner-{{text_color}}" style="float:right !important;margin-top: -20px !important;"></ion-spinner>   
+    <h3 class="{{text_color}}" ng-if="current_cast.title" style="font-size: 20px !important;">{{current_cast.title}}</h3>
+<<<<<<< HEAD
+    <h6 ng-if="current_cast" class="{{text_color}}" style="opacity: 0.8;">{{timediff(current_cast.date_created)}}</h6>
+    <div class="transparent" ng-include src="'components/current_listens.html'"></div>
+</div>
+
+<div class="padding text-center transparent">
+=======
+    <h6 ng-if="current_cast" class="{{text_color}}">{{timediff(current_cast.date_created)}}</h6>
+    <div class="transparent" ng-include src="'components/current_listens.html'"></div>
+</div>
+
+<div class="padding padding text-center transparent">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    <h6 ng-if="!current_cast" class="{{text_color}}">No casts available for airplay</h6>
+    <div ng-include src="'components/current_duration.html'"></div>
+</div>
+
+<div class="transparent" ng-include src="'components/tray.html'"></div>
+
+<<<<<<< HEAD
+<div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
+    <b class="{{text_color}}">Up Next</b>
+ </div>
+</div>
+=======
+<div class="item item-divider text-left transparent">
+    <b class="{{text_color}}">Up Next</b>
+ </div>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d

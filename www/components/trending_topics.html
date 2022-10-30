@@ -1,0 +1,10 @@
+<div style="width:100vw !important;float: left;" ng-hide="!trending_topics || trending_topics.length < 1">
+
+
+    <!-- <ion-slide ng-repeat="topic in trending_topics | unique:'caster' | limitTo:8"> -->
+        <div ng-repeat="topic in trending_topics | unique:'caster' | limitTo:8">
+            <div ng-include="'components/topic.html'"></div>
+        </div>
+        <!-- </ion-slide> -->
+    </div>
+<!-- </ion-slide-box> -->

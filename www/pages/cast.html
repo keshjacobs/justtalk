@@ -1,0 +1,47 @@
+<ion-view  align-title="left" class="bg-grey" ng-init="search_box.hide()" cache-view="false">
+
+
+    <ion-nav-bar class="bar bg-grey">
+
+        <ion-nav-buttons side="left">
+<<<<<<< HEAD
+            <button class="button button-clear" ng-click="pause_cast()" back-button>
+=======
+            <button class="button button-clear" back-button>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+              <i class="icon ion-ios-arrow-back dark"></i></button>
+          </ion-nav-buttons>
+
+        <ion-nav-title class="text-center" align="center">
+          <b style="margin-top: 5px !important;">Cast</b>
+        </ion-nav-title>
+
+        <ion-nav-buttons side="right">
+            <button ng-if="user.t_id==cast.caster.t_id" ng-click="delete_cast(cast)" class="button button-clear button-assertive">
+              <i class="icon ion-ios-trash assertive"></i>
+            </button>
+        </ion-nav-buttons> 
+
+    </ion-nav-bar>
+    
+    
+    <ion-content class="bg-grey" ng-class="cast_loader ? ' edge_loader':''">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="refresh_cast(cast._id)"></ion-refresher>
+      
+           
+              <div ng-include src="'components/cast2.html'"></div>
+              <div ng-include src="'components/replies.html'"></div>
+              <br><Br><br><br><Mbr>
+                <br><Br><br><br><br>
+    </ion-content>
+    
+    
+      
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+      
+    
+    </ion-view>
+    
+    

@@ -1,0 +1,20 @@
+        
+<<<<<<< HEAD
+<div ng-click="play_cast(cast)" ng-style="{'background-color':color}" class="item {{text_color}} item-avatar text-left cast-track" ng-if="cast.caster">
+    <img title="image" class="avatar" src="{{media+cast.caster.photo}}" height="30" />
+    <h3 class="{{text_color}}">
+        <b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>&nbsp;
+        <b style="opacity: 0.7 !important;">@{{cast.caster.user_name}}</b>
+    </h3>
+    <h3 class="{{text_color}}" ng-if="cast.title" style="font-size: 18px !important;">{{cast.title}}</h3>
+    <h6 class="{{text_color}}" ng-if="cast.reply" style="opacity: 0.7 !important;">Replying to <b>@{{cast.reply.caster.user_name}}</b></h6>
+=======
+<div ng-click="play_cast(cast)" ng-style="{'background-color':color}" class="item {{text_color}} tranny item-avatar text-left cast-track" ng-if="cast.caster">
+    <img title="image" class="avatar" src="{{media+cast.caster.photo}}" height="30" />
+   <h4 class="{{text_color}}"><b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>&nbsp;@{{cast.caster.user_name}}
+    </h4>
+    <h3 class="{{text_color}}" ng-if="cast.title">{{cast.title}}</h3>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    <h6 class="{{text_color}}">{{timediff(cast.date_created)}}</h6>
+    <br>
+</div>

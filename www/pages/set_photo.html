@@ -1,0 +1,67 @@
+
+<ion-view cache-view="false" ng-init="discovery()">
+
+<<<<<<< HEAD
+    <ion-nav-bar class="bar" style="display:block;">
+=======
+    <ion-nav-bar class="bar-light" style="display:block;">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+      <ion-nav-buttons side="left">
+        <!-- <button class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back assertive"></i></button> -->
+      </ion-nav-buttons>
+  
+          <ion-nav-buttons side="right">
+          <button ng-click="set_photo()" style="font-weight: bold;" class="button button-clear button-assertive">Next ></button>
+          </ion-nav-buttons>
+          <ion-nav-title>
+            <b>Get started</b>
+          </ion-nav-title>
+  
+  
+    </ion-nav-bar>
+   
+   
+    <ion-content class="text-center">
+        
+
+
+       
+        <div class="text-center padding">
+            <h4>Set your profile photo</h4>
+            <h6>Let's know what you look like</h6>
+        </div>
+      
+
+    <div class="profile_header3 text-center" ng-style="{'background-image':'url('+media+user.photo_header+')'}">
+        <button class="button button-small button-outline button-light" style="margin-top: 40px !important;" style="position: absolute !important;" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="header_file" name="header_file"  ngf-max-size="30000MB" ngf-select="header_up($file)">
+            &nbsp;&nbsp; Select header photo &nbsp;&nbsp;
+        </button>
+        <img title="photo" ng-if="header_file" ngf-src="header_file" style="width: 100%;margin-top: -90px !important;">
+    </div>
+
+    <div class="profile_photo_big text-center" style="margin-top: -90px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
+        <img title="photo" ng-if="file" ngf-src="file" style="width: 100%;">
+    </div> 
+
+<<<<<<< HEAD
+    <div style="padding: 20px !important;">
+        <button class="button button-small button-outline button-dark" style="position:static;max-width: 160px !important;margin: auto !important;display: block;" id="file_up" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="file" name="file"  ngf-max-size="30000MB" ngf-select="file_up($file)">
+=======
+    <br>
+
+    <br>
+    <div class="padding padding">
+        <button class="button button-small button-outline button-dark" style="position: relative;" id="file_up" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="file" name="file"  ngf-max-size="30000MB" ngf-select="file_up($file)">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+            Select profile photo
+        </button>
+    </div>
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    </ion-content>
+    
+</ion-view>

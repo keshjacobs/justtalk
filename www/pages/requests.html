@@ -1,0 +1,51 @@
+<ion-view cache-view="false" class="bg-white">
+
+<<<<<<< HEAD
+    <ion-nav-bar class="bar">
+=======
+    <ion-nav-bar class="bar-light">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+  
+                <ion-nav-title>
+                        <b>Requests</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        <ion-nav-buttons side="right">
+             
+        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+        
+        
+          
+        <ion-content class="padding bg-white" ng-init="get_messages()">
+          <ion-refresher pulling-text="Pull to refresh" on-refresh="get_messages()">
+          </ion-refresher>
+          <h4 class="text-center">All requests sent to you</h4>
+              <div ng-if="!requests || requests.length < 1">
+                  <div class="text-center item item-light">
+                    <div class="padding">
+                      <br>
+                       <br>
+                      <h2><b>No new requests.</b></h2>  <br>
+                      <br><br>
+                    </div> 
+                  </div>
+                </div>
+  
+  
+            <div ng-include="'components/request.html'" ng-repeat="request in requests">
+            </div>
+    
+                                
+                
+        
+          </ion-content>
+        </ion-view>

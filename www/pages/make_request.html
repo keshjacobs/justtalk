@@ -1,0 +1,104 @@
+<ion-view cache-view="true" class="bg-grey">
+
+<<<<<<< HEAD
+        <ion-nav-bar class="bar transparent">
+=======
+        <ion-nav-bar class="bar bg-grey">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+  
+                <ion-nav-title>
+                        <b>Contact List</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        <ion-nav-buttons side="right">
+             
+        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+<<<<<<< HEAD
+        <div class="search-bar">
+                <label class="item item-input">
+                  <input type="text" ng-model="query" placeholder="Search for people"/>
+                  &nbsp;&nbsp;&nbsp; <span class="ion ion-ios-search-strong"></span>&nbsp;&nbsp;&nbsp;
+                </label>
+        </div>
+        <ion-content class="bg-white header-content" ng-init="get_contacts()">
+=======
+        
+        
+          <ion-content class="bg-white" ng-init="get_contacts()">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+
+                <ion-refresher  icon="ion-loading-d" 
+                pulling-text="Pull to refresh"
+                on-refresh="get_contacts()">
+                    </ion-refresher>
+
+<<<<<<< HEAD
+                <div class="text-center padding">
+                        <h5>Send a request to start a conversation</h5>
+                </div>
+=======
+<div class="text-center padding">
+
+<label class="item item-input item-light" style="height: 35px !important;">
+        <input type="text" ng-model="query" placeholder="Search for people" style="border:none !important;color:rgb(8, 8, 8) !important; width: 80% !important;">
+    </label>
+    
+        <h5>Send a request to start a conversation</h5>
+</div>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+
+
+
+<div ng-if="contact_loader" class="text-center padding">
+        <br>
+<<<<<<< HEAD
+        <br>
+        <br>
+        <ion-spinner icon="crescent"></ion-spinner> 
+</div>
+
+
+
+
+<div ng-if="contact_list.length < 1" class="text-center padding">
+   
+        <br>
+        <br>
+        <h4><b>You don't have any contact</b></h4>
+        <h5>Subscribe to a pod to get in contact</h5>
+        
+    
+    </div>
+
+
+=======
+        <ion-spinner icon="crescent"></ion-spinner> 
+</div>
+
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+<div class="list">
+
+          
+            <div ng-include="'components/request_user.html'" ng-repeat="caster in contact_list | unique:'t_id' | filter:query">
+            </div>
+    
+               
+</div>
+                 
+                
+        
+<<<<<<< HEAD
+<div class="gap"></div>
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+          </ion-content>
+        </ion-view>

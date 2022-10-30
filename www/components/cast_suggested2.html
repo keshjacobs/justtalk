@@ -1,0 +1,14 @@
+
+     <div ng-if="!suggested_casts" class="text-center padding">
+        <ion-spinner class="listening" icon="crescent"></ion-spinner> 
+      </div>
+      
+    <div ng-if="suggested_casts.length > 0" class="padding">     
+<<<<<<< HEAD
+        <h4 class="title"><b>Suggested casts</b></h4>
+=======
+        <h4 class="title">Suggested casts</h4>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+       <div ng-include="'components/cast.html'" style="margin-left: 0px !important;" ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:12">
+       </div>
+    </div>

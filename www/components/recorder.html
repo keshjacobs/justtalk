@@ -1,0 +1,68 @@
+<div class="padding text-center" style="width: 100% !important;">
+
+
+<<<<<<< HEAD
+      <div style="margin-top: -15px !important;">
+                 
+                <ion-item  ng-style="{'display':file_added ? 'block':'none'}" class="bg-white dance_out" style="padding: 4px !important;height: auto !important;">
+                  <div class="row">
+                        <div class="col col-10" style="padding:13px !important;">
+                        <div class="profile-photo" style="margin-left: -4px !important;margin-top:-5px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
+=======
+      <div ng-show="file_added" class="dance_out" style="margin-top: -27px !important;">
+                 <br>
+                <ion-spinner ng-hide="post.file" icon="crescent"class="spinner-balanced" style="font-size: 17px !important;"></ion-spinner> 
+                 
+                <ion-item ng-show="post.file" class="bg-white" style="padding: 4px !important;height: auto !important;">
+                  <div class="row">
+                        <div class="col col-10" style="padding:13px !important;">
+                        <div class="profile-photo" style="margin-left: -4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+                        </div>  
+                        </div>
+                        
+                        <div class="col col-80">
+                        <div style="width: 100% !important;float: left !important;margin-top: 17px !important;" class="padding">
+                          <div ng-include src="'components/post_duration.html'"></div>
+                        </div>
+                        </div>
+
+
+                        <div class="col col-10">
+                        <div class="pull-right padding" style="float: right !important;margin-top:6px !important;">
+<<<<<<< HEAD
+                          <span ng-show="file_added && !post.casting" ng-click="test_cast(post)" class="icon ion-play balanced" style="font-size: 30px !important;"></span>
+=======
+                          <span ng-show="post.file && !post.casting" ng-click="test_cast(post)" class="icon ion-play balanced" style="font-size: 30px !important;"></span>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+                          <span ng-show="post.casting" ng-click="pause_cast()" class="icon ion-pause balanced" style="font-size: 30px !important;"></span>
+                          <h4 class="dark black" ng-show="!post.casting && post.duration > 0">{{post.duration || 0 | number:0}}s</h4>
+                        </div>
+                        </div>
+                  </div>
+                </ion-item>
+
+      </div>
+
+
+      <div ng-hide="file_added" style="margin-top: -30px !important;position: relative !important;">
+                <div ng-show="recording">
+                    <ion-spinner icon="ripple" class="listening"></ion-spinner>
+                    <b class="grey">Listening...</b>
+                    <h6 class="dark">{{timer || 0}}s Left</h6>
+                    <div ng-click="stop_recording()" style="background-color: rgb(228, 50, 50) !important;color:white !important;width:auto !important;height:40px !important;padding: 10px 16px 10px 16px !important;margin: auto !important;border-radius: 10px !important;">
+                      Stop
+                    </div>
+                </div>
+
+                <div ng-hide="recording">
+                  <br><br>
+                  <div ng-click="start_recording()" style="background-color: rgb(243, 57, 10) !important;width:74px !important;height:74px !important;padding: 25px !important;margin: auto !important;border-radius: 360px !important;">
+                    <span class="icon ion-mic-a light" style="font-size: 26px !important;margin: auto !important;"></span>
+                  </div>
+                  <h6>Tap to start recording</h6>
+                </div>
+      </div>
+
+
+</div>

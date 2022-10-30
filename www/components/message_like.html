@@ -1,0 +1,9 @@
+<div style="float: right !important;margin-right: -35px !important;margin-top: 8px !important;" ng-if="!cast.expired">
+        <div class="tiny-photo" ng-repeat="liker in cast.likes | filter:'!'+cast.user.t_id | limitTo:4 | unique:'t_id'" ng-style="{'background-image':'url('+media+liker.photo+')'}"></div>
+        <button title="like" ng-if="!liked(cast)" ng-click="like_message(cast)" class="button button-lg button-clear button-icon-right button-dark-green">
+            <span class="ion-heart"></span>
+        </button>
+        <button title="unlike" ng-if="liked(cast)" ng-click="unlike_message(cast)" class="button button-lg button-clear button-icon-right button-assertive">
+            <span class="ion-heart red"></span>
+        </button>
+</div>

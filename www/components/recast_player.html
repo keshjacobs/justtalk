@@ -1,0 +1,13 @@
+
+    <div class="pull-right text-center" style="float: right !important;margin-top: 0px !important;">
+        <button ng-if="cast.recast.casting" ng-click="pause_cast()" class="button button-clear button-balanced">
+            <span class="icon ion-pause balanced" style="font-size: 18px !important;"></span>
+        </button>
+        <button ng-if="!cast.recast.casting" ng-disabled="!cast.recast.cast || cast.recast.expired" ng-click="play_cast(cast.recast)" class="button button-clear" ng-class="play_status(cast.recast)">
+            <span class="icon ion-play" style="font-size: 18px !important;"></span>
+        </button>
+        <div style="margin-top: -10px !important;">
+            <h6 ng-if="cast.recast.duration || !cast.recast.expired" class="dark">{{cast.recast.duration || 0 | number:0}}s</h6>
+            <h6 ng-if="cast.recast.expired" class="assertive">Expired</h6>
+        </div>
+    </div>

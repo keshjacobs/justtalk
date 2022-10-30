@@ -1,0 +1,51 @@
+<ion-view  ng-init="search_box.hide()">
+
+
+    <ion-nav-bar ng-class="{{text_color}} tranny">
+      
+      <ion-nav-title class="text-center {{text_color}}">
+        <b>{{profile.user_name || '...'}}</b>
+      </ion-nav-title> 
+      <ion-nav-buttons side="left">
+            <button title="back" class="button button-clear" back-button>
+              <i class="icon ion-ios-arrow-back {{text_color}}"></i>
+            </button>
+          </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+<<<<<<< HEAD
+          <button title="more" ng-show="profile.t_id!=t_id" ng-click="profile_more(profile)" class="button button-clear button-{{text_color}}">
+            <span class="icon ion-more"></span>
+          </button>
+=======
+          <button title="more" ng-click="profile_more(profile)" class="button button-clear button-{{text_color}}">
+            <span class="icon ion-more"></span>
+        </button>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+    
+    
+    <ion-content style="margin-top: -80px !important;height:110vh !important;padding-bottom: 30px !important;">
+              <ion-refresher pulling-text="Pull to refresh" on-refresh="fetch_profile(profile.t_id)"></ion-refresher>
+              <div ng-include src="'components/profile_card.html'"></div>
+              <div ng-include src="'components/profile_casts.html'"></div>
+     </ion-content>
+    
+    
+
+<<<<<<< HEAD
+     <div ng-include src="'components/mic.html'"></div>
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+      
+          
+    
+    </ion-view>
+    
+    

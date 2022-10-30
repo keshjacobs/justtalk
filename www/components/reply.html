@@ -1,0 +1,22 @@
+<div ng-if="cast.reply" style="float:right !important;width: 100% !important;margin-top: 0px !important;margin-bottom: 10px !important;">
+       <ion-item class="reply-box" ng-show="cast.reply.caster" ng-click="open_cast(cast.reply)">
+        <div class="profile-photo" ng-style="{'background-image':'url('+media+cast.reply.caster.photo+')'}"></div>
+        <div class="padding">
+                <h4>
+<<<<<<< HEAD
+                <b>{{cast.reply.caster.full_name || cast.reply.caster.first_name +' '+ cast.reply.caster.last_name}}</b>
+                <b class="grey">@{{cast.reply.caster.user_name || '...'}}</b>
+=======
+                {{cast.reply.caster.full_name || cast.reply.caster.first_name +' '+ cast.reply.caster.last_name}}
+                <b class="assertive">@{{cast.reply.caster.user_name || '...'}}</b>
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+                </h4>
+                <h3 ng-if="cast.reply.title">{{cast.reply.title ||  '...'}}</h3>
+        </div>
+        </ion-item>    
+
+        <div ng-show="!cast.reply.caster" class="item item-divider reply-box">
+            <h4>Cast is not available anymore</h4>
+        </div>
+
+</div>

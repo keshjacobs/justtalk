@@ -1,0 +1,49 @@
+
+<ion-view>
+
+  <ion-nav-bar class="bar-light">
+
+    <ion-nav-title>
+      Add Contact
+    </ion-nav-title>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-clear" back-button>
+        <i class="icon ion-ios-arrow-back oran"></i></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="text-center padding discoboy">
+
+    <form ng-submit="add_contact(selected_contact)" class="list" enctype="application/x-www-form-urlencoded">
+
+      <br>
+<h5 class="text-center">
+ Search for a munchie using their payID, email or phone number
+</h5>
+     
+      <label class="item item-input">
+        <input type="text" ng-model="con" value="" ng-keyup="search_contact(con)" placeholder="Search For Munchie">
+      </label>
+            <div class="text-center" ng-if="loading">
+            <ion-spinner icon="dots" class="dope"></ion-spinner>
+            </div>
+          <div class="padding text-center" ng-if="(!loading && !contacts) || (!loading && contacts.length < 1)">
+              <br>
+            <h5>Can't find contact with key search.</h5>
+          </div>
+
+      <div class="list">
+        <ion-radio ng-model="selected_contact" ng-value="contact" ng-change="select_contact(contact)" class="item item-avatar item-light" ng-repeat="contact in contacts | limitTo:6">
+             <img src="img/dp.png">
+              <b>{{contact.first_name | capitalize}} {{contact.last_name | capitalize}}</b><br>
+              <small>{{contact.email}}</small><br>
+              <small class="oran">{{contact.phone}}</small>
+        </ion-radio>
+      </div>
+      <br><br>
+      <button ng-disabled="!selected_contact" type="submit" class="button button-block button-balanced">ADD</button>
+    </form>
+  </ion-content>
+</ion-view>
+

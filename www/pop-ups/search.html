@@ -1,0 +1,57 @@
+<<<<<<< HEAD
+<ion-modal-view class="total-white">
+
+
+        <ion-header-bar class="bar total-white">
+=======
+<ion-modal-view class="bg-white">
+
+
+        <ion-header-bar class="bar bg-white">
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+            <button ng-click="search_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+            <ion-title><small><b>Search</b></small></ion-title>
+        </ion-header-bar>
+
+<<<<<<< HEAD
+        <ion-content class="text-left total-white" style="margin-top: 0px !important;">
+            <div class="search-bar2">
+                <label class="item item-input">
+                    <input type="text" autofocus ng-keyup="search(query)" ng-model="query" placeholder="Search for Casts / People" />
+=======
+        <ion-content class="text-left bg-white" style="margin-top: 0px !important;">
+            <div class="padding">
+                <label class="item item-input item-light" style="height: 38px !important;border-radius: 2px !important;">
+                    <input type="text" autofocus ng-keyup="search(query)" ng-model="query" placeholder="Search for Casts / People" style="border:none !important;color:rgb(8, 8, 8) !important;" />
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+                </label>
+            </div>
+    
+      
+            <div class="text-center" ng-if="search_loading">
+                <br>
+                <ion-spinner icon="crescent"></ion-spinner>         
+            </div>
+    
+  
+                <div class="search-results" ng-show="query && !search_loading">
+                    
+                        <div class="text-center padding">
+                            <h5 class="dark" style="color: rgb(39, 38, 38) !important;">{{search_results || 0 | number}} results</h5>
+                        </div>
+
+                        <div  ng-repeat="caster in user_results" ng-include="'components/subscribe_user.html'">
+                        </div>
+                        <div  ng-repeat="cast in cast_results" ui-sref="cast({cast_id:cast._id})" ng-include="'components/cast.html'"> 
+                        </div>
+                
+                </div>
+            
+                <div class="text-center" ng-if="search_results == 0 && !search_loading">
+                    <h5 class="dark padding">No result found</h5>
+                </div>
+
+
+        </ion-content>
+
+</ion-modal-view>

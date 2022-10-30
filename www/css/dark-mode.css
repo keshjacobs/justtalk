@@ -1,0 +1,347 @@
+
+.dark{
+    color: black !important;
+}
+<<<<<<< HEAD
+.assertive,.red{
+    color: rgb(246, 78, 78) !important;
+}
+
+.dark-red,.grey{
+  color:rgba(226, 226, 226, 0.771) !important;
+}
+.transparent,.modal .track-item,.item-light{
+  border: none !important;
+}
+.modal .tranny, .bar-light,.tabs-striped .tabs,.billboard{
+    color:#fff !important;
+    background-color: rgba(0, 0, 0, 0.51) !important;
+    border:none !important;
+    -webkit-backdrop-filter: blur(55px) !important;
+    backdrop-filter: blur(55px) !important;
+}
+.bar{
+  background-color: #000 !important;
+  background-image: none !important;
+}
+
+.modal .item-avatar{
+  background-color: transparent !important;
+}
+ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.popup,.popup-head,.popup-body,.popup-buttons,.modal .bg-light{
+color:#fff !important;
+background-color: rgba(0, 0, 0, 0.607) !important;
+border:none !important;
+-webkit-backdrop-filter: blur(55px) !important;
+backdrop-filter: blur(55px) !important;
+}
+
+.item-divider,.modal .item-divider{
+  background-color: rgb(0, 0, 0) !important;
+  border:none !important;
+}
+
+ion-content{
+  background-color: #000 !important;
+}
+ion-content .item{
+  background-color: transparent !important;
+  border-right: none !important;
+  border-left: none !important;
+}
+
+ion-content .played_cast{
+  background-color: rgba(145, 248, 145, 0.211) !important;
+}
+
+.modal .air_content,ion-content .air_content,.air_content{
+  background-color: rgba(41, 20, 20, 0.472) !important;
+  -webkit-backdrop-filter: blur(200px) !important;
+  backdrop-filter: blur(200px) !important;
+}
+ion-modal-view .bar .title{
+  font-size: 20px !important;
+  font-weight: bold !important;
+  position: static !important;
+  margin: 0px !important;
+  margin-top:0px !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+ion-content .unplayed_cast{
+  background-color: rgba(251, 211, 150, 0.855) !important;
+}
+
+ion-content .expired_cast{
+  background-color: rgba(115, 12, 0, 0.855) !important;
+}
+ion-content .assertive,ion-content .button-outline .button-assertive,ion-content a .assertive{
+color: red !important;
+}
+body,.view-container,.fade-in,.bg-light,.bg-white,.modal .bg-white,.item-grey,.ion-view,.bg-grey,ion-view,.chat_board{
+  color:#fff !important;
+  background-color: rgb(0, 0, 0) !important;
+  border:none !important;
+  background-image: none !important;
+}
+.item .reply-box{
+    background-color: rgb(29, 29, 29) !important;
+    border: 1px solid rgb(34, 34, 34) !important;
+=======
+.assertive,.red,.dark-red{
+    color: rgb(246, 78, 78) !important;
+}
+.item-divider,ion-item,.text-left,.text-center{
+    background-color: transparent !important;
+}
+.modal,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.bar,header,.bar-light,.tabs-striped .tabs,.billboard{
+    color:#fff !important;
+    background-color: rgba(18, 0, 0, 0.298) !important;
+    border:none !important;
+    -webkit-backdrop-filter: blur(70px) !important;
+    backdrop-filter: blur(70px) !important;
+     background-image: none !important;
+     
+}
+
+body,.view-container,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bg-grey,ion-view,.chat_board{
+  color:#fff !important;
+  background-color: rgb(19, 0, 0) !important;
+  border:none !important;
+  background-image: none !important;
+}
+.reply-box{
+    background-color: rgb(12, 0, 0) !important;
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+}
+.jt-mic{
+    background-color: rgb(3, 127, 12) !important;
+}
+.jt-mic2{
+    background-color: rgb(127, 90, 3) !important;
+}
+.jt-mic2 span{
+        color:#000 !important;
+}
+input,textarea{
+<<<<<<< HEAD
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #fff !important;
+}
+.input-light,.input-lable,.backdrop{
+=======
+    background-color: rgba(96, 96, 96, 0) !important;
+    color: #fff !important;
+}
+.item-input,.input-light,.input-lable,.backdrop{
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    background-color: rgba(96, 96, 96, 0.528) !important;
+    color: #fff !important;
+    border: none !important;
+}
+*,.title,.dark,.button{
+    color: #fff !important;
+}
+
+<<<<<<< HEAD
+ ion-content .item-input,.item-input{
+  background-color: rgba(96, 96, 96, 0.865) !important;
+  color: #fff !important;
+  padding: 15px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  float: left;
+  padding: 10px !important;
+  width: 100% !important;
+}
+
+.search-bar{
+  background-color: rgb(0, 0, 0) !important;
+  backdrop-filter: unset !important;
+}
+
+.search-bar .item-input{
+  background-color: rgba(208, 208, 208, 0.36) !important;
+  color: #fff !important;
+}
+
+.total-white{
+  background-color: rgba(21, 21, 21, 0.931) !important;
+  color: rgb(255, 255, 255) !important;
+}
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+
+
+.tabs{
+  background-color: rgba(0, 0, 0, 0.298) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(70px) !important;
+  backdrop-filter: blur(70px) !important;
+   background-image: none !important;
+  }
+  
+  
+<<<<<<< HEAD
+.item .new_message,ion-content .new_message,.new_message{
+  background-color: rgb(51, 51, 51) !important;
+}
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+  
+  .tabs .tab-item .icon{
+    opacity: 0.9 !important;
+  }
+  
+<<<<<<< HEAD
+  .list .item{
+    border: none !important;
+  }
+=======
+  
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+.icon{
+    color: #fff !important;
+}
+
+
+.tabs .tab-item-active .icon{
+    color: #ff9249 !important;
+    font-size: 24px !important;
+    opacity: 1 !important;
+  }
+  
+  .profile_photo_big,.profile_photo,.tiny-photo,.ppa{
+    border: 2px solid #000 !important;
+  }
+
+  .splash_screen{
+    background-color: #000 !important;
+  }
+
+<<<<<<< HEAD
+ .item-options,ion-option-button{
+    background-color: rgba(32, 32, 32, 0.021) !important;
+    color:#fff !important;
+    border: none !important;
+  }
+
+  .item-options .button .assertive{
+    background-color: rgba(236, 11, 11, 0.021) !important;
+    color:#fff !important;
+    border: none !important;
+  }
+
+
+.action-sheet-options, .action-sheet-group {
+  background: #000 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+
+  .item .recast-box{
+    background-color: rgb(35, 44, 42) !important;
+    border: none !important;
+  }
+
+
+  .recast-box .button-balanced span{
+    color:rgb(23, 139, 29) !important;
+  }
+
+  .button-balanced span{
+    color:rgb(23, 139, 29);
+  }
+
+  .button-dark i{
+    color:#fff !important;
+  }
+
+
+  .button-light b, .button-light .ion-play{
+    color:rgb(2, 2, 2) !important;
+  }
+
+  
+  .popup-buttons .button-light b{
+    color:rgb(255, 255, 255) !important;
+  }
+
+
+  .button-assertive span{
+    color:rgb(248, 92, 71) !important;
+  }
+
+  .button-played,.button-played span{
+    color: rgba(0, 135, 0, 0.887) !important;
+  }
+  .button-oran span{
+    color:#ff9249 !important;
+  }
+
+  .now_playing .button-balanced span,.current_cast .button-balanced,.topic .button-balanced{
+    color:rgb(255, 255, 255) !important;
+  }
+
+  .current_cast{
+    border:none !important;
+  }
+  
+  
+  .current_cast .avatar{
+    margin-top: 0px !important;
+  }
+  
+.pill-dark{
+  background-color: rgb(101, 56, 17) !important;
+ color: #fff;
+}
+
+
+.search-bar2 .item-input{
+  background-color: rgb(60, 60, 60) !important;
+  color: #fff !important;
+  float: left;
+}
+
+
+
+
+
+::-webkit-input-placeholder {
+  color: rgb(229, 229, 229) !important;
+  font-weight: bold !important;
+}
+
+:-ms-input-placeholder { 
+  color: rgb(229, 229, 229) !important;
+  font-weight: bold !important;
+}
+
+::placeholder {
+  color: rgb(229, 229, 229) !important;
+  font-weight: bold !important;
+}
+
+
+.blur_bg{
+  background-color: #000 !important;
+}
+=======
+ .item-options, .item-options button,ion-option-button{
+    background-color: rgba(32, 32, 32, 0.021) !important;
+    color:#fff !important;
+  }
+
+
+  .recast-box{
+    background-color: rgb(0, 12, 10) !important;
+    border: none !important;
+  }
+
+  .button-dark i{
+    color:#fff !important;
+  }
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d

@@ -1,0 +1,96 @@
+
+
+
+<ion-view name="casts" align-title="left"  ng-style="{'background-color':my_color}" cache-view="true">
+
+
+    
+    <ion-nav-bar class="bar bg-grey">
+
+        <ion-nav-title class="text-center">
+            <b class="dark">Casts</b>
+        </ion-nav-title>
+        <ion-nav-buttons side="left">
+            <button title="button" class="button button-clear" back-button nav-direction="back">
+              <i class="icon ion-ios-arrow-back dark"></i></button>
+          </ion-nav-buttons>
+
+          <!-- <ion-nav-buttons side="left" menu-toggle="left">
+            <img ng-if="!user" src="img/icon-green.png" class="bar-logo"/>
+            <div ng-if="user" menu-toggle="left" class="profile-photo" style="margin-top: 0px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+        </ion-nav-buttons> -->
+        
+        
+        <!-- <ion-nav-buttons side="right">
+            <button ui-sref="settings" ng-if="t_id" class="button button-sm button-clear button-icon-right button-dark">
+                <span class="icon ion-gear-b"></span>
+            </button>
+        </ion-nav-buttons> -->
+        
+    </ion-nav-bar>
+
+
+<<<<<<< HEAD
+    <div class="padding bg-grey" style="margin-top: 80px !important;">
+        <ion-segment class="bg-grey" ng-model="categories" full="true" dark>
+            <ion-segment-button value="casts">
+              <b>Casts</b>
+            </ion-segment-button>
+            <ion-segment-button value="recasts">
+              <b>Recasts</b>
+            </ion-segment-button>
+            <ion-segment-button value="replies">
+              <b> Replies</b>
+            </ion-segment-button>
+=======
+    <div class="padding" style="margin-top: 80px !important;">
+        <ion-segment ng-model="categories" full="true" dark>
+            <ion-segment-button value="casts">
+              Casts
+            </ion-segment-button>
+            <ion-segment-button value="recasts">
+             Recasts
+            </ion-segment-button>
+            <ion-segment-button value="replies">
+              Replies
+            </ion-segment-button>
+            <!-- <ion-segment-button value="library">
+              Library
+            </ion-segment-button> -->
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+          </ion-segment>    
+     </div>
+     
+<ion-content has-header="true" class="has-header bg-grey" style="margin-top:120px !important;padding-top: 0px !important;">
+        <ion-refresher  icon="ion-loading-d" 
+        pulling-text="Pull to refresh"
+        on-refresh="refresh_profile()">
+        </ion-refresher>
+        <div ng-if="t_id">
+          <!-- <div ng-include src="'components/profile_card2.html'"></div>
+          <div class="padding text-center">
+            <h4 ng-if="user.bio" class="text-center padding dark black">{{user.bio}}</h4>    
+          </div>     -->
+           
+          <div ng-include src="'components/profile_cast2.html'"></div>
+        </div>
+
+       <div ng-include src="'components/auth.html'"></div>
+
+<<<<<<< HEAD
+       <div class="gap"></div>
+=======
+>>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
+    </ion-content>
+
+
+    
+    <div ng-include src="'components/mic.html'"></div>
+
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+      
+
+</ion-view>
+
