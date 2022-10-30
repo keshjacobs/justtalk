@@ -1570,8 +1570,10 @@ $rootScope.build_playlist=function(cast){
                   return c._id==cast._id;
                 })
                 if($rootScope.track >= -1){
-                  $rootScope.playlist[$rootScope.track].casting=true;
-                  $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
+                  if($rootScope.playlist[$rootScope.track].cast){
+                    $rootScope.playlist[$rootScope.track].casting=true;
+                    $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
+                  }
                 }else{
                   $rootScope.track=0;
                 }
