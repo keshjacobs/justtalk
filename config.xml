@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.something.ganik.justtalk" version="2.7.9" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ios.stickman" version="2.7.9" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>JustTalk</name>
     <description>
      Keep the conversation going
@@ -302,22 +302,4 @@
         <variable name="PLAY-SERVICES-WEARABLE" value="17.0.0" />
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.2.0" />
-    <plugin name="ionic-plugin-deeplinks" spec="^1.0.20">
-        <variable name="URL_SCHEME" value="justtalk" />
-        <variable name="DEEPLINK_SCHEME" value="https" />
-        <variable name="DEEPLINK_HOST" value="justtalkapp.com" />
-        <variable name="ANDROID_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_2_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_3_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_4_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_5_PATH_PREFIX" value="/" />
-        <variable name="DEEPLINK_2_SCHEME" value=" " />
-        <variable name="DEEPLINK_2_HOST" value=" " />
-        <variable name="DEEPLINK_3_SCHEME" value=" " />
-        <variable name="DEEPLINK_3_HOST" value=" " />
-        <variable name="DEEPLINK_4_SCHEME" value=" " />
-        <variable name="DEEPLINK_4_HOST" value=" " />
-        <variable name="DEEPLINK_5_SCHEME" value=" " />
-        <variable name="DEEPLINK_5_HOST" value=" " />
-    </plugin>
 </widget>

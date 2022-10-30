@@ -1,6 +1,6 @@
 {
   "name": "justtalk",
-  "version": "2.6.6",
+  "version": "2.7.9",
   "description": "talk is cheap, but talk also is free with friends and family",
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
@@ -10,8 +10,10 @@
     "@ionic/cloud": "^0.16.2",
     "bluebird": "^3.7.2",
     "cordova": "^9.0.0",
+    "cordova-android": "^8.1.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -36,7 +38,6 @@
     "gulp-sass": "^4.1.0",
     "ionic-angular": "^1.3.5",
     "ionic-native": "^2.9.0",
-    "ionic-plugin-deeplinks": "^1.0.22",
     "ionicons": "^5.4.0",
     "moment": "^2.29.1",
     "ng-tags-input": "^3.2.0",
@@ -60,7 +61,6 @@
     "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-audioinput": "^1.0.2",
     "cordova-plugin-cocoapod-support": "^1.6.2",
-    "cordova-plugin-crosswalk-webview": "^2.4.0",
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
@@ -156,24 +156,6 @@
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "This App Requires Your Location to personalize your timeline experience"
       },
-      "ionic-plugin-deeplinks": {
-        "URL_SCHEME": "justtalk",
-        "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "justtalkapp.com",
-        "ANDROID_PATH_PREFIX": "/",
-        "ANDROID_2_PATH_PREFIX": "/",
-        "ANDROID_3_PATH_PREFIX": "/",
-        "ANDROID_4_PATH_PREFIX": "/",
-        "ANDROID_5_PATH_PREFIX": "/",
-        "DEEPLINK_2_SCHEME": " ",
-        "DEEPLINK_2_HOST": " ",
-        "DEEPLINK_3_SCHEME": " ",
-        "DEEPLINK_3_HOST": " ",
-        "DEEPLINK_4_SCHEME": " ",
-        "DEEPLINK_4_HOST": " ",
-        "DEEPLINK_5_SCHEME": " ",
-        "DEEPLINK_5_HOST": " "
-      },
       "cordova-plugin-androidx-adapter": {},
       "cordova-android-firebase-gradle-release": {
         "FIREBASE-CORE": "17.0.0",
@@ -217,9 +199,6 @@
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
       "cordova-plugin-iosrtc": {},
-      "cordova-plugin-crosswalk-webview": {
-        "XWALK_VERSION": "org.xwalk:xwalk_core_library_beta:21.51.546.7"
-      },
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-permission": {},
       "cordova.plugins.diagnostic": {},
@@ -255,8 +234,16 @@
         "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "17.2.2",
         "ANDROID_GSON_VERSION": "2.8.6",
         "ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION": "1.3.1"
+      },
+      "ionic-plugin-deeplinks": {
+        "URL_SCHEME": "justtalk",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "justtalkapp.com",
+        "ANDROID_PATH_PREFIX": "/"
       }
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }
