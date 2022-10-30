@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 <ion-item class="item-avatar text-left" style="border: none !important;border-radius: 5px !important;" ng-class="post.recast_id ? 'green-bg':''" ng-if="post.cast">
       <img class="avatar profile-photo" style="margin-top: -5px !important;" ui-sref="aprofile({id:post.cast.caster.t_id})" src="{{media+post.cast.caster.photo}}" height="30" />
     <h3 ui-sref="aprofile({id:post.cast.caster.t_id})">
@@ -8,16 +7,6 @@
     </h3>
     <h3 class="black dark" ng-if="post.cast.title">{{post.cast.title}}</h3>
     <h6 class="grey">{{timediff(post.cast.date_created)}}</h6>
-=======
-<ion-item class="item-avatar text-left" ng-class="post.recast_id ? 'green-bg':''" ng-if="post.cast">
-      <img class="avatar profile-photo" style="margin-top: -5px !important;" ui-sref="aprofile({id:post.cast.caster.t_id})" src="{{media+post.cast.caster.photo}}" height="30" />
-    <h3 ui-sref="aprofile({id:post.cast.caster.t_id})">
-        <b>{{post.cast.caster.full_name || '...'}}</b>
-        @{{post.cast.caster.user_name || '...'}}
-    </h3>
-    <h4 class="black dark" ng-if="post.cast.title">{{post.cast.title}}</h4>
-    <h6>{{timediff(post.cast.date_created)}}</h6>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 </ion-item>
 <br>
 

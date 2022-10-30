@@ -62,7 +62,6 @@
   </div>
 
 
-<<<<<<< HEAD
   <div ng-class="file_added ? 'grey_bar':'transparent_bar2'" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1">
     <div ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: -33px !important;">
       <div ng-hide="messaging" ng-include="'components/recorder.html'"></div>
@@ -79,24 +78,6 @@
           <ion-spinner style="margin-top: 10px !important;" class="listening" icon="dots"></ion-spinner> 
           <h5>Sending...</h5> 
         </div>
-=======
-  <div ng-class="post.file ? 'grey_bar':'transparent_bar2'" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1">
-    <div ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: -33px !important;">
-      <div ng-hide="messaging" ng-include="'components/recorder.html'"></div>
-      <div class="text-center padding" style="margin-top:-19px !important;">
-        <div class="button-row row" ng-if="post.file" ng-hide="messaging || recording">
-          <button ng-disabled="!file_added || recording || post.casting"  ng-click="send_message(post)" class="button button-small col button-balanced">
-              Send
-          </button>
-          &nbsp;&nbsp;
-          <button ng-disabled="!file_added || recording || post.casting" ng-click="clear()" style="border: 2px solid !important;" class="button button-small col button-outline button-assertive">
-              Clear
-          </button>
-        </div>
-      <ion-spinner style="margin-top: 10px !important;" ng-show="messaging" class="listening" icon="dots"></ion-spinner> 
-      <h5 ng-show="messaging">Sending...</h5> 
-      </div>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       <br><br>
       <br><br>
       <br><br>

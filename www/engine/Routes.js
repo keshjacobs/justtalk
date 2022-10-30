@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 app.config(function($stateProvider, $urlRouterProvider,Config,$ionicConfigProvider,$httpProvider) {
     $ionicConfigProvider.views.forwardCache(true);
 
@@ -11,14 +10,6 @@ app.config(function($stateProvider, $urlRouterProvider,Config,$ionicConfigProvid
       $ionicConfigProvider.tabs.position('bottom');
       $ionicConfigProvider.navBar.alignTitle('center');
 
-=======
-app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,$httpProvider) {
-    $ionicConfigProvider.views.forwardCache(true);
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
-      $ionicConfigProvider.tabs.position('bottom');
-      $ionicConfigProvider.navBar.alignTitle('center');
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       $stateProvider
       .state('splash', {
         url: '/splash',
@@ -110,7 +101,6 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,$htt
         controller:"profile"
       })
       
-<<<<<<< HEAD
       
   
       .state('search', {
@@ -121,8 +111,6 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider,$htt
       
       
       
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   
       .state('about', {
         url: '/about',

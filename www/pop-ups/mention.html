@@ -1,6 +1,5 @@
 <ion-modal-view class="bg-grey">
     <ion-header-bar class="bar bar-header bg-grey">
-<<<<<<< HEAD
         <button ng-click="mention_box.hide()" class="button button-clear button-dark button-small dark">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
         <ion-title><small><b>Mention</b></small></ion-title>
     </ion-header-bar>
@@ -20,24 +19,6 @@
                 
             <div class="text-center padding">
                 <h5 class="dark">{{user_results.length || 0 | number}} found</h5>
-=======
-        <button ng-click="mention_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
-        <ion-title><small><b>Mention</b></small></ion-title>
-    </ion-header-bar>
-
-  
-    <ion-content class="text-left">
-
-        <div class="padding" style="margin-top: 0px;">
-            <label class="item item-input item-light" style="height: 38px !important;border-radius: 5px !important;">
-                <input type="text" autofocus ng-keyup="search_mention(query)" ng-model="query" placeholder="Search for People" style="border:none !important;color:rgb(8, 8, 8) !important; width: 80% !important;">
-            </label>
-        </div>
-            <div class="search-results" ng-show="query">
-                
-            <div class="text-center padding">
-                <h5 class="dark" style="color: rgb(39, 38, 38) !important;">Found {{user_results || 0 | number}} found</h5>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
             </div>
 
             <div  ng-repeat="caster in user_results" ng-include="'components/mention.html'">

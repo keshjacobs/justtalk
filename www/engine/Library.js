@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 app.run(function($ionicPlatform,Aud,socket,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
-=======
-app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionSheet,$http,socket,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   $rootScope.media=Config.media;
   
   $rootScope.pages=1;
 
-<<<<<<< HEAD
   $rootScope.change_bar=function(){
       if(!$rootScope.settings.dark_mode){
           StatusBar.styleDefault();
@@ -17,8 +12,6 @@ app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionS
   };
 
 
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   $rootScope.settings={
     dark_mode:false
   };
@@ -35,12 +28,9 @@ app.run(function($ionicPlatform,Aud,$cordovaSocialSharing,TopMusic,$ionicActionS
 } else {
    console.log('-----(UIWebView)');
 }
-<<<<<<< HEAD
 
 
 $rootScope.det={user_name:""};
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   $rootScope.voice_filters=voice_filters;
   $rootScope.notify=false;
   $rootScope.home_loader=false;
@@ -123,7 +113,6 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
       if($rootScope.playing_message.casting){
             main_cast=$rootScope.playing_message;
           }
-<<<<<<< HEAD
     }else if($rootScope.post){
               if($rootScope.post.file){
                 main_cast=$rootScope.post;
@@ -133,13 +122,6 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
           }else{
             main_cast=$rootScope.current_cast;
           }
-=======
-    }else if($rootScope.post.file){
-        main_cast=$rootScope.post;
-    }else{
-      main_cast=$rootScope.current_cast;
-    }
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
     if(!main_cast.timeLeft){
       main_cast.timeLeft=main_cast.duration;
@@ -349,17 +331,9 @@ $rootScope.unlock_media=function() {
 
 
 $rootScope.change_mode=function(){
-<<<<<<< HEAD
     $rootScope.change_bar();
     $localStorage.dark_mode=!$localStorage.dark_mode;
     $rootScope.settings.dark_mode=$localStorage.dark_mode;
-=======
-    $localStorage.dark_mode=!$localStorage.dark_mode;
-    $rootScope.settings.dark_mode=$localStorage.dark_mode;
-  console.log("dark_mode:");
-  console.log($rootScope.settings.dark_mode);
-$rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 }
 
 
@@ -427,11 +401,7 @@ $rootScope.use_voice=function(voice){
        }
        if (caster) {
         if (caster.t_id==user_id) {
-<<<<<<< HEAD
       return 'played_cast';
-=======
-      return 'button-balanced';
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
      }else{
       if (c.listens)  {
       var y=c.listens.findIndex(function(l){
@@ -479,22 +449,14 @@ $rootScope.play_status= function (c) {
      }
      if (caster) {
       if (caster.t_id==user_id) {
-<<<<<<< HEAD
       return 'button-played';
-=======
-      return 'button-balanced';
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
      }else{
      if (c.listens) {
             var y=c.listens.findIndex(function(l){
               return l.t_id==user_id || l==$rootScope.user._id;
             });
             if(y > -1){
-<<<<<<< HEAD
               return 'button-played';
-=======
-              return 'button-balanced';
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
             }else{
               return 'button-oran';
             }
@@ -506,11 +468,7 @@ $rootScope.play_status= function (c) {
       return 'button-oran';
     }
     }else{
-<<<<<<< HEAD
       return 'button-played';
-=======
-      return 'button-balanced';
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     }
     }else{
       return 'button-oran';
@@ -768,16 +726,11 @@ $rootScope.account_update=function(profile){
   $timeout(function(){
     $rootScope.selected_user=user;
     if($rootScope.chat){
-<<<<<<< HEAD
       console.log("in chat");
       $rootScope.selected_user.title=$rootScope.chat.title;
     }else{
     console.log("out chat");
       }
-=======
-      $rootScope.selected_user.title=$rootScope.chat.title;
-    }
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   },1000);
   }
 
@@ -855,7 +808,6 @@ $rootScope.open_listens=function(listeners){
 
 $rootScope.open_cast=function(cast){
   $rootScope.cast_replies=[];
-<<<<<<< HEAD
   $rootScope.cast=cast;
   $rootScope.search_box.hide();
   $state.go("cast");
@@ -863,15 +815,6 @@ $rootScope.open_cast=function(cast){
     $rootScope.cast.casting=true;
     $rootScope.refresh_cast(cast._id);
   },100);
-=======
-  $timeout(function(){
-    $rootScope.search_box.hide();
-  $rootScope.cast=cast;
-  $rootScope.refresh_cast(cast._id);
-  $rootScope.get_replies(cast._id);
-    $state.go("cast");
-  },1000);
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 }
 
 
@@ -883,7 +826,6 @@ $rootScope.sink=function(){
 }
     
   $rootScope.open_chat=function(chat){
-<<<<<<< HEAD
     if(chat){
       $state.go("chat");
       $rootScope.sink();
@@ -893,18 +835,6 @@ $rootScope.sink=function(){
     $rootScope.get_chat(chat._id);
     },100);
   }
-=======
-    $state.go("chat");
-    $rootScope.sink();
-    $rootScope.pause_cast();
-    if(chat){
-    $rootScope.chat=chat;
-    $timeout(function(){
-    $rootScope.get_chat(chat._id);
-    },1000);
-  }
-  $rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   }
 
     
@@ -990,18 +920,11 @@ $rootScope.sink=function(){
 $rootScope.like_cast=function(c){
   if($rootScope.user){ 
     if(this.current_cast){
-<<<<<<< HEAD
   if(this.current_cast.recast){
     c=this.current_cast.recast;
   }else{
     c=this.current_cast;
   }
-=======
-    c=this.current_cast;
-  }else 
-  if(this.current_cast.recast){
-    c=this.current_cast.recast;
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   }else
     if(this.cast.recast){
       c=this.cast.recast;
@@ -1010,7 +933,6 @@ $rootScope.like_cast=function(c){
       c=this.cast;
     }
     if($rootScope.user){
-<<<<<<< HEAD
                   if(c.likes){
                     if($rootScope.liked(c)){
                       c.likes.splice(c.likes.indexOf($rootScope.user._id),1);
@@ -1027,16 +949,6 @@ $rootScope.like_cast=function(c){
                       });
                     }
                   }
-=======
-    var data={
-              cast_id:c._id,
-              _id:$rootScope.user._id
-            };
-            if(c.likes){
-              c.likes.push($rootScope.user._id);
-            }
-        cast.like(data);
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     }
   }else{
     $rootScope.auth_box.show();
@@ -1051,41 +963,6 @@ $rootScope.like_cast=function(c){
 
 
 
-<<<<<<< HEAD
-=======
-  
-  $rootScope.unlike_cast=function(c){
-    if($rootScope.user){
-      if(this.current_cast){
-        c=this.current_cast;
-      }else 
-      if(this.current_cast.recast){
-        c=this.current_cast.recast;
-      }else
-       if(this.cast.recast){
-        c=this.cast.recast;
-      }else
-  if(this.cast){
-    c=this.cast;
-  }
-    if($rootScope.user){
-    var data={
-      cast_id:c._id,
-      t_id:$localStorage.t_id,
-      _id:$rootScope.user._id
-    };
-    c.likes.splice(c.likes.indexOf($rootScope.user._id),1);
-    cast.unlike(data).success(function(){});
-  }}else{
-    $rootScope.auth_box.show();
-  }
-  };
-
-
-
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     
     
   
@@ -1126,11 +1003,7 @@ $rootScope.like_cast=function(c){
     var value=false;
     if($rootScope.user){
       var m=$rootScope.user.subscriptions.findIndex(function(sub){
-<<<<<<< HEAD
         return sub==user._id || sub._id==user._id;
-=======
-        return sub==user._id;
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       });
       if(m >= 0){
         value=true;
@@ -1249,7 +1122,6 @@ $rootScope.like_cast=function(c){
   
   $rootScope.subscribe=function(id){
     if($localStorage.t_id){
-<<<<<<< HEAD
             if($rootScope.user.subscriptions.indexOf(id)>=0){
                $rootScope.user.subscriptions.splice($rootScope.user.subscriptions.indexOf(id),1);
                account.unsubscribe({
@@ -1267,41 +1139,6 @@ $rootScope.like_cast=function(c){
   };
   
   
-=======
-          var data={
-            user_id:id,
-            t_id:$rootScope.user.t_id
-          };
-          console.log(data);
-          $rootScope.user.subscriptions.push(id);
-          account.subscribe(data).success(function(Data){
-
-          });
-      }else{
-        $state.go("account");
-      }
-  };
-  
-  
-  
-  $rootScope.unsubscribe=function(id){
-    if($localStorage.t_id){
-              var data={
-                user_id:id,
-                t_id:$rootScope.user.t_id
-              };
-              console.log(data);
-                      var ink=$rootScope.user.subscriptions.indexOf(id);
-                      console.log("ink:");
-                      console.log(ink);
-                       $rootScope.user.subscriptions.splice(ink,1);
-                       account.unsubscribe(data).success(function(Data){});
-          }else{
-            $state.go("account");
-          }
-  };
-  
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 
 
@@ -1311,7 +1148,6 @@ $rootScope.like_cast=function(c){
 
     
   $rootScope.open_aircast=function(){
-<<<<<<< HEAD
     $rootScope.aircast_box.show();
     if(!$rootScope.settings.dark_mode){
       if($rootScope.text_color=='light'){
@@ -1322,10 +1158,6 @@ $rootScope.like_cast=function(c){
     }else{
       StatusBar.styleLightContent();
     }
-=======
-    $rootScope.change_bar();
-    $rootScope.aircast_box.show();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     }
 
     
@@ -1334,10 +1166,6 @@ $rootScope.like_cast=function(c){
 
     
   $rootScope.drop_aircast=function(){
-<<<<<<< HEAD
-=======
-    $rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     $rootScope.pause_cast();
     $rootScope.aircast_box.hide();
     $rootScope.current_cast=null; 
@@ -1350,13 +1178,8 @@ $rootScope.like_cast=function(c){
 
  
     $rootScope.close_aircast=function(){
-<<<<<<< HEAD
       $rootScope.aircast_box.hide();
       $rootScope.change_bar();
-=======
-      $rootScope.change_bar();
-      $rootScope.aircast_box.hide();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       }
 
 
@@ -1394,18 +1217,11 @@ $rootScope.like_cast=function(c){
           this.post.cast.casting=false;
         }
       }
-<<<<<<< HEAD
       if ($rootScope.TopMusic) {
       $rootScope.TopMusic.updateIsPlaying(false);
       }
       $rootScope.pause_audio();
       $rootScope.pause_audio();
-=======
-      if (TopMusic) {
-      TopMusic.updateIsPlaying(false);
-      }
-      $rootScope.pause_audio();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     }
 
 
@@ -1443,21 +1259,11 @@ $rootScope.count_down=function(){
 
 
 $rootScope.share_cast = function (c) {
-<<<<<<< HEAD
   var m=c.title ? c.title:"JustTalk:";
   var s="Listen to cast by "+c.caster.user_name+" on JustTalk";
   var l="https://justtalkapp.com/cast/"+c._id;
   $cordovaSocialSharing.share(m,s,null,l);
 };
-=======
-  var m="Listen to cast by "+c.caster.first_name+" "+c.caster.last_name+" on JustTalk";
-  var l="https://justtalkapp.com/cast/"+c._id;
-  $cordovaSocialSharing.share(m,null,null,l);
-};
-  
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 
 
@@ -1519,13 +1325,6 @@ $rootScope.report_cast=function(c){
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
  $rootScope.profile_more = function(profile) {
    var block_button={ text: 'Block @'+profile.user_name };
     if($rootScope.is_blocked(profile)){
@@ -1642,12 +1441,9 @@ $rootScope.track_position=function(position) {
       $rootScope.fetching_replies=false;
         if(Data.status==true){
           $rootScope.cast_replies=Data.data; 
-<<<<<<< HEAD
           if($rootScope.cast_replies.length > 0){ 
               $rootScope.playlist=$rootScope.cast_replies;
             }
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
           $rootScope.fetching_replies=false;
         }
       });
@@ -1766,7 +1562,6 @@ $rootScope.unheard=function(){
 
 
 $rootScope.build_playlist=function(cast){
-<<<<<<< HEAD
             if(!$rootScope.playlist || $rootScope.playlist.length < 1){
                 $rootScope.playlist=$rootScope.timeline;
                 $rootScope.track=0;
@@ -1780,44 +1575,6 @@ $rootScope.build_playlist=function(cast){
                 }else{
                   $rootScope.track=0;
                 }
-=======
-
-    if(cast.reply){ 
-      if($rootScope.cast && $rootScope.cast_replies){ 
-                var r=$rootScope.cast_replies.findIndex(function(c){
-                  return c._id==cast._id;
-                })
-              if(r > -1){
-                  $rootScope.track=r;
-                  $rootScope.playlist=$rootScope.cast_replies;
-                  if($rootScope.cast_replies[r]){
-                    $rootScope.cast_replies[r].casting=true;
-                  }else{
-                    $rootScope.cast_replies[r].casting=true;
-                  }
-                }else{
-                  $rootScope.track=0;
-                }         
-            }
-          }else{
-          if($rootScope.timeline){
-                  var p=$rootScope.timeline.findIndex(function(c){
-                      return c._id==cast._id;
-                    })
-                  if(p > -1){
-                    $rootScope.track=p;
-                    $rootScope.timeline[p].casting=true;
-                    $rootScope.playlist=$rootScope.timeline;
-                  }else{
-                    $rootScope.playlist=null;
-                    $rootScope.up_next=null;
-                  }
-              }
-            }
-            if($rootScope.playlist){
-              var next=$rootScope.track + 1;
-              $rootScope.up_next=$rootScope.playlist[next];
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
             }
 }
 
@@ -1836,15 +1593,9 @@ $rootScope.build_playlist=function(cast){
 
 
 $rootScope.top_player=function(cast) {
-<<<<<<< HEAD
   $rootScope.TopMusic=window.MusicControls || MusicControls;
   if ($rootScope.TopMusic) {
   $rootScope.TopMusic.create({
-=======
-
-  if (TopMusic) {
-  TopMusic.create({
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     track : cast.title,
     artist : cast.caster.user_name,
     cover : $rootScope.media+cast.caster.photo,
@@ -1860,7 +1611,6 @@ $rootScope.top_player=function(cast) {
     prevIcon: 'media_prev',
     nextIcon: 'media_next',
     closeIcon: 'media_close',
-<<<<<<< HEAD
     notificationIcon: 'icon',
 	  elapsed : 0, // optional, default: 0
   	skipForwardInterval : 0, //optional. default: 0.
@@ -1868,11 +1618,6 @@ $rootScope.top_player=function(cast) {
     hasScrubbing : false //optional. default to false. Enable scrubbing from control center progress bar 
   });
   $rootScope.TopMusic.subscribe(function(action) {
-=======
-    notificationIcon: 'icon'
-  });
-  TopMusic.subscribe(function(action) {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     const message = JSON.parse(action).message;
     switch(message) {
       case 'music-controls-next':
@@ -1892,11 +1637,7 @@ $rootScope.top_player=function(cast) {
         break;
       case 'music-controls-seek-to':
         const seekToInSeconds = JSON.parse(action).position;
-<<<<<<< HEAD
         $rootScope.TopMusic.updateElapsed({
-=======
-        TopMusic.updateElapsed({
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
           elapsed: seekToInSeconds,
           isPlaying: true
         });
@@ -1906,15 +1647,9 @@ $rootScope.top_player=function(cast) {
         break;
     }
   });
-<<<<<<< HEAD
   $rootScope.TopMusic.listen();
   $rootScope.TopMusic.updateIsPlaying(true); 
   $rootScope.TopMusic.updateElapsed({
-=======
-  TopMusic.listen();
-  TopMusic.updateIsPlaying(true); 
-  TopMusic.updateElapsed({
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     elapsed:$rootScope.current_cast.duration - $rootScope.current_cast.currentTime,
     isPlaying: true
   });
@@ -1944,7 +1679,6 @@ $rootScope.audio_frequency=function(audio){
 
 
 $rootScope.random_color=function(){
-<<<<<<< HEAD
   $rootScope.color="#"+Math.floor((Math.random() * 16777215) + 1).toString(16);
   return $rootScope.color;
 }
@@ -1956,19 +1690,6 @@ const img = new Image();
 img.crossOrigin = '*';
 img.src = image;
 img.onload = function() {
-=======
-  var color=Math.floor((Math.random() * 16777215) + 1).toString(16);
-  $rootScope.color="#"+color;
-  return $rootScope.color;
-}
-
-function get_color(image,callback){
-const img = new Image();
-const color= "#"+Math.floor((Math.random() * 16777215) + 1).toString(16);
-img.crossOrigin = 'Anonymous';
-img.src = image;
-var x = img.onload = function() {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   var canvas = document.createElement('canvas');
   canvas.width = img.width;
   canvas.height = img.height;
@@ -1998,7 +1719,6 @@ var x = img.onload = function() {
 }
 }
 
-<<<<<<< HEAD
       $rootScope.play_casts=function(cs){
         $rootScope.playlist=cs;
         $rootScope.play_cast($rootScope.playlist[0]);
@@ -2015,17 +1735,6 @@ var x = img.onload = function() {
           }
         get_color($rootScope.media+c.caster.photo,function(color){
           $rootScope.color=color;
-=======
-
-  
-      $rootScope.play_cast=function(c){
-        get_color(live+c.caster.photo,function(color){
-          $rootScope.color=color;
-          console.log("color:"+$rootScope.color);
-        // var color_pick=Math.floor(Math.random()*(8-1)+1)+1;
-        // $rootScope.color_pick=color_pick.toString();
-        $rootScope.pause_cast();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         $timeout(function(){
         var r=this;
         if(r.cast){
@@ -2051,7 +1760,6 @@ var x = img.onload = function() {
           $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
         }
         if($rootScope.current_cast.cast){
-<<<<<<< HEAD
             var src=$rootScope.media+$rootScope.current_cast.cast;
             $rootScope.cast_listen($rootScope.current_cast);
             $rootScope.build_playlist($rootScope.current_cast);
@@ -2064,22 +1772,11 @@ var x = img.onload = function() {
           console.log("paused!");
         $rootScope.pause_cast();
         }
-=======
-          var src=$rootScope.media+$rootScope.current_cast.cast;
-            $rootScope.play_audio(src);
-            $rootScope.top_player($rootScope.current_cast);
-            $rootScope.cast_listen($rootScope.current_cast);
-            $rootScope.build_playlist($rootScope.current_cast);
-        }
-            });
-          });
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
           };
 
         
   
           $rootScope.test_cast=function(post){
-<<<<<<< HEAD
             if(!post.casting){
               $rootScope.post=post;
               $rootScope.post.casting=true;
@@ -2088,13 +1785,6 @@ var x = img.onload = function() {
             }else{
               $rootScope.pause_cast();  
             }
-=======
-            $rootScope.pause_cast();  
-            $rootScope.post=post;
-            $rootScope.post.casting=true;
-            var file=URL.createObjectURL($rootScope.post.file);
-            $rootScope.play_audio(file);
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
               }
 
 
@@ -2130,48 +1820,17 @@ var x = img.onload = function() {
 
         
   
-<<<<<<< HEAD
-=======
-
-$rootScope.change_bar=function(){
-//   if(window.statusbar){
-//   if(!$rootScope.settings.dark_mode){
-//     if($rootScope.text_color=='light'){
-//       StatusBar.styleLightContent();
-//     }else {
-//       StatusBar.styleDefault();
-//     }
-//   }else{
-//     StatusBar.styleLightContent();
-//   }
-// }else{
-//   StatusBar.styleDefault();
-// }
-}
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     
 $rootScope.fetch_profile=function(id) {
   $rootScope.fetching_casts=true;
   $rootScope.profile_casts=null;
-<<<<<<< HEAD
-=======
-    $rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   $timeout(function(){
   account.info(id).success(function(Data){
     if(Data.status==true){
      $rootScope.profile=Data.data; 
-<<<<<<< HEAD
      get_color($rootScope.media+$rootScope.profile.photo_header,function(color){
       $rootScope.profile_color=color;
       });
-=======
-     get_color(live+$rootScope.profile.photo_header,function(color){
-      $rootScope.profile_color=color;
-      console.log("color:"+$rootScope.profile_color);
-    });
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   $timeout(function(){
       account.casts(id).success(function(Data){
         $rootScope.fetching_casts=false;
@@ -2180,7 +1839,6 @@ $rootScope.fetch_profile=function(id) {
           $rootScope.profile_casts=Data.data;
           }
         }
-<<<<<<< HEAD
         if(!$rootScope.settings.dark_mode){
           if($rootScope.text_color=='light'){
             StatusBar.styleLightContent();
@@ -2190,8 +1848,6 @@ $rootScope.fetch_profile=function(id) {
         }else{
           StatusBar.styleLightContent();
         }
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       }); 
     },1000); 
           
@@ -2221,10 +1877,7 @@ $rootScope.refresh_cast=function(id){
     $rootScope.hide();
       if(Data.status==true){
         $rootScope.cast=Data.data; 
-<<<<<<< HEAD
         $rootScope.get_replies($rootScope.cast._id);
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       }
   }).error(function(){
     $rootScope.hide();
@@ -2320,10 +1973,6 @@ cast.suggestion().success(function(Data){
     }
     $rootScope.hide();
 });
-<<<<<<< HEAD
-=======
-$rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 }
 
 
@@ -2428,10 +2077,6 @@ $rootScope.delete_cast=function(c){
 
 
     $rootScope.get_talk=function() {
-<<<<<<< HEAD
-=======
-      $rootScope.change_bar();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       $timeout(function(){
         $rootScope.home_loader=true;
       if($rootScope.user){
@@ -2542,34 +2187,20 @@ $rootScope.more_suggestions=function(pages) {
     console.log("Platform Ready!");
   
 
-<<<<<<< HEAD
     socket.on('connect', function() {
-=======
-    $rootScope.change_bar();
-
-    socket.on('connect', function() {
-  
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
       socket.on('message',function(data){
         $rootScope.get_messages();
         if($rootScope.chat){
           $rootScope.get_chat($rootScope.chat._id);
         }
-<<<<<<< HEAD
       }); 
-=======
-      });
-      
-      
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       
       socket.on('talk',function(data){
         $rootScope.get_talk();
         $rootScope.refresh_profile();
       });
       
-<<<<<<< HEAD
       });
       
       
@@ -2596,20 +2227,6 @@ $rootScope.more_suggestions=function(pages) {
     }, function(nomatch) {
       console.warn('No match', nomatch);
     });
-=======
-      
-      socket.on('init', function (data) {
-        $scope.name = data.name;
-        $scope.users = data.users;
-      });
-      
-      
-      
-      });
-      
-      
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 
 
@@ -2668,14 +2285,11 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
 
 
 
-<<<<<<< HEAD
 
 
 
 
 
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       FirebasePlugin.onMessageReceived(function(data) {
         $rootScope.notify=true;
         $rootScope.get_notifications();
@@ -2712,7 +2326,6 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
 
  
        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-<<<<<<< HEAD
        cordova.plugins.Keyboard.disableScroll(false);
 //      window.WkWebView.allowsBackForwardNavigationGestures(true);
 // window.WkWebView.allowsBackForwardNavigationGestures(false);
@@ -2728,23 +2341,6 @@ $rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled()
   $rootScope.change_bar();
 
 
-=======
-       cordova.plugins.Keyboard.disableScroll(true);
- 
-//      window.WkWebView.allowsBackForwardNavigationGestures(true);
-// window.WkWebView.allowsBackForwardNavigationGestures(false);
-if(window.statusbar){
-  StatusBar.styleDefault();
-}
-   
-if(window.Splashscreen){
-      Splashscreen.hide();
-}
-
-
-
-       
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
   successCallback: function(){
       console.log("Successfully requested remote notifications authorization");
@@ -2761,11 +2357,7 @@ cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
 });
 
 
-<<<<<<< HEAD
 cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
-=======
-  cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     console.log("Push notifications are " + (isEnabled ? "enabled" : "disabled"));
 }, function(error){
     console.error("An error occurred: "+error);
@@ -2801,13 +2393,6 @@ cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
 cordova.plugins.diagnostic.permission.NOTIFICATIONS,
  cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE,
  cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE]);
-<<<<<<< HEAD
-=======
-
-
-
-  
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
  cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
   successCallback: function(){
       console.log("Successfully requested remote notifications authorization");

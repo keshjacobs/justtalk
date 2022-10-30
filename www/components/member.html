@@ -18,7 +18,6 @@
         <h6 class="pull-right" style="float: right !important;" ng-if="!caster.accepted">
             <b>Pending...</b>
         </h6>
-<<<<<<< HEAD
   
         <h4 ui-sref="aprofile({id:caster.user.t_id})" ng-click="dropall()" style="margin-top: 12px !important;">
         <b>{{caster.user.full_name || caster.user.first_name +' '+ caster.user.last_name}}</b> 
@@ -26,13 +25,6 @@
         </h4>
 
         <h6  ng-click="dropall()" class="balanced" ng-if="caster.admin">Admin</h6>
-=======
-
-    <h3  ng-click="dropall()" ui-sref="aprofile({id:caster.user.t_id})" ><b>{{caster.user.full_name || caster.user.first_name +' '+ caster.user.last_name}}</b></h3>
-    <h5  ng-click="dropall()" ui-sref="aprofile({id:caster.user.t_id})" >@{{caster.user.user_name || '...'}}</h5>
-    <h6  ng-click="dropall()" class="balanced" ng-if="caster.admin">Admin</h6>
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 </ion-item>
 

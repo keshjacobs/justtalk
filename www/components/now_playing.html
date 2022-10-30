@@ -12,26 +12,15 @@
          </div>
     <div>
     <div class="pull-right" style="float: right !important;margin-top: -40px !important;margin-right: 5vw !important;">
-<<<<<<< HEAD
       
         <button ng-disabled="!current_cast.cast || current_cast.expired" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
             <span class="icon {{text_color}}" ng-class="current_cast.casting ? 'ion-pause':'ion-play'" style="font-size: 22px !important;"></span>
-=======
-        <button title="oause" ng-if="current_cast.casting" ng-click="pause_cast()" class="button button-clear button-balanced button-icon">
-            <span class="icon ion-pause {{text_color}}" style="font-size: 22px !important;"></span>
-        </button>
-        <button title="play" ng-if="!current_cast.casting" ng-disabled="!current_cast.cast" ng-click="play_cast(current_cast)" class="button button-clear button-balanced button-icon">
-            <span class="icon ion-play {{text_color}}" style="font-size: 22px !important;"></span>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         </button>
 
         <button title="close" ng-if="!current_cast.casting" ng-click="drop_aircast()" class="button button-clear button-balanced button-icon">
             <span class="icon ion-ios-close-empty {{text_color}}" style="font-size: 22px !important;"></span>
         </button>
-<<<<<<< HEAD
         
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     </div>
     <br>
 

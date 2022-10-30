@@ -13,7 +13,6 @@
       </ion-nav-title>
     </ion-nav-bar>
     
-<<<<<<< HEAD
     <ion-content class="padding text-center">
  
        <br>
@@ -49,42 +48,6 @@
       </button>
     </div>
 
-=======
-        <ion-content class="padding text-center">
- 
-       <br>
-     <div class="padding">
-             <br>
-             <div ui-sref="profilepic" class="ppa" style="margin-top: -7px;margin-left:auto;margin-right: auto;" ng-style="{'background-image':'url('+media + selected_user.photo+')'}">
-             </div>
-             <br>
-             <div class="text-center" ng-if="selected_user">
-                <h4>{{selected_user.full_name ||  selected_user.first_name  +' '+ selected_user.last_name | capitalize}}</h4>
-                <h5><b class="assertive">@{{selected_user.user_name}}</b></h5>
-              </div>
-     </div>
- 
-     <div ng-if="chat.members.length > 1" class="list list-inset padding">
-       joining a group conversation
-       <ion-label>Group Name</ion-label>
-      <label class="item item-input">
-        <input  ng-disabled="!chat_admin(chat)" type="text" ng-model="selected_user.title" placeholder="Group title" maxlength="30">
-      </label>
-      <h4 ng-if="chat.members.length > 2"><b class="assertive">@{{chat.user.user_name || '...'}}</b> with <b>{{chat.members.length-2}}</b> others</h4> 
-      </div>
- 
-     <br>
-     <div class="text-center" ng-if="selected_user">
-       <b>you are about to send a request to start a conversation with <b class="assertive">@{{selected_user.user_name}}</b>.</b>
-    <br>
-    <br><br>
-    <button ng-disabled="chat_id && !selected_user.title" ng-click="request_chat(selected_user)" class="button  button-full button-balanced">
-       Send request
-    </button>
-    </div>
-   
-     <br>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
  
    </ion-content>
  

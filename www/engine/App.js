@@ -1,6 +1,5 @@
 var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCordova', 'ngStorage','ngFileUpload','ionic-segment'])
 .constant('Config', {  
-<<<<<<< HEAD
     API:'https://api.justtalkapp.com/user/',
     media:'https://storage.googleapis.com/justtalkstorage/',
     google_token:"ya29.a0Aa4xrXNq1uZZnCWJldINks9YixQlWRmoukmqTSu0unOEtx6XN5bTahiCYUgvz2_L6cx2BeEtJ_4QfNAbp7m4_32Jy0kdVgyiN40FcnJiTJMhX5kDKINiLQ4tJA5d_oP4yb4YSjdToGtyxqjYekqHFVSg13I-aCgYKATASARISFQEjDvL9hQWIBrv6zkwRNvqXSq9Nag0163"
@@ -9,14 +8,6 @@ var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCor
   })
   .factory('socket', function($rootScope,Config) {
     var socket = io(Config.API, {
-=======
-    API:'https://justtalkapp.com/api/',
-    media:'https://storage.googleapis.com/justtalkstorage/'
-  }).config(function($ionicConfigProvider) {
-    $ionicConfigProvider.scrolling.jsScrolling(false);
-  }).factory('socket', function($rootScope) {
-    var socket = io(live, {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         reconnection: true,
         reconnectionDelay: 1000,
         reconnectionDelayMax: 5000,

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 app.controller('Messages', function(Chat,$ionicActionSheet,$localStorage,Mic,$rootScope,$timeout,Upload,$location,$ionicModal,Upload,Config,$state,$ionicPopup,$ionicScrollDelegate) {
-=======
-app.controller('Messages', function(Chat,$ionicActionSheet,$localStorage,Mic,$rootScope,$timeout,Upload,$location,$ionicModal,Upload,account,$state,$ionicPopup,$ionicScrollDelegate) {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
      $rootScope.post={};
     $rootScope.file_added=null;
 
@@ -313,11 +309,7 @@ $rootScope.delete_message=function(c){
 
 $rootScope.send_message=function(cast){
   $rootScope.messaging=true;
-<<<<<<< HEAD
     var uploadUrl = Config.API + "message/send";
-=======
-    var uploadUrl = API + "message/send";
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     cast.t_id=$rootScope.user.t_id;
     cast.chat_id=$rootScope.chat._id;
     cast.date_created=new Date();
@@ -326,7 +318,6 @@ $rootScope.send_message=function(cast){
       url: uploadUrl,
       data: cast
     }).then(function(resp) {
-<<<<<<< HEAD
       if(resp.data.status==true){
         $rootScope.file_added=false;
         $rootScope.messaging=false;
@@ -337,18 +328,6 @@ $rootScope.send_message=function(cast){
         $ionicScrollDelegate.scrollBottom();
       }else{
          $ionicPopup.alert({template:resp.data.message});
-=======
-      // $rootScope.chat.conversations.push(cast);
-      if(resp.data.status==true){
-        $rootScope.get_chat($rootScope.chat._id);
-      $ionicScrollDelegate.scrollBottom();
-      }else{
-         var msg=resp.data.message;
-         $ionicPopup.alert({template:msg});
-    $timeout(function(){
-    $rootScope.clear();
-    },2000);
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
        }
     });
 };
@@ -443,22 +422,13 @@ $rootScope.message_listen=function(c){
 
 
       $rootScope.play_message=function(cast){
-<<<<<<< HEAD
         if(!cast.casting){
         console.log("playing...."); 
-=======
-        console.log("playing...."); 
-        $rootScope.pause_message();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         cast.casting=true;
         $rootScope.playing_message=cast;
           $timeout(function(){
           if(cast.cast){
           var src=$rootScope.media+cast.cast;
-<<<<<<< HEAD
-=======
-          var t_src=$rootScope.trustlink(src);
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
             $rootScope.play_audio(src);
           $rootScope.message_listen(cast);
           if(!$rootScope.playlist || $rootScope.playlist.length < 1){
@@ -469,12 +439,9 @@ $rootScope.message_listen=function(c){
             $rootScope.pause_message();
           }
           });
-<<<<<<< HEAD
         }else{
           $rootScope.pause_message();
         }
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         };
     
     

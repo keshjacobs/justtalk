@@ -2,7 +2,6 @@
 .dark{
     color: black !important;
 }
-<<<<<<< HEAD
 .assertive,.red{
     color: rgb(246, 78, 78) !important;
 }
@@ -88,32 +87,6 @@ body,.view-container,.fade-in,.bg-light,.bg-white,.modal .bg-white,.item-grey,.i
 .item .reply-box{
     background-color: rgb(29, 29, 29) !important;
     border: 1px solid rgb(34, 34, 34) !important;
-=======
-.assertive,.red,.dark-red{
-    color: rgb(246, 78, 78) !important;
-}
-.item-divider,ion-item,.text-left,.text-center{
-    background-color: transparent !important;
-}
-.modal,.white_bar,.grey_bar, .popup,.popup-head,.popup-body,.popup-buttons,.bar,header,.bar-light,.tabs-striped .tabs,.billboard{
-    color:#fff !important;
-    background-color: rgba(18, 0, 0, 0.298) !important;
-    border:none !important;
-    -webkit-backdrop-filter: blur(70px) !important;
-    backdrop-filter: blur(70px) !important;
-     background-image: none !important;
-     
-}
-
-body,.view-container,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-avatar,.ion-content,ion-content,.ion-view,.bg-grey,ion-view,.chat_board{
-  color:#fff !important;
-  background-color: rgb(19, 0, 0) !important;
-  border:none !important;
-  background-image: none !important;
-}
-.reply-box{
-    background-color: rgb(12, 0, 0) !important;
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 }
 .jt-mic{
     background-color: rgb(3, 127, 12) !important;
@@ -125,17 +98,10 @@ body,.view-container,.fade-in,.bg-light,.bg-white,.item-light,.item-grey,.item-a
         color:#000 !important;
 }
 input,textarea{
-<<<<<<< HEAD
     background-color: rgba(0, 0, 0, 0) !important;
     color: #fff !important;
 }
 .input-light,.input-lable,.backdrop{
-=======
-    background-color: rgba(96, 96, 96, 0) !important;
-    color: #fff !important;
-}
-.item-input,.input-light,.input-lable,.backdrop{
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     background-color: rgba(96, 96, 96, 0.528) !important;
     color: #fff !important;
     border: none !important;
@@ -144,7 +110,6 @@ input,textarea{
     color: #fff !important;
 }
 
-<<<<<<< HEAD
  ion-content .item-input,.item-input{
   background-color: rgba(96, 96, 96, 0.865) !important;
   color: #fff !important;
@@ -170,8 +135,6 @@ input,textarea{
   background-color: rgba(21, 21, 21, 0.931) !important;
   color: rgb(255, 255, 255) !important;
 }
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 
 .tabs{
@@ -183,24 +146,17 @@ input,textarea{
   }
   
   
-<<<<<<< HEAD
 .item .new_message,ion-content .new_message,.new_message{
   background-color: rgb(51, 51, 51) !important;
 }
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   
   .tabs .tab-item .icon{
     opacity: 0.9 !important;
   }
   
-<<<<<<< HEAD
   .list .item{
     border: none !important;
   }
-=======
-  
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 .icon{
     color: #fff !important;
 }
@@ -220,7 +176,6 @@ input,textarea{
     background-color: #000 !important;
   }
 
-<<<<<<< HEAD
  .item-options,ion-option-button{
     background-color: rgba(32, 32, 32, 0.021) !important;
     color:#fff !important;
@@ -329,19 +284,3 @@ input,textarea{
 .blur_bg{
   background-color: #000 !important;
 }
-=======
- .item-options, .item-options button,ion-option-button{
-    background-color: rgba(32, 32, 32, 0.021) !important;
-    color:#fff !important;
-  }
-
-
-  .recast-box{
-    background-color: rgb(0, 12, 10) !important;
-    border: none !important;
-  }
-
-  .button-dark i{
-    color:#fff !important;
-  }
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d

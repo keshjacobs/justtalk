@@ -159,22 +159,9 @@ app.factory('Aud', function() {
 });
 
 app.factory('TopMusic', function() {
-<<<<<<< HEAD
   return window.MusicControls || MusicControls;
 });
 
-=======
-  var MC=null;
-    if(window.MusicControls){
-      MC= window.MusicControls || window.cordova.plugins.MusicControls;
-    }
-    return MC;
-});
-
-
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   app.factory('Mic', function($rootScope,Aud,$ionicPopup,$timeout) {
     let mediaRec = null;
     let folder;
@@ -198,10 +185,6 @@ app.factory('TopMusic', function() {
         $rootScope.file = file;
         $rootScope.file.lastModifiedDate = new Date();
         $rootScope.file.name = "castaway-"+$rootScope.file.lastModifiedDate+".wav";   
-<<<<<<< HEAD
-=======
-        $rootScope.file_added=true;
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         $rootScope.post.file=$rootScope.file;
         var reader = new FileReader();
         reader.onload = function (event) {

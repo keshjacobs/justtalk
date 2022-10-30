@@ -1,10 +1,6 @@
 <div ng-show="!query && suggested_users.length > 0" class="list">
     <div class="item item-divider">
-<<<<<<< HEAD
         <h2><b>Suggested for you</b></h2>
-=======
-        <h2>Suggested for you</h2>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
      </div>
     <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in suggested_users | limitTo:4">
     </div>

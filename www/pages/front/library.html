@@ -1,10 +1,6 @@
 <ion-view cache-view="false">
 
-<<<<<<< HEAD
     <ion-nav-bar  class="bar transparent">
-=======
-    <ion-nav-bar  class="bar-light">
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
        
         <ion-nav-buttons side="left" menu-toggle="left">
             <img ng-if="!user" style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
@@ -17,7 +13,6 @@
   
   
     </ion-nav-bar>
-<<<<<<< HEAD
 
     <div class="search-bar">
       <br/>
@@ -36,29 +31,6 @@
 
         <div ng-controller="Cast" ng-if="t_id">
         
-=======
-   
-   
-    <ion-content class="padding text-center">
-        <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
-        <div ng-include src="'components/auth.html'"></div>
-<div ng-controller="Cast" ng-if="t_id">
-        
-  
-
-       <div class="padding">
-          <ion-segment ng-model="library" full="true" dark>
-              <ion-segment-button value="saved">
-                Saved
-              </ion-segment-button>
-              <ion-segment-button value="purchased">
-                Purchased
-              </ion-segment-button>
-            </ion-segment>    
-       </div>
-       
-    
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
        <div ng-switch="library">
                 <ion-list ng-switch-when="saved">
                     <div ng-include="'components/book.html'" ng-repeat="book in library | filter:{saved:true,purchased:false} | unique:'_id' | orderBy:'-date_created' track by $index">
@@ -93,10 +65,7 @@
 </div>
 
 
-<<<<<<< HEAD
 <div class="gap"></div>
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 </ion-content>
 
     

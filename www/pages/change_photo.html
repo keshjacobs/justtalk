@@ -1,11 +1,7 @@
 <ion-view>
 
 
-<<<<<<< HEAD
-  <ion-nav-bar style="display:block !important;">
-=======
   <ion-nav-bar class="bar-light" style="display:block;">
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     <ion-nav-buttons side="left">
         <button title="back" class="button button-clear button-dark" back-button>
           <i class="icon ion-ios-arrow-back"></i>
@@ -13,22 +9,14 @@
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
-<<<<<<< HEAD
         <button ng-click="update_photo()" style="margin-top: 1px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;&nbsp;</button>
-=======
-        <button ng-click="update_photo()" style="margin-top: 0px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       </ion-nav-buttons>
   
     </ion-nav-bar>
 
 
 
-<<<<<<< HEAD
     <ion-content class="bg-white">
-=======
-    <ion-content has-header class="bg-white">
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   
 
       <div class="profile_header3 text-center" ng-style="{'background-image':'url('+media+user.photo_header+')'}">
@@ -41,16 +29,11 @@
     <div class="profile_photo_big text-center" style="margin-top: -90px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
         <img title="profile_photo" ng-if="file" ngf-src="file" style="width: 100%;">
     </div> 
-<<<<<<< HEAD
-    <div style="padding: 20px !important;">
-        <button class="button button-small button-outline button-dark" style="position:static;max-width: 160px !important;margin: auto !important;display: block;" id="file_up" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="file" name="file"  ngf-max-size="30000MB" ngf-select="file_up($file)">
-=======
     <br>
     <br>
     <br>
     <div style="padding: 60px !important;">
         <button class="button button-small button-outline button-dark" style="position: relative;" id="file_up" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="file" name="file"  ngf-max-size="30000MB" ngf-select="file_up($file)">
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
             change profile photo
         </button>
     </div>

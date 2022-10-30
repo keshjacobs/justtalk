@@ -2,10 +2,6 @@ app.controller('Auth', function($scope,$state,$http,account,$timeout,$ionicPopup
 
 var ip=null;
 $rootScope.counter=59;
-<<<<<<< HEAD
-=======
-$rootScope.det={};
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
   $http.get("https://ipinfo.io/json").then(function (response) 
   {
@@ -132,18 +128,11 @@ $rootScope.get_notifications();
   
   $rootScope.auth=function(user) {
     $rootScope.show();
-<<<<<<< HEAD
     console.log(user);
     $rootScope.det=user;
     $localStorage.user_name=user.user_name;
     account.auth(user).success(function(Data){
       $rootScope.hide();
-=======
-    account.auth(user).success(function(Data){
-      $rootScope.hide();
-      $rootScope.det.user_name=user.user_name;
-        $localStorage.user_name=user.user_name;
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       if(Data.status==true){
         $rootScope.t_user=Data.data;
         console.log($rootScope.t_user);

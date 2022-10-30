@@ -2,11 +2,7 @@
     <div ng-if="suggested_casts.length > 0">
         
          <div class="item item-divider">
-<<<<<<< HEAD
             <h2><b>Suggested Casts</b></h2>
-=======
-            <h2>Suggested Casts</h2>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
          </div>
 
         <div  ng-include="'components/cast.html'"  ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:12">

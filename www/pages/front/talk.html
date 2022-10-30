@@ -25,7 +25,6 @@
        
        <div ng-include src="'components/auth.html'"></div>
 
-<<<<<<< HEAD
 
             <ion-list ng-if="timeline.length > 0">
                 <div ng-include="'components/cast.html'" ng-hide="cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created'">
@@ -41,15 +40,6 @@
 
             </ion-list>
 
-=======
-            <ion-list ng-if="timeline.length > 0">
-                <div ng-include="'components/cast.html'" ng-hide="cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created'">
-                </div>
-            </ion-list>
-
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
         <div ng-if="timeline.length < 1" class="text-center padding">
    
@@ -67,28 +57,7 @@
             
         
         </div>
-<<<<<<< HEAD
         <div class="gap"></div>
-=======
-    
-
-
-
-
-        <ion-infinite-scroll on-infinite="load_more(pages)" distance="100">
-            <ion-infinite-scroll-content
-              loadingSpinner="bubbles"
-              loadingText="Loading more data..."
-            >
-            </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-
-    
-           
-            
-            
-    <br><Br><br><br><br>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     </ion-content>
 
     

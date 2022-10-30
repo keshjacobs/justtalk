@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 app.controller('profile', function($cordovaSocialSharing,Config,$stateParams,$timeout,Upload,$scope,$state,account,$ionicPopup,$rootScope) {
-=======
-app.controller('profile', function($cordovaSocialSharing,$location,$stateParams,$timeout,Upload,$scope,$state,account,$localStorage,$ionicPopup,$rootScope) {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   
 
 
@@ -46,11 +42,7 @@ $scope.header_up=function(f) {
 
 $rootScope.update_photo=function(){
   if($rootScope.user){
-<<<<<<< HEAD
     var uploadUrl = Config.API + "upload_photo";
-=======
-    var uploadUrl = API + "upload_photo";
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     var post={
       t_id:$rootScope.user.t_id
     };
@@ -86,11 +78,7 @@ $rootScope.update_photo=function(){
 $rootScope.set_photo=function(){
   if($rootScope.file || $rootScope.header_file){
   if($rootScope.user){
-<<<<<<< HEAD
     var uploadUrl = Config.API + "upload_photo";
-=======
-    var uploadUrl = API + "upload_photo";
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     var post={
       t_id:$rootScope.user.t_id
     };
@@ -149,25 +137,12 @@ $rootScope.set_photo=function(){
 
 
 $scope.share_link = function (user) {
-<<<<<<< HEAD
   var n=user.user_name;
   var s="subscribe to this channel to join the conversation";
   var l="https://justtalkapp.com/profile/"+user.t_id;
   $cordovaSocialSharing.share(n,s,Config.media+user.photo,l);
 };
 
-=======
-  var n=user.first_name + user.last_name;
-  var m="";
-  var l=API+n;
-  $cordovaSocialSharing.share(m,null,null,l);
-};
-
-
-
-
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 $rootScope.change_password=function(data){
   data.t_id=$rootScope.user.t_id;
   account.change_password(data).success(function(Data){

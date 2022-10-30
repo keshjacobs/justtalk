@@ -1,30 +1,18 @@
-<<<<<<< HEAD
 <ion-view class="bg-grey">
-=======
-<ion-view  align-title="left" class="bg-grey" ng-init="search_box.hide()" cache-view="false">
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
     <ion-nav-bar class="bar bg-grey">
 
         <ion-nav-buttons side="left">
-<<<<<<< HEAD
           <button class="button button-clear" back-button>
             <i class="icon ion-ios-arrow-back dark"></i>
           </button>
         </ion-nav-buttons>
-=======
-            <button class="button button-clear" back-button>
-              <i class="icon ion-ios-arrow-back dark"></i></button>
-          </ion-nav-buttons>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
         <ion-nav-title class="text-center" align="center">
           <b style="margin-top: 5px !important;">Edit Cast</b>
         </ion-nav-title>
 
 
-<<<<<<< HEAD
         <ion-nav-buttons side="right">
           <button ng-click="update_cast(selected_cast)" style="margin-top: 1px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
         </ion-nav-buttons>
@@ -59,30 +47,6 @@
               </label>   
             </div>
             <div class="item padding">
-=======
-            <ion-nav-buttons side="right">
-                <button ng-click="update_cast(selected_cast)" style="margin-top: 0px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
-              </ion-nav-buttons>
-
-    </ion-nav-bar>
-    
-    
-    <ion-content class="bg-grey">
-            <ion-item style="background-color:#fff;padding: 4px !important;height: auto !important;">
-                  <div class="profile-photo" style="margin-top: 26px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
-                <div ng-include src="'components/player3.html'"></div>
-                <div class="padding"  style="margin-top: 18px !important;">
-                  <label class="item item-input">
-                    <i class="icon ion-pin placeholder-icon"></i>
-                    <input type="text" ng-model="selected_cast.title" placeholder="Title of cast (optional)" maxlength="30"/>
-                  </label>      
-                </div>
-
-                <br>
-            </ion-item>
-
-            <fieldset>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
                 <button ng-disabled="mentions.length >= 5" ng-click="mention_box.show()" style="float: right !important;margin-top: 10px !important;" class="button button-small button-balanced">
                     <span class="ion ion-person-add" style="margin:4px !important;"></span>
                 </button>
@@ -93,19 +57,12 @@
                 <div class="tag" ng-repeat="mention in mentions">
                   <b>@{{mention.user_name}}</b> &nbsp;<i ng-click="remove_mention(mention)" class="ion ion-close"></i>
                 </div>
-<<<<<<< HEAD
                 <div class="padding">
                   <br/>
                   <button class="button button-block button-assertive button-clear" ng-click="delete_cast(selected_cast)">Delete Cast</button>
                 </div>
               </div>
 
-=======
-            </fieldset>
-
-            
-            <br><br><br><br>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     </ion-content>  
     
     </ion-view>

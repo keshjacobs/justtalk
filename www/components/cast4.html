@@ -4,7 +4,6 @@
         <div ng-show="!cast.recast || cast.cast" ng-include src="'components/player.html'"></div>
         <div ng-click="open_cast(cast)" style="max-width: 60vw !important;max-width:80% !important;float: left;">
             <h4><b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>
-<<<<<<< HEAD
                 <b ng-if="cast.caster.user_name" class="grey">@{{cast.caster.user_name}}</b></h4>
                 <h6 ng-if="cast.reply">Replying to <b class="grey">@{{cast.reply.caster.user_name}}</b></h6>
                 <h3 class="dark" ng-if="cast.title" style="font-size: 14px !important;">{{cast.title}}
@@ -12,21 +11,11 @@
                         &nbsp; {{timediff(cast.date_created)}}
                          <br/>
                          <br/>
-=======
-                <v ng-if="cast.caster.user_name" class="dark-red">@{{cast.caster.user_name}}</v></h4>
-                <h6 ng-if="cast.reply">Replying to <b class="assertive">@{{cast.reply.caster.user_name}}</b></h6>
-                <h3 class="dark" ng-if="cast.title" style="font-size: 14px !important;">{{cast.title}}
-                    <h6 class="dark">
-                        &nbsp; {{timediff(cast.date_created)}}
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
                     </h6>
                 </h3>
         </div>
         <div ng-include src="'components/mentions.html'"></div>
     </div>
-<<<<<<< HEAD
     <br/>
     <br/>
-=======
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 </ion-item>

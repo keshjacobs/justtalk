@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 app.controller('Cast', function(Config,Mic,$ionicScrollDelegate,$rootScope,$timeout,Upload,account,cast,$ionicPopup) {
-=======
-app.controller('Cast', function($localStorage,Mic,$ionicScrollDelegate,$rootScope,$timeout,Upload,$ionicModal,account,$state,cast,$ionicPopup) {
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   
   $rootScope.fetch_user=function(id){
     var n=this;
@@ -60,11 +56,7 @@ $rootScope.post_cast=function(cast){
       go=$rootScope.censor(cast.title);
     }
     if(go){
-<<<<<<< HEAD
       var uploadUrl = Config.API + "cast/upload";
-=======
-      var uploadUrl = API + "cast/upload";
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
       console.log("Broadcasting...");
       cast.t_id=$rootScope.t_id;
       cast.file=$rootScope.file;
@@ -244,10 +236,6 @@ $rootScope.reply_cast=function(cast) {
 
 
 $rootScope.recast=function(cast) {
-<<<<<<< HEAD
-=======
-  $rootScope.clear();
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
   if($rootScope.podcast){
     $rootScope.podcast.pause();
     $rootScope.podcast.currentTime=0;
@@ -272,62 +260,6 @@ $rootScope.recast=function(cast) {
 
 
 
-<<<<<<< HEAD
-=======
-$rootScope.like_cast=function(c){
-  if($rootScope.user){ 
-    if(this.cast.recast){
-      c=this.cast.recast;
-    }else
-    if(this.cast){
-      c=this.cast;
-    }
-    if($rootScope.user){
-    var data={
-              cast_id:c._id,
-              _id:$rootScope.user._id
-            };
-            if(c.likes){
-              c.likes.push($rootScope.user._id);
-            }
-        cast.like(data);
-    }
-  }else{
-    $rootScope.auth_box.show();
-  }
-  };
-  
-
-
-
-
-
-
-
-
-  
-  $rootScope.unlike_cast=function(c){
-    if($rootScope.user){
-       if(this.cast.recast){
-        c=this.cast.recast;
-      }else
-      if(this.cast){
-        c=this.cast;
-      }
-    if($rootScope.user){
-    var data={
-      cast_id:c._id,
-      t_id:$localStorage.t_id,
-      _id:$rootScope.user._id
-    };
-    c.likes.splice(c.likes.indexOf($rootScope.user._id),1);
-    cast.unlike(data).success(function(){});
-  }}else{
-    $rootScope.auth_box.show();
-  }
-  };
-
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 
 
 

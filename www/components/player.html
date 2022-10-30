@@ -1,6 +1,5 @@
 <div class="pull-right" style="float: right !important;margin-top:0px !important;">
          <div ng-if="!cast.expired">
-<<<<<<< HEAD
            
             <button ng-hide="cast.casting && !cast.timeLeft" ng-disabled="!cast.cast || cast.expired" ng-click="play_cast(cast)" class="button button-clear button-small button-icon" ng-class="play_status(cast)">
                 <span ng-class="cast.casting ? 'ion-pause':'ion-play'" style="font-size: 26px !important;"></span>
@@ -10,19 +9,5 @@
             <h6 ng-hide="cast.casting && !cast.timeLeft" class="grey">&nbsp;&nbsp;{{cast.duration || 0 | number:0}}s</h6>
             <ion-spinner ng-if="cast.casting && !cast.timeLeft" icon="crescent" class="play_loader"></ion-spinner>  
            </div>
-=======
-            <button ng-if="cast.bar > 0 && cast.casting" ng-click="pause_cast()" class="button button-clear button-small button-balanced button-icon">
-                <span class="ion-pause balanced" style="font-size: 26px !important;"></span>
-            </button>
-            <button ng-if="!cast.casting" ng-disabled="!cast.cast || cast.expired" ng-click="play_cast(cast)" id="play_button" class="button button-clear button-small button-icon" ng-class="play_status(cast)">
-                <span class="ion-play" style="font-size: 26px !important;"></span>
-            </button>
-          
-            <h6 ng-show="!cast.casting" class="grey">&nbsp;&nbsp;{{cast.duration || 0 | number:0}}s</h6>
-            <h6 ng-if="cast.casting && (!cast.timeLeft || cast.bar <=0)" class="grey">
-                <ion-spinner icon="crescent" class="spinner-dark" style="font-size: 10px !important;"></ion-spinner>  
-            </h6>
-        </div>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
         <h6 ng-if="cast.expired" class="assertive">&nbsp;&nbsp;Expired</h6>
 </div>

@@ -1,12 +1,7 @@
 <ion-item class="item-avatar" ng-click="view_request(request)" style="padding-bottom: 20px !important;">
     <img class="avatar" src="{{media+chatter(request).photo}}" height="30" />
-<<<<<<< HEAD
     <h3 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 12px !important;">
         <b>{{chatter(request).full_name || chatter(request).first_name +' '+ chatter(request).last_name}}</b> 
         <b class="red">@{{chatter(request).user_name || '...'}}</b>
     </h3>
-=======
-   <h2><b>{{chatter(request).full_name || chatter(request).first_name +' '+ chatter(request).last_name}}</b></h2>
-    <h3>@{{chatter(request).user_name || '...'}}</h3>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
 </ion-item>

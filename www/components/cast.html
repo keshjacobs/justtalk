@@ -2,7 +2,6 @@
     <div class="profile-photo" ui-sref="aprofile({id:cast.caster.t_id})" ng-style="{'background-image':'url('+media+cast.caster.photo+')','border':cast.audio_vision+'px solid'}"></div>
     <div style="margin-left:40px !important;margin-top: 4px !important;" class="padding">
         <div ng-show="!cast.recast || cast.cast" ng-include src="'components/player.html'"></div>
-<<<<<<< HEAD
         <div style="min-width: 60% !important;max-width:80% !important;float: left !important;height: auto;display: inline;">
                 <h4> 
                     <b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>
@@ -12,22 +11,12 @@
                 <h3 class="dark" ng-if="cast.title"  style="font-size: 18px !important;">
                     {{cast.title}}
                     <h6 class="grey">
-=======
-        <div ng-click="open_cast(cast)" style="min-width: 60% !important;max-width:80% !important;float: left !important;height: auto;display: inline;">
-           <h4><b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>
-            <v ng-if="cast.caster.user_name" class="dark-red">@{{cast.caster.user_name}}</v></h4>
-
-                <h6 ng-if="cast.reply">Replying to <b class="assertive">@{{cast.reply.caster.user_name}}</b></h6>
-                <h3 class="dark" ng-if="cast.title"  style="font-size: 18px !important;">{{cast.title}}
-                    <h6 class="dark">
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
                         &nbsp; {{timediff(cast.date_created)}}
                     </h6>
                 </h3>
         </div>
 
         <div ng-include src="'components/mentions.html'"></div>
-<<<<<<< HEAD
         <div ng-include src="'components/recast.html'"></div>
         <div ng-include src="'components/reply.html'"></div>
         <div ng-hide="cast.recast" ng-include src="'components/listens.html'"></div>
@@ -36,12 +25,6 @@
 <div class="row text-left" ng-if="cast.replies.length > 0">
     <a class="orange_link" ng-click="open_cast(cast)">Listen to conversation</a>
 </div>
-=======
-        <div ng-hide="cast.recast" ng-include src="'components/listens.html'"></div>
-        <div ng-include src="'components/recast.html'"></div>
-        <div ng-include src="'components/reply.html'"></div>
-       <div ng-include src="'components/cast_panel.html'"></div>
->>>>>>> aa6679ad5354b5c97b78dff680b6c1392a39540d
     </div>
    <!-- <div ng-include src="'components/duration.html'"></div> -->
  </ion-item>
