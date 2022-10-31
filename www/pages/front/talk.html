@@ -27,7 +27,7 @@
 
 
             <ion-list ng-if="timeline.length > 0">
-                <div ng-include="'components/cast.html'" ng-if="cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created'">
+                <div ng-include="'components/cast.html'" ng-show="!cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created'">
                 </div>
 
 

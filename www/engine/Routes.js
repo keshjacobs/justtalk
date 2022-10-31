@@ -355,7 +355,7 @@ app.config(function($stateProvider, $urlRouterProvider,Config,$ionicConfigProvid
 })
 
 
-.state('cast', {
+.state('single_cast', {
   url: '/cast/:id',
   templateUrl: 'pages/cast.html',
   controller:"Cast"

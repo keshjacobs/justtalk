@@ -1,4 +1,4 @@
-app.controller('Cast', function(Config,Mic,$ionicScrollDelegate,$rootScope,$timeout,Upload,account,cast,$ionicPopup) {
+app.controller('Cast', function(Config,Mic,$stateParams,$ionicScrollDelegate,$rootScope,$timeout,Upload,account,cast,$ionicPopup) {
   
   $rootScope.fetch_user=function(id){
     var n=this;

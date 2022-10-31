@@ -340,7 +340,8 @@ $rootScope.change_mode=function(){
   $rootScope.cast_more = function(cast) {
     var buttons=[
       { text: ' Share' },
-      { text: ' Report' }
+      { text: ' Report' },
+      { text: ' Remove from timeline' }
    ];
    var menu={
     buttons: buttons,
@@ -357,6 +358,9 @@ $rootScope.change_mode=function(){
         $rootScope.report_cast(cast);
        }
        if(index === 2) {
+        $rootScope.remove_cast(cast);
+       }
+       if(index === 3) {
         $rootScope.edit_cast(cast);
        }
        return true;
@@ -1264,6 +1268,56 @@ $rootScope.share_cast = function (c) {
   var l="justtalk://cast/"+c._id;
   $cordovaSocialSharing.share(m,s,null,l);
 };
+
+
+
+
+
+
+
+
+
+$rootScope.remove_cast=function(c){
+  $ionicPopup.show({
+    template: 'Are you sure you want to remove this cast from your timeline completely?',
+    title: 'Remove Cast',
+    scope: $rootScope,
+    buttons: [
+      {
+      text: 'No' ,
+      type:"button-light"
+      },
+      {
+      text: '<b>Yes</b>',
+      type: 'button-light',
+      onTap: function(e) {    
+          $rootScope.show();
+  var data={
+    _id:c._id,
+    t_id:$rootScope.user.t_id
+  }
+    $rootScope.show();
+  cast.remove(data).success(function(Data){
+    $rootScope.hide();
+    $ionicPopup.alert({
+      template: Data.message
+    });
+  }).error(function(){
+    $rootScope.hide();
+    $ionicPopup.alert({
+      template: "network error."
+    });
+  });
+}
+}] 
+});
+};
+
+
+
+
+
+
 
 
 
@@ -2193,7 +2247,7 @@ $rootScope.more_suggestions=function(pages) {
       
     $cordovaDeeplinks.route({
       '/cast/:id': {
-        target: 'cast',
+        target: 'single_cast',
         parent: 'front.talk'
       },
       '/profile/:id': {

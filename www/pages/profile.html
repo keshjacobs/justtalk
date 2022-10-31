@@ -1,19 +1,19 @@
 <ion-view  ng-init="search_box.hide()">
 
 
-    <ion-nav-bar ng-class="{{text_color}} tranny">
+    <ion-nav-bar ng-style="{'background-color':profile_color+' !important;'}">
       
       <ion-nav-title class="text-center {{text_color}}">
-        <b>{{profile.user_name || '...'}}</b>
+        <b  ng-class="{{text_color}}">{{profile.user_name || '...'}}</b>
       </ion-nav-title> 
       <ion-nav-buttons side="left">
-            <button title="back" ng-click="change_bar()" class="button button-clear" back-button>
+            <button title="back" ng-click="change_bar()"  ng-class="{{text_color}}" class="button button-clear" back-button>
               <i class="icon ion-ios-arrow-back {{text_color}}"></i>
             </button>
           </ion-nav-buttons>
 
         <ion-nav-buttons side="right">
-          <button title="more" ng-show="profile.t_id!=t_id" ng-click="profile_more(profile)" class="button button-clear button-{{text_color}}">
+          <button title="more" ng-show="profile.t_id!=t_id"  ng-class="{{text_color}}" ng-click="profile_more(profile)" class="button button-clear button-{{text_color}}">
             <span class="icon ion-more"></span>
           </button>
         </ion-nav-buttons>

@@ -186,6 +186,9 @@ app.factory('cast',function($http,Config){
     report: function(data){
       return $http.post(Config.API + "cast/report",data);
     },
+    remove: function(data){
+      return $http.post(Config.API + "cast/remove",data);
+    },
     reply: function(data){
       return $http.post(Config.API + "cast/reply",data);
     },
