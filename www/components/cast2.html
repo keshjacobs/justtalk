@@ -10,7 +10,7 @@
                 <h6 ng-if="cast.reply">Replying to <b class="grey">@{{cast.reply.caster.user_name}}</b></h6>
                 <h6 class="grey">&nbsp;{{timediff(cast.date_created)}}</h6>   
         </div>
-        <div class="item-body" ng-show="!cast.reply && !cast.recast && cast.cast">
+        <div class="item-body transparent" style="border: 1px solid #80808040 !important;" ng-show="!cast.reply && !cast.recast && cast.cast">
             <div ng-include src="'components/player.html'"></div>
             <h2 style="font-size:20px !important;padding:8px !important;margin-top: 0px !important;" class="dark">{{cast.title}}</h2>
         </div>

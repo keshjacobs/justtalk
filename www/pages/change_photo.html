@@ -29,9 +29,6 @@
     <div class="profile_photo_big text-center" style="margin-top: -90px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
         <img title="profile_photo" ng-if="file" ngf-src="file" style="width: 100%;">
     </div> 
-    <br>
-    <br>
-    <br>
     <div style="padding: 60px !important;">
         <button class="button button-small button-outline button-dark" style="position: relative;" id="file_up" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'image/*'" ngf-pattern="'.png,.jpg,.gif,.jpeg'" ng-model="file" name="file"  ngf-max-size="30000MB" ngf-select="file_up($file)">
             change profile photo

@@ -1,5 +1,4 @@
 <ion-view class="bg-grey">
-
   <ion-nav-bar class="bar bg-grey">
 
     <ion-nav-title>
@@ -7,51 +6,26 @@
     </ion-nav-title>
 
 
-    <!-- <ion-nav-buttons side="left" menu-toggle="left">
-      <img ng-if="!user" src="img/icon-green.png" class="bar-logo"/>
-      <div ng-if="user" menu-toggle="left" class="profile-photo" style="margin-top: 0px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
-  </ion-nav-buttons> -->
-
     <ion-nav-buttons side="left">
       <button title="back" class="button button-clear" back-button nav-direction="back">
         <i class="icon ion-ios-arrow-back dark"></i></button>
     </ion-nav-buttons>
+
   </ion-nav-bar>
 
   <ion-content>
-    <!-- <div ui-sref="edit_profile" class="item text-left item-icon-right">
-      <i class="icon ion-edit balanced"></i> Edit Profile
-    </div> -->
-
-<!-- <div ui-sref="change_photo" class="item text-left item-icon-right">
-  <i class="icon ion-image dark"></i> Change Profile Photo
-</div>
-    <div class="item item-divider"><b>Security settings</b></div> -->
-    <br/>
+    
     <ion-item ui-sref="changepassword" class="text-left item-icon-right">
-    <b> <i class="icon ion-lock-combination dark"></i> Change password</b>
+      <b><i class="icon ion-lock-combination" style="font-size: 30px !important;"></i>  Change password</b>
     </ion-item>
 
-<br>
-    <!-- <div class="item item-divider"><b>Personal</b></div>
+    <ion-item ng-click="delete_account()" class="text-left item-icon-right assertive">
+    <b><i class="icon ion-trash-b" style="font-size: 30px !important;"></i>  Delete account</b>
+    </ion-item>
 
-    <div ui-sref="change_photo" class="item text-left item-icon-right">
-      <i class="icon ti-angle-right balanced"></i> Change Profile Photo
-    </div>
-
-    <div ui-sref="subscription" class="item text-left item-icon-right">
-      <i class="icon ti-angle-right balanced"></i> Subscriptions
-    </div> -->
-
-
-<br>
-<ion-item ng-click="delete_account()" class="text-left item-icon-right assertive">
-<b><i class="icon ion-trash-b" style="font-size: 30px !important;"></i>  Delete account</b>
-</ion-item>
-
-<ion-item ng-click="logout()" class="text-left item-icon-right assertive">
-<b><i class="icon ion-log-out" style="font-size: 30px !important;"></i>  Logout</b>
-</ion-item>
+    <ion-item ng-click="logout()" class="text-left item-icon-right assertive">
+    <b><i class="icon ion-log-out" style="font-size: 30px !important;"></i>  Logout</b>
+    </ion-item>
 
   </ion-content>
 </ion-view>

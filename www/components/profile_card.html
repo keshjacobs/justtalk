@@ -23,14 +23,14 @@
     </div>
 
 
-             <div class="row" style="padding: 10px !important;" ng-if="profile.user_name && profile.t_id!=user.t_id" ng-hide="is_blocked(profile) || profile.block_list.indexOf(t_id) > -1">
+             <div class="row" style="padding: 15px !important;" ng-if="profile.user_name && profile.t_id!=user.t_id" ng-hide="is_blocked(profile) || profile.block_list.indexOf(t_id) > -1">
                    
                     <button ng-class="subscribed(profile) ? 'button-outline button-light':'button-assertive'" ng-click="subscribe(profile._id)" class="button button-block">
-                        &nbsp;&nbsp;{{subscribed(profile) ? 'unsubscribe':'subscribe'}}&nbsp;&nbsp;
+                        &nbsp;{{subscribed(profile) ? 'unsubscribe':'subscribe'}}&nbsp;
                     </button> 
-                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <button ng-disabled="!profile_casts || profile_casts.length < 1" ng-click="play_casts(profile_casts)" class="button button-block button-light">
-                        &nbsp;&nbsp;&nbsp;<i class="ion ion-play"></i>&nbsp;&nbsp;<b>Play casts</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;<i class="ion ion-play"></i>&nbsp;&nbsp;<b>Play</b>&nbsp;&nbsp;&nbsp;
                     </button>  
                 </div>
                 

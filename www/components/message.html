@@ -3,19 +3,18 @@
    <ion-item ng-if="cast.user" ng-class="cast_status(cast)" style="padding: 4px !important;">
     <div class="profile-photo" ui-sref="aprofile({id:cast.user.t_id})" ng-style="{'background-image':'url('+media+cast.user.photo+')'}"></div>
     <div  style="margin-left:40px !important;" class="padding">  
-        <div ng-include src="'components/player2.html'"></div>
         <h3 ui-sref="aprofile({id:cast.user.t_id})">
           <v>{{cast.user.full_name || cast.user.first_name +' '+ cast.user.last_name}}</v> 
-          <v class="grey">@{{cast.user.user_name || '...'}}</v>
+          <small class="grey">@{{cast.user.user_name || '...'}}</small>
         </h3>
-  
         <h6>
           {{timediff(cast.date_created)}}
         </h6>
+        <div style="margin-top: -33px !important;" ng-include src="'components/player2.html'"></div>
+  
          <!-- <div ng-include src="'components/message_like.html'"></div> -->
-        <div ng-include src="'components/message_listens.html'"></div>
     </div>
     <div ng-include src="'components/duration.html'"></div>
   </ion-item>
-
+  <div ng-include src="'components/message_listens.html'"></div>
 </div>
