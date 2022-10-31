@@ -16,6 +16,12 @@ app.controller('Cast', function(Config,Mic,$ionicScrollDelegate,$rootScope,$time
   }
   
   
+if($stateParams.id){
+  var id=$stateParams.id;
+  $rootScope.cast_replies=[];
+  $rootScope.search_box.hide();
+  $rootScope.refresh_cast(id);
+}
 
   
 

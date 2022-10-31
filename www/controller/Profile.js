@@ -139,7 +139,7 @@ $rootScope.set_photo=function(){
 $scope.share_link = function (user) {
   var n=user.user_name;
   var s="subscribe to this channel to join the conversation";
-  var l="https://justtalkapp.com/profile/"+user.t_id;
+  var l="justtalk://profile/"+user.t_id;
   $cordovaSocialSharing.share(n,s,Config.media+user.photo,l);
 };
 

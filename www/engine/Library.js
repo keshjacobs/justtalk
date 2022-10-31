@@ -1261,7 +1261,7 @@ $rootScope.count_down=function(){
 $rootScope.share_cast = function (c) {
   var m=c.title ? c.title:"JustTalk:";
   var s="Listen to cast by "+c.caster.user_name+" on JustTalk";
-  var l="https://justtalkapp.com/cast/"+c._id;
+  var l="justtalk://cast/"+c._id;
   $cordovaSocialSharing.share(m,s,null,l);
 };
 
@@ -2166,22 +2166,7 @@ $rootScope.more_suggestions=function(pages) {
      }
    }, 100);
  
-  //  $cordovaDeeplinks.route({
-  //   '/:id': {
-  //       target: 'cast',
-  //       parent: 'front.talk'
-  //   },
-  // }).subscribe(function(match) {
-  //   $timeout(function() {
-  //     $state.go(match.$route.target);
-  //     $timeout(function() {
-  //       $state.go(match.$route.target, {id: match.$args.id});
-  //     }, 800);
-  //   }, 100);
-  // }, function(nomatch) {
-  //   console.warn('No match', nomatch);
-  // });
- 
+
 
 
 
@@ -2209,23 +2194,19 @@ $rootScope.more_suggestions=function(pages) {
     $cordovaDeeplinks.route({
       '/cast/:id': {
         target: 'cast',
-        parent: 'front.home'
+        parent: 'front.talk'
       },
       '/profile/:id': {
         target: 'profile',
-        parent: 'front.home'
+        parent: 'front.talk'
       }
     }).subscribe(function(match) {
       $timeout(function() {
         $state.go(match.$route.parent);
-        $timeout(function() {
-          if(match.$route.target=='cast'){
-            $rootScope.open_cast({_id:match.$args});
-          }else{
-            $state.go(match.$route.target, match.$args);
-          }
-        }, 800);
-      }, 100);
+        $timeout(function() {  
+            $state.go(match.$route.target, {id: match.$args.id});
+        }, 2000);
+      }, 2000);
     }, function(nomatch) {
       console.warn('No match', nomatch);
     });
