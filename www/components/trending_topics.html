@@ -1,10 +1,6 @@
-<div style="width:100vw !important;float: left;" ng-hide="!trending_topics || trending_topics.length < 1">
-
-
-    <!-- <ion-slide ng-repeat="topic in trending_topics | unique:'caster' | limitTo:8"> -->
-        <div ng-repeat="topic in trending_topics | unique:'caster' | limitTo:8">
-            <div ng-include="'components/topic.html'"></div>
-        </div>
-        <!-- </ion-slide> -->
-    </div>
-<!-- </ion-slide-box> -->
+<div style="width:100vw !important;float: left;" class="list" ng-hide="!trending_topics || trending_topics.length < 1">
+    <div class="item item-divider">
+        <h2><b>Top Picks</b></h2>
+     </div>
+     <div ng-include="'components/topic.html'" ng-repeat="topic in trending_topics | unique:'caster' | limitTo:8"></div>
+</div>

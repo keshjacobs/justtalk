@@ -1,0 +1,6 @@
+<div style="width:100vw !important;float: left;">
+    <div class="item item-divider">
+        <h2><b>Listen To</b></h2>
+     </div>
+     <div ng-include="'components/face.html'" ng-repeat="user in faces | unique:'t_id' | limitTo:8"></div>
+</div>

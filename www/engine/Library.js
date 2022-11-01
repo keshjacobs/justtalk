@@ -106,10 +106,7 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
 
 
   $rootScope.play_audio=function (audio) {
-    console.log("play!"); 
     var main_cast;
-    console.log("stream:");
-    console.log(audio);
     if($rootScope.playing_message){
       if($rootScope.playing_message.casting){
             main_cast=$rootScope.playing_message;
@@ -141,7 +138,6 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
     biquadFilter = AudioMan.createBiquadFilter();  
     gainNodeR = AudioMan.createGain();
     gainNodeL = AudioMan.createGain();
-    compressor = AudioMan.createDynamicsCompressor();
     if(buffer){
       source.audio = audio;
       source.buffer = buffer;
@@ -149,22 +145,15 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
       source.muted = false;
       source.loop=false;
       source.autoplay=true;
-      gainNodeR.gain.value = 1;
-      compressor.threshold.value = -50;
-      compressor.knee.value = 40;
-      compressor.ratio.value = 12;
-      compressor.reduction.value = -20;
-      compressor.attack.value = 0;
-      compressor.release.value = 0.25;
-
-      source.connect(compressor);
-      compressor.connect(biquadFilter);
-      biquadFilter.connect(AudioMan.destination);
       source.playbackRate.value =main_cast.filter.pitch;
+      gainNodeR.gain.value = 1;
+      source.connect(gainNodeR);
+      gainNodeR.connect(biquadFilter);
       biquadFilter.type = main_cast.filter.type;
       biquadFilter.frequency.value = main_cast.filter.frequency;
       biquadFilter.gain.value = main_cast.filter.gain;
       biquadFilter.Q.value = 100;
+      biquadFilter.connect(AudioMan.destination);
       var ct=parseInt(main_cast.duration)-parseInt(main_cast.timeLeft);
       source.onended=function(){   
                           if($rootScope.Music){
@@ -1193,12 +1182,8 @@ $rootScope.save_cast=function(cast){
   if($rootScope.post.music_file){
     cast.music_file=$rootScope.post.music_file;
   }
-  window.requestFileSystem(window.PERSISTENT, 1024*1024, function(filesystem) {
-  if(filesystem){
-    filesystem.root.getFile(cast.file.name, { 'create': true },function(fileEntry){
-    fileEntry.createWriter(function(fileWriter){
-    var file=fileWriter.write(cast.file);
-    cast.cast= window.URL.createObjectURL(file);
+  cast.cast= window.URL.createObjectURL(cast.file);
+  cast.music= window.URL.createObjectURL(cast.music_file);
     cast.mentions=$rootScope.mentions;
     $timeout(function(){
       if(!$localStorage.saved_casts){
@@ -1218,10 +1203,6 @@ $rootScope.save_cast=function(cast){
       $rootScope.get_library();
     },3000);
     console.log(cast);
-  });
-});
-}
-});
 };
 
 
@@ -1300,6 +1281,8 @@ $rootScope.upload_cast=function(c){
 
 $rootScope.trash_cast=function(index){
   $rootScope.show();
+  URL.revokeObjectURL($localStorage.saved_casts[index].cast);
+  URL.revokeObjectURL($localStorage.saved_casts[index].music);
   $timeout(function(){
   $rootScope.hide();
   $localStorage.saved_casts.splice(index,1);
