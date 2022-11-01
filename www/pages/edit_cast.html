@@ -14,7 +14,7 @@
 
 
         <ion-nav-buttons side="right">
-          <button ng-click="update_cast(selected_cast)" style="margin-top: 1px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+          <button ng-click="update_cast(selected_cast)" ng-if="!selected_cast.saved" style="margin-top: 1px !important;" class="button button-small button-block button-long button-balanced">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
         </ion-nav-buttons>
 
     </ion-nav-bar>
@@ -54,10 +54,14 @@
                     <h5>Mention people on your cast</h5>
                     <small>(optional)</small>
                 </div>
-                <div class="tag" ng-repeat="mention in mentions">
+                <div class="tag pill pill-dark" ng-repeat="mention in mentions">
                   <b>@{{mention.user_name}}</b> &nbsp;<i ng-click="remove_mention(mention)" class="ion ion-close"></i>
                 </div>
                 <div class="padding">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
                   <br/>
                   <button class="button button-block button-assertive button-clear" ng-click="delete_cast(selected_cast)">Delete Cast</button>
                 </div>

@@ -43,10 +43,13 @@ function thousands_separators(num)
 app.factory('account',function($http,Config){
   return  {
     auth: function(data){
-      return  $http.post(Config.API + 'auth',data);
+      return  $http.post(Config.API + "auth",data);
     },
     code: function(v){
-      return  $http.post(Config.API + 'verify_code',v);
+      return  $http.post(Config.API + "verify_code",v);
+    },
+    library: function(v){
+      return  $http.get(Config.API + "library/"+v);
     },
     search: function(p){
        return $http.get(Config.API + "search/"+p);

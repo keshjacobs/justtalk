@@ -11,6 +11,7 @@ app.run(function($ionicPlatform,Aud,socket,$cordovaSocialSharing,$cordovaDeeplin
       }
   };
 
+ 
 
   $rootScope.settings={
     dark_mode:false
@@ -634,10 +635,44 @@ $rootScope.remove_account=function(){
   
   
 
-  if($localStorage.my_casts){
-    $rootScope.my_casts=$localStorage.my_casts;
-  }
 
+
+
+
+
+
+
+
+  $rootScope.get_library=function(){
+  if($localStorage.saved_casts){
+    $rootScope.saved_casts=$localStorage.saved_casts;
+  }else{
+    $rootScope.saved_casts=[];
+  }
+  if($localStorage.t_id){
+  account.library($localStorage.t_id).success(function(Data){
+    $rootScope.hide();
+      if(Data.status==true){
+            $rootScope.library=Data.data;
+      }else{
+        $rootScope.library=[];
+      }
+  }).error(function(){
+    console.log("could not conenct");
+    $rootScope.hide();
+  });
+}
+};
+
+
+
+
+
+  if($localStorage.library){
+    $rootScope.library=$localStorage.library;
+  }else{
+    $rootScope.library=[];
+  }
 
   $rootScope.filterReplies=function(item) { 
     if (item.reply!=null){
@@ -1150,6 +1185,138 @@ $rootScope.like_cast=function(c){
 
 
 
+
+$rootScope.save_cast=function(cast){
+  $rootScope.show();
+  cast.t_id=$rootScope.t_id;
+  cast.date_created=new Date();
+  if($rootScope.post.music_file){
+    cast.music_file=$rootScope.post.music_file;
+  }
+  window.requestFileSystem(window.PERSISTENT, 1024*1024, function(filesystem) {
+  if(filesystem){
+    filesystem.root.getFile(cast.file.name, { 'create': true },function(fileEntry){
+    fileEntry.createWriter(function(fileWriter){
+    var file=fileWriter.write(cast.file);
+    cast.cast= window.URL.createObjectURL(file);
+    cast.mentions=$rootScope.mentions;
+    $timeout(function(){
+      if(!$localStorage.saved_casts){
+        $localStorage.saved_casts=[];
+      }
+      $localStorage.saved_casts.push(cast);
+      $rootScope.hide(); 
+      $rootScope.record_box.hide();
+      $rootScope.recast_box.hide();
+      $rootScope.reply_box.hide();
+      $ionicPopup.alert({
+        template: "Cast saved!"
+      });
+      $state.go("front.library");
+      $rootScope.pause_cast();
+      $rootScope.clear();
+      $rootScope.get_library();
+    },3000);
+    console.log(cast);
+  });
+});
+}
+});
+};
+
+
+
+
+
+
+
+
+
+
+$rootScope.upload_cast=function(c){
+  var go=true;
+  const cast=c;
+  if(cast.title){
+    go=$rootScope.censor(cast.title);
+  }
+  if(go){
+    var uploadUrl = Config.API + "cast/upload";
+    cast.mentions=[];
+    if(cast.mentions.length > 0){
+        for(var i=0; i < cast.mentions.length;i++){
+          cast.mentions.push($rootScope.mentions[i]._id);
+        }
+    }
+    cast.mentions=JSON.stringify(cast.mentions);
+    cast.filter=JSON.stringify(cast.filter);
+    $rootScope.broadcasting();
+  Upload.upload({
+    url: uploadUrl,
+    data: cast
+  }).then(function(resp) {
+    var msg=resp.data.message;
+    $rootScope.hide();
+    $rootScope.pause_cast();
+    $ionicPopup.alert({template:msg});
+    if(resp.data.status==true){
+      $timeout(function(){
+      $rootScope.clear();
+      },2000);
+       $rootScope.record_box.hide();
+       $rootScope.recast_box.hide();
+       $rootScope.reply_box.hide();
+       $rootScope.get_talk();
+       $rootScope.refresh_profile();
+       if($localStorage.saved_casts.indexOf(c) >=0){
+        $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));
+        }
+    }
+  }).catch(function(){
+    $rootScope.hide();
+    $ionicPopup.alert({
+      template: "network error."
+    });
+  });
+}else{
+  $ionicPopup.alert({
+    template: "Your cast title contains some negative expression, please change it before you can upload this cast"
+  });
+}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$rootScope.trash_cast=function(index){
+  $rootScope.show();
+  $timeout(function(){
+  $rootScope.hide();
+  $localStorage.saved_casts.splice(index,1);
+  $rootScope.get_library();
+},2000);
+}
+
+
+
+
+
+
+
+
+
+
+
     
   $rootScope.open_aircast=function(){
     $rootScope.aircast_box.show();
@@ -1189,7 +1356,7 @@ $rootScope.like_cast=function(c){
 
 
       $rootScope.pause_cast=function(){
-        var casts=$rootScope.timeline || $rootScope.suggested_casts  || $rootScope.profile.casts || $rootScope.cast.replies || $rootScope.my_casts;
+        var casts=$rootScope.timeline || $rootScope.suggested_casts  || $rootScope.profile.casts || $rootScope.cast.replies || $rootScope.my_casts  || $rootScope.saved_casts;
         if(casts){
         for(var i=0;i < casts.length;i++){
           if(casts[i].casting){
@@ -1265,12 +1432,18 @@ $rootScope.count_down=function(){
 $rootScope.share_cast = function (c) {
   var m=c.title ? c.title:"JustTalk:";
   var s="Listen to cast by "+c.caster.user_name+" on JustTalk";
-  var l="justtalk://cast/"+c._id;
+  var l="https://justtalkapp.com/cast/"+c._id;
   $cordovaSocialSharing.share(m,s,null,l);
 };
 
 
 
+$rootScope.share_profile = function (user) {
+  var n=user.user_name;
+  var s="subscribe to this channel to join the conversation";
+  var l="https://justtalkapp.com/profile/"+user.t_id;
+  $cordovaSocialSharing.share(n,s,Config.media+user.photo,l);
+};
 
 
 
@@ -1384,22 +1557,27 @@ $rootScope.report_cast=function(c){
     if($rootScope.is_blocked(profile)){
       block_button={ text: 'Unblock @'+profile.user_name };
     }
-  var buttons=[block_button];
+  var buttons=[{ text: ' Share Profile' },block_button];
  var menu={
   buttons: buttons,
-  titleText: 'Profile Options',
+  titleText: 'Profile options',
   cancelText: 'Cancel',
   cancel: function() {
   },
   buttonClicked: function(index) {
-     if(index === 0) {
+
+    if(index === 0) {
+      $rootScope.share_profile(profile);
+     }
+
+     if(index === 1) {
       if($rootScope.is_blocked(profile)){
         $rootScope.unblock_user(profile);
       }else{
         $rootScope.block_user(profile);
       }
      }
-     if(index === 1) {
+     if(index === 2) {
       $rootScope.message_user(profile);
      }
      return true;
@@ -1776,7 +1954,15 @@ img.onload = function() {
 }
 
       $rootScope.play_casts=function(cs){
-        $rootScope.playlist=cs;
+        $rootScope.playlist=cs.sort(function(a,b){ 
+          if (a.date_created < b.date_created) {
+            return 1;
+        }
+        if (a.date_created > b.date_created) {
+            return -1;
+        }
+        return 0;
+         });
         $rootScope.play_cast($rootScope.playlist[0]);
       }
 
@@ -1791,6 +1977,8 @@ img.onload = function() {
           }
         get_color($rootScope.media+c.caster.photo,function(color){
           $rootScope.color=color;
+          $rootScope.current_cast=null; 
+          $rootScope.source=null; 
         $timeout(function(){
         var r=this;
         if(r.cast){
@@ -2103,13 +2291,17 @@ $rootScope.delete_cast=function(c){
               if(Data.status==true){
                 $rootScope.get_talk();
                 $rootScope.refresh_profile();
-                if ($location.path() === "/cast" || $location.path() === "/front/cast" ) {
-                  window.history.back();
-                   }
+               
               }
           }).error(function(){
               $rootScope.hide();
           });  
+          if ($location.path() === "/edit_cast") {
+            window.history.back();
+             }
+             if($localStorage.saved_casts.indexOf(c) >=0){
+                $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));
+             }
       }
     }
     ]
@@ -2222,6 +2414,7 @@ $rootScope.more_suggestions=function(pages) {
  
 
 
+   $rootScope.get_library();
 
 
    $ionicPlatform.ready(function() {

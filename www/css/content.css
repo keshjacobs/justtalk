@@ -775,17 +775,17 @@ margin-bottom: 10px !important;
 
 ::-webkit-input-placeholder {
   color: rgb(19, 19, 19) !important;
-  font-weight: lighter !important;
+  font-weight:bold !important;
 }
 
 :-ms-input-placeholder { 
   color: rgb(27, 27, 27) !important;
-  font-weight: lighter !important;
+  font-weight:bold !important;
 }
 
 ::placeholder {
   color: rgb(20, 20, 20) !important;
-  font-weight: lighter !important;
+  font-weight:bold !important;
 }
 ion-content .new_message{
   background-color: white !important;

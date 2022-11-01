@@ -10,11 +10,11 @@
          <div ng-if="unheard_messages(chat) > 0" class="badge badge-energized" style="margin-top: 25px !important;float: right !important;">{{unheard_messages(chat) || 0}}</div>
         </div>
         <div class="profile-photo" style="margin-right: 10px !important;" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
-        <div style="padding-top: 10px !important;">
+        <div style="padding-top: 13px !important;">
             <h4 ng-if="chat.members.length > 2" style="font-size: 18px !important;">{{chat.title || 'Group'}}</h4>
             <h4 ng-if="chat.members.length <= 2" style="font-size: 18px !important;">
                 {{chatter(chat).full_name || chatter(chat).first_name +' '+ chatter(chat).last_name}} 
-                <v class="grey">@{{chatter(chat).user_name || '...'}}</v>
+                <small class="grey">@{{chatter(chat).user_name || '...'}}</small>
             </h4>
             <div ng-if="(chat.members | filter:{accepted:true}).length <= 1">
                 <h5><i class="dark">Pending...</i></h5>

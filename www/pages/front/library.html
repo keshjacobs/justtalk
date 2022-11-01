@@ -25,47 +25,37 @@
             </ion-segment-button>
           </ion-segment>    
      </div>
-  <ion-content class="bg-grey header-content padding">
-        <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
-        <div ng-include src="'components/auth.html'"></div>
+  <ion-content class="bg-grey header-content">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
+      <div ng-include src="'components/auth.html'"></div>
 
-        <div ng-controller="Cast" ng-if="t_id">
+      <div ng-controller="Cast" ng-if="t_id">
         
        <div ng-switch="library">
                 <ion-list ng-switch-when="saved">
-                    <div ng-include="'components/book.html'" ng-repeat="book in library | filter:{saved:true,purchased:false} | unique:'_id' | orderBy:'-date_created' track by $index">
-                    </div> 
-                    <div ng-if="!library || (library | filter:{purchased:false,saved:true}).length < 1" class="text-center padding">
+                    <div ng-include="'components/saved_cast.html'" ng-repeat="cast in saved_casts | orderBy:'-date_created'"></div> 
+                    <div ng-if="!saved_casts || saved_casts.length <=0" class="text-center padding">
                         <br>
-                        <br>
-                        <h5>You have no saved item</h5>
-                        </div>
+                        <h5>You have no saved cast</h5>
+                    </div>
                 </ion-list>
                 
 
                 <ion-list ng-switch-when="purchased">
-                    <div ng-include="'components/book.html'" ng-repeat="book in library | filter:{purchased:true} | unique:'_id' | orderBy:'-date_created' track by $index">
-                </div> 
-                <div ng-if="!library || (library | filter:{purchased:true}).length < 1" class="text-center padding">
-                    <br>
-                    <br>
-                    <h5>You have not purchased anything</h5>
+                    <div ng-if="!library || library.length <= 0" class="text-center padding">
+                        <br>
+                        <h5>You have not purchased anything</h5>
                     </div>
+                    <div ng-include="'components/book.html'" ng-repeat="book in library | orderBy:'-date_created'"></div> 
                 </ion-list>
        </div>
       
+      </div>
 
 
-      
+      <div class="gap"></div>
 
 
-
-
-
-</div>
-
-
-<div class="gap"></div>
 </ion-content>
 
     

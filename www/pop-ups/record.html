@@ -32,9 +32,20 @@
                 <div ng-include="'components/mentioner.html'"></div>
 
 
-            <div ng-show="file_added" class="padding padding text-center">
-                <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-balanced button-block" style="margin-top: 10px !important;">
+            <div ng-show="file_added" class="padding text-center">
+              <br/>
+
+                <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-balanced button-block">
                     Post
+                </button>
+
+                <button ng-disabled="!file_added || recording || post.casting"  ng-click="save_cast(post)" class="button button-dark button-outline button-block">
+                  Save for later
+                </button>
+                <br/>
+                <hr/>
+                <button ng-disabled="!file_added || recording || post.casting"  ng-click="clear()" class="button button-clear button-assertive button-block">
+                  Clear
                 </button>
            </div>
  

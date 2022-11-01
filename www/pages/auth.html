@@ -25,7 +25,7 @@
       <form ng-submit="auth(det)">
           <label class="item item-input text-left">
             <b class="text-center" style="padding-top:8px;"><i class="ion-at assertive"></i></b>  &nbsp;&nbsp;&nbsp;
-            <input ng-model="det.user_name" name="user_name" type="text" placeholder="Username"/>
+            <input autocapitalize="none" autocomplete="off" ng-model="det.user_name" name="user_name" type="text" placeholder="Username"/>
           </label>
           <div class="row">
             <button ng-disabled="!det.user_name" type="submit" class="button button-full button-balanced">Continue</button>

@@ -178,6 +178,11 @@ app.factory('TopMusic', function() {
       }
       }
     }
+
+
+
+
+
     function save_record(file){
       console.log("Saving file........");
       $timeout(function(){
@@ -202,13 +207,8 @@ app.factory('TopMusic', function() {
         };
 
       reader.readAsArrayBuffer($rootScope.file);
-        if($rootScope.file){
-          console.log("Done recording:");
           console.log($rootScope.post);  
-          console.error("file name: "+$rootScope.post.file.name);
-        }
       },1000);
-
      }
 
 
@@ -245,13 +245,10 @@ app.factory('TopMusic', function() {
                   }
                   mediaRec = new MediaRecorder(stream);
                   mediaRec.ondataavailable = function(e){
-                    console.log('chunking..:');
-                    console.log(e.data);
                     chunks.push(e.data);
                     };
                   mediaRec.onstop = function(){        
                     let file = new Blob(chunks,{ 'type' : 'audio/wav' });
-                    console.log('Data Available: blob size is ' + file.size);
                     save_record(file);
                   }
                   mediaRec.onstart = function(){
