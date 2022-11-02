@@ -23,7 +23,7 @@
  
  
    
-<ion-content has-header class="header-content" ng-class="casts_loading ? ' edge_loader':''">
+<ion-content overflow-scroll="true" has-header class="header-content" ng-class="casts_loading ? ' edge_loader':''">
       
       
 <ion-refresher pulling-text="Pull to refresh" on-refresh="discovery()"></ion-refresher>
@@ -34,6 +34,8 @@
       <ion-list ng-switch-when="casts">
     
           <div ng-include src="'components/auth.html'"></div>
+
+          <div ng-include src="'components/listen_to.html'"></div>
 
           <div ng-include src="'components/trending_topics.html'"></div>
 

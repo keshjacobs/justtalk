@@ -4,7 +4,7 @@
               <ion-title><small><b>Listens</b></small></ion-title>
     </ion-header-bar>
       
-        <ion-content class="padding text-left bg-grey" style="margin-top: 0px !important;">
+        <ion-content class="text-left bg-grey">
             <h5 class="padding text-center"><b>{{listeners.length || 0}}</b> {{listeners.length > 1 ? 'people':'person'}} listened to this cast</h5>
               <div ng-include="'components/subscribe_user.html'" ng-click="listen_box.hide()" ng-repeat="caster in listeners | unique:'t_id'">
               </div>

@@ -63,6 +63,7 @@ $rootScope.det={user_name:""};
   $rootScope.fetching_cast=true;
 
   $rootScope.playlist=[];
+  $rootScope.top_boys=[];
   $rootScope.track=0;
 
 
@@ -633,21 +634,25 @@ $rootScope.remove_account=function(){
 
 
   $rootScope.get_library=function(){
-  if($localStorage.saved_casts){
-    $rootScope.saved_casts=$localStorage.saved_casts;
-  }else{
-    $rootScope.saved_casts=[];
-  }
   if($localStorage.t_id){
+  cast.saved($rootScope.user._id).success(function(Data){
+    $rootScope.hide();
+      if(Data.status==true){
+        $localStorage.saved_casts=Data.data;
+        $rootScope.saved_casts=$localStorage.saved_casts;
+      }
+  }).error(function(){
+    console.log("could not fetch saved casts");
+    $rootScope.hide();
+  });
   account.library($localStorage.t_id).success(function(Data){
     $rootScope.hide();
       if(Data.status==true){
-            $rootScope.library=Data.data;
-      }else{
-        $rootScope.library=[];
+            $localStorage.library=Data.data;
+            $rootScope.library=$localStorage.library;
       }
   }).error(function(){
-    console.log("could not conenct");
+    console.log("could not fetch library");
     $rootScope.hide();
   });
 }
@@ -1171,38 +1176,49 @@ $rootScope.like_cast=function(c){
 
 
 
-
-
-
-
 $rootScope.save_cast=function(cast){
   $rootScope.show();
+  var uploadUrl = Config.API + "cast/save";
   cast.t_id=$rootScope.t_id;
+  cast.caster=$rootScope.user._id;
+  cast.file=$rootScope.file;
   cast.date_created=new Date();
   if($rootScope.post.music_file){
     cast.music_file=$rootScope.post.music_file;
   }
-  cast.cast= window.URL.createObjectURL(cast.file);
-  cast.music= window.URL.createObjectURL(cast.music_file);
     cast.mentions=$rootScope.mentions;
-    $timeout(function(){
-      if(!$localStorage.saved_casts){
-        $localStorage.saved_casts=[];
-      }
-      $localStorage.saved_casts.push(cast);
+    cast.mentions=[];
+    if($rootScope.mentions.length > 0){
+        for(var i=0; i < $rootScope.mentions.length;i++){
+          cast.mentions.push($rootScope.mentions[i]._id);
+        }
+    }
+    cast.mentions=JSON.stringify(cast.mentions);
+    cast.filter=JSON.stringify(cast.filter);
+    Upload.upload({
+      url: uploadUrl,
+      data: cast
+    }).then(function(resp) {
       $rootScope.hide(); 
-      $rootScope.record_box.hide();
-      $rootScope.recast_box.hide();
-      $rootScope.reply_box.hide();
-      $ionicPopup.alert({
-        template: "Cast saved!"
-      });
-      $state.go("front.library");
-      $rootScope.pause_cast();
-      $rootScope.clear();
-      $rootScope.get_library();
-    },3000);
-    console.log(cast);
+        var msg=resp.data.message;
+        $ionicPopup.alert({template: msg});
+        if(!$localStorage.saved_casts){
+          $localStorage.saved_casts=[];
+        }
+        if(resp.data.status==true){
+          $localStorage.saved_casts.push(cast);
+          $timeout(function(){
+            $rootScope.record_box.hide();
+            $rootScope.recast_box.hide();
+            $rootScope.reply_box.hide();
+            $state.go("front.library");
+            $rootScope.pause_cast();
+            $rootScope.clear();
+            $rootScope.get_library();
+          },3000);
+        };
+    });
+    
 };
 
 
@@ -1215,54 +1231,44 @@ $rootScope.save_cast=function(cast){
 
 
 $rootScope.upload_cast=function(c){
-  var go=true;
-  const cast=c;
-  if(cast.title){
-    go=$rootScope.censor(cast.title);
-  }
-  if(go){
-    var uploadUrl = Config.API + "cast/upload";
-    cast.mentions=[];
-    if(cast.mentions.length > 0){
-        for(var i=0; i < cast.mentions.length;i++){
-          cast.mentions.push($rootScope.mentions[i]._id);
-        }
-    }
-    cast.mentions=JSON.stringify(cast.mentions);
-    cast.filter=JSON.stringify(cast.filter);
-    $rootScope.broadcasting();
-  Upload.upload({
-    url: uploadUrl,
-    data: cast
-  }).then(function(resp) {
-    var msg=resp.data.message;
-    $rootScope.hide();
-    $rootScope.pause_cast();
-    $ionicPopup.alert({template:msg});
-    if(resp.data.status==true){
-      $timeout(function(){
-      $rootScope.clear();
-      },2000);
-       $rootScope.record_box.hide();
-       $rootScope.recast_box.hide();
-       $rootScope.reply_box.hide();
-       $rootScope.get_talk();
-       $rootScope.refresh_profile();
-       if($localStorage.saved_casts.indexOf(c) >=0){
-        $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));
-        }
-    }
-  }).catch(function(){
-    $rootScope.hide();
-    $ionicPopup.alert({
-      template: "network error."
-    });
-  });
-}else{
-  $ionicPopup.alert({
-    template: "Your cast title contains some negative expression, please change it before you can upload this cast"
-  });
-}
+  $rootScope.pause_cast();
+  $ionicPopup.show({
+    template: 'Do you want to upload '+(c.title ? '`'+c.title+'` cast?':'cast?'),
+    title: 'Upload Cast',
+    scope: $rootScope,
+    buttons: [
+      {
+      text: 'No' ,
+      type:"button-light"
+      },
+      {
+      text: '<b>Yes</b>',
+      type: 'button-light',
+      onTap: function(e) {    
+                  $rootScope.broadcasting(); 
+                  cast.upload(c._id).success(function(Data){
+                    $rootScope.hide();
+                    $ionicPopup.alert({template:Data.message});
+                    if(Data.status==true){
+                        $timeout(function(){
+                          $rootScope.clear();
+                          $rootScope.record_box.hide();
+                          $rootScope.recast_box.hide();
+                          $rootScope.reply_box.hide();
+                          $rootScope.get_talk();
+                          $rootScope.refresh_profile();
+                          $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));
+                        },2000);
+                      }
+                    }).error(function(){
+                        $rootScope.hide();
+                        $ionicPopup.alert({
+                          template: "network error."
+                        });
+                      });   
+            }
+          }]
+        });
 };
 
 
@@ -1281,13 +1287,15 @@ $rootScope.upload_cast=function(c){
 
 $rootScope.trash_cast=function(index){
   $rootScope.show();
-  URL.revokeObjectURL($localStorage.saved_casts[index].cast);
-  URL.revokeObjectURL($localStorage.saved_casts[index].music);
-  $timeout(function(){
-  $rootScope.hide();
-  $localStorage.saved_casts.splice(index,1);
-  $rootScope.get_library();
-},2000);
+  if(index >= 0){
+      URL.revokeObjectURL($localStorage.saved_casts[index].cast);
+      URL.revokeObjectURL($localStorage.saved_casts[index].music);
+      $timeout(function(){
+      $rootScope.hide();
+      $localStorage.saved_casts.splice(index,1);
+      $rootScope.get_library();
+      },2000);   
+    }
 }
 
 
@@ -1785,7 +1793,7 @@ $rootScope.build_playlist=function(cast){
                   return c._id==cast._id;
                 })
                 if($rootScope.track >= -1){
-                  if($rootScope.playlist[$rootScope.track].cast){
+                  if($rootScope.playlist[$rootScope.track]){
                     $rootScope.playlist[$rootScope.track].casting=true;
                     $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
                   }
@@ -1903,6 +1911,7 @@ $rootScope.random_color=function(){
 
 
 function get_color(image,callback){
+  if(image){
 const img = new Image();
 img.crossOrigin = '*';
 img.src = image;
@@ -1934,6 +1943,9 @@ img.onload = function() {
     }
   callback('#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1));
 }
+  }else{
+    callback(null);
+  }
 }
 
       $rootScope.play_casts=function(cs){
@@ -1960,8 +1972,7 @@ img.onload = function() {
           }
         get_color($rootScope.media+c.caster.photo,function(color){
           $rootScope.color=color;
-          $rootScope.current_cast=null; 
-          $rootScope.source=null; 
+          $rootScope.current_cast=null;
         $timeout(function(){
         var r=this;
         if(r.cast){
@@ -2181,11 +2192,27 @@ $rootScope.get_notifications=function(){
 
 
 
+$rootScope.listen_to=function(casts){
+  var boys=[];
+  if(casts){
+    casts.map(function(cast){
+        if(boys.indexOf(cast.caster) <=-1){
+          boys.push(cast.caster);
+        }
+    });
+  }
+  console.log("listen to:");
+  console.log(boys);
+  return boys;
+}
+
+
 $rootScope.discovery=function(){
   $rootScope.casts_loading=true;
   cast.trending().success(function(Data){
     if(Data.status==true){
-        $rootScope.trending_topics=Data.data;    
+        $rootScope.trending_topics=Data.data;
+        $rootScope.top_boys=$rootScope.listen_to($rootScope.trending_topics);
     }
 });
 account.suggestion().success(function(Data){
@@ -2282,9 +2309,7 @@ $rootScope.delete_cast=function(c){
           if ($location.path() === "/edit_cast") {
             window.history.back();
              }
-             if($localStorage.saved_casts.indexOf(c) >=0){
-                $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));
-             }
+            $rootScope.trash_cast($localStorage.saved_casts.indexOf(c));  
       }
     }
     ]

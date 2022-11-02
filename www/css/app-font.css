@@ -65,15 +65,22 @@
   src: url("fonts/Mukta/Mukta-Light.ttf");
 }
 
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/Source_Sans_Pro/SourceSansPro-Light.ttf");
+}
+
+
 
 *{
-  font-family: 'MuktaMahee', sans-serif;
+  /* font-family: 'MuktaMahee', sans-serif; */
+  font-family: 'Source Sans Pro', sans-serif;
    border:none;
  }
 
 
 
  .nuba, h1{
-  font-family: "Montserrat" !important;
+  font-family: 'Source Sans Pro', sans-serif;
    font-weight: lighter !important;
  }

@@ -6,7 +6,7 @@
         <h5>Mention people on your cast</h5>
         <small>(optional)</small>
     </div>
-    <div class="tag" ng-repeat="mention in mentions">
+    <div class="tag pill pill-dark" ng-repeat="mention in mentions">
       <b>@{{mention.user_name}}</b> &nbsp;<i ng-click="remove_mention(mention)" class="ion ion-close"></i>
     </div>
 </fieldset>
