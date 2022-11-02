@@ -326,8 +326,7 @@ $rootScope.change_mode=function(){
   $rootScope.cast_more = function(cast) {
     var buttons=[
       { text: ' Share' },
-      { text: ' Report' },
-      { text: ' Remove from timeline' }
+      { text: ' Report' }
    ];
    var menu={
     buttons: buttons,
@@ -343,16 +342,19 @@ $rootScope.change_mode=function(){
        if(index === 1) {
         $rootScope.report_cast(cast);
        }
-       if(index === 2) {
+       if(cast.caster.t_id!=$rootScope.t_id && index === 2) {
         $rootScope.remove_cast(cast);
        }
-       if(index === 3) {
+       if(cast.caster.t_id==$rootScope.t_id && index === 2) {
         $rootScope.edit_cast(cast);
        }
        return true;
     }
  }
- if(cast.caster.t_id==$rootScope.t_id){
+
+ if(cast.caster.t_id!=$rootScope.t_id){
+  buttons.push({ text: ' Remove from timeline' });
+ }else{
   buttons.push({ text: ' Edit' });
   menu.destructiveText=' Delete';
   menu.destructiveButtonClicked=function(){
@@ -1442,7 +1444,7 @@ $rootScope.share_profile = function (user) {
 $rootScope.remove_cast=function(c){
   $ionicPopup.show({
     template: 'Are you sure you want to remove this cast from your timeline completely?',
-    title: 'Remove Cast',
+    title: 'Remove from timeline',
     scope: $rootScope,
     buttons: [
       {
@@ -1464,6 +1466,8 @@ $rootScope.remove_cast=function(c){
     $ionicPopup.alert({
       template: Data.message
     });
+    $rootScope.get_talk();
+    $rootScope.refresh_profile();
   }).error(function(){
     $rootScope.hide();
     $ionicPopup.alert({

@@ -196,7 +196,10 @@ app.factory('cast',function($http,Config){
       return $http.post(Config.API + "cast/report",data);
     },
     remove: function(data){
-      return $http.post(Config.API + "cast/remove",data);
+      return $http.post(Config.API + "cast/hide",data);
+    },
+    show: function(data){
+      return $http.post(Config.API + "cast/show",data);
     },
     reply: function(data){
       return $http.post(Config.API + "cast/reply",data);

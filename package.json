@@ -1,6 +1,6 @@
 {
   "name": "justtalk",
-  "version": "2.7.9",
+  "version": "2.8.1",
   "description": "talk is cheap, but talk also is free with friends and family",
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
