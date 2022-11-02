@@ -1244,6 +1244,8 @@ $rootScope.upload_cast=function(c){
                   $rootScope.broadcasting(); 
                   cast.upload(c._id).success(function(Data){
                     $rootScope.hide();
+                    console.log("upload saved callback:");
+                    console.log(Data);
                     $ionicPopup.alert({template:Data.message});
                     if(Data.status==true){
                         $timeout(function(){
