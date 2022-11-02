@@ -2223,7 +2223,7 @@ $rootScope.discovery=function(){
   $rootScope.casts_loading=true;
   cast.trending().success(function(Data){
     if(Data.status==true){
-        $rootScope.trending_topics=Data.data;
+        $rootScope.trending_topics=$rootScope.censor_casts(Data.data);
         $rootScope.top_boys=$rootScope.listen_to($rootScope.trending_topics);
     }
 });
@@ -2234,7 +2234,7 @@ account.suggestion().success(function(Data){
 });
 cast.suggestion().success(function(Data){
     if(Data.status==true){
-        $rootScope.suggested_casts=Data.data;    
+        $rootScope.suggested_casts=$rootScope.censor_casts(Data.data);    
         $rootScope.casts_loading=false;
     }
     $rootScope.hide();
@@ -2343,6 +2343,26 @@ $rootScope.delete_cast=function(c){
     }
       
 
+    $rootScope.censor_casts=function(casts){
+      if($rootScope.user){
+          casts.map(function(cast,i){
+            if($rootScope.user.cast_list){
+              var index=$rootScope.user.cast_list.indexOf(cast._id);
+              if(index >=0){
+                casts.splice(i,1);
+              }
+            }
+            if($rootScope.user.block_list){
+              var index=$rootScope.user.block_list.indexOf(cast.caster.t_id);
+              if(index >=0){
+                casts.splice(i,1);
+              }
+            }
+          })
+        }
+          return casts;
+    }
+
 
     $rootScope.get_talk=function() {
       $timeout(function(){
@@ -2351,7 +2371,7 @@ $rootScope.delete_cast=function(c){
     cast.timeline($rootScope.user.t_id).success(function(Data){
       $rootScope.home_loader=false;
       if(Data.status==true){
-        $rootScope.timeline=Data.data;  
+        $rootScope.timeline=$rootScope.censor_casts(Data.data);
         $rootScope.home_loader=false;
         $rootScope.hide();
       }
