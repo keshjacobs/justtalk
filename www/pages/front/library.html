@@ -33,7 +33,7 @@
         
        <div ng-switch="library">
                 <ion-list ng-switch-when="saved">
-                    <div ng-include="'components/saved_cast.html'" ng-repeat="cast in saved_casts | orderBy:'-date_created'"></div> 
+                    <div ng-include="'components/saved_cast.html'" ng-repeat="cast in saved_casts | orderBy:'-date_created' track by $index"></div> 
                     <div ng-if="!saved_casts || saved_casts.length <=0" class="text-center padding">
                         <br>
                         <h5>You have no saved cast</h5>
@@ -46,7 +46,7 @@
                         <br>
                         <h5>You have not purchased anything</h5>
                     </div>
-                    <div ng-include="'components/book.html'" ng-repeat="book in library | orderBy:'-date_created'"></div> 
+                    <div ng-include="'components/book.html'" ng-repeat="book in library | orderBy:'-date_created' track by $index"></div> 
                 </ion-list>
        </div>
       

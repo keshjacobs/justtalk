@@ -113,15 +113,10 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
             main_cast=$rootScope.playing_message;
           }
     }else if($rootScope.post){
-              if($rootScope.post.file){
                 main_cast=$rootScope.post;
               }else{
-                main_cast=$rootScope.current_cast;
-              }
-          }else{
             main_cast=$rootScope.current_cast;
           }
-
     if(!main_cast.timeLeft){
       main_cast.timeLeft=main_cast.duration;
     }
@@ -637,6 +632,7 @@ $rootScope.remove_account=function(){
   if($rootScope.user){
   cast.saved($rootScope.user._id).success(function(Data){
     $rootScope.hide();
+    console.log(Data);
       if(Data.status==true){
         $localStorage.saved_casts=Data.data;
         $rootScope.saved_casts=$localStorage.saved_casts;
@@ -645,7 +641,7 @@ $rootScope.remove_account=function(){
     console.log("could not fetch saved casts");
     $rootScope.hide();
   });
-  account.library($localStorage.t_id).success(function(Data){
+  account.library($rootScope.user._id).success(function(Data){
     $rootScope.hide();
       if(Data.status==true){
             $localStorage.library=Data.data;
@@ -1998,7 +1994,7 @@ img.onload = function() {
           $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
         }
         if($rootScope.current_cast.cast){
-            var src=$rootScope.media+$rootScope.current_cast.cast;
+            var src=Config.media+$rootScope.current_cast.cast;
             $rootScope.cast_listen($rootScope.current_cast);
             $rootScope.build_playlist($rootScope.current_cast);
             $rootScope.play_audio(src);
@@ -2015,8 +2011,8 @@ img.onload = function() {
         
   
           $rootScope.test_cast=function(post){
+            $rootScope.post=post;
             if(!post.casting){
-              $rootScope.post=post;
               $rootScope.post.casting=true;
               var file=URL.createObjectURL($rootScope.post.file);
               $rootScope.play_audio(file);
@@ -2026,6 +2022,20 @@ img.onload = function() {
               }
 
 
+              $rootScope.replay_cast=function(post){
+                console.log(post);
+                if(!post.casting){
+                  $rootScope.post=post;
+                  $rootScope.post.casting=true;
+                  if(!$rootScope.post.timeLeft){
+                    $rootScope.post.timeLeft=$rootScope.post.duration;
+                  }
+                  $rootScope.play_audio(Config.media+$rootScope.post.cast);
+                }else{
+                  $rootScope.pause_cast();  
+                }
+                  }
+    
 
               $rootScope.select_music=function(file){
                       $rootScope.pause_cast();  
@@ -2422,12 +2432,13 @@ $rootScope.more_suggestions=function(pages) {
  
 
 
-   $rootScope.get_library();
 
 
    $ionicPlatform.ready(function() {
     console.log("Platform Ready!");
   
+
+    $rootScope.get_library();
 
     socket.on('connect', function() {
 

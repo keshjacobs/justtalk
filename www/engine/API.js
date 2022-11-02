@@ -180,9 +180,12 @@ app.factory('cast',function($http,Config){
     info: function(p){
        return $http.get(Config.API + "cast/info/"+p);
      },
-    saved: function(p){
-      return $http.get(Config.API + "cast/saved/"+p);
-    },
+     saved: function(p){
+       return $http.get(Config.API + "cast/saved/"+p);
+     },
+     upload: function(id){
+      return $http.get(Config.API + "cast/add/"+id);
+     },
     recast: function(data){
       return $http.get(Config.API + "cast/recast",data);
     },
