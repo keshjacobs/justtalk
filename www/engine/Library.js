@@ -634,7 +634,7 @@ $rootScope.remove_account=function(){
 
 
   $rootScope.get_library=function(){
-  if($localStorage.t_id){
+  if($rootScope.user){
   cast.saved($rootScope.user._id).success(function(Data){
     $rootScope.hide();
       if(Data.status==true){

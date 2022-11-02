@@ -1,3 +1,4 @@
+<div ng-if="top_boys.length > 5">
 <div class="item item-divider">
         <h2><b>Listen To</b></h2>
 </div>
@@ -5,4 +6,5 @@
         <div style="width:1000px !important;">
             <div ng-include="'components/face.html'" ng-repeat="user in top_boys  | unique:'t_id' | limitTo:8"></div>
         </div>
- </ion-scroll>
+ </ion-scroll>    
+</div>
