@@ -68,6 +68,7 @@
     <preference name="Allow3DTouchLinkPreview" value="false" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="AudioCanMix" value="true" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <cross-domain-policy>
         <site-control permitted-cross-domain-policies="all" />
@@ -144,6 +145,11 @@
         </feature>
     </platform>
     <platform name="ios">
+        <preference name="WKWebViewOnly" value="true" />
+        <feature name="CDVWKWebViewEngine">
+           <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <feature name="StatusBar">
             <param name="ios-package" onload="true" value="CDVStatusBar" />
         </feature>

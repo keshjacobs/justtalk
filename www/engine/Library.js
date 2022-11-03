@@ -2208,6 +2208,8 @@ $rootScope.get_notifications=function(){
 
 
 
+
+
 $rootScope.listen_to=function(casts){
   var boys=[];
   if(casts){
@@ -2221,6 +2223,9 @@ $rootScope.listen_to=function(casts){
   console.log(boys);
   return boys;
 }
+
+
+
 
 
 $rootScope.discovery=function(){
@@ -2596,24 +2601,19 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
 
       });
 
-
-
-
  
        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
        cordova.plugins.Keyboard.disableScroll(false);
-//      window.WkWebView.allowsBackForwardNavigationGestures(true);
-// window.WkWebView.allowsBackForwardNavigationGestures(false);
+      window.WkWebView.allowsBackForwardNavigationGestures(true);
 
-  if(Splashscreen){
-        Splashscreen.hide();
-  }
+      if(Splashscreen){
+            Splashscreen.hide();
+      }
 
-
-$rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled().value;
+      $rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled().value;
 
        
-  $rootScope.change_bar();
+      $rootScope.change_bar();
 
 
 cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
@@ -2645,6 +2645,8 @@ cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
  }, function(error){
      console.error(error);
  });
+
+
 cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
   for (var permission in statuses){
       switch(statuses[permission]){

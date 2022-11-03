@@ -163,145 +163,99 @@ app.factory('TopMusic', function() {
 });
 
   app.factory('Mic', function($rootScope,Aud,$ionicPopup,$timeout) {
+
+    $rootScope.MediaDevices=navigator.mediaDevices || window.navigator.mediaDevices || window.MediaDevices;
+
     let mediaRec = null;
-    let folder;
     var timer;
+
+
     function count_down(){
-      if($rootScope.recording){
-      $rootScope.timer=$rootScope.timer-1;
-      if($rootScope.timer <=0){
-        this.stop();
-      }else{
-          $timeout(function(){
-            count_down();
-          },1000);
-      }
-      }
+              if($rootScope.recording){
+                    $rootScope.timer=$rootScope.timer-1;
+                    if($rootScope.timer <=0){
+                      this.stop();
+                    }else{
+                        $timeout(function(){
+                          count_down();
+                        },1000);
+                    }
+              }
     }
 
 
-
-
-
     function save_record(file){
-      console.log("Saving file........");
-      $timeout(function(){
-        $rootScope.file_added=true;
-        $rootScope.file = file;
-        $rootScope.file.lastModifiedDate = new Date();
-        $rootScope.file.name = "castaway-"+$rootScope.file.lastModifiedDate+".wav";   
-        $rootScope.post.file=$rootScope.file;
-        var reader = new FileReader();
-        reader.onload = function (event) {
-         var AudioMan= new Aud();
-         AudioMan.decodeAudioData(event.target.result, function(buffer) {
-                $rootScope.post.duration = buffer.duration;
-                $rootScope.post.timeLeft=buffer.duration;
-                console.log("The duration of the song is of: " + $rootScope.post.duration + " seconds");
-            },function(e){
-              console.error("Could not decode saved file: "+ e);
-            });
-        };
-      reader.onerror = function (event) {
-            console.error("An error ocurred reading the file: ", event);
-        };
+                console.log("Saving file........");
+                $timeout(function(){
+                  $rootScope.file_added=true;
+                  $rootScope.file = file;
+                  $rootScope.file.lastModifiedDate = new Date();
+                  $rootScope.file.name = "castaway-"+$rootScope.file.lastModifiedDate+".wav";   
+                  $rootScope.post.file=$rootScope.file;
+                  var reader = new FileReader();
+                  reader.onload = function (event) {
+                  var AudioMan= new Aud();
+                  AudioMan.decodeAudioData(event.target.result, function(buffer) {
+                          $rootScope.post.duration = buffer.duration;
+                          $rootScope.post.timeLeft=buffer.duration;
+                          console.log("The duration of the song is of: " + $rootScope.post.duration + " seconds");
+                      },function(e){
+                        console.error("Could not decode saved file: "+ e);
+                      });
+                  };
+                reader.onerror = function (event) {
+                      console.error("An error ocurred reading the file: ", event);
+                  };
 
-      reader.readAsArrayBuffer($rootScope.file);
-          console.log($rootScope.post);  
-      },1000);
+                reader.readAsArrayBuffer($rootScope.file);
+                    console.log($rootScope.post);  
+                },1000);
      }
 
 
      
     return  {
     rec:function(secs){
-            const chunks = [];
-            $rootScope.recording=true;
-            $rootScope.file_added=false;
-            var stop=this.stop;
-            if(secs){
-              $rootScope.timer=secs;
-            }else{
-              $rootScope.timer=180;
-            }
-
-            console.log("microphone started with Wk!");
-          
-
-
-            var error=function(err) {
-              $rootScope.recording=false;
-                  $rootScope.file_added=false;
-              $ionicPopup.alert({template:"Microphone failed to  connect"});
-              console.log("error in mic connection");
-              console.log(err);
-              stop();
-            };
-
-            var success=function(stream) {
-                console.log("Mic connected successfully........");
-                  var options = {
-                    mimeType : 'audio/wavc'
-                  }
-                  mediaRec = new MediaRecorder(stream);
-                  mediaRec.ondataavailable = function(e){
-                    chunks.push(e.data);
-                    };
-                  mediaRec.onstop = function(){        
-                    let file = new Blob(chunks,{ 'type' : 'audio/wav' });
-                    save_record(file);
-                  }
-                  mediaRec.onstart = function(){
-                    console.log("microphone started!");
-                    var secs=$rootScope.timer*1000;
-                    timer=$timeout(function(){
-                      stop();
-                    },secs);
-                  };
+                  const chunks = [];
                   $rootScope.recording=true;
-                  mediaRec.start(secs);
-                  count_down();
-            }
-          
-                  
-            if(!navigator.mediaDevices){
-              console.log("audioinput initialized");
-              var captureCfg = {
-                sampleRate: 16000,
-                bufferSize: 8192,
-                channels: 1,
-                format: audioinput.FORMAT.PCM_16BIT,
-                audioSourceType: audioinput.AUDIOSOURCE_TYPE.DEFAULT,
-                fileUrl: cordova.file.dataDirectory
-                };
-                audioinput.initialize(captureCfg, function() {	
-                    if (device.iOS == true) {
-                                folder = cordova.file.tempDirectory;
-                              }
-                      if (device.android == true) {
-                        folder = cordova.file.dataDirectory;
+                  $rootScope.file_added=false;
+                  var stop=this.stop;
+                  if(secs){
+                    $rootScope.timer=secs;
+                  }else{
+                    $rootScope.timer=180;
+                  }
+                  $rootScope.MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
+                    console.log("Mic connected successfully........");
+                      var options = {
+                        mimeType : 'audio/wavc'
                       }
-                    console.log("microphone started with audioinput!");
-                    var captureCfg = { 
-                        fileUrl : folder + "temp.wav"
-                    }
-                    console.log("cache Directory:");
-                    console.log(folder);
-                    audioinput.start(captureCfg);
-                      var secs=$rootScope.timer*1000;
-                      var isrecording=audioinput.isCapturing();
-                      console.log("is recording:");
-                      console.log(isrecording);
+                      mediaRec = new MediaRecorder(stream);
+                      mediaRec.ondataavailable = function(e){
+                        chunks.push(e.data);
+                        };
+                      mediaRec.onstop = function(){        
+                        let file = new Blob(chunks,{ 'type' : 'audio/wav' });
+                        save_record(file);
+                      }
+                      mediaRec.onstart = function(){
+                        console.log("microphone started!");
+                        var secs=$rootScope.timer*1000;
+                        timer=$timeout(function(){
+                          stop();
+                        },secs);
+                      };
+                      $rootScope.recording=true;
+                      mediaRec.start(secs);
                       count_down();
-                      timer=$timeout(function(){
-                        stop();
-                      },secs);
-                    });
-              }else{
-                  console.log("Webkit initialized");
-                  navigator.mediaDevices.getUserMedia({audio:true}).then(success).catch(error);
-              }
-
+                }).catch(function(err) {
+                  $rootScope.recording=false;
+                      $rootScope.file_added=false;
+                  $ionicPopup.alert({template:"Microphone failed to  connect"});
+                  console.log("error in mic connection");
+                  console.log(err);
+                  stop();
+                });
       },
 
       stop:function(){
@@ -310,36 +264,8 @@ app.factory('TopMusic', function() {
                 $rootScope.messaging=false;
                 $timeout.cancel(timer);
                 if(mediaRec){
-                  console.log("WK mediaRec stopping tracks..........");
-                  if(mediaRec.state!="inactive"){
-                    mediaRec.stop();
+                  mediaRec.stop();
                   }
-                  }else{ 
-                    console.log("activating audioinput stop!");
-                    audioinput.stop(function(url){
-                      console.log("Rec session :"+url);
-                      console.log(folder + "temp.wav");
-                      window.resolveLocalFileSystemURL(folder + "temp.wav", function (tempFile) {
-                          console.log("temp File:");
-                          console.log(tempFile);
-                          console.log(tempFile.name);
-                          tempFile.file(function (tempWav) {
-                          console.log("temp Wav:");
-                          console.log(tempWav);
-                          save_record(tempWav);	 
-                          })
-                          tempFile.remove(function (e) { 
-                            console.log("temporary WAV deleted"); 
-                          },  function (e) {
-                            console.log("Couldn't remove temp file: " + e.message)
-                          });		
-                        }, function(e) {
-                            $rootScope.file_added=false;
-                            console.log("Could not resolveLocalFileSystemURL: " + e.message);
-                          });
-                    });
-                  }
-                  console.log("applying voice default filter......................");
                   $rootScope.post.filter=voice_filters[0];
               }
     }
