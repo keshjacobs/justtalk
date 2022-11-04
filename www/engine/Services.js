@@ -153,18 +153,9 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
 });
 
 
-app.factory('Aud', function() {
-  return window.webkitAudioContext || window.AudioContext || AudioContext;
-  // return new (window.webkitAudioContext || window.AudioContext || AudioContext)();
-});
-
-app.factory('TopMusic', function() {
-  return window.MusicControls || MusicControls;
-});
-
-  app.factory('Mic', function($rootScope,Aud,$ionicPopup,$timeout) {
-
-    $rootScope.MediaDevices=navigator.mediaDevices || window.navigator.mediaDevices || window.MediaDevices;
+  app.factory('Mic', function($rootScope,$ionicPopup,$timeout,MediaDevices) {
+    var Aud=AudioContext || window.AudioContext;
+    let AudioMan=new Aud();
 
     let mediaRec = null;
     var timer;
@@ -194,7 +185,6 @@ app.factory('TopMusic', function() {
                   $rootScope.post.file=$rootScope.file;
                   var reader = new FileReader();
                   reader.onload = function (event) {
-                  var AudioMan= new Aud();
                   AudioMan.decodeAudioData(event.target.result, function(buffer) {
                           $rootScope.post.duration = buffer.duration;
                           $rootScope.post.timeLeft=buffer.duration;
@@ -225,7 +215,7 @@ app.factory('TopMusic', function() {
                   }else{
                     $rootScope.timer=180;
                   }
-                  $rootScope.MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
+                  MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
                     console.log("Mic connected successfully........");
                       var options = {
                         mimeType : 'audio/wavc'

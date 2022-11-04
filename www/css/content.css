@@ -21,7 +21,7 @@
   background-position: left !important;
 }
 .air_content{
-  margin-top: 313px !important;
+  margin-top: 270px !important;
   background-color: rgba(41, 20, 20, 0.472) !important;
   -webkit-backdrop-filter: blur(200px) !important;
   backdrop-filter: blur(200px) !important;
@@ -1779,7 +1779,7 @@ font-weight: bolder !important;
   margin-top: 0px !important;
   padding-top: 90px !important;
   display: inline-block !important;
-  height: 400px !important;
+  height: 350px !important;
   margin: auto;
   width: 100% !important;
   padding-left: 0px !important;
@@ -1793,7 +1793,6 @@ font-weight: bolder !important;
   width: 100% !important;
   color: #fff !important;
   display: inline-block !important;
-  margin-top: 14px !important;
   -webkit-backdrop-filter: blur(200px) !important;
   backdrop-filter: blur(200px) !important;
   background-color: rgba(0, 0, 0, 0.31) !important;
@@ -1880,9 +1879,8 @@ background-image: none !important;
   border: none !important;
 }
 ion-item{
-  box-shadow: 1px 2px 5px 0px rgba(131, 130, 130, 0.237) !important;
+  border: 1px solid rgba(181, 181, 181, 0.1) !important;
 }
-
 
 
 ::-webkit-scrollbar,

@@ -14,6 +14,7 @@
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
     "cordova-ios": "^6.2.0",
+    "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -24,6 +25,7 @@
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
+    "cordova-plugin-music-controls": "^2.2.0",
     "cordova-plugin-navigationbar-color": "0.0.8",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
@@ -65,9 +67,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
     "cordova-plugin-ios-microphone-permissions": "^1.0.0",
-    "cordova-plugin-iosrtc": "^8.0.3",
     "cordova-plugin-media": "^5.0.4",
-    "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-music-controls-plugin.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
@@ -193,12 +193,10 @@
       "cordova-plugin-media-capture": {},
       "cordova-plugin-navigationbar-color": {},
       "cordova-plugin-proguard": {},
-      "cordova-plugin-music-controls2": {},
       "cordova-plugin-androidx": {},
       "cordova-plugin-media": {
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
-      "cordova-plugin-iosrtc": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-permission": {},
       "cordova.plugins.diagnostic": {},
@@ -240,7 +238,8 @@
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
-      }
+      },
+      "cordova-music-controls": {}
     },
     "platforms": [
       "android"

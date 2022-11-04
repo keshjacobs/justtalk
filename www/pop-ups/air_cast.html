@@ -6,8 +6,11 @@
       </ion-header-bar>
       <div class="tranny" ng-include src="'components/current_cast.html'"></div>
 
-      <ion-content class="text-center air_content" ng-style="{'background-color':color+' !important'}">
+      <ion-content class="text-left air_content" ng-style="{'background-color':color+' !important'}">
       
+<div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
+  <b class="{{text_color}}">Up Next</b>
+</div>
                   
 <ion-list class="{{text_color}} transparent">
  

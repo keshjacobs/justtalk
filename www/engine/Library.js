@@ -1,4 +1,4 @@
-app.run(function($ionicPlatform,Aud,socket,Upload,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
+app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
   $rootScope.media=Config.media;
   
   $rootScope.pages=1;
@@ -22,13 +22,7 @@ app.run(function($ionicPlatform,Aud,socket,Upload,$cordovaSocialSharing,$cordova
     $localStorage.dark_mode=false;
   }
 
-  let biquadFilter,gainNodeR,gainNodeL,compressor;
   $rootScope.source={};
-  if (window.indexedDB) {
-    console.log('-----(WKWebView)');
-} else {
-   console.log('-----(UIWebView)');
-}
 
 
 $rootScope.det={user_name:""};
@@ -71,29 +65,6 @@ $rootScope.det={user_name:""};
 
 
 
-//   function mix_audio(buffer1,buffer2) {
-//     var maxChannels =  buffer1.numberOfChannels;
-//     var maxDuration = buffer1.duration;
-//     var mixed = AudioMan.createBuffer(maxChannels,maxDuration,AudioMan.sampleRate);
-//     var _out;
-//     for (var srcChannel = 0; srcChannel < buffer1.numberOfChannels; srcChannel++) {
-//        _out = mixed.getChannelData(srcChannel);
-//       var channel1 = buffer1.getChannelData(srcChannel);
-//       for (var i = 0; i < channel1.length; i++) {
-//           _out[i] += channel1[i];
-//       }
-//     }
-//     for (var srcChannel = 0; srcChannel < buffer2.numberOfChannels; srcChannel++) {
-//           var channel2 = buffer2.getChannelData(srcChannel);
-//           for (var i = 0; i < channel2.length; i++) {
-//               _out[i] += channel2[i];
-//           }
-//       }
-// console.log("mixed audio:");
-// console.log(mixed);
-//     return mixed;
-// }
-
 
 $ionicModal.fromTemplateUrl('pop-ups/record.html', {
   scope: $rootScope,
@@ -104,36 +75,55 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
 
 
 
+$rootScope.pause_message=function(){
+  var casts=$rootScope.chat.conversations;
+  if(casts){
+  for(var i=0;i < casts.length;i++){
+    if(casts[i].casting){
+      casts[i].casting=false;
+    }
+  }
+}
+$rootScope.playing_message=null;
+$rootScope.pause_audio();
+}
+
+
+
 
 
   $rootScope.play_audio=function (audio) {
-    var main_cast;
+    let main_cast=$rootScope.post;
     if($rootScope.playing_message){
       if($rootScope.playing_message.casting){
             main_cast=$rootScope.playing_message;
           }
-    }else if($rootScope.post){
-                main_cast=$rootScope.post;
-              }else{
-            main_cast=$rootScope.current_cast;
-          }
+          console.log("message cast:");
+          console.log(main_cast);
+    }else if($rootScope.current_cast){
+      main_cast=$rootScope.current_cast;
+      console.log("current cast:");
+      console.log(main_cast);
+    }else{
+      console.log("post cast:");
+      console.log(main_cast);
+    }
     if(!main_cast.timeLeft){
-      main_cast.timeLeft=main_cast.duration;
+      main_cast.timeLeft=main_cast.duration || 0;
     }
     if(!main_cast.filter){
       main_cast.filter=voice_filters[0];
     }
+    var timeLeft=parseInt(main_cast.timeLeft) || 0;
+    var ct=parseInt(main_cast.duration) - timeLeft; 
+    var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
+    const AudioMan=new Aud();
+    const source = AudioMan.createBufferSource();
+    const biquadFilter = AudioMan.createBiquadFilter();  
+    const gainNodeL = AudioMan.createGain();
+    const gainNodeR = AudioMan.createGain();
     $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
-      console.log("arraybuffering.......");
-      let AudioMan= new Aud();
-      let source = AudioMan.createBufferSource();
-      let music_source = AudioMan.createBufferSource();
-    AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
-      console.log("Decoded arraybuffer:..........");
-      console.log(buffer);
-    biquadFilter = AudioMan.createBiquadFilter();  
-    gainNodeR = AudioMan.createGain();
-    gainNodeL = AudioMan.createGain();
+      AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
     if(buffer){
       source.audio = audio;
       source.buffer = buffer;
@@ -141,44 +131,16 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
       source.muted = false;
       source.loop=false;
       source.autoplay=true;
-      source.playbackRate.value =main_cast.filter.pitch;
-      gainNodeR.gain.value = 1;
-      source.connect(gainNodeR);
-      gainNodeR.connect(biquadFilter);
+      source.playbackRate.value=main_cast.filter.pitch;
+      source.connect(biquadFilter);
       biquadFilter.type = main_cast.filter.type;
       biquadFilter.frequency.value = main_cast.filter.frequency;
-      biquadFilter.gain.value = main_cast.filter.gain;
-      biquadFilter.Q.value = 100;
-      biquadFilter.connect(AudioMan.destination);
-      var ct=parseInt(main_cast.duration)-parseInt(main_cast.timeLeft);
-      source.onended=function(){   
-                          if($rootScope.Music){
-                            $rootScope.Music.stop();
-                          }  
-                          if(main_cast.timeLeft < 1.5){
-                            main_cast.timeLeft=main_cast.duration; 
-                            if($rootScope.playing_message){
-                              console.log("ending message!");
-                              $rootScope.pause_message();
-                              if($rootScope.playlist.length > 1){
-                                  $rootScope.next_message();
-                                  } 
-                              }else{
-                                console.log("ending cast or post!");
-                                $rootScope.pause_cast();
-                                if(!main_cast.file){
-                                  // if($rootScope.playlist.length > 1){
-                                      $rootScope.next_cast();
-                                    // } 
-                                  } 
-                              }
-                          }
-                          };
+      biquadFilter.connect(gainNodeR);
+      gainNodeR.gain.value = 5;
+      gainNodeR.connect(AudioMan.destination);
         if(main_cast.music){
-          console.log("music playable.......");
+          const music_source = AudioMan.createBufferSource();
           $rootScope.connect_music(main_cast.music).success(function(bf) {
-            console.log("music buffer:");
-            console.log(bf);
             AudioMan.decodeAudioData(bf).then(function(musicbuffer) {
               if(musicbuffer){
                 music_source.buffer=musicbuffer;
@@ -187,45 +149,57 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
                 music_source.loop=true;
                 music_source.autoplay=true;
                 music_source.connect(gainNodeL);
-                gainNodeL.gain.value = 0.2;
+                gainNodeL.gain.value = 1;
+                $rootScope.Music=music_source;
                 gainNodeL.connect(AudioMan.destination);
-                if (source.start) {
-                  source.start(0,ct);
-                  music_source.start(0,ct);
-                  } else if (source.play) {
-                    source.play(0,ct);
-                    music_source.play(0,ct);
-                  } else if (source.noteOn) {
-                      source.noteOn(0,ct);
-                      music_source.play(0,ct);
-                  }
-                  console.log("start.............");
-                  $rootScope.source=source;
-                  $rootScope.source.started=true;
-                  $rootScope.Music=music_source;
-                  $rootScope.currentTime(main_cast);
             }
             });  
             });
-        }else{
+        }
+        source.onended=function(){   
+          if($rootScope.Music){
+            $rootScope.Music.stop();
+          }  
+          if(main_cast.timeLeft <= 1){
+            main_cast.timeLeft=main_cast.duration; 
+            if($rootScope.playing_message){
+              $rootScope.pause_message();
+              if($rootScope.playlist.length > 1){
+                  $rootScope.next_message();
+                  } 
+              }else{
+                $rootScope.pause_cast();
+                if(!main_cast.file){
+                      $rootScope.next_cast();
+                  } 
+              }
+          }};
           if (source.start) {
-            source.start(0,ct);
+            source.start(0,ct); 
+            if(main_cast.music){
+              music_source.start(0,ct);
+              }
             } else if (source.play) {
               source.play(0,ct);
+              if(main_cast.music){
+                music_source.play(0,ct);
+                }
             } else if (source.noteOn) {
                 source.noteOn(0,ct);
+                if(main_cast.music){
+                  music_source.noteOn(0,ct);
+                  }
             }
             console.log("start.............");
             $rootScope.source=source;
             $rootScope.source.started=true;
             $rootScope.currentTime(main_cast);
-        }
 }else{
   console.log("can not decode buffer............................");
 }
   }).catch(function(e){  
-    console.log("can not decode buffer:"+e.err);
-    console.log("error msg buffer :"+e.message);
+    console.log("Error caught:");
+    console.log(e);
     $rootScope.pause_message();
   });  
 }).error(function() {
@@ -250,11 +224,8 @@ $rootScope.connect_music=function (audio) {
   if($rootScope.file){
     link=audio;
   }else{
-    link=$rootScope.media+audio;
+    link=Config.media+audio;
   }
-
-  console.log("music link:");
-  console.log(link);
   return $http.get(link, {responseType: "arraybuffer"});
 };
 
@@ -263,22 +234,19 @@ $rootScope.connect_music=function (audio) {
 
 
 $rootScope.pause_audio=function(){
-  console.log('Pausing....');
   if ($rootScope.source.started) {
     $rootScope.source.started=false;
     $rootScope.source.stop();
     if($rootScope.Music){
       $rootScope.Music.stop();
     }
-    console.log($rootScope.source);
     }
 }
 
 $rootScope.unlock_media=function() {
- var AudioMan= new Aud();
+  var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
+  let AudioMan=new Aud();
   var source = AudioMan.createBufferSource();
-  console.log("unlocking");
-  // create empty buffer and play it
   var buffer = AudioMan.createBuffer(1, 1, 22050);
   source.buffer = buffer;
   source.connect(AudioMan.destination);
@@ -634,7 +602,6 @@ $rootScope.remove_account=function(){
   if($rootScope.user){
   cast.saved($rootScope.user._id).success(function(Data){
     $rootScope.hide();
-    console.log(Data);
       if(Data.status==true){
         $localStorage.saved_casts=Data.data;
         $rootScope.saved_casts=$localStorage.saved_casts;
@@ -702,8 +669,6 @@ $rootScope.refresh_profile=function(){
       if(Data.status==true){
         $rootScope.user=Data.data;
         $rootScope.blocked=$rootScope.user.block_list;
-        console.log("Profile:");
-        console.log(Data.data);
         account.casts(id).success(function(Data){
           $rootScope.fetching_casts=false;
           if(Data.status==true){
@@ -1246,8 +1211,6 @@ $rootScope.upload_cast=function(c){
                   $rootScope.broadcasting(); 
                   cast.upload(c._id).success(function(Data){
                     $rootScope.hide();
-                    console.log("upload saved callback:");
-                    console.log(Data);
                     $ionicPopup.alert({template:Data.message});
                     if(Data.status==true){
                         $timeout(function(){
@@ -1379,8 +1342,8 @@ $rootScope.trash_cast=function(index){
           this.post.cast.casting=false;
         }
       }
-      if ($rootScope.TopMusic) {
-      $rootScope.TopMusic.updateIsPlaying(false);
+      if (TopMusic) {
+      TopMusic.updateIsPlaying(false);
       }
       $rootScope.pause_audio();
       $rootScope.pause_audio();
@@ -1820,9 +1783,8 @@ $rootScope.build_playlist=function(cast){
 
 
 $rootScope.top_player=function(cast) {
-  $rootScope.TopMusic=window.MusicControls || MusicControls;
-  if ($rootScope.TopMusic) {
-  $rootScope.TopMusic.create({
+  if (TopMusic) {
+  TopMusic.create({
     track : cast.title,
     artist : cast.caster.user_name,
     cover : $rootScope.media+cast.caster.photo,
@@ -1844,7 +1806,7 @@ $rootScope.top_player=function(cast) {
     skipBackwardInterval : 0, //optional. default: 0.
     hasScrubbing : false //optional. default to false. Enable scrubbing from control center progress bar 
   });
-  $rootScope.TopMusic.subscribe(function(action) {
+  TopMusic.subscribe(function(action) {
     const message = JSON.parse(action).message;
     switch(message) {
       case 'music-controls-next':
@@ -1864,7 +1826,7 @@ $rootScope.top_player=function(cast) {
         break;
       case 'music-controls-seek-to':
         const seekToInSeconds = JSON.parse(action).position;
-        $rootScope.TopMusic.updateElapsed({
+        TopMusic.updateElapsed({
           elapsed: seekToInSeconds,
           isPlaying: true
         });
@@ -1874,12 +1836,15 @@ $rootScope.top_player=function(cast) {
         break;
     }
   });
-  $rootScope.TopMusic.listen();
-  $rootScope.TopMusic.updateIsPlaying(true); 
-  $rootScope.TopMusic.updateElapsed({
+
+  TopMusic.listen();
+  TopMusic.updateIsPlaying(true); 
+  TopMusic.updateElapsed({
     elapsed:$rootScope.current_cast.duration - $rootScope.current_cast.currentTime,
     isPlaying: true
   });
+}else{
+  console.log("topmusic not loaded!");
 }
 }
  
@@ -2219,8 +2184,6 @@ $rootScope.listen_to=function(casts){
         }
     });
   }
-  console.log("listen to:");
-  console.log(boys);
   return boys;
 }
 
@@ -2490,22 +2453,18 @@ $rootScope.more_suggestions=function(pages) {
       
     $cordovaDeeplinks.route({
       '/cast/:id': {
-        target: 'single_cast',
-        parent: 'front.talk'
+        target: 'single_cast'
       },
       '/profile/:id': {
-        target: 'profile',
-        parent: 'front.talk'
+        target: 'profile'
       }
     }).subscribe(function(match) {
-      $timeout(function() {
-        $state.go(match.$route.parent);
+      console.log('Match deep route:', match);
         $timeout(function() {  
             $state.go(match.$route.target, {id: match.$args.id});
-        }, 2000);
-      }, 2000);
+        }, 6000);
     }, function(nomatch) {
-      console.warn('No match', nomatch);
+      console.log('No match', nomatch);
     });
 
 
@@ -2528,9 +2487,8 @@ $rootScope.get_notifications();
 
 const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
       
+if(FirebasePlugin){
       FirebasePlugin.getToken(function(token) {
-        console.log("...............justTalk signed fcm generated token:");
-        console.log(token);
         $rootScope.pushtoken=token;
         $localStorage.pushtoken=token;
        if($rootScope.user){
@@ -2540,7 +2498,7 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
       FirebasePlugin.setBadgeNumber(0);
       FirebasePlugin.grantPermission();
    });
-
+  
 
    FirebasePlugin.requestPushPermission();
    FirebasePlugin.grantPermission(function(hasPermission){
@@ -2559,13 +2517,6 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
         }
     FirebasePlugin.setBadgeNumber(0);
 });
-
-
-
-
-
-
-
 
 
 
@@ -2600,19 +2551,14 @@ const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
         }); 
 
       });
-
+    }
  
-       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-       cordova.plugins.Keyboard.disableScroll(false);
+    if(cordova){
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+      cordova.plugins.Keyboard.disableScroll(false);
       window.WkWebView.allowsBackForwardNavigationGestures(true);
-
-      if(Splashscreen){
-            Splashscreen.hide();
-      }
-
+      Splashscreen.hide();
       $rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled().value;
-
-       
       $rootScope.change_bar();
 
 
@@ -2684,6 +2630,7 @@ cordova.plugins.diagnostic.permission.NOTIFICATIONS,
   ],
   omitRegistration: false
 });
+   }
 
 
 

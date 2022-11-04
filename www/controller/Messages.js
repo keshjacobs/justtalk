@@ -272,21 +272,6 @@ $rootScope.delete_message=function(c){
   };
 
 
-  $rootScope.pause_message=function(){
-     var casts=$rootScope.chat.conversations;
-     if(casts){
-     for(var i=0;i < casts.length;i++){
-       if(casts[i].casting){
-         casts[i].casting=false;
-       }
-     }
-   }
-   $rootScope.playing_message=null;
-   $rootScope.pause_audio();
- }
-
-
-
 
 
   $rootScope.exit_chat=function(){

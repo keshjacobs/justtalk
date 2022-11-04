@@ -6,6 +6,8 @@ var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCor
   }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.scrolling.jsScrolling(false);
   })
+  .constant('TopMusic',window.MusicControls)
+  .constant('MediaDevices',window.navigator.mediaDevices)
   .factory('socket', function($rootScope,Config) {
     var socket = io(Config.API, {
         reconnection: true,
