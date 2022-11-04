@@ -62,12 +62,12 @@
 
 @font-face {
   font-family: "Mukta";
-  src: url("fonts/Mukta/Mukta-Light.ttf");
+  src: url("fonts/Mukta/Mukta-Regular.ttf");
 }
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: url("fonts/Source_Sans_Pro/SourceSansPro-Light.ttf");
+  src: url("fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
 }
 
 
@@ -78,9 +78,12 @@
    border:none;
  }
 
+b{
+  font-family: 'Mukta', sans-serif;
+   border:none;
+}
 
-
- h2, h1{
+ h2,h3, h1{
   font-family: 'Source Sans Pro', sans-serif;
    font-weight: lighter !important;
  }

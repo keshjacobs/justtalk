@@ -2452,19 +2452,20 @@ $rootScope.more_suggestions=function(pages) {
       
       
     $cordovaDeeplinks.route({
-      '/cast/:id': {
+      'cast/:id': {
         target: 'single_cast'
       },
-      '/profile/:id': {
+      'profile/:id': {
         target: 'profile'
       }
     }).subscribe(function(match) {
       console.log('Match deep route:', match);
         $timeout(function() {  
             $state.go(match.$route.target, {id: match.$args.id});
-        }, 6000);
+        }, 2000);
     }, function(nomatch) {
-      console.log('No match', nomatch);
+      console.log('No match',nomatch.$link.path);
+      console.log('No match url fragment', nomatch.$link.fragment);
     });
 
 

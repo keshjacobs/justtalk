@@ -4,8 +4,8 @@
     <div class="profile-photo" ui-sref="aprofile({id:cast.user.t_id})" ng-style="{'background-image':'url('+media+cast.user.photo+')'}"></div>
     <div  style="margin-left:40px !important;" class="padding">  
         <h3 ui-sref="aprofile({id:cast.user.t_id})">
-          <v>{{cast.user.full_name || cast.user.first_name +' '+ cast.user.last_name}}</v> 
-          <small class="grey">@{{cast.user.user_name || '...'}}</small>
+          <b>{{cast.user.full_name || cast.user.first_name +' '+ cast.user.last_name}}
+          <small class="grey">@{{cast.user.user_name || '...'}}</small></b>
         </h3>
         <h6>
           {{timediff(cast.date_created)}}
