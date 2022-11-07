@@ -4,9 +4,11 @@ app.controller('Messages', function(Chat,$ionicActionSheet,$localStorage,Mic,$ro
 
   
   $rootScope.view_request=function(request){
+    $rootScope.show();
     $rootScope.request=request;
     $timeout(function(){
     $state.go("request");
+    $rootScope.hide();
   },1000);
     }
   

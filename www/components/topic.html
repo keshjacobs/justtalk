@@ -1,8 +1,9 @@
 <div class="item topic-case blur_bg" ng-if="topic.title"  ng-if="profile.t_id!=user.t_id" ng-style="{'background-image':'url('+media+topic.caster.photo+')'}">
     <div class="topic">
-      <div ng-include src="'components/topic_player.html'"></div>
-      <h2 ng-click="open_cast(topic)" style="font-size: 26px !important;margin: 5px !important;" class="light"><b>{{topic.title}}</b></h2>
-      <!-- <div ng-include src="'components/listens.html'" ng-init="cast = topic"></div> -->
+      <div class="item-body transparent">
+        <div ng-include src="'components/topic_player.html'"></div>
+        <h2 ng-click="open_cast(topic)" style="font-size: 24px !important;margin: 0px !important;" class="light"><b>{{topic.title}}</b></h2>  
+      </div>
       <div ng-include src="'components/narrated_by.html'" ng-init="caster = topic.caster"></div>
     </div> 
 </div>

@@ -195,6 +195,22 @@ input,textarea{
   border: none !important;
 }
 
+.action-sheet-title{
+  color: grey !important;
+}
+
+.action-sheet-group .button{
+  border:1px solid rgba(43, 43, 43, 0.097) !important;
+  border-radius: 4px !important;
+  margin: 5px !important;
+  color: rgb(242, 242, 242) !important;
+  font-size: 15px !important;
+}
+
+.action-sheet-cancel .button{
+  color: rgb(234, 45, 45) !important;
+}
+
 
   .item .recast-box{
     background-color: rgb(35, 44, 42) !important;

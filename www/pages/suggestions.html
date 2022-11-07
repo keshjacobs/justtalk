@@ -33,7 +33,7 @@
             <div class="item item-divider">
                 <h2>Suggested for you</h2>
              </div>
-            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in suggested_users">
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in top_boys | unique:'t_id' | limitTo:20">
             </div>
         </div>
           

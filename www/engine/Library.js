@@ -1,8 +1,6 @@
 app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
   $rootScope.media=Config.media;
-  
   $rootScope.pages=1;
-
   $rootScope.change_bar=function(){
       if(!$rootScope.settings.dark_mode){
           StatusBar.styleDefault();
@@ -10,9 +8,6 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$co
         StatusBar.styleLightContent();
       }
   };
-
- 
-
   $rootScope.settings={
     dark_mode:false
   };
@@ -718,6 +713,7 @@ $rootScope.account_update=function(profile){
 
 
   $rootScope.select_user=function(user){
+    $rootScope.show();
     $state.go("confirm_request");
   $timeout(function(){
     $rootScope.selected_user=user;
@@ -727,6 +723,7 @@ $rootScope.account_update=function(profile){
     }else{
     console.log("out chat");
       }
+    $rootScope.hide();
   },1000);
   }
 
@@ -1430,7 +1427,6 @@ $rootScope.remove_cast=function(c){
       template: Data.message
     });
     $rootScope.get_talk();
-    $rootScope.refresh_profile();
   }).error(function(){
     $rootScope.hide();
     $ionicPopup.alert({
@@ -1787,7 +1783,7 @@ $rootScope.top_player=function(cast) {
   TopMusic.create({
     track : cast.title,
     artist : cast.caster.user_name,
-    cover : $rootScope.media+cast.caster.photo,
+    cover : Config.media+cast.caster.photo,
     album: 'JustTalk',
     isPlaying : true,
     dismissable : false,
@@ -1937,7 +1933,7 @@ img.onload = function() {
               $rootScope.pause_cast();
             }
           }
-        get_color($rootScope.media+c.caster.photo,function(color){
+        get_color(Config.media+c.caster.photo,function(color){
           $rootScope.color=color;
           $rootScope.current_cast=null;
         $timeout(function(){
@@ -2047,7 +2043,7 @@ $rootScope.fetch_profile=function(id) {
   account.info(id).success(function(Data){
     if(Data.status==true){
      $rootScope.profile=Data.data; 
-     get_color($rootScope.media+$rootScope.profile.photo_header,function(color){
+     get_color(Config.media+$rootScope.profile.photo_header,function(color){
       $rootScope.profile_color=color;
       });
   $timeout(function(){
@@ -2429,8 +2425,7 @@ $rootScope.more_suggestions=function(pages) {
 
 
    $ionicPlatform.ready(function() {
-    console.log("Platform Ready!");
-  
+    $rootScope.change_bar();
 
     $rootScope.get_library();
 
@@ -2476,7 +2471,6 @@ $rootScope.more_suggestions=function(pages) {
 
     if(window.device){
      $rootScope.device=window.device || device;
-    console.log($rootScope.device);
     } 
 
 
@@ -2554,14 +2548,11 @@ if(FirebasePlugin){
       });
     }
  
-    if(cordova){
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(false);
       window.WkWebView.allowsBackForwardNavigationGestures(true);
       Splashscreen.hide();
       $rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled().value;
-      $rootScope.change_bar();
-
 
 cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
   successCallback: function(){
@@ -2631,7 +2622,6 @@ cordova.plugins.diagnostic.permission.NOTIFICATIONS,
   ],
   omitRegistration: false
 });
-   }
 
 
 
