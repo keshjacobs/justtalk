@@ -2429,8 +2429,6 @@ $rootScope.more_suggestions=function(pages) {
 
     $rootScope.get_library();
 
-    socket.on('connect', function() {
-
       socket.on('message',function(data){
         $rootScope.get_messages();
         if($rootScope.chat){
@@ -2443,7 +2441,6 @@ $rootScope.more_suggestions=function(pages) {
         $rootScope.refresh_profile();
       });
       
-      });
       
       
     $cordovaDeeplinks.route({

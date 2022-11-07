@@ -7,7 +7,7 @@ var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCor
     $ionicConfigProvider.scrolling.jsScrolling(false);
   })
   .constant('TopMusic',window.MusicControls)
-  .constant('MediaDevices',window.navigator.mediaDevices)
+  .constant('MediaDevices',navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedid)
   .factory('socket', function($rootScope,Config) {
     var socket = io(Config.API, {
         reconnection: true,
