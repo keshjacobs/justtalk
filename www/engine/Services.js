@@ -250,9 +250,13 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
 
       stop:function(){
                 console.log("stop................................");
+                $rootScope.show();
                 $rootScope.recording=false;
                 $rootScope.messaging=false;
                 $timeout.cancel(timer);
+                $timeout(function(){
+                  $rootScope.hide();
+                },2000);
                 if(mediaRec){
                   mediaRec.stop();
                   }

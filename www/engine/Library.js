@@ -501,6 +501,7 @@ $ionicModal.fromTemplateUrl('pop-ups/mention.html', {
    
    $rootScope.hide=function(){
     $rootScope.$broadcast('scroll.refreshComplete');
+    $rootScope.$broadcast('scroll.infiniteScrollComplete');
      $ionicLoading.hide();
    };
    
@@ -774,7 +775,9 @@ $rootScope.dropall=function(){
   
 $rootScope.get_chat=function(id){
   $rootScope.msg_loading=true;
+  $rootScope.pause_message();
   Chat.info(id).success(function(Data){
+    $rootScope.hide();
     if(Data.status==true){
       $rootScope.chat=Data.data; 
       console.log($rootScope.chat);

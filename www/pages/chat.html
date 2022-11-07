@@ -43,8 +43,11 @@
 
       </div>
 
+
     </ion-content>
 
+    <ion-infinite-scroll on-infinite="get_chat(chat._id)" distance="-10%">
+    </ion-infinite-scroll>
 <ion-footer style="margin-bottom: 0px !important;">
 <div class="message_bar">
   <ion-progress-bar ng-if="messaging" type="indeterminate"></ion-progress-bar>
