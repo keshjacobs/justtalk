@@ -2,12 +2,24 @@
   "name": "justtalk",
   "version": "2.8.5",
   "description": "listen to podcasts and join the conversation",
+  "author": "Kesh Jacobs",
+  "homepage": "https://justtalkapp.com/",
+  "private": true,
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "lint": "ionic-app-scripts lint",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
+    "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/ionic-webview": "^5.36.0",
+    "@ionic-native/status-bar": "5.36.0",
+    "@ionic/storage": "3.0.6",
     "@ionic/cli": "^6.20.4",
-    "@ionic/cloud": "^0.16.2",
     "bluebird": "^3.7.2",
     "cordova": "^11.0.0",
     "cordova-android": "^10.1.2",
@@ -49,10 +61,12 @@
     "opus-media-recorder": "^0.8.0",
     "rxjs": "^6.6.3",
     "update-notifier": "^5.1.0",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "zone.js": "0.12.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
+    "typescript": "2.4.2",
     "@ionic/cli-plugin-gulp": "1.1.1",
     "@ionic/cli-plugin-ionic1": "2.1.1",
     "@ionic/cli-plugin-proxy": "^1.5.9",
@@ -78,7 +92,6 @@
     "cordova.plugins.diagnostic": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-util": "^3.0.8",
-    "ionic": "^5.4.16",
     "shelljs": "^0.8.4",
     "whitelist": "^1.0.2",
     "xcode": "^3.0.1"
