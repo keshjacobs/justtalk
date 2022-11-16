@@ -1,15 +1,12 @@
 app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
   $rootScope.media=Config.media;
   $rootScope.pages=1;
-  var StatusBar=StatusBar;
   $rootScope.change_bar=function(){
-    if(StatusBar!=undefined){
       if(!$rootScope.settings.dark_mode){
           StatusBar.styleDefault();
       }else{
         StatusBar.styleLightContent();
       }
-    }
   };
   $rootScope.settings={
     dark_mode:false
@@ -2510,12 +2507,6 @@ $rootScope.more_suggestions=function(pages) {
 
    $ionicPlatform.ready(function() {
 
-   var cordova = window.cordova;
-  if (cordova && cordova.plugins && cordova.plugins.iosrtc) {
-    cordova.plugins.iosrtc.registerGlobals();
-    cordova.plugins.iosrtc.debug.enable('*', true);
-  }
-
     $rootScope.change_bar();
 
     $rootScope.get_library();
@@ -2547,6 +2538,7 @@ $rootScope.more_suggestions=function(pages) {
             $state.go(match.$route.target, {id: match.$args.id});
         }, 2000);
     }, function(nomatch) {
+      console.log('Deep Match none:', match);
     });
 
 
@@ -2635,7 +2627,6 @@ if(FirebasePlugin){
     }
  
 
-    if(cordova){
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(false);
       window.WkWebView.allowsBackForwardNavigationGestures(true);
@@ -2672,6 +2663,9 @@ cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
      console.error(error);
  });
 
+
+ cordova.plugins.iosrtc.registerGlobals();
+ cordova.plugins.iosrtc.debug.enable('*', true);
 
 cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
   for (var permission in statuses){
@@ -2710,7 +2704,6 @@ cordova.plugins.diagnostic.permission.NOTIFICATIONS,
   ],
   omitRegistration: false
 });
-   }
 
 
    });
