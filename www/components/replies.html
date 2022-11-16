@@ -1,13 +1,17 @@
 
 <div class="list" ng-class="fetching_replies ? 'edge_loader':''">
-<div ng-if="cast_replies.length > 0">
-        
-         <div class="item item-divider text-left">      
-              <b>{{cast_replies.length || 0 | number}} {{cast_replies.length > 1 ? 'replies':'reply'}}</b>
-         </div>
+     <div ng-if="!cast_replies || cast_replies.length < 1" class="text-center padding">
+          <br>
+          <ion-spinner icon="crescent"></ion-spinner> 
+     </div>
+     <div ng-if="cast_replies.length > 0">
+          
+          <div class="item item-divider text-left">      
+               <b>{{cast_replies.length || 0 | number}} {{cast_replies.length > 1 ? 'replies':'reply'}}</b>
+          </div>
 
-        <div  ng-include="'components/cast3.html'" ng-repeat="cast in cast_replies | orderBy:'-date_created'">
-        </div>
+          <div  ng-include="'components/cast3.html'" ng-repeat="cast in cast_replies | orderBy:'-date_created'">
+          </div>
 
-</div>
+     </div>
 </div>

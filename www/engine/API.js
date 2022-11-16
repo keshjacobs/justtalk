@@ -26,6 +26,64 @@ var voice_filters=[
 }
 ];
 
+
+
+var songs=[
+  { 
+    name:"headlines",
+    src:"songs/headlines.mp3"
+  },
+  { 
+    name:"complicated",
+    src:"songs/complicated.mp3"
+  },
+  { 
+    name:"happy",
+    src:"songs/happy.mp3"
+  },
+  { 
+    name:"holiday",
+    src:"songs/holiday.mp3"
+  },
+  { 
+    name:"moonlight",
+    src:"songs/moonlight.mp3"
+  },
+  { 
+    name:"sober",
+    src:"songs/sober.mp3"
+  },
+  { 
+    name:"charlie",
+    src:"songs/charlie.mp3"
+  },
+  { 
+    name:"steady",
+    src:"songs/steady.mp3"
+  },
+  { 
+    name:"anxiety",
+    src:"songs/anxiety.mp3"
+  },
+  { 
+    name:"fun",
+    src:"songs/fun.mp3"
+  },
+  { 
+    name:"afternoon",
+    src:"songs/afternoon.mp3"
+  },
+  { 
+    name:"jazz",
+    src:"songs/jazz.mp3"
+  },
+  { 
+    name:"discovery",
+    src:"songs/discovery.mp3"
+  }
+  ];
+  
+
 function getFormData(object) {
   const formData = new FormData();
   Object.keys(object).forEach(key => formData.append(key, object[key]));

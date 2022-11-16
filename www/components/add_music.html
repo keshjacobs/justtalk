@@ -1,12 +1,8 @@
 <fieldset  class="item text-left">
-    <button ng-disabled="!file_added" ngf-resize="{width: 850, height: 850,quality: 0.8,centerCrop: true}" ngf-accept="'audio/*'" ngf-pattern="'.mp3,.ogg,.m4a,.wav'" ng-model="post.music_file" name="music_file"  ngf-max-size="30000MB" ngf-select="select_music($file)" style="float: right !important;margin-top: 10px !important;" class="button button-small button-dark">
+    <button ng-click="music_box.show()" style="float: right !important;margin-top: 10px !important;" class="button button-small button-dark">
         <span class="ion ion-music-note" style="margin:4px !important;"></span>
     </button>
-    <div ng-if="!post.music_file">
-        <h5>Add a sound track</h5>
-        <small>(optional)</small>
-    </div>
-    <div ng-if="post.music_file">
-        <h3 style="margin-top: 10px !important;"><b>{{post.music_file.name}}</b> &nbsp;<i ng-click="clear_music()" class="ion ion-close"></i></h3>
-    </div>
-</fieldset>
+    <h5>Add a sound track</h5>
+     <i ng-if="selected_music" ng-click="clear_music()" style="margin-top:8px !important;margin-right: 8px !important;" class="ion ion-close"></i>
+     <b ng-class="selected_music ? 'oran':'dark'">{{selected_music ? selected_music.name:'(optional)' | capitalize}}</b>
+  </fieldset>

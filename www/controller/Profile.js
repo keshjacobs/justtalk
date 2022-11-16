@@ -59,7 +59,6 @@ $rootScope.update_photo=function(){
       }).then(function(resp) {
         var msg=resp.data.message;
         $rootScope.hide();
-        $ionicPopup.alert({template:msg});
         if(resp.data.status==true){
             $rootScope.refresh_profile();
             $rootScope.file=null;
@@ -95,7 +94,6 @@ $rootScope.set_photo=function(){
       }).then(function(resp) {
         var msg=resp.data.message;
         $rootScope.hide();
-        $ionicPopup.alert({template:msg});
         if(resp.data.status==true){
             $rootScope.refresh_profile();
             $rootScope.file=null;

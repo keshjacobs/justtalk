@@ -5,7 +5,6 @@
             </button>
             <h6 ng-show="cast.bar > 0" style="margin-top: -8px !important;" class="grey">&nbsp;&nbsp;{{cast.timeLeft || 0 | number:0}}s</h6>
             <h6 ng-show="(!cast.bar || cast.bar <= 0) && !cast.casting" style="margin-top: -8px !important;" class="grey">&nbsp;&nbsp;{{cast.duration || 0 | number:0}}s</h6>
-            <ion-spinner ng-if="cast.casting && !cast.timeLeft" icon="crescent" class="play_loader"></ion-spinner>
-        </div>
+         </div>
         <h6 ng-if="cast.expired" class="dark">&nbsp;&nbsp;Expired</h6>
 </div>

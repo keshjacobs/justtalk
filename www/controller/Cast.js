@@ -66,10 +66,6 @@ $rootScope.post_cast=function(cast){
       console.log("Broadcasting...");
       cast.t_id=$rootScope.t_id;
       cast.file=$rootScope.file;
-
-      if($rootScope.post.music_file){
-        cast.music_file=$rootScope.post.music_file;
-      }
       console.log(cast);
       cast.mentions=[];
       if($rootScope.mentions.length > 0){
@@ -84,11 +80,9 @@ $rootScope.post_cast=function(cast){
       url: uploadUrl,
       data: cast
     }).then(function(resp) {
-      var msg=resp.data.message;
       $rootScope.hide();
       $rootScope.pause_cast();
       $rootScope.clear();
-      $ionicPopup.alert({template:msg});
       if(resp.data.status==true){
         $timeout(function(){
         $rootScope.clear();

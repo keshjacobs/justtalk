@@ -77,10 +77,10 @@
         <allow-http-request-headers-from domain="*" headers="*" secure="false" />
     </cross-domain-policy>
     <universal-links>
-    <host name="justtalkapp.com" scheme="https">
-        <path event="launchedAppFromLink" url="*" />
-    </host>
-   </universal-links>
+        <host name="justtalkapp.com" scheme="https">
+            <path event="launchedAppFromLink" url="*" />
+        </host>
+    </universal-links>
     <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -166,16 +166,16 @@
         <feature name="SocialSharing">
             <param name="ios-package" value="SocialSharing" />
         </feature>
-        <edit-config mode="merge" parent="NSPhotoLibraryUsageDescription" file="*-Info.plist">
+        <edit-config file="*-Info.plist" mode="merge" parent="NSPhotoLibraryUsageDescription">
             <string>This app requires photo library access for users to share media contents on justtalk </string>
         </edit-config>
-        <edit-config mode="merge" parent="NSPhotoLibraryAdditionsUsageDescription" file="*-Info.plist">
+        <edit-config file="*-Info.plist" mode="merge" parent="NSPhotoLibraryAdditionsUsageDescription">
             <string>This app requires photo library access for users to share media contents on justtalk</string>
         </edit-config>
-        <edit-config mode="merge" parent="NSMicrophoneUsageDescription"  file="*-Info.plist">
+        <edit-config file="*-Info.plist" mode="merge" parent="NSMicrophoneUsageDescription">
             <string>This app needs microphone access for users to create casts and record messages </string>
         </edit-config>
-        <config-file mode="merge" parent="NSCameraUsageDescription" file="*-Info.plist">
+        <config-file file="*-Info.plist" mode="merge" parent="NSCameraUsageDescription">
             <string>This app requires photo library access for users to set profile photo or share contents</string>
         </config-file>
         <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">

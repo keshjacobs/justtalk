@@ -2,7 +2,10 @@
     <ion-nav-bar class="bar bar-light">
         <ion-nav-title>
           <div ng-if="chat.members.length > 0"> 
-            <div class="profile-photo2" style="margin-top:-5px !important;" ui-sref="aprofile({id:chatter(chat).t_id})" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+            <div ng-if="chat.members.length <= 2" class="profile-photo2" style="margin-top:-5px !important;" ui-sref="aprofile({id:chatter(chat).t_id})" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+            <div style="margin-left: 30px !important;margin-top:0px !important;" ng-if="chat.members.length > 2">
+              <div class="group-photo2" ng-repeat="member in chat.members | limitTo:4" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
+            </div>
             <h4 ng-if="chat.members.length > 2">{{chat.title || 'Group'}}</h4>
             <h4 ng-if="chat.members.length < 3">{{chatter(chat).full_name  || chatter(chat).user_name}}</h4>
          </div>
@@ -24,30 +27,24 @@
     <ion-content class="chat_board">
       <ion-refresher pulling-text="Pull to refresh" on-refresh="get_chat(chat._id)"></ion-refresher>
        
-      <br/>
 
-      <div ng-show="chat.conversations.length < 1" class="padding padding">
+      <div ng-show="chat.conversations.length < 1">
         <div class=" text-center item item-light" style="border: none !important;box-shadow:none !important;">
           <div class="padding">
-            <h2><b>No message sent yet.</b></h2>  <br>
+            <h2><b>No message sent yet.</b></h2>
             <p>Be the first to break the ice.</p>
-          </div>  <br>
+          </div>
         </div>
       </div>
   
-      <div ng-if="chat.conversations.length > 0" style="width: 100% !important;padding-bottom: 240px !important;float: right;">
-
-      <div class="padding">
+      <div ng-if="chat.conversations.length > 0">
             <div ng-include="'components/message.html'" ng-repeat="cast in chat.conversations | unique:'date_created' | orderBy:'date_created'"></div>
-       </div>
-
       </div>
 
+      <div class="gap"></div>
 
     </ion-content>
 
-    <ion-infinite-scroll on-infinite="get_chat(chat._id)" distance="-10%">
-    </ion-infinite-scroll>
 <ion-footer style="margin-bottom: 0px !important;">
 <div class="message_bar">
   <ion-progress-bar ng-if="messaging" type="indeterminate"></ion-progress-bar>

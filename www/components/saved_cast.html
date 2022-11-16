@@ -1,7 +1,4 @@
- <ion-item class="bg-light item-light" style="padding: 5px !important; height: auto !important;float: left !important;width: 100% !important;">
-        <ion-option-button ng-click="delete_cast(cast)" class="assertive">
-            Delete
-        </ion-option-button>
+ <ion-item class="item-light">
         <div ng-show="!cast.recast || cast.cast" ng-include src="'components/player4.html'"></div>
         <h3 class="dark" ng-if="cast.title"  style="font-size: 18px !important;">
             {{cast.title}}
@@ -11,9 +8,12 @@
         </h3>
         <div ng-include src="'components/mentions.html'"></div>
         <div style="margin-bottom: 10px !important;margin-top: 10px !important;" ng-include src="'components/duration.html'"></div>
-        <div class="row text-center" style="margin-top: 15px !important;" ng-show="!cast.casting">
+        <div class="row text-center" style="margin-top: 30px !important;" ng-show="!cast.casting">
             <a class="button button-small button-light button-outline col orange_link" ng-click="edit_cast(cast)">Edit</a>
             &nbsp;&nbsp;
             <a class="button button-small col button-balanced" ng-click="upload_cast(cast)">Upload</a>
         </div>
+        <ion-option-button ng-click="delete_cast(cast)" class="assertive">
+            Delete
+        </ion-option-button>
  </ion-item>

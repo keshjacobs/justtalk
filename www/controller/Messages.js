@@ -77,9 +77,6 @@ app.controller('Messages', function(Chat,$ionicActionSheet,$localStorage,Mic,$ro
     }
     Chat.request(data).success(function(Data){
       $rootScope.hide();
-      $ionicPopup.alert({
-        template: Data.message
-      });
       $rootScope.get_messages();
         if(Data.status==true){
           $state.go("front.messages");
@@ -117,29 +114,6 @@ $rootScope.accept_chat=function(chat){
 
 
 
-
-$rootScope.chat_title=function(chat){
-  $rootScope.show();
-  var data={
-    title:chat.title,
-    chat_id:chat._id
-  }
-  Chat.title(data).success(function(Data){
-      if(Data.status==true){
-        $rootScope.get_messages();
-        $rootScope.get_chat(chat._id);
-      } 
-      $ionicPopup.alert({
-        template: Data.message
-      });
-       $rootScope.hide();
-         }).error(function(){
-          $rootScope.hide();
-          $ionicPopup.alert({
-            template: "network error."
-          });
-         }); 
-}
 
 
 
@@ -284,7 +258,6 @@ $rootScope.delete_message=function(c){
       window.history.back();
     }
     $timeout(function(){
-      $rootScope.get_messages();
       $rootScope.chat={};
       $rootScope.playlist=[];
       $rootScope.chat_id=null;

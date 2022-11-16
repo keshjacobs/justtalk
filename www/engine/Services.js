@@ -1,3 +1,17 @@
+app.directive("visualize", function($rootScope){
+  return {
+    restrict: "A",
+    link: function(scope, element){
+      const ctx = element[0].getContext('2d');
+      ctx.width = 350;
+      ctx.height = 100;
+      $rootScope.visor=ctx;
+    }
+  };
+});
+
+
+
 
 app.directive('backButton', function(){
 
@@ -215,6 +229,7 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
                   }else{
                     $rootScope.timer=180;
                   }
+                  $rootScope.play_sound("talk.wav");
                   MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
                     console.log("Mic connected successfully........");
                       var options = {

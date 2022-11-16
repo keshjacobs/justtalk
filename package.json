@@ -23,6 +23,7 @@
     "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^4.1.0",
+    "cordova-plugin-iosrtc": "^8.0.3",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
     "cordova-plugin-music-controls": "^2.2.0",
@@ -239,7 +240,8 @@
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
       },
-      "cordova-music-controls": {}
+      "cordova-music-controls": {},
+      "cordova-plugin-iosrtc": {}
     },
     "platforms": [
       "android"

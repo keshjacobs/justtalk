@@ -8,20 +8,7 @@
         <b class="light">{{profile.full_name || profile.first_name + ' ' + profile.last_name}}</b>  <span ng-if="profile.verified" class="ion ion-checkmark-circled assertive"></span>
     </h3>
     <h5 style="margin-top: -10px;"><b class="text-center light">@{{profile.user_name || '...'}}</b></h5>
-    <h5 ng-if="profile.bio" style="padding: 20px;" class="text-center padding light">{{profile.bio}}</h5>        
-    
-    <div class="text-center light padding">
-        <b>
-            {{profile.casts.length || profile_casts.length || 0 | number}}&nbsp;&nbsp;
-        </b>
-        <i style="opacity: 0.8;"> Casts</i>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <b ui-sref="subscribers({user_id:profile.t_id})">
-        {{profile.subscribers.length || 0 | number}}&nbsp;&nbsp;
-        </b>
-        <i style="opacity: 0.8;"> Subscribers</i>
-    </div>
-
+ 
 
              <div class="row" style="padding: 15px !important;" ng-if="profile.user_name && profile.t_id!=user.t_id" ng-hide="is_blocked(profile) || profile.block_list.indexOf(t_id) > -1">
                    
@@ -33,6 +20,22 @@
                         &nbsp;&nbsp;<i class="ion ion-play"></i>&nbsp;&nbsp;<b>Play</b>&nbsp;&nbsp;&nbsp;
                     </button>  
                 </div>
+
+                <div class="text-center light padding">
+                    <b>
+                        {{profile.casts.length || profile_casts.length || 0 | number}}&nbsp;&nbsp;
+                    </b>
+                    <i style="opacity: 0.8;"> Casts</i>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <b ui-sref="subscribers({user_id:profile.t_id})">
+                    {{profile.subscribers.length || 0 | number}}&nbsp;&nbsp;
+                    </b>
+                    <i style="opacity: 0.8;"> Subscribers</i>
+                </div>
+
+                <h5 ng-if="profile.bio" style="padding: 10px;" class="text-center padding light">{{profile.bio}}</h5>        
+    
+            
                 
 </div>
 

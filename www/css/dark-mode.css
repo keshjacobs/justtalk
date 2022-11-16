@@ -110,7 +110,7 @@ input,textarea{
     color: #fff !important;
 }
 
- ion-content .item-input,.item-input{
+ ion-content .item-input,ion-modal-view .item-input,.item-input{
   background-color: rgba(96, 96, 96, 0.865) !important;
   color: #fff !important;
   padding: 15px !important;
@@ -271,7 +271,7 @@ input,textarea{
 }
 
 
-.search-bar2 .item-input{
+.search-bar2 .item-input,.item .item-input{
   background-color: rgb(60, 60, 60) !important;
   color: #fff !important;
   float: left;

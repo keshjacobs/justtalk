@@ -21,7 +21,7 @@
   background-position: left !important;
 }
 .air_content{
-  margin-top: 270px !important;
+  margin-top: 290px !important;
   background-color: rgba(41, 20, 20, 0.472) !important;
   -webkit-backdrop-filter: blur(200px) !important;
   backdrop-filter: blur(200px) !important;
@@ -498,6 +498,7 @@ padding: 0px !important;
    z-index: 1000000000 !important;
    -webkit-backdrop-filter: blur(10px) !important;
    backdrop-filter: blur(10px) !important;
+   padding-top: 17px !important;
 }
 
 .jt-mic{
@@ -640,6 +641,26 @@ margin-bottom: 10px !important;
 }
 
 
+
+.group-photo{
+  width:40px !important;
+  height:40px !important;
+  float:left !important;
+  border-radius:360px !important;
+  margin-right: 8px !important;
+  margin-left: -30px !important;
+  background-color:rgba(252, 138, 46, 0.212) !important;
+  background-repeat: no-repeat !important;
+  background-size:cover !important;
+  background-position:center !important;
+  border:2px solid rgb(255, 255, 255) !important;
+  margin-top:6px !important;
+  margin-bottom:10px !important;
+	transition: all 2s !important;
+}
+
+
+
 .profile-photo2{
   width:32px !important;
   height:32px !important;
@@ -654,12 +675,25 @@ margin-bottom: 10px !important;
   /* border:1px solid rgba(192, 190, 190, 0.438); */
   margin-top:0px !important;
   margin-bottom:10px !important;
-  transition: border-width 0.3s linear;
-  border-color: rgba(156, 236, 90, 0.911) !important;
   background-repeat: no-repeat !important;
 }
 
 
+.group-photo2{
+  width:32px !important;
+  height:32px !important;
+  float:left !important;
+  border-radius:360px !important;
+  margin-right: 8px !important;
+  margin-left: -30px !important;
+  background-color:rgba(252, 138, 46, 0.212) !important;
+  background-repeat: no-repeat !important;
+  background-size:cover !important;
+  background-position:center !important;
+  border:2px solid rgb(255, 255, 255) !important;
+  margin-top:-5px !important;
+  margin-bottom:10px !important;
+}
 
 
 
@@ -859,7 +893,7 @@ ion-content .new_message{
   background-image: none !important;
   border: none !important;
   border-radius: 0px !important;
-  padding-right: 10px !important;
+  padding-right:5px !important;
 }
 
 ion-footer,ion-footer-bar{
@@ -1756,15 +1790,16 @@ font-weight: bolder !important;
 }
 .chat_board{
   height: 100vh !important;
-  width: 100% !important;
+  width: 100vw !important;
   float: left !important;
   background-color: rgba(247, 247, 247, 0.87);
-  overflow-y:scroll !important;
-  padding-bottom: 290px !important;
-  position: absolute !important;
+  padding-bottom: 590px !important;
   background-image: linear-gradient(rgb(255, 255, 255), 80%, rgb(249, 218, 200));
   /* background-image: url('../img/chat_bg.jpeg'); */
   background-size: cover !important;
+  padding-left:10px !important;
+  padding-right:10px !important;
+  padding-top: 120px !important;
 }
 
 
@@ -1805,9 +1840,9 @@ font-weight: bolder !important;
 }
 .current_cast{
   margin-top: 0px !important;
-  padding-top: 90px !important;
+  padding-top: 105px !important;
   display: inline-block !important;
-  height: 350px !important;
+  height: 370px !important;
   margin: auto;
   width: 100% !important;
   padding-left: 0px !important;
@@ -2057,8 +2092,8 @@ display: none;
 }
 
 .profile_face{
-  width:80px;
-  height:80px;
+  width:90px;
+  height:90px;
   border-radius: 360px;
   overflow: hidden;
   z-index: 2000;
@@ -2080,7 +2115,7 @@ display: none;
 
 .face_card{
   padding: 0px !important;
-  width: 120px !important;
+  width: 130px !important;
   height: 110px !important;
   margin: 0px !important;
   position: relative;
@@ -2118,7 +2153,7 @@ display: none;
   width:100% !important;
   min-height:430px;
   height: auto;
-  background-size: cover;
+  background-size:130%;
   background-color: rgb(26, 26, 26);
   margin:auto !important;
   /* background-image: url('../img/dp.png'); */
@@ -2128,6 +2163,7 @@ display: none;
   position: relative;
   background-position: top !important;
   background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
   padding-top: 160px !important;
   padding-bottom: 1px !important;
   margin-top: -2px !important;

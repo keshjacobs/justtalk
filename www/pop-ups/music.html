@@ -1,0 +1,20 @@
+<ion-modal-view class="bg-grey">
+
+
+
+    <ion-header-bar class="bar bg-grey">
+        <button ng-click="music_box.hide()" class="button button-clear button-light button-sm button-small"  style="float:left;font-weight: bold;color: rgb(3, 3, 3) !important;">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
+        <ion-title><small><b>Add Music</b></small></ion-title>
+    </ion-header-bar>
+
+
+    <ion-content class="text-left bg-light" style="margin-top: 0px !important;">
+        <br>
+        <div ng-include="'components/music.html'" ng-repeat="music in songs">
+        </div>
+
+
+    </ion-content>
+
+
+</ion-modal-view>

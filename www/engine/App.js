@@ -1,4 +1,4 @@
-var app=angular.module('justtalk', ['ionic','ionic.native','lazy-scroll', 'ngCordova', 'ngStorage','ngFileUpload','ionic-segment'])
+var app=angular.module('justtalk', ['ionic','ngAnimate','ionic.native','lazy-scroll', 'ngCordova', 'ngStorage','ngFileUpload','ionic-segment'])
 .constant('Config', {  
     API:'https://api.justtalkapp.com/user/',
     media:'https://storage.googleapis.com/justtalkstorage/',
