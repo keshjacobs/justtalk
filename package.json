@@ -53,16 +53,14 @@
     "gulp-sass": "^4.1.0",
     "ionic-angular": "^1.3.5",
     "ionic-native": "^2.9.0",
-    "ionicons": "^5.4.0",
+    "ionicons": "^6.0.4",
     "moment": "^2.29.1",
-    "ng-tags-input": "^3.2.0",
     "node-sass": "^5.0.0",
     "npm": "^6.14.15",
     "opus-media-recorder": "^0.8.0",
     "rxjs": "^6.6.3",
     "update-notifier": "^5.1.0",
-    "xml-js": "^1.6.11",
-    "zone.js": "0.12.0"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
@@ -91,7 +89,6 @@
     "cordova-plugin-wkwebview": "^0.6.10",
     "cordova.plugins.diagnostic": "^6.1.1",
     "gulp": "^4.0.2",
-    "gulp-util": "^3.0.8",
     "shelljs": "^0.8.4",
     "whitelist": "^1.0.2",
     "xcode": "^3.0.1"
@@ -209,7 +206,7 @@
       "cordova-plugin-proguard": {},
       "cordova-plugin-androidx": {},
       "cordova-plugin-media": {
-        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "YES"
       },
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-permission": {},

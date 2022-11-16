@@ -186,7 +186,7 @@ h2,h1,h4,b{
   transition:0.5s linear all !important;
 }
 
-.profile_header,.profile_header2{
+.profile_header,.profile_header2,.splash_screen{
   -webkit-animation: shrink 9s !important;
   transition:2s ease all !important;
   animation: shrink 9s alternate !important;
