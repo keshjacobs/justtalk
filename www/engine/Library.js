@@ -2667,6 +2667,16 @@ cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
  cordova.plugins.iosrtc.registerGlobals();
  cordova.plugins.iosrtc.debug.enable('*', true);
 
+ // load adapter.js
+  if (window.device.platform === 'iOS') {
+ var adapterVersion = 'latest';
+ var script = document.createElement("script");
+ script.type = "text/javascript";
+ script.src = "https://webrtc.github.io/adapter/adapter-" + adapterVersion + ".js";
+ script.async = false;
+ document.getElementsByTagName("head")[0].appendChild(script);
+  }
+
 cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
   for (var permission in statuses){
       switch(statuses[permission]){

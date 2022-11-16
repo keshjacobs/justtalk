@@ -1,7 +1,7 @@
 {
   "name": "justtalk",
-  "version": "2.8.1",
-  "description": "talk is cheap, but talk also is free with friends and family",
+  "version": "2.8.5",
+  "description": "listen to podcasts and join the conversation",
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
     "@ionic-native/core": "^5.31.1",
@@ -13,7 +13,6 @@
     "cordova-android": "^10.1.2",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
-    "cordova-ios": "^6.2.0",
     "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
