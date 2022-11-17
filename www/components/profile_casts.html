@@ -1,6 +1,6 @@
  <div ng-controller="Cast">
         
-         <div ng-if="!is_blocked(profile) && profile.block_list.indexOf(t_id) == -1">
+         <div ng-if="!is_blocked(profile) && !restricted(profile)">
 
 
             <div class="padding">
@@ -15,7 +15,7 @@
                      <b>Replies</b>
                    </ion-segment-button>
                    <ion-segment-button value="library">
-                     <b>Library</b>
+                     <b>Stations</b>
                    </ion-segment-button>
                  </ion-segment>    
             </div>
@@ -82,7 +82,7 @@
 
 
 
-        <div class="padding text-center" ng-if="is_blocked(profile)">
+        <div class="padding text-center" ng-if="!restricted(profile) && is_blocked(profile)">
             <h4><b>You blocked @{{profile.user_name}}</b></h4>
             <h5>You can't recieve messages or see {{profile.user_name}}'s cast, also {{profile.user_name}} can't view your casts.</h5>
             <br>
@@ -91,7 +91,7 @@
                
 
 
-         <div class="padding text-center" ng-if="profile.block_list.indexOf(t_id) > -1">
+         <div class="padding text-center" ng-if="restricted(profile)">
             <h4><b>You can't view @{{profile.user_name}}'s casts</b></h4>
             <h5>This user has blocked you from viewing thier casts.</h5>
          </div>

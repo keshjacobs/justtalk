@@ -4,7 +4,7 @@
           <div ng-if="chat.members.length > 0"> 
             <div ng-if="chat.members.length <= 2" class="profile-photo2" style="margin-top:-5px !important;" ui-sref="aprofile({id:chatter(chat).t_id})" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
             <div style="margin-left: 30px !important;margin-top:0px !important;" ng-if="chat.members.length > 2">
-              <div class="group-photo2" ng-repeat="member in chat.members | limitTo:4" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
+              <div class="group-photo2" ng-repeat="member in chat.members | limitTo:3" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
             </div>
             <h4 ng-if="chat.members.length > 2">{{chat.title || 'Group'}}</h4>
             <h4 ng-if="chat.members.length < 3">{{chatter(chat).full_name  || chatter(chat).user_name}}</h4>

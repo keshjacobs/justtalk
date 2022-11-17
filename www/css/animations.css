@@ -175,9 +175,9 @@ h2,h1,h4,b{
   transition:0.7s linear all;
 }
 
-.message_a,.message_b{
+/* .message_a,.message_b{
   -webkit-animation: 0.4s slide-up !important;
-}
+} */
 
 
 .topic-case{
@@ -193,9 +193,9 @@ h2,h1,h4,b{
 }
 
 .now_playing,.message_bar {
-  animation: 0.8s up !important;
-  -webkit-animation: 0.8s up !important;
-  transition:0.5s ease-in-out all;
+  animation: 0.3s up !important;
+  -webkit-animation: 0.3s up !important;
+  transition:0.5s linear all;
 }
 
 .profile_photo_big{

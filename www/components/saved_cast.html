@@ -8,10 +8,10 @@
         </h3>
         <div ng-include src="'components/mentions.html'"></div>
         <div style="margin-bottom: 10px !important;margin-top: 10px !important;" ng-include src="'components/duration.html'"></div>
-        <div class="row text-center" style="margin-top: 30px !important;" ng-show="!cast.casting">
-            <a class="button button-small button-light button-outline col orange_link" ng-click="edit_cast(cast)">Edit</a>
+        <div class="row text-center" style="margin-top: 30px !important;">
+            <button ng-disabled="cast.casting" class="button button-small button-light button-outline col orange_link" ng-click="edit_cast(cast)">Edit</button>
             &nbsp;&nbsp;
-            <a class="button button-small col button-balanced" ng-click="upload_cast(cast)">Upload</a>
+            <button ng-disabled="cast.casting" class="button button-small col button-balanced" ng-click="upload_cast(cast)">Upload</button>
         </div>
         <ion-option-button ng-click="delete_cast(cast)" class="assertive">
             Delete

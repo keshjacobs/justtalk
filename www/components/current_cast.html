@@ -5,7 +5,7 @@
        <b>{{current_cast.caster.full_name || current_cast.caster.first_name +' '+ current_cast.caster.last_name}}</b> 
        <b style="opacity: 0.8;">@{{current_cast.caster.user_name}}</b>
     </h3> 
-    <h6 class="{{text_color}}" ng-if="current_cast.reply">Playing from replies</h6>
+    <h6 class="{{text_color}}" ng-if="current_cast.reply">Playing from a conversation</h6>
     <ion-spinner style="float:right !important;margin-top: -20px !important;" ng-show="current_cast.bar > 0 && current_cast.casting" icon="lines" class="spinner-{{text_color}}"></ion-spinner>
     <ion-spinner ng-if="current_cast.bar >= 0 && !current_cast.casting" icon="crescent" class="spinner-{{text_color}}" style="float:right !important;margin-top: -20px !important;"></ion-spinner>   
     <h3 class="{{text_color}}" ng-if="current_cast.title" style="font-size: 20px !important;">{{current_cast.title}}</h3>

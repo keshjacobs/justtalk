@@ -480,13 +480,16 @@ padding: 0px !important;
 }
 
 .item-body{
-  background-color: rgba(64, 64, 64, 0.213) !important;
+  background-color: rgba(226, 226, 226, 0.213) !important;
   padding: 15px !important;
   float: left !important;
   width: 100% !important;
   border: none !important;
   margin-top: 15px !important;
   border-radius: 10px !important;
+}
+.body h5,h6{
+  margin-top: 0px !important;
 }
 
 .now_playing{ 
@@ -612,7 +615,6 @@ padding: 0px !important;
   border:1px solid rgba(255, 255, 255, 0.733) !important;
   float: left !important;
   display: block !important;
-  margin-top: 10px !important;
 }
 
 .dance_out{
@@ -648,7 +650,7 @@ margin-bottom: 10px !important;
   float:left !important;
   border-radius:360px !important;
   margin-right: 8px !important;
-  margin-left: -30px !important;
+  margin-left: -38px !important;
   background-color:rgba(252, 138, 46, 0.212) !important;
   background-repeat: no-repeat !important;
   background-size:cover !important;

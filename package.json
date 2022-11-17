@@ -5,27 +5,18 @@
   "author": "Kesh Jacobs",
   "homepage": "https://justtalkapp.com/",
   "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
-    "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/ionic-webview": "^5.36.0",
+    "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "5.36.0",
-    "@ionic/storage": "3.0.6",
     "@ionic/cli": "^6.20.4",
+    "@ionic/storage": "3.0.6",
     "bluebird": "^3.7.2",
     "cordova": "^11.0.0",
-    "cordova-android": "^10.1.2",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
-    "cordova-ios": "^6.2.0",
     "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
@@ -35,7 +26,6 @@
     "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^4.1.0",
-    "cordova-plugin-iosrtc": "^8.0.3",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
     "cordova-plugin-music-controls": "^2.2.0",
@@ -55,7 +45,7 @@
     "ionic-native": "^2.9.0",
     "ionicons": "^6.0.4",
     "moment": "^2.29.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^4.12.0",
     "npm": "^6.14.15",
     "opus-media-recorder": "^0.8.0",
     "rxjs": "^6.6.3",
@@ -64,7 +54,6 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
-    "typescript": "2.4.2",
     "@ionic/cli-plugin-gulp": "1.1.1",
     "@ionic/cli-plugin-ionic1": "2.1.1",
     "@ionic/cli-plugin-proxy": "^1.5.9",
@@ -72,6 +61,7 @@
     "@ionic/v1-toolkit": "^3.2.15",
     "bower": "^1.8.12",
     "cordova-android-firebase-gradle-release": "^4.0.0",
+    "cordova-ios": "^6.2.0",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-audioinput": "^1.0.2",
@@ -90,6 +80,7 @@
     "cordova.plugins.diagnostic": "^6.1.1",
     "gulp": "^4.0.2",
     "shelljs": "^0.8.4",
+    "typescript": "2.4.2",
     "whitelist": "^1.0.2",
     "xcode": "^3.0.1"
   },
@@ -250,8 +241,7 @@
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
       },
-      "cordova-music-controls": {},
-      "cordova-plugin-iosrtc": {}
+      "cordova-music-controls": {}
     },
     "platforms": [
       "android"

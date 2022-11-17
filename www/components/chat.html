@@ -10,8 +10,8 @@
          <div ng-if="unheard_messages(chat) > 0" class="badge badge-energized" style="margin-top: 25px !important;float: right !important;">{{unheard_messages(chat) || 0}}</div>
         </div>
         <div ng-if="chat.members.length <= 2" class="profile-photo" style="margin-right: 10px !important;" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
-        <div style="margin-left: 30px !important;" ng-if="chat.members.length > 2">
-            <div class="group-photo" ng-repeat="member in chat.members | limitTo:4" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
+        <div style="margin-left: 35px !important;" ng-if="chat.members.length > 2">
+            <div class="group-photo" ng-repeat="member in chat.members | limitTo:3" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
         </div>
         <div style="padding-top: 13px !important;">
             <h4 ng-if="chat.members.length > 2" style="font-size: 18px !important;">{{chat.title || 'Group'}}</h4>

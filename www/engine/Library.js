@@ -861,11 +861,7 @@ $rootScope.get_chat=function(id){
       console.log($rootScope.chat);
       $rootScope.messaging=false;
       $rootScope.msg_loading=false;
-      $rootScope.get_messages();
-      $rootScope.pause_cast();
       $rootScope.sink();
-      $rootScope.clear();
-      $rootScope.clear();
     }
 });
 }
@@ -900,11 +896,14 @@ $rootScope.sink=function(){
 }
     
   $rootScope.open_chat=function(chat){
-        if(chat){
-          $rootScope.pause_cast();
-          $rootScope.chat=chat;
-          $state.go("chat");
-          $rootScope.sink();
+          if(chat){
+            $rootScope.pause_cast();
+            $rootScope.chat=chat;
+            $state.go("chat");
+            $rootScope.sink();
+            $timeout(function(){
+              $rootScope.get_chat(chat._id);
+            },1000);
         }
   }
 
@@ -959,6 +958,21 @@ $rootScope.sink=function(){
   }
 
 
+  $rootScope.restricted=function(user){
+    if(user.block_list){
+      if(user.block_list.length > 0 && $rootScope.t_id){
+        if(user.block_list.indexOf($rootScope.t_id) >=0){
+          return true;
+        }else{
+          return false;
+        }
+    }else{
+      return false;
+    }
+  }else{
+    return false;
+  }
+  }
 
         
   $rootScope.unblock_user=function(user){
@@ -1006,7 +1020,6 @@ $rootScope.like_cast=function(c){
     }
     if($rootScope.user){
                   if(c.likes){
-                    $rootScope.play_sound("like.wav");
                     if($rootScope.liked(c)){
                       c.likes.splice(c.likes.indexOf($rootScope.user._id),1);
                       cast.unlike({
@@ -1015,6 +1028,7 @@ $rootScope.like_cast=function(c){
                         _id:$rootScope.user._id
                       });
                     }else{
+                      $rootScope.play_sound("like.wav");
                       c.likes.push($rootScope.user._id);
                       cast.like({cast_id:c._id,
                         _id:$rootScope.user._id,
@@ -1195,7 +1209,6 @@ $rootScope.like_cast=function(c){
   
   $rootScope.subscribe=function(id){
     if($localStorage.t_id){
-            $rootScope.play_sound("subscribe.wav");
             if($rootScope.user.subscriptions.indexOf(id)>=0){
                $rootScope.user.subscriptions.splice($rootScope.user.subscriptions.indexOf(id),1);
                account.unsubscribe({
@@ -1203,6 +1216,7 @@ $rootScope.like_cast=function(c){
                 t_id:$rootScope.user.t_id
               });
             }else{  
+              $rootScope.play_sound("subscribe.wav");
               $rootScope.user.subscriptions.push(id);
               account.subscribe({
                 user_id:id,
@@ -1582,6 +1596,7 @@ $rootScope.report_cast=function(c){
 
 
 
+      $rootScope.get_library();
 
 
 
@@ -2071,19 +2086,23 @@ img.onload = function() {
 
 
               $rootScope.replay_cast=function(post){
-                console.log(post);
-                if(!post.casting){
-                  $rootScope.post=post;
+                $rootScope.pause_audio(); 
+                $rootScope.post=post;
+                if(!$rootScope.post.casting){
+                  for(var i=0;i < $rootScope.saved_casts.length;i++){
+                    $rootScope.saved_casts[i].casting=false;
+                    } 
                   $rootScope.post.casting=true;
                   if(!$rootScope.post.timeLeft){
                     $rootScope.post.timeLeft=$rootScope.post.duration;
                   }
                   $rootScope.play_audio(Config.media+$rootScope.post.cast);
                 }else{
-                  $rootScope.pause_cast();  
+                  $rootScope.post.casting=false;
                 }
                   }
     
+
 
               $rootScope.select_music=function(file){
                       $rootScope.pause_cast();  

@@ -77,9 +77,7 @@
         <allow-http-request-headers-from domain="*" headers="*" secure="false" />
     </cross-domain-policy>
     <universal-links>
-        <host name="justtalkapp.com" scheme="https">
-            <path event="launchedAppFromLink" url="*" />
-        </host>
+        <host name="justtalkapp.com" scheme="https" />
     </universal-links>
     <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -166,16 +164,16 @@
         <feature name="SocialSharing">
             <param name="ios-package" value="SocialSharing" />
         </feature>
-        <edit-config file="*-Info.plist" mode="merge" parent="NSPhotoLibraryUsageDescription">
+        <edit-config mode="merge" parent="NSPhotoLibraryUsageDescription" target="*-Info.plist">
             <string>This app requires photo library access for users to share media contents on justtalk </string>
         </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" parent="NSPhotoLibraryAdditionsUsageDescription">
+        <edit-config mode="merge" parent="NSPhotoLibraryAdditionsUsageDescription" target="*-Info.plist">
             <string>This app requires photo library access for users to share media contents on justtalk</string>
         </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" parent="NSMicrophoneUsageDescription">
+        <edit-config mode="merge" parent="NSMicrophoneUsageDescription" target="*-Info.plist">
             <string>This app needs microphone access for users to create casts and record messages </string>
         </edit-config>
-        <config-file file="*-Info.plist" mode="merge" parent="NSCameraUsageDescription">
+        <config-file mode="merge" parent="NSCameraUsageDescription" target="*-Info.plist">
             <string>This app requires photo library access for users to set profile photo or share contents</string>
         </config-file>
         <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">

@@ -1,4 +1,4 @@
-<div style="width:100vw !important;float: left;" class="list" ng-hide="!trending_topics || (trending_topics  | unique:'caster').length < 1">
+<div style="width:100vw !important;float: left;" class="list" ng-if="(trending_topics  | unique:'caster').length > 3">
     <div class="item item-divider">
         <h2><b>Top Picks</b></h2>
      </div>
