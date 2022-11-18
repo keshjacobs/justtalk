@@ -21,8 +21,8 @@
         
         
           
-        <ion-content ng-init="get_subscriptions(user_id)">
-          <ion-refresher pulling-text="Pull to refresh" on-refresh="get_subscriptions(user_id)">
+        <ion-content>
+          <ion-refresher pulling-text="Pull to refresh" on-refresh="get_subscriptions(t_id)">
           </ion-refresher>
               <div ng-if="!subscriptions || subscriptions.length < 1">
                   <div class="text-center item item-light">

@@ -1,40 +1,35 @@
-<ion-view cache-view="false">
+<ion-view cache-view="false" ng-init="get_library()">
 
-    <ion-nav-bar  class="bar transparent">
-       
+  <ion-nav-bar  class="bar transparent">    
         <ion-nav-buttons side="left" menu-toggle="left">
             <img ng-if="!user" style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
             <div ng-if="user" menu-toggle="left" class="profile-photo2"  style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
         </ion-nav-buttons>
+        <ion-nav-title>
+          <b>Library</b>
+        </ion-nav-title>
+  </ion-nav-bar>
 
-          <ion-nav-title>
-            <b>Library</b>
-          </ion-nav-title>
-  
-  
-    </ion-nav-bar>
-
-    <div class="search-bar">
+  <div class="search-bar">
       <br/>
-        <ion-segment style="margin-top: 13px !important;" ng-model="library" full="true" dark>
-            <ion-segment-button value="saved">
-              <b>Saved</b>
-            </ion-segment-button>
-            <ion-segment-button value="purchased">
-            <b>Purchased</b>
-            </ion-segment-button>
-          </ion-segment>    
-     </div>
-  <ion-content class="bg-grey header-content" ng-init="get_library()">
+      <ion-segment style="margin-top: 13px !important;" ng-model="library" full="true" dark>
+          <ion-segment-button value="saved">
+            <b>Saved</b>
+          </ion-segment-button>
+          <ion-segment-button value="purchased">
+          <b>Purchased</b>
+          </ion-segment-button>
+      </ion-segment>    
+  </div>
+  <ion-content class="bg-grey header-content">
       <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
       <div ng-include src="'components/auth.html'"></div>
 
-      <div ng-controller="Cast" ng-if="t_id">
         
-       <div ng-switch="library">
+       <div ng-if="t_id" ng-switch="library">
                 <ion-list ng-switch-when="saved">
                     <div ng-include="'components/saved_cast.html'" ng-repeat="cast in saved_casts | orderBy:'-date_created' track by $index"></div> 
-                    <div ng-if="!saved_casts || saved_casts.length <=0" class="text-center padding">
+                    <div ng-if="saved_casts.length < 1" class="text-center padding">
                         <br>
                         <h5 class="dark">You have no saved cast</h5>
                     </div>
@@ -42,14 +37,12 @@
                 
 
                 <ion-list ng-switch-when="purchased">
-                    <div ng-show="!library || library.length <= 0" class="text-center padding">
+                    <div ng-show="!purchased || purchased.length < 1" class="text-center padding">
                         <br>
                         <h5 class="dark">You have not purchased anything</h5>
                     </div>
                 </ion-list>
        </div>
-      
-      </div>
 
 
       <div class="gap"></div>

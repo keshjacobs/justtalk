@@ -106,7 +106,7 @@ $rootScope.post_cast=function(cast){
          $rootScope.record_box.hide();
          $rootScope.recast_box.hide();
          $rootScope.reply_box.hide();
-         $rootScope.get_talk();
+         $rootScope.new_feed();
          $ionicScrollDelegate.scrollTop();
          $rootScope.refresh_profile();
       }
@@ -177,7 +177,7 @@ $rootScope.update_cast=function(c){
         $rootScope.refresh_cast($rootScope.cast._id);
         $rootScope.get_replies($rootScope.cast._id);
       }
-       $rootScope.get_talk();
+      $rootScope.new_feed();
        $ionicScrollDelegate.scrollTop();
        $rootScope.refresh_profile();
        window.history.back();

@@ -145,6 +145,17 @@ to{
 
 
 
+@keyframes reduce {
+  from {
+    background-size:70%;
+  }
+to{
+    background-size:20%;
+  }
+}
+
+
+
 
 @keyframes scale {
   0% {
@@ -185,8 +196,14 @@ h2,h1,h4,b{
   -webkit-animation: 0.8s up !important;
   transition:0.5s linear all !important;
 }
+.splash_screen{
+  -webkit-animation: reduce 9s !important;
+  transition:2s ease all !important;
+  animation: reduce 9s alternate !important;
+}
 
-.profile_header,.profile_header2,.splash_screen{
+
+.profile_header,.profile_header2{
   -webkit-animation: shrink 9s !important;
   transition:2s ease all !important;
   animation: shrink 9s alternate !important;
@@ -201,5 +218,5 @@ h2,h1,h4,b{
 .profile_photo_big{
   animation: 1.4s scale !important;
   -webkit-animation: 1.4s scale !important;
-transition:2s all !important; 
+transition:2s width,height !important; 
 }

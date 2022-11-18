@@ -44,10 +44,7 @@ $rootScope.counter=59;
           $rootScope.user=Data.data;
           $state.go("front.talk");
           $rootScope.det={};
-$rootScope.get_talk();
-$rootScope.discovery();
-$rootScope.get_messages();
-$rootScope.get_notifications();
+          $rootScope.new_feed();
         }else{
         $scope.error=Data.message;
         }
@@ -212,11 +209,7 @@ else{
               $localStorage.t_id=Data.data.t_id;
               $rootScope.user=Data.data;
               $rootScope.det={};
-
-              $rootScope.get_talk();
-              $rootScope.discovery();
-              $rootScope.get_messages();
-              $rootScope.get_notifications();
+              $rootScope.new_feed();
               $state.go("welcome");
               $localStorage.user_name=null;
           }else{

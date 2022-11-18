@@ -382,6 +382,7 @@ $rootScope.message_listen=function(c){
 
 
       $rootScope.play_message=function(cast){
+        $rootScope.get_messages();
         if(!cast.casting){
         console.log("playing...."); 
         cast.casting=true;
