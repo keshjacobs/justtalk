@@ -1,22 +1,25 @@
-<ion-modal-view  ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}" >
-    <ion-header-bar class="bar tranny" ng-click="close_aircast()" ng-style="{'border':'1px solid '+color}">
-      <button title="close" ng-click="close_aircast()" class="button button-clear button-{{text_color}} button-small">&nbsp;<i class="ion ion-chevron-down"></i>&nbsp;</button>          
-      <ion-title style="text-align: center !important;"><b class="{{text_color}}" style="margin-left: -15% !important;">Now Playing</b></ion-title>
-      <button title="close" ng-click="close_aircast()" class="button button-clear button-{{text_color}} button-small">&nbsp;<span></span>&nbsp;</button>          
-      </ion-header-bar>
+<ion-modal-view class="air"  ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}" >
+
+      <ion-header-bar class="bar tranny" ng-click="close_aircast()" ng-style="{'border':'1px solid '+color}">
+        <button title="close" ng-click="close_aircast()" class="button button-clear button-{{text_color}} button-icon">&nbsp;<i class="ion ion-chevron-down"></i>&nbsp;</button>          
+          <ion-title><b class="{{text_color}}">Now Playing</b></ion-title>
+        <!-- <button title="drop" ng-click="drop_aircast()" class="button button-clear button-{{text_color}} button-icon">&nbsp;<i class="ion ion-ios-close-empty"></i>&nbsp;</button>           -->
+       </ion-header-bar>
+    
+
       <div class="tranny" ng-include src="'components/current_cast.html'"></div>
 
       <ion-content class="text-left air_content" ng-style="{'background-color':color+' !important'}">
       
-<div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
-  <b class="{{text_color}}">Up Next</b>
-</div>
+            <div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
+              <b class="{{text_color}}">Up Next</b>
+            </div>
+                              
+            <ion-list class="{{text_color}} transparent">
+            
+                <div ng-include ng-repeat="cast in playlist | limitTo:6:(track+1)" src="'components/track-item.html'"></div>
                   
-<ion-list class="{{text_color}} transparent">
- 
-    <div ng-include ng-repeat="cast in playlist | limitTo:6:(track+1)" src="'components/track-item.html'"></div>
-      
-</ion-list>
+            </ion-list>
 
       </ion-content>
     </ion-modal-view>

@@ -168,7 +168,7 @@ $rootScope.preview=function(sound){
       biquadFilter.type = main_cast.filter.type;
       biquadFilter.frequency.value = main_cast.filter.frequency;
       biquadFilter.connect(gainNodeR);
-      gainNodeR.gain.value = 2;
+      gainNodeR.gain.value = 1;
       gainNodeR.connect(analyser);
       analyser.connect(AudioMan.destination);
       analyser.fftSize = 256;
@@ -929,6 +929,7 @@ $rootScope.sink=function(){
       account.block(data).success(function(Data){
         if(Data.status==true){
           $rootScope.refresh_profile();
+          $rootScope.new_feed();
         }else{
          $rootScope.hide();
         }
@@ -966,6 +967,7 @@ $rootScope.sink=function(){
       account.unblock(data).success(function(Data){
         if(Data.status==true){
           $rootScope.refresh_profile();
+          $rootScope.new_feed();
         }else{
          $rootScope.hide();
         }
@@ -1788,8 +1790,12 @@ $rootScope.unheard=function(){
 
 
 $rootScope.build_playlist=function(cast){
-            if(!$rootScope.playlist || $rootScope.playlist.length < 1){
-                $rootScope.playlist=$rootScope.timeline;
+            if(!$rootScope.playlist || $rootScope.playlist.length <= 0){
+                if ($location.path() === "/front/talk" || $location.path() === "/front/talk" ) {
+                  $rootScope.playlist=$rootScope.timeline;
+                }else{
+                  $rootScope.playlist=$rootScope.suggested_casts;
+                }
                 $rootScope.track=0;
             }else{
                 $rootScope.track=$rootScope.playlist.findIndex(function(c){
@@ -2396,7 +2402,7 @@ $rootScope.delete_cast=function(c){
     cast.suggestion().success(function(Data){
       $rootScope.home_loader=false;
       if(Data.status==true){
-        $rootScope.timeline=Data.data;
+        $rootScope.timeline=$rootScope.censor_casts(Data.data);
         $rootScope.home_loader=false;
         $rootScope.hide();
       }
@@ -2427,13 +2433,13 @@ $rootScope.load_more=function(pages) {
             data.id=$rootScope.user.t_id;
             cast.more_timeline(data).success(function(Data){
               if(Data.status==true){
-                $rootScope.timeline=Data.data;  
+                $rootScope.timeline=$rootScope.censor_casts(Data.data);
               }
             }); 
         }else{
             cast.more_suggestion(data).success(function(Data){
               if(Data.status==true){
-                $rootScope.timeline=Data.data;
+                $rootScope.timeline=$rootScope.censor_casts(Data.data);
               }
             }); 
         }
@@ -2449,7 +2455,7 @@ $rootScope.more_suggestions=function(pages) {
                 page:pages
               }).success(function(Data){
                 if(Data.status==true){
-                  $rootScope.suggested_casts=Data.data;
+                  $rootScope.suggested_casts=$rootScope.censor_casts(Data.data);
                 }
               }); 
           $rootScope.pages=$rootScope.pages + 1;
@@ -2503,10 +2509,10 @@ $rootScope.more_suggestions=function(pages) {
       
       
     $cordovaDeeplinks.route({
-      'cast/:id': {
+      '/cast/:id': {
         target: 'single_cast'
       },
-      'profile/:id': {
+      '//profile/:id': {
         target: 'profile'
       }
     }).subscribe(function(match) {

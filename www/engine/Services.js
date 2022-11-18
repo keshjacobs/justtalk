@@ -229,7 +229,6 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
                   }else{
                     $rootScope.timer=180;
                   }
-                  $rootScope.play_sound("talk.wav");
                   MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
                     console.log("Mic connected successfully........");
                       var options = {
