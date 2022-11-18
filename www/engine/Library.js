@@ -2508,11 +2508,14 @@ $rootScope.more_suggestions=function(pages) {
       
       
       
-    $cordovaDeeplinks.route({
+    $cordovaDeeplinks.route({,
+      '/': {
+        target: 'front.talk'
+      },
       '/cast/:id': {
         target: 'single_cast'
       },
-      '//profile/:id': {
+      '/profile/:id': {
         target: 'profile'
       }
     }).subscribe(function(match) {
