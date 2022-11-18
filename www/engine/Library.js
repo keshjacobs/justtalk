@@ -2508,7 +2508,7 @@ $rootScope.more_suggestions=function(pages) {
       
       
       
-    $cordovaDeeplinks.route({,
+    $cordovaDeeplinks.route({
       '/': {
         target: 'front.talk'
       },
