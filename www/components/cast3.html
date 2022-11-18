@@ -6,7 +6,7 @@
             <h4><b>{{cast.caster.full_name || cast.caster.first_name +' '+ cast.caster.last_name}}</b>
                 <b ng-if="cast.caster.user_name" class="grey">@{{cast.caster.user_name}}</b></h4>
                 <h6 class="grey">
-                    &nbsp; {{timediff(cast.date_created)}}
+                {{timediff(cast.date_created)}}
                 </h6>
         </div>
         <div class="item-body" ng-if="cast.title">

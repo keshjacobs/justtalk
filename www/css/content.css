@@ -311,7 +311,7 @@ input[type=range]  {
   background-position: center !important;
 }
 
-ion-content div .spinner{
+ion-content .spinner{
   position: relative !important;
   margin-left:auto !important;
   margin-right:auto !important;
@@ -324,7 +324,18 @@ ion-content div .spinner{
   font-size: 40px !important;
 }
 
-.spinner svg{
+
+.now_playing svg,.current_cast svg,.now_spinner svg{
+  stroke: rgba(248, 238, 222, 0.794) !important;
+  fill: rgb(190, 182, 169) !important;
+  margin:0px !important;
+  font-size:20px !important;
+  width: 20px !important;
+  height:20px !important;
+  padding-top: 5px !important;
+}
+
+ion-content .spinner svg{
   stroke: rgb(150, 150, 150) !important;
   fill: rgb(73, 73, 73) !important;
   width: 40px !important;
@@ -489,7 +500,7 @@ padding: 0px !important;
   border-radius: 10px !important;
 }
 .body h5,h6{
-  margin-top: 0px !important;
+  /* margin-top: 0px !important; */
 }
 
 .now_playing{ 
@@ -2105,6 +2116,7 @@ display: none;
   font-weight: bold;
   background-color: rgb(219, 142, 40);
   margin: auto !important;
+  margin-bottom: 10px !important;
 }
 
 .myScroll{
@@ -2781,6 +2793,6 @@ border: 3px solid orange !important;
 }
 
 
-.item-body h3{
+.item-body h3,h5,b,h2,h4{
   margin: 0px !important;
 }

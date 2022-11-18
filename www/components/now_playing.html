@@ -1,12 +1,10 @@
 
     <div ng-show="current_cast.cast" ng-style="{'background-color':color}" class="item padding now_playing">
-        <!-- <ion-spinner ng-click="open_aircast()" ng-if="current_cast.bar <= 0 && current_cast.casting" style="margin-top: 15px !important;float:left !important;" icon="crescent" class="spinner-assertive"></ion-spinner>
-        <ion-spinner ng-click="open_aircast()" ng-if="current_cast.bar > 0 && current_cast.casting" style="margin-top: 15px !important;float:left !important;" icon="lines" class="spinner-assertive"></ion-spinner> -->
-        <!-- <ion-icon ng-click="drop_aircast()" ng-if="!current_cast.casting" style="margin-top: 18px !important;float:left !important;margin-left:10px !important;" class="ion ion-close {{text_color}}"></ion-icon> -->
-        <div class="profile-photo" style="float: left !important;margin-left: 15px !important;margin-top: 1px !important;" ui-sref="aprofile({id:current_cast.caster.t_id})" ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}"></div>
+         <div class="profile-photo" style="float: left !important;margin-left: 15px !important;margin-top: 1px !important;" ui-sref="aprofile({id:current_cast.caster.t_id})" ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}"></div>
         <div  style="margin-left:36px !important;">
         <div ng-click="open_aircast()">
             <h3 class="{{text_color}}"><b>{{current_cast.caster.full_name || current_cast.caster.first_name +' '+ current_cast.caster.last_name}}</b> &nbsp; 
+                <ion-spinner ng-if="current_cast.casting" icon="lines" class="now_spinner"></ion-spinner> 
             </h3>
             <h4 class="{{text_color}}" ng-if="current_cast.caster.user_name">@{{current_cast.caster.user_name}}</h4>
          </div>

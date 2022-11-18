@@ -194,25 +194,25 @@ h2,h1,h4,b{
 .topic-case{
   animation: 0.8s up !important;
   -webkit-animation: 0.8s up !important;
-  transition:0.5s linear all !important;
+  transition:0.5s transform !important;
 }
 .splash_screen{
   -webkit-animation: reduce 9s !important;
-  transition:2s ease all !important;
+  transition:2s background-size !important;
   animation: reduce 9s alternate !important;
 }
 
 
 .profile_header,.profile_header2{
   -webkit-animation: shrink 9s !important;
-  transition:2s ease all !important;
+  transition:2s background-size !important;
   animation: shrink 9s alternate !important;
 }
 
 .now_playing,.message_bar {
   animation: 0.3s up !important;
   -webkit-animation: 0.3s up !important;
-  transition:0.5s linear all;
+  transition:0.5s transform !important;
 }
 
 .profile_photo_big{

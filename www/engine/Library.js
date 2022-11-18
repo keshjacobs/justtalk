@@ -16,7 +16,8 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$co
   }else{
     $localStorage.dark_mode=false;
   }
-
+  var music_source={};
+  var source={};
   $rootScope.source={};
   $rootScope.prep=null;
   $rootScope.Music={};
@@ -76,14 +77,16 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
 
 
 $rootScope.pause_message=function(){
-  var casts=$rootScope.chat.conversations;
-  if(casts){
-  for(var i=0;i < casts.length;i++){
-    if(casts[i].casting){
-      casts[i].casting=false;
+  if($rootScope.chat){
+    var casts=$rootScope.chat.conversations;
+    if(casts){
+    for(var i=0;i < casts.length;i++){
+      if(casts[i].casting){
+        casts[i].casting=false;
+      }
     }
   }
-}
+  }
 $rootScope.playing_message=null;
 $rootScope.pause_audio();
 }
@@ -120,7 +123,7 @@ $rootScope.preview=function(sound){
   $rootScope.play_audio=function (audio){
     var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
     const AudioMan=new Aud();
-    const source = AudioMan.createBufferSource();
+    source = AudioMan.createBufferSource();
     const biquadFilter = AudioMan.createBiquadFilter();  
     const gainNodeR = AudioMan.createGain();
     const analyser = AudioMan.createAnalyser(); 
@@ -232,7 +235,7 @@ $rootScope.connect_music=function (audio,ct,loudness) {
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
   const AudioMan=new Aud();
   const gainNodeL = AudioMan.createGain();
-  const music_source = AudioMan.createBufferSource();
+  music_source = AudioMan.createBufferSource();
   $http.get(Config.media+audio, {responseType: "arraybuffer"}).success(function(bf) {
     AudioMan.decodeAudioData(bf).then(function(buffer) {
       if(buffer){
@@ -263,19 +266,23 @@ $rootScope.connect_music=function (audio,ct,loudness) {
 
 
 $rootScope.pause_audio=function(){
-  if ($rootScope.source.started) {
+  if ($rootScope.source.stop) {
     $rootScope.source.started=false;
     $rootScope.source.stop();
-    }
+    $rootScope.source={};
+    source=null;
     if($rootScope.Music.stop){
-      $rootScope.Music.stop();
+        $rootScope.Music.stop();
+        $rootScope.Music={};
+        music_source=null;
+    }
     }
 }
 
 $rootScope.unlock_media=function() {
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
   let AudioMan=new Aud();
-  var source = AudioMan.createBufferSource();
+  source = AudioMan.createBufferSource();
   var buffer = AudioMan.createBuffer(1, 1, 22050);
   source.buffer = buffer;
   source.connect(AudioMan.destination);
@@ -287,7 +294,6 @@ $rootScope.unlock_media=function() {
           source.noteOn(0);
       }
       $rootScope.source=source;
-      $rootScope.source.started=true;
       document.body.removeEventListener('click', $rootScope.unlock_media);
       document.body.removeEventListener('touchstart',$rootScope.unlock_media);
       $rootScope.pause_audio();
@@ -322,12 +328,12 @@ $rootScope.change_mode=function(){
 
   $rootScope.cast_more = function(cast) {
     var buttons=[
-      { text: ' Share' },
-      { text: ' Report' }
+      { text: ' Share to ...' },
+      { text: ' Report cast' }
    ];
    var menu={
     buttons: buttons,
-    titleText: 'Cast Options',
+    titleText: 'More',
     cancelText: ' Cancel',
     cancel: function() {
       return true;
@@ -352,8 +358,8 @@ $rootScope.change_mode=function(){
  if(cast.caster.t_id!=$rootScope.t_id){
   buttons.push({ text: ' Remove from timeline' });
  }else{
-  buttons.push({ text: ' Edit' });
-  menu.destructiveText=' Delete';
+  buttons.push({ text: ' Edit cast' });
+  menu.destructiveText=' Delete cast';
   menu.destructiveButtonClicked=function(){
       $rootScope.delete_cast(cast);
       return true;
@@ -1902,7 +1908,7 @@ $rootScope.top_player=function(cast) {
 
 $rootScope.audio_frequency=function(audio){
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  var source = audioCtx.createMediaElementSource(audio);
+  source = audioCtx.createMediaElementSource(audio);
   $rootScope.analyser = audioCtx.createAnalyser();
   source.connect($rootScope.analyser);
   $rootScope.analyser.connect(audioCtx.destination);
@@ -2471,6 +2477,10 @@ $rootScope.more_suggestions=function(pages) {
      }
    }, 100);
  
+   if ($location.path() === "/front/messages" || $location.path() === "/front/messages" ) {
+    $rootScope.chat=null;
+  }
+
 
    $rootScope.get_subscriptions=function(id){
     account.subscriptions(id).success(function(Data){

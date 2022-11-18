@@ -173,6 +173,7 @@ $rootScope.leave_chat=function(chat){
     $rootScope.hide();
       if(Data.status==true){
         $rootScope.exit_chat();
+        $rootScope.get_messages();
       } 
       $ionicPopup.alert({
         template: Data.message
@@ -238,6 +239,7 @@ $rootScope.delete_message=function(c){
           Chat.delete(data).success(function(Data){
               $rootScope.hide();
               $ionicPopup.alert({template:Data.message});
+              $rootScope.get_messages();
           }).error(function(){
               $rootScope.hide();
           });  

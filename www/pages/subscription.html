@@ -19,9 +19,13 @@
         </ion-nav-bar>
         
         
-        
-          
-        <ion-content>
+        <div class="search-bar">
+          <label class="item item-input">
+            <input type="text" ng-model="query" placeholder="Search subscriptions"/>
+            &nbsp;&nbsp;&nbsp; <span class="ion ion-ios-search-strong"></span>&nbsp;&nbsp;&nbsp;
+          </label>
+        </div>
+      <ion-content class="bg-white header-content">
           <ion-refresher pulling-text="Pull to refresh" on-refresh="get_subscriptions(t_id)">
           </ion-refresher>
               <div ng-if="!subscriptions || subscriptions.length < 1">
@@ -36,7 +40,7 @@
                 </div>
   
   
-            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in subscriptions track by $index">
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in subscriptions | filter:query track by $index">
             </div>
     
                                 

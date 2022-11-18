@@ -5,9 +5,9 @@
             &nbsp;&nbsp; Request &nbsp;&nbsp;
         </button> 
     </div>
-    <h3>
-    <v>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</v>
-    <v class="grey">@{{caster.user_name || '...'}}</v>
-    </h3>
+    <h4 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 12px !important;">
+    <b>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</b>
+    <b class="grey">@{{caster.user_name || '...'}}</b>
+    </h4>
      
 </ion-item>

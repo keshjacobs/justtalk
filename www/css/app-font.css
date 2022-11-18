@@ -5,65 +5,6 @@
   src: url("fonts/roboto/Roboto-Medium.ttf");
 }
 
-@font-face {
-  font-family: "Aargh";
-  font-weight: 400;
-  src: url("fonts/Aaargh/Aaargh.ttf");
-}
-
-
-@font-face {
-  font-family: "RadioCanada";
-  font-weight: 400;
-  src: url("fonts/RadioCanada/RadioCanada-Light.ttf");
-}
-
-
-@font-face {
-  font-family: "san-pro";
-  font-weight: 400;
-  src: url("fonts/source-sans-pro/SourceSansPro-Regular.ttf");
-}
-
-@font-face {
-  font-family: "proxima";
-  font-weight: 400;
-  src: url("fonts/ProximaNovaThin/ProximaNovaThin.woff");
-}
-
-
-@font-face {
-  font-family: "nunito";
-  src: url("fonts/Nunito/Nunito-VariableFont_wght.ttf");
-  
-}
-
-
-
-@font-face {
-  font-family: "ubuntu";
-  src: url("fonts/ubuntu/Ubuntu-Regular.ttf");
-  
-}
-
-
-@font-face {
-  font-family: "Montserrat";
-  /* src:url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Work+Sans:wght@100&display=swap'); */
-  src: url("fonts/Montserrat.ttf");
-}
-
-
-@font-face {
-  font-family: "MuktaMahee";
-  /* src:url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Work+Sans:wght@100&display=swap'); */
-  src: url("fonts/Mukta_Mahee/MuktaMahee-Medium.ttf");
-}
-
-@font-face {
-  font-family: "Mukta";
-  src: url("fonts/Mukta/Mukta-Regular.ttf");
-}
 
 @font-face {
   font-family: "Source Sans Pro";
@@ -71,19 +12,7 @@
 }
 
 
-
 *{
-  /* font-family: 'MuktaMahee', sans-serif; */
   font-family: 'Source Sans Pro', sans-serif;
    border:none;
- }
-
-b{
-  font-family: 'Mukta', sans-serif;
-   border:none;
-}
-
- h2,h3, h1{
-  font-family: 'Source Sans Pro', sans-serif;
-   font-weight: lighter !important;
  }
