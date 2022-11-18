@@ -88,11 +88,8 @@ $rootScope.pause_audio();
 
 
 $rootScope.play_sound=function(sound){
-  const audioCtx = new AudioContext();
-  const audio = new Audio("sounds/"+sound);
-  const source = audioCtx.createMediaElementSource(audio);
-  source.connect(audioCtx.destination);
-  audio.play();
+  Audio.src ="sounds/"+sound;
+  Audio.play();
 }
 
 
@@ -120,6 +117,9 @@ $rootScope.preview=function(sound){
   $rootScope.play_audio=function (audio) {
     var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
     const AudioMan=new Aud();
+    Audio.src=audio;
+    Audio.crossOrigin="anonymous";
+    const a=AudioMan.createMediaElementSource(Audio);
     const source = AudioMan.createBufferSource();
     const biquadFilter = AudioMan.createBiquadFilter();  
     const gainNodeR = AudioMan.createGain();
@@ -156,13 +156,15 @@ $rootScope.preview=function(sound){
     $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
       AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
     if(buffer){
-      source.audio = audio;
+      source.src = audio;
       source.buffer = buffer;
       source.crossOrigin = "anonymous";   
       source.muted = false;
       source.loop=false;
       source.autoplay=true;
+      source.channelInterpretation = "speakers";
       source.playbackRate.value=main_cast.filter.pitch;
+      a.connect(biquadFilter);
       source.connect(biquadFilter);
       biquadFilter.type = main_cast.filter.type;
       biquadFilter.frequency.value = main_cast.filter.frequency;
@@ -170,11 +172,10 @@ $rootScope.preview=function(sound){
       gainNodeR.gain.value = 2;
       gainNodeR.connect(analyser);
       analyser.connect(AudioMan.destination);
-      source.channelInterpretation = "speakers";
       analyser.fftSize = 256;
       $rootScope.bufferLength = analyser.frequencyBinCount;
       $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
-        source.onended=function(){   
+      source.onended=function(){   
           if($rootScope.Music.stop){
             $rootScope.Music.stop();
           }  
@@ -229,8 +230,6 @@ $rootScope.preview=function(sound){
 
 
 $rootScope.connect_music=function (audio,ct,loudness) { 
-  console.log("audio:");
-  console.log(Config.media+audio);
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
   const AudioMan=new Aud();
   const gainNodeL = AudioMan.createGain();
@@ -238,7 +237,7 @@ $rootScope.connect_music=function (audio,ct,loudness) {
   $http.get(Config.media+audio, {responseType: "arraybuffer"}).success(function(bf) {
     AudioMan.decodeAudioData(bf).then(function(buffer) {
       if(buffer){
-          music_source.audio=audio;
+          music_source.src=audio;
           music_source.buffer=buffer;
           music_source.crossOrigin = "anonymous";   
           music_source.muted = false;

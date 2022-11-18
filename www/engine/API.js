@@ -1,6 +1,6 @@
 var error_connection="Check your internet connection";
 var connection_error=error_connection;
-
+var Audio=new Audio();
 var voice_filters=[
 { 
   name:"normal",
