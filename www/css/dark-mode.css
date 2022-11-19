@@ -58,15 +58,6 @@ ion-content .played_cast{
   -webkit-backdrop-filter: blur(200px) !important;
   backdrop-filter: blur(200px) !important;
 }
-ion-modal-view .bar .title{
-  font-size: 20px !important;
-  font-weight: bold !important;
-  position: static !important;
-  margin: 0px !important;
-  margin-top:0px !important;
-  width: 100% !important;
-  text-align: center !important;
-}
 
 ion-content .unplayed_cast{
   background-color: rgba(251, 211, 150, 0.855) !important;
@@ -248,10 +239,6 @@ input,textarea{
   .button-played,.button-played span{
     color: rgba(0, 135, 0, 0.887) !important;
   }
-  .button-oran span{
-    color:#ff9249 !important;
-  }
-
   .now_playing .button-balanced span,.current_cast .button-balanced,.topic .button-balanced{
     color:rgb(255, 255, 255) !important;
   }

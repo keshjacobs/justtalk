@@ -16,3 +16,8 @@
   font-family: 'Source Sans Pro', sans-serif;
    border:none;
  }
+
+ small{
+  margin: 0px !important;
+  padding: 0px !important;
+ }

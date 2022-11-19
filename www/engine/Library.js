@@ -25,6 +25,8 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$co
   $rootScope.saved_casts=[];
   $rootScope.library=[];
 
+  $rootScope.fetching_replies=false;
+
 $rootScope.det={user_name:""};
 $rootScope.voice_filters=voice_filters;
 $rootScope.songs=songs;
@@ -320,9 +322,10 @@ $rootScope.unlock_media=function() {
 
 
 $rootScope.change_mode=function(){
-    $rootScope.change_bar();
+  $rootScope.play_sound("popup.wav");
     $localStorage.dark_mode=!$localStorage.dark_mode;
     $rootScope.settings.dark_mode=$localStorage.dark_mode;
+    $rootScope.change_bar();
 }
 
 
@@ -1542,7 +1545,6 @@ $rootScope.report_cast=function(c){
     $rootScope.pause_cast();
     $timeout(function(){
     $rootScope.track=$rootScope.track+1; 
-    $rootScope.current_cast={};
     if($rootScope.playlist[$rootScope.track]){
     if($rootScope.track <= ($rootScope.playlist.length-1)){
         $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
@@ -1562,7 +1564,7 @@ $rootScope.report_cast=function(c){
   var buttons=[{ text: ' Share Profile' },block_button];
  var menu={
   buttons: buttons,
-  titleText: 'Profile options',
+  titleText: 'More',
   cancelText: 'Cancel',
   cancel: function() {
   },
@@ -1607,11 +1609,8 @@ if((!$rootScope.is_blocked(profile) && blocks.indexOf($rootScope.t_id)==-1)){
   
       $rootScope.previous_cast=function(){
         console.log("previous cast....");
-        var color_pick=Math.floor(Math.random()*(8-1)+1)+1;
-        $rootScope.color_pick=color_pick.toString();
         $rootScope.pause_cast();
         $timeout(function(){
-        $rootScope.current_cast={};
         $rootScope.track=$rootScope.track-1;
         if($rootScope.playlist[$rootScope.track]){
         if($rootScope.track >= 0){
@@ -1673,12 +1672,10 @@ $rootScope.track_position=function(position) {
     $timeout(function(){
     cast.replies(id).success(function(Data){
       $rootScope.fetching_replies=false;
-        if(Data.status==true){
-          $rootScope.cast_replies=Data.data; 
-          if($rootScope.cast_replies.length > 0){ 
-              $rootScope.playlist=$rootScope.cast_replies;
+        if(Data.status==true){ 
+          if(Data.data.length > 0){ 
+            $rootScope.cast_replies=Data.data;
             }
-          $rootScope.fetching_replies=false;
         }
       });
     },2000);
@@ -1795,22 +1792,35 @@ $rootScope.unheard=function(){
 
 
 
-$rootScope.build_playlist=function(cast){
+$rootScope.build_playlist=function(c){
+            var playlist=[];
             if(!$rootScope.playlist || $rootScope.playlist.length <= 0){
-                if ($location.path() === "/front/talk" || $location.path() === "/front/talk" ) {
-                  $rootScope.playlist=$rootScope.timeline;
-                }else{
-                  $rootScope.playlist=$rootScope.suggested_casts;
+                if(c.replies.length > 0){
+                  cast.replies(c._id).success(function(Data){
+                      if(Data.status==true){
+                              playlist.concat(Data.data);
+                      }
+                    });
                 }
-                $rootScope.track=0;
+                if ($location.path() === "/front/talk" || $location.path() === "/front/talk" ) { 
+                  playlist.concat($rootScope.timeline);
+                }else{   
+                   playlist.concat($rootScope.suggested_casts);
+                }
+                $rootScope.playlist=playlist;
             }else{
-                $rootScope.track=$rootScope.playlist.findIndex(function(c){
-                  return c._id==cast._id;
+                $rootScope.track=$rootScope.playlist.findIndex(function(cst){
+                  return cst._id==c._id;
                 })
                 if($rootScope.track >= -1){
                   if($rootScope.playlist[$rootScope.track]){
                     $rootScope.playlist[$rootScope.track].casting=true;
                     $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
+                  if(!$rootScope.up_next){
+                    $rootScope.playlist=$rootScope.suggested_casts;
+                    }
+                  }else{
+                    $rootScope.playlist=$rootScope.suggested_casts;
                   }
                 }else{
                   $rootScope.track=0;
@@ -2111,15 +2121,6 @@ $rootScope.fetch_profile=function(id) {
           if($rootScope.profile){
           $rootScope.profile_casts=Data.data;
           }
-        }
-        if(!$rootScope.settings.dark_mode){
-          if($rootScope.text_color=='light'){
-            StatusBar.styleLightContent();
-          }else {
-            StatusBar.styleDefault();
-          }
-        }else{
-          StatusBar.styleLightContent();
         }
       }); 
     },1000); 

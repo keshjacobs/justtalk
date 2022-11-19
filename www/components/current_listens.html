@@ -1,11 +1,9 @@
-<div class="row" style="padding-bottom: 0px !important;margin-bottom: 0px !important;margin-top: 5px !important;" ng-click="open_listens(current_cast.listens)" ng-if="(current_cast.listens | filter:'!'+current_cast.caster.t_id).length > 0">
-    <div class="tiny-photo2" ng-repeat="listener in current_cast.listens | filter:'!'+current_cast.caster.t_id | limitTo:4 | unique:'t_id'" ng-style="{'background-image':'url('+media+listener.photo+')'}"></div>
-    <small>
-        <h5 class="{{text_color}}">&nbsp;&nbsp;{{(current_cast.listens | filter:'!'+current_cast.caster.t_id | unique:'t_id').length || 0}} listened
+<div class="row" style="padding-bottom: 0px !important;padding-left: 15px !important;margin-bottom: 0px !important;margin-top: 5px !important;" ng-click="open_listens(current_cast.listens)" ng-if="(current_cast.listens | filter:'!'+current_cast.caster.t_id).length > 0">
+    <div class="tiny-photo2" ng-repeat="listener in current_cast.listens | filter:'!'+current_cast.caster.t_id | limitTo:3 | unique:'t_id'" ng-style="{'background-image':'url('+media+listener.photo+')'}"></div>
+    <small class="{{text_color}}">&nbsp;&nbsp;{{(current_cast.listens | filter:'!'+current_cast.caster.t_id | unique:'t_id').length || 0}} listened
             <!-- &nbsp;&nbsp;listened by <b>{{(current_cast.listens | filter:'!'+current_cast.caster.t_id)[0].user_name}}</b>
     <v ng-if="(current_cast.listens | filter:'!'+current_cast.caster.t_id | unique:'t_id').length > 1">
         and {{(current_cast.listens | filter:'!'+current_cast.caster.t_id | unique:'t_id').length - 1 || 0 | number:0}} others -->
     <!-- </v> -->
-        </h5>
     </small>
 </div>

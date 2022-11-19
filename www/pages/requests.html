@@ -24,7 +24,10 @@
         <ion-content class="padding bg-white" ng-init="get_messages()">
           <ion-refresher pulling-text="Pull to refresh" on-refresh="get_messages()">
           </ion-refresher>
+          <br/>
           <h4 class="text-center">All requests sent to you</h4>
+          <br/>
+
               <div ng-if="!requests || requests.length < 1">
                   <div class="text-center item item-light">
                     <div class="padding">

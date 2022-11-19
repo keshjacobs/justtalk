@@ -1,5 +1,4 @@
 <ion-view cache-view="true" class="bg-white">
-   <!-- <div class="blur"> -->
     <ion-nav-bar class="bar"  ng-hide="!t_id">
                     <ion-nav-title class="text-center" align="center">
                         <b>Home</b>
@@ -11,13 +10,14 @@
                     </ion-nav-buttons>
                     
                     <ion-nav-buttons side="right">
-                    <!-- <button  ng-click="search_box.show()" title="search" class="button button-sm button-clear button-dark">
-                            <span class="icon ion-ios-search"></span>
-                        </button> -->
+                        &nbsp;&nbsp;&nbsp;
+                        <button ng-click="change_mode()" class="button button-sm button-clear" ng-class="!settings.dark_mode ? 'button-dark':'bg-green'">
+                            <span class="icon" ng-class="!settings.dark_mode ? 'ion-ios-moon':'ion-ios-sunny'"></span>
+                        </button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </ion-nav-buttons>
     </ion-nav-bar>
-    <!-- </div> -->
-
+   
     <ion-content class="bg-grey" ng-class="home_loader ? ' edge_loader':''">
 
        <ion-refresher pulling-text="Pull to refresh" on-refresh="get_talk()"></ion-refresher>

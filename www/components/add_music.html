@@ -1,8 +1,8 @@
 <fieldset  class="item text-left">
     <button ng-click="music_box.show()" style="float: right !important;margin-top: 10px !important;" class="button button-small button-dark">
-        <span class="ion ion-music-note" style="margin:4px !important;"></span>
+        &nbsp;&nbsp;  Add  &nbsp;&nbsp;
     </button>
-    <h5>Add a sound track</h5>
+    <h5>Add background music</h5>
      <i ng-if="selected_music" ng-click="clear_music()" style="margin-top:8px !important;margin-right: 8px !important;" class="ion ion-close"></i>
      <b ng-class="selected_music ? 'oran':'dark'">{{selected_music ? selected_music.name:'(optional)' | capitalize}}</b>
   </fieldset>

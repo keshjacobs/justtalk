@@ -39,11 +39,6 @@
        <ion-list ng-switch-when="library">
         <div ng-include="'components/book.html'" ng-repeat="book in library | unique:'_id' | orderBy:'-date_created' track by $index">
        </div> 
-       <div ng-if="!library || library.length < 1" class="text-center padding">
-        <br>
-        <br>
-        <h5>You have nothing in your library</h5>
-        </div>
        </ion-list>
 
 
