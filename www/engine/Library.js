@@ -36,8 +36,6 @@ $rootScope.songs=songs;
   $rootScope.casts_loading=false;
   $rootScope.timer=180;
   $rootScope.mentions=[];
-      $sessionStorage.user=null;
-      $localStorage.user=null;
       $rootScope.t_id=null;
       $rootScope.cast={};
       $rootScope.search_results=[];
@@ -279,6 +277,11 @@ $rootScope.pause_audio=function(){
         music_source=null;
     }
     }
+    if($rootScope.Music.stop){
+      $rootScope.Music.stop();
+      $rootScope.Music={};
+      music_source=null;
+  }
 }
 
 $rootScope.unlock_media=function() {
@@ -336,7 +339,7 @@ $rootScope.change_mode=function(){
    ];
    var menu={
     buttons: buttons,
-    titleText: 'More',
+    titleText: cast.title || cast.caster.user_name,
     cancelText: ' Cancel',
     cancel: function() {
       return true;
@@ -879,6 +882,12 @@ $rootScope.open_cast=function(cast){
 
 
 
+$rootScope.float=function(){
+  $timeout(function(){
+    $ionicScrollDelegate.scrollTop();
+  },500);
+}
+
 $rootScope.sink=function(){
   $timeout(function(){
     $ionicScrollDelegate.scrollBottom();
@@ -936,9 +945,9 @@ $rootScope.sink=function(){
         blocker:$rootScope.t_id
       }
       account.block(data).success(function(Data){
+        $rootScope.new_feed();
         if(Data.status==true){
           $rootScope.refresh_profile();
-          $rootScope.new_feed();
         }else{
          $rootScope.hide();
         }
@@ -1470,7 +1479,7 @@ $rootScope.remove_cast=function(c){
           $rootScope.show();
   var data={
     _id:c._id,
-    t_id:$rootScope.user.t_id
+    t_id:$rootScope.t_id
   }
     $rootScope.show();
   cast.remove(data).success(function(Data){
@@ -1541,17 +1550,17 @@ $rootScope.report_cast=function(c){
 
 
   $rootScope.next_cast=function(){
-    console.log("next cast....");
-    $rootScope.pause_cast();
-    $timeout(function(){
-    $rootScope.track=$rootScope.track+1; 
-    if($rootScope.playlist[$rootScope.track]){
-    if($rootScope.track <= ($rootScope.playlist.length-1)){
-        $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
+      console.log("next cast....");
+      $rootScope.pause_cast();
+      $timeout(function(){
+      $rootScope.track=$rootScope.track+1;
+        if($rootScope.playlist[$rootScope.track]){
+          if($rootScope.track <= ($rootScope.playlist.length-1)){
+            $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
+            }
           }
-}
-},2000);
-      }
+      },1000);
+    }
 
 
 
@@ -1564,7 +1573,7 @@ $rootScope.report_cast=function(c){
   var buttons=[{ text: ' Share Profile' },block_button];
  var menu={
   buttons: buttons,
-  titleText: 'More',
+  titleText: profile.user_name,
   cancelText: 'Cancel',
   cancel: function() {
   },
@@ -1608,16 +1617,16 @@ if((!$rootScope.is_blocked(profile) && blocks.indexOf($rootScope.t_id)==-1)){
   
   
       $rootScope.previous_cast=function(){
-        console.log("previous cast....");
-        $rootScope.pause_cast();
-        $timeout(function(){
-        $rootScope.track=$rootScope.track-1;
-        if($rootScope.playlist[$rootScope.track]){
-        if($rootScope.track >= 0){
-          $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
-          }
-  }
-  },1000);
+            console.log("previous cast....");
+            $rootScope.pause_cast();
+            $timeout(function(){
+              $rootScope.track=$rootScope.track-1;
+              if($rootScope.playlist[$rootScope.track]){
+                if($rootScope.track >= 0){
+                    $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
+                  }
+                }
+            },1000);
           }
   
   
@@ -1793,38 +1802,33 @@ $rootScope.unheard=function(){
 
 
 $rootScope.build_playlist=function(c){
-            var playlist=[];
-            if(!$rootScope.playlist || $rootScope.playlist.length <= 0){
-                if(c.replies.length > 0){
-                  cast.replies(c._id).success(function(Data){
-                      if(Data.status==true){
-                              playlist.concat(Data.data);
-                      }
-                    });
-                }
-                if ($location.path() === "/front/talk" || $location.path() === "/front/talk" ) { 
-                  playlist.concat($rootScope.timeline);
-                }else{   
-                   playlist.concat($rootScope.suggested_casts);
-                }
-                $rootScope.playlist=playlist;
-            }else{
+            $rootScope.playlist=$rootScope.timeline;
+            if($rootScope.playlist.length > 1){
+              console.log("found playlist");
                 $rootScope.track=$rootScope.playlist.findIndex(function(cst){
                   return cst._id==c._id;
                 })
-                if($rootScope.track >= -1){
                   if($rootScope.playlist[$rootScope.track]){
                     $rootScope.playlist[$rootScope.track].casting=true;
                     $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
-                  if(!$rootScope.up_next){
-                    $rootScope.playlist=$rootScope.suggested_casts;
-                    }
+                    if(!$rootScope.up_next){
+                      $rootScope.playlist=$rootScope.suggested_casts;
+                      }
                   }else{
                     $rootScope.playlist=$rootScope.suggested_casts;
                   }
+            }else{
+              console.log("new playlist");
+                if($rootScope.cast){
+                  cast.replies($rootScope.cast._id).success(function(Data){
+                      if(Data.status==true){
+                        $rootScope.playlist=Data.data;
+                      }
+                    });
                 }else{
-                  $rootScope.track=0;
+                  $rootScope.playlist=$rootScope.timeline; 
                 }
+                console.log($rootScope.playlist);
             }
 }
 
@@ -2192,6 +2196,9 @@ $rootScope.timediff = function(start){
 
 
   
+if($localStorage.user){
+$localStorage.user=$rootScope.user;
+}
   
 
 
@@ -2202,6 +2209,7 @@ $rootScope.timediff = function(start){
     $rootScope.hide();
       if(Data.status==true){
         $rootScope.user=Data.data; 
+        $localStorage.user=$rootScope.user;
       }else{
         console.log("could not conenct");
       }
@@ -2367,13 +2375,14 @@ $rootScope.delete_cast=function(c){
         }
     });
     }
-      
 
     $rootScope.censor_casts=function(casts){
       if($rootScope.user){
           casts.map(function(cast,i){
             if($rootScope.user.cast_list){
-              var index=$rootScope.user.cast_list.indexOf(cast._id);
+              var index=$rootScope.user.cast_list.findIndex(function(cst){
+                          return cst==cast._id || cast.cast_id;
+                        })
               if(index >=0){
                 casts.splice(i,1);
               }

@@ -1,43 +1,27 @@
-body {
-    background: #F6F6F6;
-  }
-  
-  div.menu {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background: #F6F6F6;
-  }
-  
-  div.menu li a {
-    display: block;
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  div.menu li a i {
-      width: 30px;
-      text-align: center;
-  }
-  
-  div.menu li a span {
-      margin-left: 20px;
-  }
+
 
 .menu-open .menu-content { 
-  transform: translate3d(0px, 0px, 0px) !important;
   background-color: rgba(0, 0, 0, 0.682) !important;
-  left:0px !important;
-  float: left !important; 
+  -webkit-transition: all 0.3s linear !important;
+  transition: all 0.3s linear !important;
 }
 
 
-.menu-open .menu{
-  box-shadow: 200px 0px 205px rgba(0, 0, 0, 0.503) !important;
+.menu-open .menu,.menu-open ion-side-menu{
+  box-shadow: 200px 0px 205px rgba(26, 24, 24, 0.392) !important;
   z-index: 100000 !important;
-  -webkit-transition: all 600ms ease-in-out,opacity 700ms ease;
-  -moz-transition: all 600ms ease-in-out,opacity 700ms ease;
-  -ms-transition: all 600ms ease-in-out,opacity 700ms ease;
-  -o-transition: all 600ms ease-in-out,opacity 700ms ease;
-  transition: all 600ms ease-in-out,opacity 700ms ease !important;
+  -webkit-transition: width 0.2s linear !important;
+  transition: left 0.2s ease !important;
+}
+
+ion-side-menu{
+  width:295px !important;
+}
+
+.menu{
+  background-color: rgba(244, 244, 244, 0.032) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(80px) !important;
+  backdrop-filter: blur(80px) !important;
+      background-image: none !important;
 }

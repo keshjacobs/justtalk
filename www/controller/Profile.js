@@ -1,26 +1,13 @@
 app.controller('profile', function($cordovaSocialSharing,Config,$stateParams,$timeout,Upload,$scope,$state,account,$ionicPopup,$rootScope) {
   
-
-
-
-
-
-
-
-  $rootScope.$emit('lazyImg:refresh');
-
   $rootScope.profile={};
 
 
 if($stateParams.id){
   var id=$stateParams.id;
     $rootScope.fetch_profile(id);
-}else{
-  if($rootScope.user){
-  $rootScope.refresh_profile();
-  }
 }
-  
+
 $scope.file_up=function(f) {
   $rootScope.show();
   $rootScope.file=f;

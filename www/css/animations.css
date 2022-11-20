@@ -147,10 +147,10 @@ to{
 
 @keyframes reduce {
   from {
-    background-size:70%;
+    background-size:50%;
   }
 to{
-    background-size:20%;
+    background-size:10%;
   }
 }
 
@@ -181,9 +181,9 @@ to{
 
 
 h2,h1,h4,b{
-  animation: 0.8s showup !important;
   -webkit-animation: 0.8s showup !important;
-  transition:0.7s linear all;
+  animation: 0.8s showup !important;
+  transition:opacity 0.7s ease !important;
 }
 
 /* .message_a,.message_b{
@@ -192,9 +192,7 @@ h2,h1,h4,b{
 
 
 .topic-case{
-  animation: 0.8s up !important;
-  -webkit-animation: 0.8s up !important;
-  transition:0.5s transform !important;
+  transition:0.5s display !important;
 }
 .splash_screen{
   -webkit-animation: reduce 9s !important;

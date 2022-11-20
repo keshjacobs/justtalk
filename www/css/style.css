@@ -84,9 +84,6 @@ float: left !important;
   background-image:url("../img/axe3.png");
 }
 
-button,div,.button,.item,a:any-link{
-  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-}
 
 button:active,.button:active{
   background-color: rgba(0,0,0,0) !important;
