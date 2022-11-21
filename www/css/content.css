@@ -111,10 +111,9 @@ cursor: pointer;
     height: 7px !important;
     float: left !important;
     border: 5px !important;
-    /* background-color: rgba(1, 66, 1, 0.719) !important; */
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #209e50c5), color-stop(100%, #6e9405e0));
-    background-repeat: no-repeat;
+      background-repeat: no-repeat;
   -webkit-appearance: none;
+  appearance: none;
   width: 97%;
   outline: none;
   position:  relative !important;
@@ -196,7 +195,7 @@ cursor: pointer;
 }
 
 .duration2::-webkit-slider-runnable-track {
-  background: #a34f00de;
+  background: #313b2d8b;
   height: 0.5rem;
 }
 

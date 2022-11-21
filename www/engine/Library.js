@@ -334,7 +334,7 @@ $rootScope.change_mode=function(){
   $rootScope.cast_more = function(cast) {
     var buttons=[
       { text: ' Share to ...' },
-      { text: ' Report cast' }
+      { text: ' Report this cast' }
    ];
    var menu={
     buttons: buttons,

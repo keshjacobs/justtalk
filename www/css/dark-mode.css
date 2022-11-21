@@ -14,10 +14,10 @@
 }
 .modal .tranny, .bar-light,.tabs-striped .tabs,.billboard{
     color:#fff !important;
-    background-color: rgba(0, 0, 0, 0.51) !important;
+    background-color: rgba(22, 22, 22, 0.37) !important;
     border:none !important;
-    -webkit-backdrop-filter: blur(55px) !important;
-    backdrop-filter: blur(55px) !important;
+    -webkit-backdrop-filter: blur(35px) !important;
+    backdrop-filter: blur(35px) !important;
 }
 .bar{
   background-color: #000 !important;
@@ -29,10 +29,10 @@
 }
 ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.popup,.popup-head,.popup-body,.popup-buttons,.modal .bg-light{
 color:#fff !important;
-background-color: rgba(0, 0, 0, 0.607) !important;
+background-color: rgba(36, 36, 36, 0.373) !important;
 border:none !important;
--webkit-backdrop-filter: blur(55px) !important;
-backdrop-filter: blur(55px) !important;
+-webkit-backdrop-filter: blur(25px) !important;
+backdrop-filter: blur(25px) !important;
 }
 
 .item-divider,.modal .item-divider{
@@ -54,9 +54,9 @@ ion-content .played_cast{
 }
 
 .modal .air_content,ion-content .air_content,.air_content{
-  background-color: rgba(41, 20, 20, 0.472) !important;
-  -webkit-backdrop-filter: blur(200px) !important;
-  backdrop-filter: blur(200px) !important;
+  background-color: rgba(11, 11, 11, 0.355) !important;
+  -webkit-backdrop-filter: blur(50px) !important;
+  backdrop-filter: blur(50px) !important;
 }
 
 ion-content .unplayed_cast{
@@ -129,10 +129,10 @@ input,textarea{
 
 
 .tabs{
-  background-color: rgba(0, 0, 0, 0.298) !important;
+  background-color: rgba(29, 29, 29, 0.298) !important;
   border:none !important;
-  -webkit-backdrop-filter: blur(70px) !important;
-  backdrop-filter: blur(70px) !important;
+  -webkit-backdrop-filter: blur(40px) !important;
+  backdrop-filter: blur(40px) !important;
    background-image: none !important;
   }
   
