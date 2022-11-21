@@ -14,7 +14,11 @@
             <div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
               <b class="{{text_color}}">Up Next</b>
             </div>
-                              
+                  
+            <div ng-show="fetching_replies" class="text-center padding">
+              <ion-spinner icon="crescent"></ion-spinner> 
+            </div>
+
             <ion-list class="{{text_color}} transparent">
             
                 <div ng-include ng-repeat="cast in playlist | limitTo:30:(track+1)" src="'components/track-item.html'"></div>

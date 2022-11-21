@@ -14,19 +14,13 @@
             <button title="button" class="button button-clear" back-button nav-direction="back">
               <i class="icon ion-ios-arrow-back dark"></i></button>
           </ion-nav-buttons>
+        
 
-          <!-- <ion-nav-buttons side="left" menu-toggle="left">
-            <img ng-if="!user" src="img/icon-green.png" class="bar-logo"/>
-            <div ng-if="user" menu-toggle="left" class="profile-photo" style="margin-top: 0px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
-        </ion-nav-buttons> -->
-        
-        
-        <!-- <ion-nav-buttons side="right">
-            <button ui-sref="settings" ng-if="t_id" class="button button-sm button-clear button-icon-right button-dark">
-                <span class="icon ion-gear-b"></span>
-            </button>
-        </ion-nav-buttons> -->
-        
+        <ion-nav-buttons side="right">
+          <button title="mic" ng-click="start_talk()" ng-if="current_cast.cast" class="button button-sm button-clear button-dark">
+            <span class="icon ion-plus"></span>
+          </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
 
 

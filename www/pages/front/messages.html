@@ -12,11 +12,11 @@
           <div ng-if="user" menu-toggle="left" class="profile-photo2" style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
       </ion-nav-buttons>
 
-        <!-- <ion-nav-buttons side="right">
-            <button  ng-click="message_settings()" title="search" class="button button-sm button-clear button-dark">
-                <span class="icon ion-gear-b"></span>
+        <ion-nav-buttons side="right">
+            <button title="mic" ui-sref="front.make_request" ng-if="current_cast.cast" class="button button-sm button-clear button-dark">
+              <span class="icon ion-android-person-add"></span>
             </button>
-        </ion-nav-buttons> -->
+        </ion-nav-buttons>
 
      
         

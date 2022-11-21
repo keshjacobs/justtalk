@@ -111,6 +111,9 @@ app.factory('account',function($http,Config){
     search: function(p){
        return $http.get(Config.API + "search/"+p);
      },
+     report: function(p){
+        return $http.post(Config.API + "report",p);
+      },
      search_mention: function(p){
         return $http.get(Config.API + "mentions/search/"+p);
       },

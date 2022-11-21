@@ -50,7 +50,6 @@ $rootScope.songs=songs;
         platform:null,
         serial:null
     };
-    $rootScope.cast_replies=[];
 
     $rootScope.mediaStream = null;
     $rootScope.mediaRec = null;
@@ -870,7 +869,6 @@ $rootScope.open_listens=function(listeners){
 
 
 $rootScope.open_cast=function(cast){
-  $rootScope.cast_replies=[];
   $rootScope.cast=cast;
   $rootScope.search_box.hide();
   $state.go("cast");
@@ -1548,6 +1546,44 @@ $rootScope.report_cast=function(c){
 
 
 
+  $rootScope.report_user=function(user){
+    $ionicPopup.show({
+      template: 'Are you sure you want to report this account?',
+      title: 'Report '+user.user_name,
+      scope: $rootScope,
+      buttons: [
+        {
+        text: 'No' ,
+        type:"button-light"
+        },
+        {
+        text: '<b>Yes</b>',
+        type: 'button-light',
+        onTap: function(e) {    
+            $rootScope.show();
+    var data={
+      user_id:user._id,
+      _id:$rootScope.user._id
+    }
+      $rootScope.show();
+    account.report(data).success(function(Data){
+      $rootScope.hide();
+      $rootScope.play_sound("popup.wav");
+      $ionicPopup.alert({
+        template: Data.message
+      });
+    }).error(function(){
+      $rootScope.hide();
+      $rootScope.play_sound("popup.wav");
+      $ionicPopup.alert({
+        template: "network error."
+      });
+    });
+  }
+  }] 
+  });
+  }
+
 
   $rootScope.next_cast=function(){
       console.log("next cast....");
@@ -1570,7 +1606,11 @@ $rootScope.report_cast=function(c){
     if($rootScope.is_blocked(profile)){
       block_button={ text: 'Unblock @'+profile.user_name };
     }
-  var buttons=[{ text: ' Share Profile' },block_button];
+  var buttons=[
+        {text: ' Share this profile' },
+        {text: ' Report '+profile.user_name },
+        block_button
+      ];
  var menu={
   buttons: buttons,
   titleText: profile.user_name,
@@ -1584,13 +1624,17 @@ $rootScope.report_cast=function(c){
      }
 
      if(index === 1) {
+      $rootScope.report_user(profile);
+     }
+
+     if(index === 2) {
       if($rootScope.is_blocked(profile)){
         $rootScope.unblock_user(profile);
       }else{
         $rootScope.block_user(profile);
       }
      }
-     if(index === 2) {
+     if(index === 3) {
       $rootScope.message_user(profile);
      }
      return true;
@@ -1676,18 +1720,20 @@ $rootScope.track_position=function(position) {
 
 
 
-  $rootScope.get_replies=function(id){
+  $rootScope.get_replies=async function(id){
+    $rootScope.cast_replies=[];
     $rootScope.fetching_replies=true;
     $timeout(function(){
-    cast.replies(id).success(function(Data){
-      $rootScope.fetching_replies=false;
+      cast.replies(id).success(function(Data){
+        $rootScope.fetching_replies=false;
         if(Data.status==true){ 
-          if(Data.data.length > 0){ 
-            $rootScope.cast_replies=Data.data;
-            }
+            $rootScope.cast_replies=Data.data; 
+            $rootScope.cast_replies.map(function(reply,i){
+              $rootScope.playlist.add(reply);
+            });
         }
       });
-    },2000);
+    },1000);
   }
   
   
@@ -1800,36 +1846,29 @@ $rootScope.unheard=function(){
 }
 
 
-
 $rootScope.build_playlist=function(c){
-            $rootScope.playlist=$rootScope.timeline;
-            if($rootScope.playlist.length > 1){
-              console.log("found playlist");
-                $rootScope.track=$rootScope.playlist.findIndex(function(cst){
-                  return cst._id==c._id;
-                })
-                  if($rootScope.playlist[$rootScope.track]){
-                    $rootScope.playlist[$rootScope.track].casting=true;
-                    $rootScope.up_next=$rootScope.playlist[$rootScope.track + 1];
-                    if(!$rootScope.up_next){
-                      $rootScope.playlist=$rootScope.suggested_casts;
-                      }
-                  }else{
-                    $rootScope.playlist=$rootScope.suggested_casts;
-                  }
-            }else{
-              console.log("new playlist");
-                if($rootScope.cast){
-                  cast.replies($rootScope.cast._id).success(function(Data){
-                      if(Data.status==true){
-                        $rootScope.playlist=Data.data;
-                      }
-                    });
-                }else{
-                  $rootScope.playlist=$rootScope.timeline; 
-                }
-                console.log($rootScope.playlist);
+            if(c.replies.length > 0 || c.reply){
+              $rootScope.get_replies(c._id);
             }
+            if($rootScope.playlist.length < 1){
+              $rootScope.playlist=$rootScope.timeline;
+                $rootScope.track=0;
+            }
+            $rootScope.playlist.filter((v,i,a)=>a.findIndex(v2=>(v2._id===v._id))===i);
+            $rootScope.track=$rootScope.playlist.findIndex(function(cst){
+              return cst._id==c._id;
+            })
+            if($rootScope.track > -1){
+              if($rootScope.playlist[$rootScope.track]){
+                $rootScope.playlist[$rootScope.track].casting=true;
+              }
+              if(!$rootScope.playlist[$rootScope.track + 1]){
+                $rootScope.playlist=$rootScope.suggested_casts;
+                $rootScope.track=0;
+              }
+              }else{
+                $rootScope.track=0;
+              }
 }
 
 
@@ -1980,16 +2019,8 @@ img.onload = function() {
 }
 
       $rootScope.play_casts=function(cs){
-        $rootScope.playlist=cs.sort(function(a,b){ 
-          if (a.date_created < b.date_created) {
-            return 1;
-        }
-        if (a.date_created > b.date_created) {
-            return -1;
-        }
-        return 0;
-         });
-        $rootScope.play_cast($rootScope.playlist[0]);
+        $rootScope.playlist=cs;
+        $rootScope.play_cast(cs[0]);
       }
 
   

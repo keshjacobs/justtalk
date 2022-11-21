@@ -5,6 +5,12 @@
             <img ng-if="!user" style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
             <div ng-if="user" menu-toggle="left" class="profile-photo2"  style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
         </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+            <button title="mic" ng-click="start_talk()" ng-if="current_cast.cast" class="button button-sm button-clear button-dark">
+              <span class="icon ion-plus"></span>
+            </button>
+        </ion-nav-buttons>
         <ion-nav-title>
           <b>Library</b>
         </ion-nav-title>
