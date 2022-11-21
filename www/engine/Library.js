@@ -57,8 +57,10 @@ $rootScope.songs=songs;
   $rootScope.fetching_cast=true;
 
   $rootScope.playlist=[];
+  $rootScope.cast_replies=[];
   $rootScope.top_boys=[];
   $rootScope.track=0;
+  $rootScope.convo_track=0;
 
 
 
@@ -1588,11 +1590,15 @@ $rootScope.report_cast=function(c){
       console.log("next cast....");
       $rootScope.pause_cast();
       $timeout(function(){
-      $rootScope.track=$rootScope.track+1;
-        if($rootScope.playlist[$rootScope.track]){
-          if($rootScope.track <= ($rootScope.playlist.length-1)){
-            $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
-            }
+            if($rootScope.cast_replies[$rootScope.convo_track+1]){
+              $rootScope.convo_track=$rootScope.convo_track+1;
+              $rootScope.play_cast($rootScope.cast_replies[$rootScope.convo_track]);
+            }else{
+              if($rootScope.playlist[$rootScope.track+1]){
+                $rootScope.track=$rootScope.track+1;
+                $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
+                $rootScope.convo_track=0;
+                }
           }
       },1000);
     }
@@ -1663,12 +1669,16 @@ if((!$rootScope.is_blocked(profile) && blocks.indexOf($rootScope.t_id)==-1)){
             console.log("previous cast....");
             $rootScope.pause_cast();
             $timeout(function(){
-              $rootScope.track=$rootScope.track-1;
-              if($rootScope.playlist[$rootScope.track]){
-                if($rootScope.track >= 0){
-                    $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
-                  }
-                }
+              $rootScope.convo_track=$rootScope.convo_track-1;
+              if($rootScope.cast_replies[$rootScope.convo_track]){
+                    $rootScope.play_cast($rootScope.cast_replies[$rootScope.convo_track]);
+              }else{
+                  $rootScope.track=$rootScope.track-1;
+                  if($rootScope.playlist[$rootScope.track]){
+                        $rootScope.play_cast($rootScope.playlist[$rootScope.track]);
+                        $rootScope.convo_track=0;
+                    }
+              }
             },1000);
           }
   
@@ -1719,18 +1729,15 @@ $rootScope.track_position=function(position) {
 
 
 
-  $rootScope.get_replies=async function(id){
-    $rootScope.cast_replies=[];
+  $rootScope.get_replies=function(id){
     $rootScope.fetching_replies=true;
+    if($rootScope.aircast_box){
+      $rootScope.float();
+    }
     $timeout(function(){
       cast.replies(id).success(function(Data){
         $rootScope.fetching_replies=false;
-        if(Data.status==true){ 
-            $rootScope.cast_replies=Data.data; 
-            $rootScope.cast_replies.map(function(reply,i){
-              $rootScope.playlist.add(reply);
-            });
-        }
+        $rootScope.cast_replies=Data.data; 
       });
     },1000);
   }
@@ -1846,28 +1853,44 @@ $rootScope.unheard=function(){
 
 
 $rootScope.build_playlist=function(c){
-            if(c.replies.length > 0 || c.reply){
-              $rootScope.get_replies(c._id);
-            }
-            if($rootScope.playlist.length < 1){
-              $rootScope.playlist=$rootScope.timeline;
-                $rootScope.track=0;
-            }
-            $rootScope.playlist.filter((v,i,a)=>a.findIndex(v2=>(v2._id===v._id))===i);
-            $rootScope.track=$rootScope.playlist.findIndex(function(cst){
-              return cst._id==c._id;
-            })
-            if($rootScope.track > -1){
-              if($rootScope.playlist[$rootScope.track]){
-                $rootScope.playlist[$rootScope.track].casting=true;
-              }
-              if(!$rootScope.playlist[$rootScope.track + 1]){
-                $rootScope.playlist=$rootScope.suggested_casts;
-                $rootScope.track=0;
-              }
-              }else{
-                $rootScope.track=0;
-              }
+  console.log("building playlist:");
+  console.log(c);
+  if(!c.reply){
+    console.log("not reply");
+    if($rootScope.playlist.length < 1){
+      $rootScope.playlist=$rootScope.timeline;
+    }
+    $rootScope.playlist=$rootScope.playlist.map(function(cast,i){
+      if(!cast.reply){
+          return cast;
+        }
+      });
+    $rootScope.track=$rootScope.playlist.findIndex(function(cst){
+      if(cst){
+        return cst._id==c._id;
+      }
+    })
+    if($rootScope.track > -1){
+      if($rootScope.playlist[$rootScope.track]){
+        $rootScope.playlist[$rootScope.track].casting=true;
+      }
+      if(!$rootScope.playlist[$rootScope.track + 1]){
+        $rootScope.playlist=$rootScope.suggested_casts;
+        $rootScope.track=0;
+      }
+      }
+  }else{
+    console.log("a reply");
+      $rootScope.convo_track=$rootScope.cast_replies.findIndex(function(rep){
+        return rep._id==c._id;
+      });
+      if($rootScope.convo_track > -1){
+        if($rootScope.cast_replies[$rootScope.convo_track]){
+          $rootScope.cast_replies[$rootScope.convo_track].casting=true;
+        }
+        }
+  }
+          
 }
 
 
@@ -2059,10 +2082,12 @@ img.onload = function() {
           $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
         }
         if($rootScope.current_cast.cast){
-            var src=Config.media+$rootScope.current_cast.cast;
+            if(!$rootScope.current_cast.reply){
+              $rootScope.get_replies($rootScope.current_cast._id);
+            }
             $rootScope.cast_listen($rootScope.current_cast);
             $rootScope.build_playlist($rootScope.current_cast);
-            $rootScope.play_audio(src);
+            $rootScope.play_audio(Config.media+$rootScope.current_cast.cast);
             $rootScope.top_player($rootScope.current_cast);
         }
             });

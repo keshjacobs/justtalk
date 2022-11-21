@@ -11,12 +11,24 @@
 
       <ion-content class="text-left air_content" ng-style="{'background-color':color+' !important'}">
       
+
+
+        <div ng-style="{'background-color':color}" ng-show="cast_replies.length > 0">
+          <div class="next-header" ng-style="{'background-color':color}">
+              <b class="{{text_color}}">{{current_cast.reply ? "In":(current_cast.title || current_cast.caster.user_name+"'s")}} conversation</b>
+          </div>  
+          <div ng-show="fetching_replies" class="text-center padding">
+              <ion-spinner icon="crescent"></ion-spinner> 
+              <small>Checking for conversations...</small>
+          </div>
+          <div ng-include ng-repeat="cast in cast_replies | limitTo:cast_replies.length:(convo_track+1)" src="'components/track-item.html'"></div>   
+        </div>
+
+
+
+
             <div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
               <b class="{{text_color}}">Up Next</b>
-            </div>
-                  
-            <div ng-show="fetching_replies" class="text-center padding">
-              <ion-spinner icon="crescent"></ion-spinner> 
             </div>
 
             <ion-list class="{{text_color}} transparent">
