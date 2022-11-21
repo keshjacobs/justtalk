@@ -1561,12 +1561,11 @@ $rootScope.report_cast=function(c){
         type: 'button-light',
         onTap: function(e) {    
             $rootScope.show();
-    var data={
-      user_id:user._id,
-      _id:$rootScope.user._id
-    }
       $rootScope.show();
-    account.report(data).success(function(Data){
+    account.report({
+          user_id:user._id,
+          _id:$rootScope.user._id
+        }).success(function(Data){
       $rootScope.hide();
       $rootScope.play_sound("popup.wav");
       $ionicPopup.alert({
