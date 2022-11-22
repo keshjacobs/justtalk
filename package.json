@@ -27,7 +27,6 @@
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
-    "cordova-plugin-music-controls2-fix-ios": "^3.0.8",
     "cordova-plugin-navigationbar-color": "0.0.8",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
@@ -73,7 +72,6 @@
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
     "cordova-plugin-ios-microphone-permissions": "^1.0.0",
     "cordova-plugin-media": "^5.0.4",
-    "cordova-plugin-music-controls2": "^3.0.7",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
@@ -243,10 +241,7 @@
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
-      },
-      "cordova-music-controls": {},
-      "cordova-plugin-advanced-background-mode": {},
-      "cordova-plugin-music-controls2": {}
+      }
     },
     "platforms": []
   }

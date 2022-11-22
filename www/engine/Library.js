@@ -1850,14 +1850,14 @@ $rootScope.unheard=function(){
 
 
 $rootScope.build_playlist=function(c){
-  if(!c.reply){
-    if($rootScope.playlist.length < 1){
-        if($rootScope.timeline.length > 3){
-        $rootScope.playlist=$rootScope.timeline;
-      }else{
-        $rootScope.playlist=$rootScope.suggested_casts
-      }
+  if(!$rootScope.playlist || $rootScope.playlist.length < 1){
+      if($rootScope.timeline.length > 3){
+      $rootScope.playlist=$rootScope.timeline;
+    }else{
+      $rootScope.playlist=$rootScope.suggested_casts
     }
+  }
+  if(!c.reply){
     $rootScope.playlist=$rootScope.playlist.map(function(cast,i){
       if(!cast.reply){
           return cast;
