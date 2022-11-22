@@ -25,11 +25,10 @@
       <form class="padding" ng-submit="auth(det)">
           <label class="item item-input">
             <i class="ion-at assertive"></i>&nbsp;&nbsp;&nbsp;
-            <input autocapitalize="none" autocomplete="off" ng-model="det.user_name" name="user_name" type="text" placeholder="Username"/>
+            <input autocapitalize="none" autocomplete="off" ng-model="det.user_name" name="user_name" type="text" placeholder="username"/>
           </label>
        <br/>
-       <br/>
-          <div class="padding">
+          <div class="padding" style="margin-top:20px !important;">
             <button ng-disabled="!det.user_name" type="submit" class="button button-full button-balanced">Continue</button>
           </div>
     </form>

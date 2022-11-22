@@ -61,7 +61,11 @@ $rootScope.post_cast=function(cast){
     if(cast.title){
       go=$rootScope.censor(cast.title);
     }
-    if(cast.duration > 3){
+    if(!cast.recast && cast.duration < 3){
+      $ionicPopup.alert({
+        template: "Your cast is to short, record a cast that is more than 3 seconds atleast"
+      });
+    }else{
       if(go){
       var uploadUrl = Config.API + "cast/upload";
       console.log("Broadcasting...");
@@ -122,11 +126,7 @@ $rootScope.post_cast=function(cast){
       template: "Your cast title contains some negative expression, please change it before you can upload this cast"
     });
   }
-}else{
-    $ionicPopup.alert({
-      template: "Your cast is to short, record a cast that is more than 3 seconds atleast"
-    });
-  }
+}
 };
 
 

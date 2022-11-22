@@ -64,13 +64,12 @@
   border-radius: 200px !important;
   cursor: pointer;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.375);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #efefefc5), color-stop(100%, #ffffffe0));
+  background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #efefefc5), color-stop(100%, #ffffffe0));
   background-repeat: no-repeat;
 }
 
 
-  .duration3{
+  .duration2{
     height: 7px !important;
     float: left !important;
     border: 5px !important;
@@ -82,30 +81,16 @@
     position:  relative !important;
     display: block !important;
     z-index: 10000 !important;
-    margin-top: -1px !important;
+    margin-top: 0px !important;
     border-radius: 200px !important;
     margin-left: 10px !important;
+    background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #ecececc5), color-stop(100%, #828282bd));
+    background-repeat: no-repeat;
   }
   
 
   
   
-
-.duration2{
-  height: 10px !important;
-  float: left !important;
-  border: 5px !important;
-   background-repeat: no-repeat;
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  outline: none;
-  position:  relative !important;
-  display: block !important;
-  z-index: 10000 !important;
-  margin-top: 5px !important;
-  border-radius: 200px !important;
-}
 
 
 

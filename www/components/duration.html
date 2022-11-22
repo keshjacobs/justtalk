@@ -1,2 +1,2 @@
-<input type="range" min="1" step="1" ng-change="track_position2(cast.bar)" max="cast.duration" ng-model="cast.bar" class="duration" />
+<input type="range" min="1" step="1" ng-style="{'background-size': ((cast.bar/cast.duration) * 100)+'%'}" ng-change="track_position2(cast.bar)" max="{{cast.duration || 180}}" ng-model="cast.bar || 0" class="duration2" />
 <!-- ng-style="{'background-size': ((cast.bar/cast.duration) * 100)+'%'}" -->
