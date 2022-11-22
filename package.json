@@ -72,6 +72,7 @@
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
     "cordova-plugin-ios-microphone-permissions": "^1.0.0",
     "cordova-plugin-media": "^5.0.4",
+    "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-plugin-music-controls2.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
@@ -241,7 +242,8 @@
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
-      }
+      },
+      "cordova-plugin-music-controls2": {}
     },
     "platforms": []
   }
