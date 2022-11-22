@@ -1,5 +1,5 @@
 app.controller('splash', function($timeout,$state,$rootScope){
-    $rootScope.play_sound("talk.wav");
+    $rootScope.play_sound("splash.wav");
      $timeout(function(){
         if(!$rootScope.notify){
             if(!$rootScope.t_id){

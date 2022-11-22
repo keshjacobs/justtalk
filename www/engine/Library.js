@@ -1852,7 +1852,11 @@ $rootScope.unheard=function(){
 $rootScope.build_playlist=function(c){
   if(!c.reply){
     if($rootScope.playlist.length < 1){
-      $rootScope.playlist=$rootScope.timeline;
+        if($rootScope.timeline.length > 3){
+        $rootScope.playlist=$rootScope.timeline;
+      }else{
+        $rootScope.playlist=$rootScope.suggested_casts
+      }
     }
     $rootScope.playlist=$rootScope.playlist.map(function(cast,i){
       if(!cast.reply){
@@ -1867,10 +1871,6 @@ $rootScope.build_playlist=function(c){
     if($rootScope.track > -1){
       if($rootScope.playlist[$rootScope.track]){
         $rootScope.playlist[$rootScope.track].casting=true;
-      }
-      if(!$rootScope.playlist[$rootScope.track + 1]){
-        $rootScope.playlist=$rootScope.suggested_casts;
-        $rootScope.track=0;
       }
       }
   }
@@ -2575,7 +2575,7 @@ $rootScope.more_suggestions=function(pages) {
         target: 'single_cast'
       },
       '/profile/:id': {
-        target: 'profile'
+        target: 'aprofile'
       }
     }).subscribe(function(match) {
       console.log('Match deep route:', match);

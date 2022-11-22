@@ -1,6 +1,6 @@
 {
   "name": "justtalk",
-  "version": "2.8.5",
+  "version": "2.8.6",
   "description": "listen to podcasts and join the conversation",
   "author": "Kesh Jacobs",
   "homepage": "https://justtalkapp.com/",
@@ -17,7 +17,6 @@
     "cordova": "^11.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
-    "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -28,7 +27,7 @@
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
-    "cordova-plugin-music-controls": "^2.2.0",
+    "cordova-plugin-music-controls2-fix-ios": "^3.0.8",
     "cordova-plugin-navigationbar-color": "0.0.8",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
@@ -60,8 +59,10 @@
     "@ionic/lab": "3.2.13",
     "@ionic/v1-toolkit": "^3.2.15",
     "bower": "^1.8.12",
+    "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-ios": "^6.2.0",
+    "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
@@ -72,6 +73,7 @@
     "cordova-plugin-ios-camera-permissions": "^1.2.0",
     "cordova-plugin-ios-microphone-permissions": "^1.0.0",
     "cordova-plugin-media": "^5.0.4",
+    "cordova-plugin-music-controls2": "^3.0.7",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
@@ -243,7 +245,8 @@
         "ANDROID_PATH_PREFIX": "/"
       },
       "cordova-music-controls": {},
-      "cordova-plugin-advanced-background-mode": {}
+      "cordova-plugin-advanced-background-mode": {},
+      "cordova-plugin-music-controls2": {}
     },
     "platforms": []
   }
