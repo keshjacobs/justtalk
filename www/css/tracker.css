@@ -1,0 +1,48 @@
+
+
+
+.duration::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+     /* background: #cbcbcbe8; */
+  }
+
+
+
+.duration::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border:none !important;
+    height: 10px;
+    width: 10px;
+    border-radius: 360px;
+    background: #adadadd3;
+    cursor: pointer;
+    box-shadow: none !important; /* Add cool effects to your sliders! */
+    appearance: none !important;
+    z-index: 100000 !important;
+  }
+
+
+
+  .duration::-ms-fill-upper {
+    background: #3071a9;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+
+  .duration:focus::-ms-fill-upper {
+    background: #367ebd;
+  }
+  
+  
+
+
+
+
+
+  
+
+
+
+  

@@ -21,7 +21,7 @@
               <ion-spinner icon="crescent"></ion-spinner> 
               <small>Checking for conversations...</small>
           </div>
-          <div ng-include ng-repeat="cast in cast_replies | limitTo:cast_replies.length:(convo_track+1)" src="'components/track-item.html'"></div>   
+          <div ng-include ng-repeat="cast in cast_replies | limitTo:cast_replies.length:(current_cast.reply ? convo_track+1:convo_track)" src="'components/track-item.html'"></div>   
         </div>
 
 

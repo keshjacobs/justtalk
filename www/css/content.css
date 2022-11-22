@@ -53,112 +53,43 @@
   height: 7px !important;
   float: left !important;
   border: 5px !important;
-  background-color: rgba(141, 141, 141, 0.773) !important;
--webkit-appearance: none;
-background: transparent;
-appearance: none;
-width: 100%;
-outline: none;
-position:  relative !important;
-display: block !important;
-z-index: 10000 !important;
-margin-top: -1px !important;
-border-radius: 200px !important;
-cursor: pointer;
-}
-
-.duration::-webkit-slider-runnable-track {
-  background: #053a5f;
-  height: 0.5rem;
-}
-
-.duration::-moz-range-track {
-  background: #053a5f;
-  height: 0.5rem;
-}
-
-
-.duration::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  width: 0px !important;
-  height: 0px !important;
-  border-radius: 0% !important; 
-  background: none !important;
-  box-shadow: none !important;
-  z-index: 100000 !important;
-  }
-  
-  .duration::-moz-range-thumb {
-  width: 0px;
-  height: 0px;
-  border-radius: 0%;
-  background: none !important;
-  cursor: pointer;
-  }
-  
-
-
-
-  input[type="range"]:focus {
-    outline: none;
-  }
-
-
-
-
-  .duration3{
-    height: 7px !important;
-    float: left !important;
-    border: 5px !important;
-      background-repeat: no-repeat;
   -webkit-appearance: none;
   appearance: none;
-  width: 97%;
+  width: 100%;
   outline: none;
   position:  relative !important;
   display: block !important;
   z-index: 10000 !important;
   margin-top: -1px !important;
   border-radius: 200px !important;
-  margin-left: 10px !important;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.375);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #efefefc5), color-stop(100%, #ffffffe0));
+  background-repeat: no-repeat;
+}
+
+
+  .duration3{
+    height: 7px !important;
+    float: left !important;
+    border: 5px !important;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 97%;
+    outline: none;
+    position:  relative !important;
+    display: block !important;
+    z-index: 10000 !important;
+    margin-top: -1px !important;
+    border-radius: 200px !important;
+    margin-left: 10px !important;
   }
   
-  .duration3::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    width: 0px !important;
-    height: 0px !important;
-    border-radius: 0% !important; 
-    background: none !important;
-    box-shadow: none !important;
-    z-index: 100000 !important;
-    }
-    
-    .duration3::-moz-range-thumb {
-      width: 0px;
-      height: 0px;
-      border-radius: 0%;
-      background: none !important;
-      cursor: pointer;
-    }
-    
+
   
   
-
-
-
-
-
-    input[type=range]::-ms-track {
-      width: 100%;
-      cursor: pointer;
-    
-      /* Hides the slider so custom styles can be added */
-      background: transparent; 
-      border-color: transparent;
-      color: transparent;
-    }
 
 .duration2{
   height: 10px !important;
@@ -176,69 +107,6 @@ cursor: pointer;
   border-radius: 200px !important;
 }
 
-.duration2::-webkit-slider-thumb {
-  appearance: none !important;
-  width: 0px !important;
-  height: 0px !important;
-  border-radius: 0% !important; 
-  background: none !important;
-  box-shadow: none !important;
-  z-index: 100000 !important;
-}
-
-.duration2::-moz-range-thumb {
-  width: 0px;
-  height: 0px;
-  border-radius: 0%;
-  background: none !important;
-  cursor: pointer;
-}
-
-.duration2::-webkit-slider-runnable-track {
-  background: #313b2d8b;
-  height: 0.5rem;
-}
-
-.duration2::-ms-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  border-width: 16px 0;
-  color: transparent;
-  border-radius: 200px !important;
-}
-.duration2::-ms-fill-lower {
-  background: #2a6495;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #3071a9;
-}
-input[type=range]::-ms-fill-upper {
-  background: #3071a9;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #367ebd;
-}
-
-
-input[type=range].styled-slider.slider-progress {
-  --range: calc(var(--max) - var(--min));
-  --ratio: calc((var(--value) - var(--min)) / var(--range));
-  --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
-}
-
-
-input[type=range]  {
-  background-color: rgba(0, 0, 0, 0.255) !important;
-}
 
 
 .chat_box{

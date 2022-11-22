@@ -1704,7 +1704,9 @@ $rootScope.track_position=function(position) {
   if($rootScope.current_cast.casting){
         $rootScope.pause_cast();
       } 
-    if(position){
+    if(parseInt(position)){
+      console.log("t:");
+      console.log(parseInt(position));
       $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration - parseInt(position);  
         }
   }
