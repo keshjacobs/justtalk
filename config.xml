@@ -28,6 +28,9 @@
     <allow-intent href="*" />
     <allow-intent href="file://*/*" />
     <allow-intent href="file://*" />
+    <resources>
+        <color name="background">#FF0000</color>
+    </resources>
     <preference name="EnableViewportScale" value="false" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
     <preference name="GradlePluginGoogleServicesVersion" value="4.3.10" />
@@ -99,9 +102,6 @@
         <allow-access-from domain="angular-file-upload.appspot.com" />
         <allow-http-request-headers-from domain="*" headers="*" secure="false" />
     </cross-domain-policy>
-    <resources>
-        <color name="background">#FF0000</color>
-    </resources>
     <icon src="resources/icon.png" />
     <platform name="android">
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">

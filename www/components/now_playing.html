@@ -15,12 +15,14 @@
             <span class="icon {{text_color}}" ng-class="current_cast.casting ? 'ion-pause':'ion-play'" style="font-size: 22px !important;"></span>
         </button>
 
-        <!-- <button title="close" ng-if="!current_cast.casting" ng-click="drop_aircast()" class="button button-clear button-balanced button-icon">
-            <span class="icon ion-ios-close-empty {{text_color}}" style="font-size: 22px !important;"></span>
-        </button> -->
 
         <button ng-click="next_cast()" ng-disabled="(track == (playlist.length-1)) || playlist.length < 1 || !playlist || !current_cast.cast" class="button button-clear button-balanced button-icon">
             <span class="icon ion-ios-fastforward {{text_color}}" style="font-size: 22px !important;"></span>
+        </button>
+
+
+        <button title="close" ng-if="!current_cast.casting" ng-click="drop_aircast()" class="button button-clear button-balanced button-icon">
+            <span class="icon ion-ios-close-empty {{text_color}}" style="font-size: 22px !important;"></span>
         </button>
         
     </div>

@@ -182,7 +182,7 @@ $rootScope.preview=function(sound){
           if($rootScope.Music.stop){
             $rootScope.Music.stop();
           }  
-          if(main_cast.timeLeft <= 1){
+          if(main_cast.timeLeft < 1){
             main_cast.timeLeft=main_cast.duration; 
             if($rootScope.playing_message){
               $rootScope.pause_message();
@@ -191,7 +191,8 @@ $rootScope.preview=function(sound){
                 $rootScope.pause_cast();
                 $rootScope.next_cast();
               }
-          }};
+          }
+        };
           if (source.start) {
             source.start(0,ct); 
             } else if (source.play) {
@@ -322,7 +323,7 @@ $rootScope.unlock_media=function() {
 
 
 $rootScope.change_mode=function(){
-  $rootScope.play_sound("popup.wav");
+  $rootScope.play_sound("splash.wav");
     $localStorage.dark_mode=!$localStorage.dark_mode;
     $rootScope.settings.dark_mode=$localStorage.dark_mode;
     $rootScope.change_bar();
@@ -1848,21 +1849,23 @@ $rootScope.unheard=function(){
   return total;
 }
 
+$rootScope.clear_replies=function(){
+  $rootScope.cast_replies=[];
+}
 
 $rootScope.build_playlist=function(c){
+  if ( $location.path() === "/front/talk" ){
+    $rootScope.playlist=$rootScope.timeline;
+  }
   if(!$rootScope.playlist || $rootScope.playlist.length < 1){
-      if($rootScope.timeline.length > 3){
+      if($rootScope.timeline.length > 1){
       $rootScope.playlist=$rootScope.timeline;
     }else{
-      $rootScope.playlist=$rootScope.suggested_casts
+      $rootScope.playlist=$rootScope.suggested_casts;
     }
   }
-  if(!c.reply){
-    $rootScope.playlist=$rootScope.playlist.map(function(cast,i){
-      if(!cast.reply){
-          return cast;
-        }
-      });
+  if(!$rootScope.cast_replies[$rootScope.convo_track + 1]){
+    $rootScope.cast_replies=[];
     $rootScope.track=$rootScope.playlist.findIndex(function(cst){
       if(cst){
         return cst._id==c._id;
@@ -2069,11 +2072,11 @@ img.onload = function() {
           $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
         }
         if($rootScope.current_cast.cast){
+            $rootScope.build_playlist($rootScope.current_cast);
             if(!$rootScope.current_cast.reply){
               $rootScope.get_replies($rootScope.current_cast._id);
             }
             $rootScope.cast_listen($rootScope.current_cast);
-            $rootScope.build_playlist($rootScope.current_cast);
             $rootScope.play_audio(Config.media+$rootScope.current_cast.cast);
             $rootScope.top_player($rootScope.current_cast);
         }
@@ -2236,7 +2239,7 @@ $rootScope.timediff = function(start){
 
   
 if($localStorage.user){
-$localStorage.user=$rootScope.user;
+$rootScope.user=$localStorage.user;
 }
   
 
@@ -2441,20 +2444,8 @@ $rootScope.delete_cast=function(c){
     $rootScope.get_talk=function() {
       $timeout(function(){
         $rootScope.home_loader=true;
-      if($rootScope.user){
-    cast.timeline($rootScope.user.t_id).success(function(Data){
-      $rootScope.home_loader=false;
-      if(Data.status==true){
-        $rootScope.timeline=$rootScope.censor_casts(Data.data);
-        $rootScope.home_loader=false;
-        $rootScope.hide();
-      }
-    }).error(function(){
-      $rootScope.home_loader=false;
-      $rootScope.hide();
-    });  
-    }else{
-    cast.suggestion().success(function(Data){
+      if($rootScope.t_id){
+    cast.timeline($rootScope.t_id).success(function(Data){
       $rootScope.home_loader=false;
       if(Data.status==true){
         $rootScope.timeline=$rootScope.censor_casts(Data.data);
@@ -2466,6 +2457,19 @@ $rootScope.delete_cast=function(c){
       $rootScope.hide();
     });  
     }
+    // else{
+    // cast.suggestion().success(function(Data){
+    //   $rootScope.home_loader=false;
+    //   if(Data.status==true){
+    //     $rootScope.timeline=$rootScope.censor_casts(Data.data);
+    //     $rootScope.home_loader=false;
+    //     $rootScope.hide();
+    //   }
+    // }).error(function(){
+    //   $rootScope.home_loader=false;
+    //   $rootScope.hide();
+    // });  
+    // }
     },1000);
     }
 
@@ -2518,7 +2522,7 @@ $rootScope.more_suggestions=function(pages) {
 }
  
    $ionicPlatform.registerBackButtonAction(function() {
-     if ($location.path() === "/front/talk" || $location.path() === "/front/talk" ) {
+     if ( $location.path() === "/front/talk" ) {
        navigator.app.exitApp();
      }
      else {
@@ -2526,7 +2530,7 @@ $rootScope.more_suggestions=function(pages) {
      }
    }, 100);
  
-   if ($location.path() === "/front/messages" || $location.path() === "/front/messages" ) {
+   if ($location.path() === "/front/messages" ) {
     $rootScope.chat=null;
   }
 

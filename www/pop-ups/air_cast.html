@@ -15,14 +15,17 @@
 
         <div ng-style="{'background-color':color}" ng-show="cast_replies.length > 0">
           <div class="next-header" ng-style="{'background-color':color}">
+              <a ng-click="clear_replies()" class="pull-right {{text_color}}" style="float: right !important;text-decoration: underline;">Clear</a>
               <b class="{{text_color}}">{{current_cast.reply ? "In":(current_cast.title || current_cast.caster.user_name+"'s")}} conversation</b>
           </div>  
           <div ng-show="fetching_replies" class="text-center padding">
               <ion-spinner icon="crescent"></ion-spinner> 
               <small>Checking for conversations...</small>
           </div>
-          <div ng-include ng-repeat="cast in cast_replies | limitTo:cast_replies.length:(current_cast.reply ? convo_track+1:convo_track)" src="'components/track-item.html'"></div>   
-        </div>
+          <div ng-hide="fetching_replies">
+            <div ng-include ng-repeat="cast in cast_replies | limitTo:cast_replies.length:(current_cast.reply ? convo_track+1:convo_track)" src="'components/track-item.html'"></div>   
+          </div>
+         </div>
 
 
 
