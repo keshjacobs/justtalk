@@ -1,5 +1,5 @@
 <div style="height: 60px;float:left;width:100%;">
-<input type="range" min="0" ng-change="track_position(current_cast.bar)" ng-style="{'background-size': ((current_cast.bar/current_cast.duration) * 100)+'%'}" max="{{current_cast.duration || 180}}" step="1" ng-model="current_cast.bar || 0" class="duration" />
+<input type="range" min="0" ng-change="track_position(current_cast.bar)" ng-model="current_cast.bar" ng-style="{'background-size': ((current_cast.bar/current_cast.duration) * 100)+'%'}" max="{{current_cast.duration || 180}}" step="1" value="{{current_cast.bar || 0}}" class="duration" />
 <div>
     <h6 class="{{text_color}} pull-right" style="float: right !important;">{{current_cast.duration || 0 | number:0}}s</h6>
     <h6 class="{{text_color}} pull-left" style="float: left !important;">{{current_cast.bar || 0 | number:0}}s</h6>

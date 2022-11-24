@@ -90,6 +90,7 @@ $rootScope.post_cast=function(cast){
       $rootScope.clear();
       if(resp.data.status==true){
         $timeout(function(){
+          $rootScope.play_sound("popup.wav");
         $rootScope.clear();
         },2000);
         if(cast.recast){

@@ -27,12 +27,17 @@
 .modal .item-avatar{
   background-color: transparent !important;
 }
-ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.popup,.popup-head,.popup-body,.popup-buttons,.modal .bg-light{
+ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.modal .bg-light{
 color:#fff !important;
 background-color: rgba(36, 36, 36, 0.373) !important;
 border:none !important;
 -webkit-backdrop-filter: blur(25px) !important;
 backdrop-filter: blur(25px) !important;
+}
+.popup,.popup-head,.popup-body,.popup-buttons{
+  color:#fff !important;
+  background-color: rgb(0, 0, 0) !important;
+  border:none !important;
 }
 
 .item-divider,.modal .item-divider{

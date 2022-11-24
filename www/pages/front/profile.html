@@ -20,6 +20,9 @@
           <button title="mic" ng-click="start_talk()" ng-if="current_cast.cast" class="button button-sm button-clear button-dark">
             <span class="icon ion-plus"></span>
           </button>
+          <button ng-click="play_casts(my_casts)" ng-if="!current_cast" class="button button-sm button-clear button-dark">
+           Play all&nbsp;&nbsp;
+          </button>
       </ion-nav-buttons>
     </ion-nav-bar>
 

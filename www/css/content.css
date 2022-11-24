@@ -64,7 +64,7 @@
   border-radius: 200px !important;
   cursor: pointer;
   overflow: hidden;
-  background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #efefefc5), color-stop(100%, #ffffffe0));
+  background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #2727277a), color-stop(100%, #36363690));
   background-repeat: no-repeat;
 }
 
@@ -84,7 +84,7 @@
     margin-top: 0px !important;
     border-radius: 200px !important;
     margin-left: 10px !important;
-    background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #ecececc5), color-stop(100%, #828282bd));
+    background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #36363693), color-stop(100%, #1e1e1e71));
     background-repeat: no-repeat;
   }
   
@@ -2114,7 +2114,7 @@ display: none;
 
 .profile_header2{
   width:100% !important;
-  height:340px;
+  height:380px;
   background-size: cover;
   background-color: rgba(27, 31, 26, 0.836);
   margin:auto !important;

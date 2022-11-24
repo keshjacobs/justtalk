@@ -5,7 +5,7 @@
             <h2><b>Suggested Casts</b></h2>
          </div>
 
-        <div  ng-include="'components/cast.html'"  ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:12">
+        <div  ng-include="'components/cast.html'"  ng-repeat="cast in suggested_casts | orderBy:'-likes' | limitTo:20  track by $index">
         </div>
 
    </div>

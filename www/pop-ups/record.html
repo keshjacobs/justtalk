@@ -1,9 +1,9 @@
 <ion-modal-view class="bg-light">
     <ion-header-bar class="bar bg-light">
             <button title="close" ng-click="close_recorder()" ng-hide="recording" class="button button-clear button-dark button-sm button-small">&nbsp;<i class="ion ion-close-round"></i>&nbsp;</button>          
-             <!-- <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-clear button-balanced button-sm button-small" style="margin-top: 10px !important;"> -->
-           
-            </button>          
+             <!-- <button ng-disabled="!file_added || recording || post.casting"  ng-click="post_cast(post)" class="button button-clear button-balanced button-sm button-small" style="margin-top: 10px !important;"> -->   
+            </button>  
+            <ion-title><b>{{file_added ? 'Create a cast':''}}</b></ion-title>        
     </ion-header-bar>
     
       <ion-content class="text-center bg-white padding">
