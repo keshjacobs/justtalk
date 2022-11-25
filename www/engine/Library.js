@@ -16,12 +16,11 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$co
   }else{
     $localStorage.dark_mode=false;
   }
-  var music_source={};
-  var source={};
-  $rootScope.source={};
   $rootScope.prep=null;
+  $rootScope.source={};
   $rootScope.Music={};
-  $rootScope.AudioMan={};
+  $rootScope.AudioMan=null;
+  $rootScope.AudioMan2=null;
 
   $rootScope.saved_casts=[];
   $rootScope.library=[];
@@ -80,6 +79,10 @@ $ionicModal.fromTemplateUrl('pop-ups/record.html', {
 
 $rootScope.pause_message=function(){
   if($rootScope.chat){
+    if($rootScope.playing_message){
+    $rootScope.playing_message.casting=false;
+    }
+    this.cast.casting=false;
     var casts=$rootScope.chat.conversations;
     if(casts){
     for(var i=0;i < casts.length;i++){
@@ -122,10 +125,24 @@ $rootScope.preview=function(sound){
 
 
 
+$rootScope.next_message=function(){
+  console.log("next message....");
+  $rootScope.pause_message();
+  $timeout(function(){
+          $rootScope.track=$rootScope.track+1; 
+          if($rootScope.playlist[$rootScope.track]){
+              $rootScope.play_message($rootScope.playlist[$rootScope.track]);
+          }
+        },1000);
+    }
+
+
+
+
   $rootScope.play_audio=function (audio){
     var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
     $rootScope.AudioMan=new Aud();
-    source = $rootScope.AudioMan.createBufferSource();
+    var source = $rootScope.AudioMan.createBufferSource();
     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
     const gainNodeR = $rootScope.AudioMan.createGain();
     const analyser = $rootScope.AudioMan.createAnalyser();
@@ -186,10 +203,8 @@ $rootScope.preview=function(sound){
           if(main_cast.timeLeft <= 1.1){
             main_cast.timeLeft=main_cast.duration; 
             if($rootScope.playing_message){
-              $rootScope.pause_message();
               $rootScope.next_message();
               }else{
-                $rootScope.pause_cast();
                 $rootScope.next_cast();
               }
           }
@@ -232,11 +247,11 @@ $rootScope.preview=function(sound){
 
 $rootScope.connect_music=function (audio,ct,loudness) { 
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-  const AudioMan=new Aud();
-  const gainNodeL = AudioMan.createGain();
-  music_source = AudioMan.createBufferSource();
+  $rootScope.AudioMan2=new Aud();
+  const gainNodeL = $rootScope.AudioMan2.createGain();
+  var music_source = $rootScope.AudioMan2.createBufferSource();
   $http.get(Config.media+audio, {responseType: "arraybuffer"}).success(function(bf) {
-    AudioMan.decodeAudioData(bf).then(function(buffer) {
+    $rootScope.AudioMan2.decodeAudioData(bf).then(function(buffer) {
       if(buffer){
           music_source.src=audio;
           music_source.buffer=buffer;
@@ -246,7 +261,7 @@ $rootScope.connect_music=function (audio,ct,loudness) {
           music_source.autoplay=true;
           music_source.connect(gainNodeL);
           gainNodeL.gain.value = loudness;
-          gainNodeL.connect(AudioMan.destination);
+          gainNodeL.connect($rootScope.AudioMan2.destination);
           if (music_source.start) {
               music_source.start(0,ct); 
             } else if (music_source.play) {
@@ -265,29 +280,28 @@ $rootScope.connect_music=function (audio,ct,loudness) {
 
 
 $rootScope.pause_audio=function(){
-  if($rootScope.AudioMan.close){
+  if($rootScope.AudioMan){
+    $rootScope.source.started=false;
     $rootScope.AudioMan.close();
   }
-  if ($rootScope.source.stop) {
-    $rootScope.source.started=false;
-    $rootScope.source.stop();
-    $rootScope.source={};
-    source=null;
-    }
-    if($rootScope.Music.stop){
-      $rootScope.Music.stop();
-      $rootScope.Music={};
-      music_source=null;
+  if($rootScope.AudioMan2){
+    $rootScope.AudioMan2.close();
   }
+  // if ($rootScope.source.stop) {
+  //   $rootScope.source.stop();
+  //   }
+  //   if($rootScope.Music.stop){
+  //     $rootScope.Music.stop();
+  // }
 }
 
 $rootScope.unlock_media=function() {
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-  let AudioMan=new Aud();
-  source = AudioMan.createBufferSource();
-  var buffer = AudioMan.createBuffer(1, 1, 22050);
+  $rootScope.AudioMan=new Aud();
+  var source = $rootScope.AudioMan.createBufferSource();
+  var buffer = $rootScope.AudioMan.createBuffer(1, 1, 22050);
   source.buffer = buffer;
-  source.connect(AudioMan.destination);
+  source.connect($rootScope.AudioMan.destination);
   if (source.start) {
       source.start(0);
       } else if (source.play) {
@@ -299,7 +313,6 @@ $rootScope.unlock_media=function() {
       document.body.removeEventListener('click', $rootScope.unlock_media);
       document.body.removeEventListener('touchstart',$rootScope.unlock_media);
       $rootScope.pause_audio();
-      AudioMan.stop();
 }
 
 
@@ -1758,6 +1771,8 @@ $rootScope.currentTime=function(cast) {
                 if(cast.casting && $rootScope.source.started){
                       $rootScope.currentTime(cast);
                     }
+                  }else{
+                    $rootScope.pause_audio();
                   }
               }else{
                 console.log("no source!");
@@ -1972,14 +1987,12 @@ $rootScope.top_player=function(cast) {
 
 $rootScope.audio_frequency=function(audio){
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  source = audioCtx.createMediaElementSource(audio);
+  var source = audioCtx.createMediaElementSource(audio);
   $rootScope.analyser = audioCtx.createAnalyser();
   source.connect($rootScope.analyser);
   $rootScope.analyser.connect(audioCtx.destination);
   $rootScope.Audiofrq = new Uint8Array($rootScope.analyser.frequencyBinCount);
   $rootScope.analyser.getByteFrequencyData($rootScope.Audiofrq);
-  console.log("Audio frq:");
-  console.log($rootScope.Audiofrq);
 }
 
 
@@ -2070,8 +2083,9 @@ img.onload = function() {
           $rootScope.current_cast=c;
         }
         $rootScope.current_cast.casting=true;
-        if(!$rootScope.current_cast.timeLeft){
+        if(!$rootScope.current_cast.timeLeft || $rootScope.current_cast.timeLeft < 1){
           $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
+          $rootScope.current_cast.bar=0;
         }
         if($rootScope.current_cast.cast){
             $rootScope.build_playlist($rootScope.current_cast);
@@ -2424,24 +2438,22 @@ $rootScope.delete_cast=function(c){
     }
 
     $rootScope.censor_casts=function(casts){
-      var new_casts=[];
+      var new_casts=casts;
       if($rootScope.user){
         casts.map(function(cast,i){
-            if($rootScope.user.cast_list){
-              var z=$rootScope.user.cast_list.indexOf(cast._id);
-              if(z <=-1){
-                new_casts.push(cast);
+              var id=cast._id;
+              if(cast.recast){
+                id=cast.recast._id;
               }
-            }
-        })
-        casts.map(function(cast,i){
-            if($rootScope.user.block_list){
+              var z=$rootScope.user.cast_list.indexOf(id);
               var index=$rootScope.user.block_list.indexOf(cast.caster.t_id);
-              if(index <=-1){
-                new_casts.push(cast);
-              }
-            }
-        });
+              if(z>=0){
+                new_casts.splice(i,1);
+              }else
+               if(index >=0){
+                new_casts.splice(i,1);
+                }
+        })
         }
           return new_casts;
     }
@@ -2511,9 +2523,24 @@ $rootScope.today=date;
     }
     $rootScope.new_feed();
 
+
+
+
+
+
+
+
+
+
+
+
+
    $ionicPlatform.ready(function() {
+    document.body.addEventListener('click', $rootScope.unlock_media);
+    document.body.addEventListener('touchstart',$rootScope.unlock_media);
 
     $rootScope.change_bar();
+
       socket.on('message',function(data){
         $rootScope.get_messages();
         if($rootScope.chat){
@@ -2549,8 +2576,6 @@ $rootScope.today=date;
 
 
 
-  document.body.addEventListener('click', $rootScope.unlock_media);
-  document.body.addEventListener('touchstart',$rootScope.unlock_media);
 
 
     if(window.device){
@@ -2570,15 +2595,11 @@ if(FirebasePlugin){
         $rootScope.account_update($rootScope.user);
        }
       FirebasePlugin.setBadgeNumber(0);
-      FirebasePlugin.grantPermission();
    });
-  
-
    FirebasePlugin.requestPushPermission();
    FirebasePlugin.grantPermission(function(hasPermission){
     console.log("Permission was " + (hasPermission ? "granted" : "denied"));
     });
-
    FirebasePlugin.onTokenRefresh(function(token) {
     console.log("...............justtalk signed fcm generated token:");
     if(token){
@@ -2599,7 +2620,6 @@ if(FirebasePlugin){
         $rootScope.notify=true;
         if (data.tap || data.tapped || data.Tapped || data.Tap) {
             $timeout(function() {
-              $rootScope.new_feed();
                 if(data.notifications){
                   $state.go("front.notification");
                 }else
@@ -2609,7 +2629,7 @@ if(FirebasePlugin){
                 if(data.chat || data.message){
                   $state.go("front.messages");
                 }
-            },4000);
+            },2000);
         }
 
         FirebasePlugin.getBadgeNumber(function(n) {
@@ -2630,7 +2650,6 @@ if(FirebasePlugin){
       cordova.plugins.Keyboard.disableScroll(false);
       window.WkWebView.allowsBackForwardNavigationGestures(true);
       Splashscreen.hide();
-      $rootScope.settings.dark_mode=cordova.plugins.ThemeDetection.isDarkModeEnabled().value;
 
 cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
   successCallback: function(){
@@ -2663,18 +2682,20 @@ cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
  });
 
 
- cordova.plugins.iosrtc.registerGlobals();
- cordova.plugins.iosrtc.debug.enable('*', true);
+//  cordova.plugins.iosrtc.registerGlobals();
+//  cordova.plugins.iosrtc.debug.enable('*', true);
 
  // load adapter.js
-  if (window.device.platform === 'iOS') {
- var adapterVersion = 'latest';
- var script = document.createElement("script");
- script.type = "text/javascript";
- script.src = "https://webrtc.github.io/adapter/adapter-" + adapterVersion + ".js";
- script.async = false;
- document.getElementsByTagName("head")[0].appendChild(script);
-  }
+//   if (window.device.platform === 'iOS') {
+//  var adapterVersion = 'latest';
+//  var script = document.createElement("script");
+//  script.type = "text/javascript";
+//  script.src = "https://webrtc.github.io/adapter/adapter-" + adapterVersion + ".js";
+//  script.async = false;
+//  document.getElementsByTagName("head")[0].appendChild(script);
+//   }
+
+
 
 cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
   for (var permission in statuses){
@@ -2699,6 +2720,8 @@ cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
 cordova.plugins.diagnostic.permission.NOTIFICATIONS,
  cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE,
  cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE]);
+
+
  cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
   successCallback: function(){
       console.log("Successfully requested remote notifications authorization");

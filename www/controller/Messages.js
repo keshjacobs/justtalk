@@ -328,19 +328,6 @@ $rootScope.start_recording=function() {
 
 
 
-  $rootScope.next_message=function(){
-    console.log("next message....");
-    // $rootScope.pause_message();
-    $rootScope.pause_cast();
-    $timeout(function(){
-            $rootScope.track=$rootScope.track+1; 
-            if($rootScope.playlist[$rootScope.track]){
-                $rootScope.play_message($rootScope.playlist[$rootScope.track]);
-            }
-          },1000);
-      }
-  
-
 
 
 
@@ -348,10 +335,10 @@ $rootScope.start_recording=function() {
 
 
   $rootScope.track_position2=function(position) {
-  if($rootScope.playing_message.casting){
-        $rootScope.pause_message();
+    if(position){ 
+      if($rootScope.playing_message.casting){
+      $rootScope.pause_message();
       } 
-    if(position){
       $rootScope.playing_message.timeLeft=$rootScope.playing_message.duration - parseInt(position);  
         }
   }
@@ -387,16 +374,14 @@ $rootScope.message_listen=function(c){
         $rootScope.get_messages();
         if(!cast.casting){
         console.log("playing...."); 
-        cast.casting=true;
         $rootScope.playing_message=cast;
+        $rootScope.playing_message.casting=true;
           $timeout(function(){
           if(cast.cast){
           var src=$rootScope.media+cast.cast;
             $rootScope.play_audio(src);
           $rootScope.message_listen(cast);
-          if(!$rootScope.playlist || $rootScope.playlist.length < 1){
           $rootScope.playlist=$rootScope.chat.conversations;
-          }
           $rootScope.track=$rootScope.chat.conversations.indexOf(cast);
           }else{
             $rootScope.pause_message();

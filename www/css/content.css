@@ -59,12 +59,12 @@
   outline: none;
   position:  relative !important;
   display: block !important;
-  z-index: 10000 !important;
+  z-index: 1000000 !important;
   margin-top: -1px !important;
   border-radius: 200px !important;
   cursor: pointer;
   overflow: hidden;
-  background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #2727277a), color-stop(100%, #36363690));
+  background: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #2727277a), color-stop(100%, #36363690));
   background-repeat: no-repeat;
 }
 
@@ -80,11 +80,11 @@
     outline: none;
     position:  relative !important;
     display: block !important;
-    z-index: 10000 !important;
+    z-index: 1000000 !important;
     margin-top: 0px !important;
     border-radius: 200px !important;
     margin-left: 10px !important;
-    background-image: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #36363693), color-stop(100%, #1e1e1e71));
+    background: -webkit-gradient(linear, 100% 100%, 100% 100%, color-stop(100%, #36363693), color-stop(100%, #1e1e1e71));
     background-repeat: no-repeat;
   }
   
