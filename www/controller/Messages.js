@@ -253,14 +253,16 @@ $rootScope.delete_message=function(c){
 
 
   $rootScope.exit_chat=function(){
-    $rootScope.clear();
     $rootScope.pause_cast();
     $rootScope.pause_message();
+    $rootScope.clear();
+    $rootScope.get_messages();
     if ($location.path() != "/front/messages") {
       window.history.back();
     }
     $timeout(function(){
       $rootScope.chat={};
+      $rootScope.messages=null;
       $rootScope.playlist=[];
       $rootScope.chat_id=null;
     },1000);

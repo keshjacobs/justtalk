@@ -343,7 +343,13 @@ padding: 0px !important;
     margin: 9px !important;
     border-radius: 9px !important;
   }
-    
+    .backdrop{
+    background-color: rgba(0, 0, 0, 0.768) !important;
+    color: #fff !important;
+    border: none !important;
+    opacity: 1 !important;
+    }
+
   .topic{
       width:100% !important;
       height:inherit !important;

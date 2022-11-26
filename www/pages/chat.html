@@ -27,7 +27,7 @@
       <ion-refresher pulling-text="Pull to refresh" on-refresh="get_chat(chat._id)"></ion-refresher>
        
 
-      <div ng-show="chat.conversations.length < 1">
+      <div ng-show="messages.length < 1">
         <div class=" text-center item item-light" style="border: none !important;box-shadow:none !important;">
           <div class="padding">
             <h2><b>No message sent yet.</b></h2>
@@ -36,8 +36,8 @@
         </div>
       </div>
   
-      <div ng-if="chat.conversations.length > 0">
-            <div ng-include="'components/message.html'" ng-repeat="cast in chat.conversations | unique:'date_created' | orderBy:'date_created'"></div>
+      <div ng-if="messages.length > 0">
+            <div ng-include="'components/message.html'" ng-repeat="cast in messages | unique:'date_created' | orderBy:'date_created'"></div>
       </div>
 
       <div class="gap"></div>

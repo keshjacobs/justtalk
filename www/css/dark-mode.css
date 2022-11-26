@@ -97,7 +97,7 @@ input,textarea{
     background-color: rgba(0, 0, 0, 0) !important;
     color: #fff !important;
 }
-.input-light,.input-lable,.backdrop{
+.input-light,.input-lable{
     background-color: rgba(96, 96, 96, 0.528) !important;
     color: #fff !important;
     border: none !important;

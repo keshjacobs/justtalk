@@ -149,7 +149,12 @@
         </feature>
     </platform>
     <platform name="ios">
+        <plugin name="cordova-plugin-iosrtc" spec="4.0.2" />
+        <plugin name="cordova-plugin-add-swift-support" />
+        <preference name="swift-version" value="4.2" />
+        <preference name="deployment-target" value="10.2" />
         <preference name="WKWebViewOnly" value="true" />
+        <preference name="UseLegacySwiftLanguageVersion" value="true" />
         <feature name="CDVWKWebViewEngine">
             <param name="ios-package" value="CDVWKWebViewEngine" />
         </feature>
@@ -243,7 +248,7 @@
         <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
     </platform>
     <resources>
-        <color name="background">#FF0000</color>
+        <color name="background">#290000</color>
     </resources>
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />

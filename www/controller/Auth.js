@@ -39,11 +39,12 @@ $rootScope.counter=59;
       account.login(data).success(function(Data){
         $rootScope.hide();
         if(Data.status==true){
-          $localStorage.t_id=Data.data.t_id;
-          $rootScope.t_id=Data.data.t_id;
-          $rootScope.user=Data.data;
-          $state.go("front.talk");
+          $localStorage.user_name=null;
           $rootScope.det={};
+          $rootScope.user=Data.data;
+          $localStorage.t_id=$rootScope.user.t_id;
+          $rootScope.t_id=$localStorage.t_id;
+          $state.go("front.talk");
           $rootScope.new_feed();
         }else{
         $scope.error=Data.message;
@@ -206,12 +207,13 @@ else{
         account.register(data).success(function(Data){
           $rootScope.hide();
           if(Data.status==true){
-              $localStorage.t_id=Data.data.t_id;
-              $rootScope.user=Data.data;
-              $rootScope.det={};
-              $rootScope.new_feed();
-              $state.go("welcome");
               $localStorage.user_name=null;
+              $rootScope.det={};
+              $rootScope.user=Data.data;
+              $localStorage.t_id=$rootScope.user.t_id;
+              $rootScope.t_id=$localStorage.t_id;
+              $state.go("welcome");
+              $rootScope.new_feed();
           }else{
             $scope.error=Data.message;
           }

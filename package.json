@@ -17,6 +17,7 @@
     "cordova": "^11.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
+    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -60,17 +61,12 @@
     "bower": "^1.8.12",
     "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
-    "cordova-ios": "^6.2.0",
-    "cordova-music-controls": "git+https://github.com/Ekaanth/cordova-music-controls-plugin.git",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
-    "cordova-plugin-audioinput": "^1.0.2",
     "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-ios-camera-permissions": "^1.2.0",
-    "cordova-plugin-ios-microphone-permissions": "^1.0.0",
     "cordova-plugin-media": "^5.0.4",
     "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-plugin-music-controls2.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
@@ -193,7 +189,6 @@
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-cocoapod-support": {},
-      "cordova-plugin-audioinput": {},
       "cordova-plugin-media-capture": {},
       "cordova-plugin-navigationbar-color": {},
       "cordova-plugin-proguard": {},
@@ -204,14 +199,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-permission": {},
       "cordova.plugins.diagnostic": {},
-      "cordova-plugin-ios-microphone-permissions": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-ios-camera-permissions": {
-        "CAMERA_USAGE_DESCRIPTION": "This app requires photo library access for users to set profile photo or share contents",
-        "MICROPHONE_USAGE_DESCRIPTION": "This app needs microphone access for users to create casts and record messages",
-        "PHOTOLIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access for users to set profile photo or share contents",
-        "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app requires photo library access for users to set profile photo or share contents"
-      },
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.12",
         "ANDROIDBLACKLISTSECURESOCKETPROTOCOLS": "SSLv3,TLSv1"
@@ -243,7 +231,8 @@
         "DEEPLINK_HOST": "justtalkapp.com",
         "ANDROID_PATH_PREFIX": "/"
       },
-      "cordova-plugin-music-controls2": {}
+      "cordova-plugin-music-controls2": {},
+      "cordova-plugin-add-swift-support": {}
     },
     "platforms": []
   }

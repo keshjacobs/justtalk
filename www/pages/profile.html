@@ -13,7 +13,7 @@
         </ion-nav-buttons>
 
         <ion-nav-buttons side="right">
-          <button title="more" ng-show="profile.t_id!=t_id" ng-click="profile_more(profile)" class="button button-clear">
+          <button title="more" ng-disabled="!profile.t_id" ng-show="profile.t_id!=t_id" ng-click="profile_more(profile)" class="button button-clear">
             <span class="icon ion-more dark"></span>
           </button>
         </ion-nav-buttons>
