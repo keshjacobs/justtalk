@@ -230,7 +230,8 @@ $rootScope.delete_message=function(c){
       {
       text: '<b>Yes</b>',
       type: 'button-light',
-      onTap: function(e) {    
+      onTap: function(e) {   
+        if($rootScope.chat){
           $rootScope.show();
           var data={
             chat_id:$rootScope.chat._id,
@@ -239,10 +240,11 @@ $rootScope.delete_message=function(c){
           Chat.delete(data).success(function(Data){
               $rootScope.hide();
               $ionicPopup.alert({template:Data.message});
-              $rootScope.get_messages();
+              $rootScope.get_chat($rootScope.chat._id);
           }).error(function(){
               $rootScope.hide();
           });  
+        }
       }
     }
     ]
@@ -253,19 +255,19 @@ $rootScope.delete_message=function(c){
 
 
   $rootScope.exit_chat=function(){
-    $rootScope.pause_cast();
-    $rootScope.pause_message();
-    $rootScope.clear();
-    $rootScope.get_messages();
+    $rootScope.chat=null;
+    $rootScope.messages=null;
+    $rootScope.playlist=[];
+    $rootScope.chat_id=null;
     if ($location.path() != "/front/messages") {
       window.history.back();
     }
     $timeout(function(){
-      $rootScope.chat={};
-      $rootScope.messages=null;
-      $rootScope.playlist=[];
-      $rootScope.chat_id=null;
-    },1000);
+      $rootScope.pause_cast();
+      $rootScope.pause_message();
+      $rootScope.clear();
+      $rootScope.get_messages();
+    });
     }
   
    
@@ -383,8 +385,8 @@ $rootScope.message_listen=function(c){
           var src=$rootScope.media+cast.cast;
             $rootScope.play_audio(src);
           $rootScope.message_listen(cast);
-          $rootScope.playlist=$rootScope.chat.conversations;
-          $rootScope.track=$rootScope.chat.conversations.indexOf(cast);
+          $rootScope.playlist=$rootScope.messages;
+          $rootScope.track=$rootScope.messages.indexOf(cast);
           }else{
             $rootScope.pause_message();
           }

@@ -14,9 +14,9 @@
                    <ion-segment-button value="replies">
                      <b>Replies</b>
                    </ion-segment-button>
-                   <ion-segment-button value="library">
+                   <!-- <ion-segment-button value="library">
                      <b>Stations</b>
-                   </ion-segment-button>
+                   </ion-segment-button> -->
                  </ion-segment>    
             </div>
             
@@ -45,10 +45,10 @@
                      </div>
                </ion-list>
 
-       <ion-list ng-switch-when="library">
+       <!-- <ion-list ng-switch-when="library">
          <div ng-include="'components/book.html'" ng-repeat="book in profile_library | unique:'_id' | orderBy:'-date_created' track by $index">
         </div> 
-        </ion-list>
+        </ion-list> -->
  
             </div>
            
