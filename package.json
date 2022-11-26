@@ -61,6 +61,7 @@
     "bower": "^1.8.12",
     "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
+    "cordova-ios": "^6.2.0",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
