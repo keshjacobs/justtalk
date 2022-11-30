@@ -167,6 +167,90 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
 });
 
 
+
+
+
+
+
+app.factory('$cordovaMedia', ['$q', function ($q) {
+
+  return {
+    newMedia: function (src,success,error,mediaStatus) { 
+      var media = new Media(src,success,error,mediaStatus);
+      return media;
+    },
+
+    getCurrentPosition: function (source) {
+      var q = $q.defer();
+
+      source.getCurrentPosition(function (success) {
+        q.resolve(success);
+
+      }, function (error) {
+        q.reject(error);
+      });
+
+      return q.promise;
+    },
+
+    getDuration: function (source) {
+
+      return source.getDuration();
+    },
+
+    play: function (source) {
+      source.play();
+
+      // iOS quirks :
+      // -  myMedia.play({ numberOfLoops: 2 }) -> looping
+      // -  myMedia.play({ playAudioWhenScreenIsLocked : false })
+    },
+
+    pause: function (source) {
+      return source.pause();
+    },
+
+    release: function (source) {
+      return source.release();
+    },
+
+
+    seekTo: function (source, milliseconds) {
+
+      return source.seekTo(milliseconds);
+    },
+
+    setVolume: function (source, volume) {
+      return source.setVolume(volume);
+    },
+
+    startRecord: function (source) {
+      return source.startRecord();
+    },
+
+    stopRecord: function (source) {
+
+      return source.stopRecord();
+    },
+
+    stop: function (source) {
+      return source.stop();
+    }
+  };
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
   app.factory('Mic', function($rootScope,$ionicPopup,$timeout,MediaDevices) {
     var Aud=AudioContext || window.AudioContext;
     let AudioMan=new Aud();
@@ -220,6 +304,9 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
      
     return  {
     rec:function(secs){
+                  if(window.KeepAwake){
+                    KeepAwake.start();
+                  }
                   const chunks = [];
                   $rootScope.recording=true;
                   $rootScope.file_added=false;
@@ -264,7 +351,10 @@ val = val.replace(decimal, '').replace(group, '').replace(currency, '').trim();
 
       stop:function(){
                 console.log("stop................................");
-                $rootScope.show();
+                $rootScope.show(); 
+                 if(window.KeepAwake){
+                  KeepAwake.stop();
+                }
                 $rootScope.recording=false;
                 $rootScope.messaging=false;
                 $timeout.cancel(timer);

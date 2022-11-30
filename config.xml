@@ -38,6 +38,7 @@
     <preference name="webviewbounce" value="false" />
     <preference name="AndroidLaunchMode" value="singleInstance" />
     <preference name="WKSuspendInBackground" value="false" />
+    <preference name="ScrollEnabled" value="true" />
     <preference name="MixedContentMode" value="2" />
     <preference name="Scheme" value="https" />
     <preference name="ResolveServiceWorkerRequests" value="true" />
@@ -68,7 +69,6 @@
     <preference name="NavigationBarBackgroundColor" value="#290000" />
     <preference name="NavigationBarLight" value="true" />
     <preference name="WKWebViewOnly" value="true" />
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="AllowBackForwardNavigationGestures" value="true" />
     <preference name="Allow3DTouchLinkPreview" value="false" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
@@ -149,7 +149,7 @@
         </feature>
     </platform>
     <platform name="ios">
-        <plugin name="cordova-plugin-iosrtc" spec="4.0.2" />
+        <plugin name="cordova-plugin-iosrtc" spec="4.0.3" />
         <plugin name="cordova-plugin-add-swift-support" />
         <preference name="swift-version" value="4.2" />
         <preference name="deployment-target" value="10.2" />
@@ -247,9 +247,6 @@
         <splash height="1792" src="resources/ios/splash/Default-1792h~iphone.png" width="828" />
         <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
     </platform>
-    <resources>
-        <color name="background">#290000</color>
-    </resources>
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
     <plugin name="cordova-plugin-navigationbar-color" spec="0.0.8" />
@@ -317,4 +314,5 @@
         <variable name="PLAY-SERVICES-WEARABLE" value="17.0.0" />
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.2.0" />
+    <plugin name="cordova-plugin-keep-awake" spec="https://github.com/snuffy/cordova-plugin-keep-awake" />
 </widget>

@@ -8,7 +8,9 @@
   "dependencies": {
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
     "@ionic-native/core": "^5.31.1",
+    "@ionic-native/file": "^5.36.0",
     "@ionic-native/ionic-webview": "^5.36.0",
+    "@ionic-native/media": "^5.36.0",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "5.36.0",
     "@ionic/cli": "^6.20.4",
@@ -21,16 +23,13 @@
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-filepath": "^1.5.8",
     "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^4.1.0",
-    "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-media-permissions": "0.0.2",
-    "cordova-plugin-navigationbar-color": "0.0.8",
     "cordova-plugin-splashscreen": "^6.0.0",
-    "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
     "cordova-plugin-whitelist": "^1.3.4",
     "cordova-plugin-x-socialsharing": "^5.6.8",
     "cordova-support-google-services": "^1.4.1",
@@ -59,8 +58,8 @@
     "@ionic/lab": "3.2.13",
     "@ionic/v1-toolkit": "^3.2.15",
     "bower": "^1.8.12",
-    "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
+    "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
     "cordova-plugin-androidx": "^3.0.0",
@@ -68,10 +67,11 @@
     "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-media": "^5.0.4",
+    "cordova-plugin-iosrtc": "^6.0.21",
+    "cordova-plugin-keep-awake": "git+https://github.com/snuffy/cordova-plugin-keep-awake.git",
+    "cordova-plugin-media": "^6.1.0",
     "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-plugin-music-controls2.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
-    "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
     "cordova-plugin-webserver": "^1.0.4",
@@ -190,16 +190,14 @@
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-cocoapod-support": {},
-      "cordova-plugin-media-capture": {},
       "cordova-plugin-navigationbar-color": {},
       "cordova-plugin-proguard": {},
       "cordova-plugin-androidx": {},
-      "cordova-plugin-media": {
-        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "YES"
-      },
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-permission": {},
-      "cordova.plugins.diagnostic": {},
+      "cordova.plugins.diagnostic": {
+        "ANDROIDX_VERSION": "1.0.0",
+        "ANDROIDX_APPCOMPAT_VERSION": "1.3.1"
+      },
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.12",
@@ -233,7 +231,16 @@
         "ANDROID_PATH_PREFIX": "/"
       },
       "cordova-plugin-music-controls2": {},
-      "cordova-plugin-add-swift-support": {}
+      "cordova-plugin-add-swift-support": {},
+      "cordova-plugin-iosrtc": {
+        "MANUAL_INIT_AUDIO_DEVICE": "FALSE"
+      },
+      "cordova-plugin-media": {
+        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+      },
+      "cordova-plugin-keep-awake": {
+        "USESWIFTLANGUAGEVERSION": "4"
+      }
     },
     "platforms": []
   }

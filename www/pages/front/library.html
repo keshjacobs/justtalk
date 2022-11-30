@@ -27,7 +27,7 @@
           </ion-segment-button>
       </ion-segment>    
   </div>
-  <ion-content class="bg-grey header-content">
+  <ion-content class="bg-grey header-content">         
       <ion-refresher pulling-text="Pull to refresh" on-refresh="get_library()"></ion-refresher>
       <div ng-include src="'components/auth.html'"></div>
 
@@ -36,8 +36,9 @@
                 <ion-list ng-switch-when="saved">
                     <div ng-include="'components/saved_cast.html'" ng-repeat="cast in saved_casts | orderBy:'-date_created' track by $index"></div> 
                     <div ng-if="saved_casts.length < 1" class="text-center padding">
+                        <br><br><br>
                         <span class="ion ion-mic-a dark" style="font-size: 30px !important;opacity: 0.4 !important;"></span>
-                        <br>
+                        <br><br/>
                         <h5 class="dark">You have no saved cast</h5>
                     </div>
                 </ion-list>
@@ -45,8 +46,9 @@
 
                 <ion-list ng-switch-when="purchased">
                     <div ng-show="!purchased || purchased.length < 1" class="text-center padding">
+                        <br><br><br>
                         <span class="ion ion-ios-book dark" style="font-size: 30px !important;opacity: 0.4 !important;"></span>
-                        <br>
+                        <br><br>
                         <h5 class="dark">You have not purchased anything</h5>
                     </div>
                 </ion-list>

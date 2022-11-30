@@ -25,8 +25,6 @@ var voice_filters=[
 }
 ];
 
-
-
 var songs=[
   { 
     name:"headlines",

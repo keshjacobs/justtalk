@@ -1,4 +1,4 @@
-app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
+app.run(function($ionicPlatform,socket,Upload,$cordovaMedia,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
   $rootScope.media=Config.media;
   $rootScope.pages=1;
   $rootScope.change_bar=function(){
@@ -9,15 +9,16 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaSocialSharing,TopMusic,$co
       }
   };
   $rootScope.settings={
-    dark_mode:false
+    dark_mode:true
   };
   if($localStorage.dark_mode){
     $rootScope.settings.dark_mode=$localStorage.dark_mode;
   }else{
     $localStorage.dark_mode=false;
+    $rootScope.settings.dark_mode=$localStorage.dark_mode;
   }
   $rootScope.prep=null;
-  $rootScope.source={};
+  $rootScope.source=null;
   $rootScope.Music={};
   $rootScope.AudioMan=null;
   $rootScope.AudioMan2=null;
@@ -139,106 +140,137 @@ $rootScope.next_message=function(){
 
 
 
-
-  $rootScope.play_audio=function (audio){
-    var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-    $rootScope.AudioMan=new Aud();
-    var source = $rootScope.AudioMan.createBufferSource();
-    const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
-    const gainNodeR = $rootScope.AudioMan.createGain();
-    const analyser = $rootScope.AudioMan.createAnalyser();
-    if($rootScope.source.stop){
-      $rootScope.source.stop();
-    }
-    let main_cast=$rootScope.post;
-    if($rootScope.playing_message){
-      if($rootScope.playing_message.casting){
-            main_cast=$rootScope.playing_message;
-          }
-          console.log("message cast:");
-          console.log(main_cast);
-    }else if($rootScope.current_cast){
-      main_cast=$rootScope.current_cast;
-      console.log("current cast:");
-      console.log(main_cast);
-    }else{
-      console.log("post cast:");
-      console.log(main_cast);
-    }
-    if(!main_cast.timeLeft){
-      main_cast.timeLeft=main_cast.duration || 0;
-    }
-    if(!main_cast.filter){
-      main_cast.filter=voice_filters[0];
-    }
-    var timeLeft=parseInt(main_cast.timeLeft) || 0;
-    var ct=parseInt(main_cast.duration) - timeLeft; 
-    if(main_cast.music){
-      $rootScope.connect_music(main_cast.music,ct,0.1);
-    }
-    $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
-      $rootScope.AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
-    if(buffer){
-      source.src = audio;
-      source.buffer = buffer;
-      source.crossOrigin = "anonymous";   
-      source.muted = false;
-      source.loop=false;
-      source.autoplay=true;
-      source.channelInterpretation = "speakers";
-      source.playbackRate.value=main_cast.filter.pitch;
-      source.connect(biquadFilter);
-      biquadFilter.type = main_cast.filter.type;
-      biquadFilter.frequency.value = main_cast.filter.frequency;
-      biquadFilter.connect(gainNodeR);
-      gainNodeR.gain.value = 1;
-      gainNodeR.connect(analyser);
-      analyser.connect($rootScope.AudioMan.destination);
-      analyser.fftSize = 256;
-      $rootScope.bufferLength = analyser.frequencyBinCount;
-      $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
-      source.onended=function(){   
-          if($rootScope.Music.stop){
-            $rootScope.Music.stop();
-          }  
-          if(main_cast.timeLeft <= 1.1){
-            main_cast.timeLeft=main_cast.duration; 
-            if($rootScope.playing_message){
-              $rootScope.next_message();
-              }else{
-                $rootScope.next_cast();
-              }
-          }
-        };
-          if (source.start) {
-            source.start(0,ct); 
-            } else if (source.play) {
-              source.play(0,ct);
-            } else if (source.noteOn) {
-                source.noteOn(0,ct);
+    $rootScope.play_audio=function (audio){
+      let main_cast=$rootScope.post;
+      if($rootScope.playing_message){
+        if($rootScope.playing_message.casting){
+              main_cast=$rootScope.playing_message;
             }
-            console.log("start.............");
-            $rootScope.source=source;
-            $rootScope.source.started=true;
-            $rootScope.currentTime(main_cast);
-}else{
-  console.log("can not decode buffer............................");
-}
-  }).catch(function(e){  
-    console.log("Error caught:");
-    console.log(e);
-    $rootScope.pause_message();
-  });  
-}).error(function() {
-  if($rootScope.playing_message){
-    console.log("ending because there was a fetch error...................!");
-    $rootScope.pause_message();
-  }else{
-    console.log("ending cast or post!........................");
-    $rootScope.pause_cast();
-  }
-});
-};
+      }else if($rootScope.current_cast){
+        main_cast=$rootScope.current_cast;
+      }
+      if(!main_cast.timeLeft){
+        main_cast.timeLeft=main_cast.duration || 0;
+      }
+      if(!main_cast.filter){
+        main_cast.filter=voice_filters[0];
+      }
+      var timeLeft=parseInt(main_cast.timeLeft) || 0;
+      var ct=parseInt(main_cast.duration) - timeLeft; 
+      $rootScope.source=$rootScope.Audio(audio,
+        function () { 
+          console.log("play from media plugin...");
+          if(main_cast.music){
+            console.log("music loaded....")
+            $rootScope.connect_music(main_cast.music,ct,0.1);
+          }
+        },
+        function (e) { 
+          alert('Media Error: ' + JSON.stringify(e)); 
+        }
+        );
+        $rootScope.source.crossOrigin = "anonymous";   
+        $rootScope.source.muted = false;
+        $rootScope.source.loop=false;
+        $rootScope.source.autoplay=true;
+        $rootScope.source.seekTo(ct);
+        $rootScope.source.play();
+        $rootScope.source.setVolume('1.0');
+    }
+
+
+//   $rootScope.play_audio=function (audio){
+//     var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
+//     $rootScope.AudioMan=new Aud();
+//     var source = $rootScope.AudioMan.createBufferSource();
+//     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
+//     const gainNodeR = $rootScope.AudioMan.createGain();
+//     const analyser = $rootScope.AudioMan.createAnalyser();
+//     if($rootScope.source.stop){
+//       $rootScope.source.stop();
+//     }
+//     let main_cast=$rootScope.post;
+//     if($rootScope.playing_message){
+//       if($rootScope.playing_message.casting){
+//             main_cast=$rootScope.playing_message;
+//           }
+//     }else if($rootScope.current_cast){
+//       main_cast=$rootScope.current_cast;
+//     }
+//     if(!main_cast.timeLeft){
+//       main_cast.timeLeft=main_cast.duration || 0;
+//     }
+//     if(!main_cast.filter){
+//       main_cast.filter=voice_filters[0];
+//     }
+//     var timeLeft=parseInt(main_cast.timeLeft) || 0;
+//     var ct=parseInt(main_cast.duration) - timeLeft; 
+//     if(main_cast.music){
+//       $rootScope.connect_music(main_cast.music,ct,0.1);
+//     }
+//     $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
+//       $rootScope.AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
+//     if(buffer){
+//       source.src = audio;
+//       source.buffer = buffer;
+//       source.crossOrigin = "anonymous";   
+//       source.muted = false;
+//       source.loop=false;
+//       source.autoplay=true;
+//       source.channelInterpretation = "speakers";
+//       source.playbackRate.value=main_cast.filter.pitch;
+//       source.connect(biquadFilter);
+//       biquadFilter.type = main_cast.filter.type;
+//       biquadFilter.frequency.value = main_cast.filter.frequency;
+//       biquadFilter.connect(gainNodeR);
+//       gainNodeR.gain.value = 1;
+//       gainNodeR.connect(analyser);
+//       analyser.connect($rootScope.AudioMan.destination);
+//       analyser.fftSize = 256;
+//       $rootScope.bufferLength = analyser.frequencyBinCount;
+//       $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
+//       source.onended=function(){   
+//           if($rootScope.Music.stop){
+//             $rootScope.Music.stop();
+//           }  
+//           if(main_cast.timeLeft <= 1.1){
+//             main_cast.timeLeft=main_cast.duration; 
+//             if($rootScope.playing_message){
+//               $rootScope.next_message();
+//               }else{
+//                 $rootScope.next_cast();
+//               }
+//           }
+//         };
+//           if (source.start) {
+//             source.start(0,ct); 
+//             } else if (source.play) {
+//               source.play(0,ct);
+//             } else if (source.noteOn) {
+//                 source.noteOn(0,ct);
+//             }
+//             console.log("start.............");
+//             $rootScope.source=source;
+//             $rootScope.source.started=true;
+//             $rootScope.currentTime(main_cast);
+// }else{
+//   console.log("can not decode buffer............................");
+// }
+//   }).catch(function(e){  
+//     console.log("Error caught:");
+//     console.log(e);
+//     $rootScope.pause_message();
+//   });  
+// }).error(function() {
+//   if($rootScope.playing_message){
+//     console.log("ending because there was a fetch error...................!");
+//     $rootScope.pause_message();
+//   }else{
+//     console.log("ending cast or post!........................");
+//     $rootScope.pause_cast();
+//   }
+// });
+// };
 
 
 
@@ -278,23 +310,29 @@ $rootScope.connect_music=function (audio,ct,loudness) {
 
 
 
-
-
 $rootScope.pause_audio=function(){
-  if($rootScope.AudioMan){
-    $rootScope.source.started=false;
-    $rootScope.AudioMan.close();
+  if($rootScope.source){
+    $rootScope.source.pause();
   }
-  if($rootScope.AudioMan2){
-    $rootScope.AudioMan2.close();
-  }
+}
+
+
+
+// $rootScope.pause_audio=function(){
+//   if($rootScope.AudioMan){
+//     $rootScope.source.started=false;
+//     $rootScope.AudioMan.close();
+//   }
+//   if($rootScope.AudioMan2){
+//     $rootScope.AudioMan2.close();
+//   }
   // if ($rootScope.source.stop) {
   //   $rootScope.source.stop();
   //   }
   //   if($rootScope.Music.stop){
   //     $rootScope.Music.stop();
   // }
-}
+// }
 
 $rootScope.unlock_media=function() {
   var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
@@ -310,10 +348,9 @@ $rootScope.unlock_media=function() {
       } else if (source.noteOn) {
           source.noteOn(0);
       }
-      $rootScope.source=source;
+      source.stop();
       document.body.removeEventListener('click', $rootScope.unlock_media);
       document.body.removeEventListener('touchstart',$rootScope.unlock_media);
-      $rootScope.pause_audio();
 }
 
 
@@ -1415,10 +1452,9 @@ $rootScope.upload_cast=function(c){
           this.post.cast.casting=false;
         }
       }
-      if (TopMusic) {
-      TopMusic.updateIsPlaying(false);
-      }
-      $rootScope.pause_audio();
+      // if (MusicControls) {
+      // MusicControls.updateIsPlaying(false);
+      // }
       $rootScope.pause_audio();
     }
 
@@ -1607,9 +1643,7 @@ $rootScope.report_cast=function(c){
       $timeout(function(){
             if($rootScope.convo_track <= ($rootScope.cast_replies.length-1)){
               $rootScope.play_cast($rootScope.cast_replies[$rootScope.convo_track]);
-              if($rootScope.convo_track <= 0){
                 $rootScope.convo_track=$rootScope.convo_track+1;
-              }
             }else{
               $rootScope.convo_track=0;
               $rootScope.cast_replies=[];
@@ -1912,8 +1946,7 @@ $rootScope.build_playlist=function(c){
 
 
 $rootScope.top_player=function(cast) {
-  if (TopMusic) {
-  TopMusic.create({
+  MusicControls.create({
     track : cast.title,
     artist : cast.caster.user_name,
     cover : Config.media+cast.caster.photo,
@@ -1935,7 +1968,11 @@ $rootScope.top_player=function(cast) {
     skipBackwardInterval : 0, //optional. default: 0.
     hasScrubbing : true //optional. default to false. Enable scrubbing from control center progress bar 
   });
-  TopMusic.subscribe(function(action) {
+  MusicControls.updateElapsed({
+    elapsed:($rootScope.current_cast.duration - $rootScope.current_cast.currentTime) || 0,
+    isPlaying: true
+  });
+  MusicControls.subscribe(function(action) {
     const message = JSON.parse(action).message;
     switch(message) {
       case 'music-controls-next':
@@ -1955,7 +1992,7 @@ $rootScope.top_player=function(cast) {
         break;
       case 'music-controls-seek-to':
         const seekToInSeconds = JSON.parse(action).position;
-        TopMusic.updateElapsed({
+        MusicControls.updateElapsed({
           elapsed: seekToInSeconds,
           isPlaying: true
         });
@@ -1965,16 +2002,8 @@ $rootScope.top_player=function(cast) {
         break;
     }
   });
-
-  TopMusic.listen();
-  TopMusic.updateIsPlaying(true); 
-  TopMusic.updateElapsed({
-    elapsed:$rootScope.current_cast.duration - $rootScope.current_cast.currentTime,
-    isPlaying: true
-  });
-}else{
-  console.log("topmusic not loaded!");
-}
+  MusicControls.updateIsPlaying(true); 
+  MusicControls.listen(($rootScope.current_cast.duration - $rootScope.current_cast.currentTime) || 0);
 }
  
 
@@ -2082,10 +2111,10 @@ img.onload = function() {
               if(!$rootScope.current_cast.reply){
                 $rootScope.get_replies($rootScope.current_cast._id);
               }
-              if($rootScope.current_cast.cast){
+              if($rootScope.current_cast){
                   $rootScope.cast_listen($rootScope.current_cast);
                   $rootScope.play_audio(Config.media+$rootScope.current_cast.cast);
-                  $rootScope.top_player($rootScope.current_cast);
+                  // $rootScope.top_player($rootScope.current_cast);
               }
             });
           });
@@ -2530,11 +2559,16 @@ $rootScope.today=date;
     document.body.addEventListener('click', $rootScope.unlock_media);
     document.body.addEventListener('touchstart',$rootScope.unlock_media);
 
+
+    $rootScope.Audio=function(audio,success,error){
+      console.log("Media plugin calling........:");
+      var angSound = $cordovaMedia.newMedia(audio);
+      $cordovaMedia.play(angSound).then(success,error);
+    }
+
     $rootScope.change_bar();
 
-    if (window.device.platform === 'iOS') {
-      cordova.plugins.iosrtc.registerGlobals();
-    }
+      
       socket.on('message',function(data){
         $rootScope.get_messages();
         if($rootScope.chat){
@@ -2592,7 +2626,7 @@ if(FirebasePlugin){
    });
    FirebasePlugin.requestPushPermission();
    FirebasePlugin.grantPermission(function(hasPermission){
-    console.log("Permission was " + (hasPermission ? "granted" : "denied"));
+    console.log("Aeby Push Permission was " + (hasPermission ? "granted" : "denied"));
     });
    FirebasePlugin.onTokenRefresh(function(token) {
     console.log("...............justtalk signed fcm generated token:");
@@ -2608,12 +2642,18 @@ if(FirebasePlugin){
 });
 
 
+      navigator.geolocation.getCurrentPosition(function(position){
+        $rootScope.user.coord={
+          lat:position.coords.latitude,
+          long:position.coords.longitude
+        };
+        $rootScope.account_update($rootScope.user);
+      });
 
 
       FirebasePlugin.onMessageReceived(function(data) {
         $rootScope.notify=true;
         if (data.tap || data.tapped || data.Tapped || data.Tap) {
-            $timeout(function() {
                 if(data.notifications){
                   $state.go("front.notification");
                 }else
@@ -2623,7 +2663,6 @@ if(FirebasePlugin){
                 if(data.chat || data.message){
                   $state.go("front.messages");
                 }
-            },2000);
         }
 
         FirebasePlugin.getBadgeNumber(function(n) {
@@ -2644,92 +2683,73 @@ if(FirebasePlugin){
       cordova.plugins.Keyboard.disableScroll(false);
       window.WkWebView.allowsBackForwardNavigationGestures(true);
       Splashscreen.hide();
+      cordova.plugins.backgroundMode.on('activate', function() {
+        cordova.plugins.backgroundMode.disableWebViewOptimizations(); 
+     });
 
-cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
-  successCallback: function(){
-      console.log("Successfully requested remote notifications authorization");
-  },
-  errorCallback: function(err){
-     console.error("Error requesting remote notifications authorization: " + err);
-  },
-  types: [
-      cordova.plugins.diagnostic.remoteNotificationType.ALERT,
-      cordova.plugins.diagnostic.remoteNotificationType.SOUND,
-      cordova.plugins.diagnostic.remoteNotificationType.BADGE
-  ],
-  omitRegistration: false
-});
-
-
-cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
-    console.log("Push notifications are " + (isEnabled ? "enabled" : "disabled"));
-}, function(error){
-    console.error("An error occurred: "+error);
-});
-
-  cordova.plugins.diagnostic.requestMicrophoneAuthorization(function(status){
-    if(status === cordova.plugins.diagnostic.permissionStatus.GRANTED){
-        console.log("Microphone use is authorized");
-    }
- }, function(error){
-     console.error(error);
- });
-
-
-//  cordova.plugins.iosrtc.registerGlobals();
-//  cordova.plugins.iosrtc.debug.enable('*', true);
-
- // load adapter.js
-//   if (window.device.platform === 'iOS') {
-//  var adapterVersion = 'latest';
-//  var script = document.createElement("script");
-//  script.type = "text/javascript";
-//  script.src = "https://webrtc.github.io/adapter/adapter-" + adapterVersion + ".js";
-//  script.async = false;
-//  document.getElementsByTagName("head")[0].appendChild(script);
-//   }
+      // if (window.device.platform === 'iOS') {
+            cordova.plugins.iosrtc.registerGlobals();
+            cordova.plugins.iosrtc.debug.enable('*', true);
+      // }
 
 
 
-cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
-  for (var permission in statuses){
-      switch(statuses[permission]){
-          case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-              console.log("Permission granted to use "+permission);
-              break;
-          case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-              console.log("Permission to use "+permission+" has not been requested yet");
-              break;
-          case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
-              console.log("Permission denied to use "+permission+" - ask again?");
-              break;
-          case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-              console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
-              break;
-      }
-  }
-}, function(error){
-  console.error("The following error occurred: "+error);
-},[cordova.plugins.diagnostic.permission.RECORD_AUDIO,
-cordova.plugins.diagnostic.permission.NOTIFICATIONS,
- cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE,
- cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE]);
+      cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
+        if(!isEnabled){
+          cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
+            successCallback: function(){
+                console.log("Successfully requested remote notifications authorization");
+            },
+            errorCallback: function(err){
+              console.error("Error requesting remote notifications authorization: " + err);
+            },
+            types: [
+                cordova.plugins.diagnostic.remoteNotificationType.ALERT,
+                cordova.plugins.diagnostic.remoteNotificationType.SOUND,
+                cordova.plugins.diagnostic.remoteNotificationType.BADGE
+            ],
+            omitRegistration: false
+          });
+        }
+      });
 
 
- cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
-  successCallback: function(){
-      console.log("Successfully requested remote notifications authorization");
-  },
-  errorCallback: function(err){
-    console.error("Error requesting remote notifications authorization: " + err);
-  },
-  types: [
-      cordova.plugins.diagnostic.remoteNotificationType.ALERT,
-      cordova.plugins.diagnostic.remoteNotificationType.SOUND,
-      cordova.plugins.diagnostic.remoteNotificationType.BADGE
-  ],
-  omitRegistration: false
-});
+
+
+    cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
+      for (var permission in statuses){
+          switch(statuses[permission]){
+              case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                  console.log("Permission granted to use "+permission);
+                  break;
+              case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                  console.log("Permission to use "+permission+" has not been requested yet");
+                  break;
+              case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
+                  console.log("Permission denied to use "+permission+" - ask again?");
+                  break;
+              case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                  console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+                  break;
+          }
+        }
+      }, function(error){
+        console.error("The following error occurred: "+error);
+      },[
+      cordova.plugins.diagnostic.permission.RECORD_AUDIO,
+      cordova.plugins.diagnostic.permission.CAMERA,
+      cordova.plugins.diagnostic.permission.NOTIFICATIONS,
+      cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE,
+      cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE,
+      cordova.plugins.diagnostic.permission.ACCESS_FINE_LOCATION,
+      cordova.plugins.diagnostic.permission.ACCESS_COARSE_LOCATION
+    ]);
+
+
+
+
+
+
 
 
    });
