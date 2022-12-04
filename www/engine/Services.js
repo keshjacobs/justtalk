@@ -337,10 +337,10 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
 
                  
                   timer=$timeout(function(){
-                    stop(src);
+                    stop();
                   },$rootScope.timer*1000); 
-                   if($rootScope.source){
-                    $rootScope.source.release();
+                   if($rootScope.source.stop){
+                    $rootScope.source.stop();
                     }
                   // cordova.file.dataDirectory
                   window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (entry) {

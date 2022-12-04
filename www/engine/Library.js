@@ -196,6 +196,7 @@ $rootScope.next_message=function(){
   $rootScope.play_audio=function (audio){
     var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
     $rootScope.AudioMan=new Aud();
+    $cordovaMedia.newMedia(audio);
     var source = $rootScope.AudioMan.createBufferSource();
     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
     const gainNodeR = $rootScope.AudioMan.createGain();
@@ -1492,9 +1493,9 @@ $rootScope.upload_cast=function(c){
           $rootScope.file=null;
           $rootScope.file_added=false;
           $rootScope.mentions=[];
-          if($rootScope.source){
+          if($rootScope.source.stop){
             $rootScope.clear_music();
-          $rootScope.source.release();
+          $rootScope.source.stop();
           }
     }
          
