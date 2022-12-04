@@ -1819,24 +1819,27 @@ $rootScope.track_position=function(position) {
   
   
 
-$rootScope.currentTime=function(cast) {
+$rootScope.currentTime=function(main_cast) {
     var pitch=1;
-    cast.duration=parseInt(cast.duration);
-    cast.timeLeft=parseInt(cast.timeLeft);
-    if(cast.filter){
-      if(cast.filter.pitch){
-          pitch=cast.filter.pitch;
+    main_cast.duration=parseInt(main_cast.duration);
+    main_cast.timeLeft=parseInt(main_cast.timeLeft);
+    if(main_cast.filter){
+      if(main_cast.filter.pitch){
+          pitch=main_cast.filter.pitch;
       }
     }
     $timeout(function(){
       if($rootScope.source){  
-                var timeLeft=cast.duration - cast.timeLeft;
+                var timeLeft=main_cast.duration - main_cast.timeLeft;
 
-                if(timeLeft <= cast.duration){  
-                  cast.timeLeft=cast.timeLeft - 1;
-                  cast.bar = timeLeft;
-                if(cast.casting && $rootScope.source.started){
-                      $rootScope.currentTime(cast);
+                if(timeLeft <= main_cast.duration){  
+                  main_cast.timeLeft=main_cast.timeLeft - 1;
+                  main_cast.bar = timeLeft;
+                  if(main_cast.bar >=30){
+                    cast.countStream(main_cast._id);
+                  }
+                if(main_cast.casting && $rootScope.source.started){
+                      $rootScope.currentTime(main_cast);
                     }
                   }else{
                     $rootScope.pause_audio();

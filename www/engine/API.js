@@ -242,6 +242,9 @@ app.factory('cast',function($http,Config){
      saved: function(p){
        return $http.get(Config.API + "cast/saved/"+p);
      },
+     countStream: function(p){
+      return $http.get(Config.API + "cast/stream/"+p);
+    },
      upload: function(id){
       return $http.get(Config.API + "cast/add/"+id);
      },
