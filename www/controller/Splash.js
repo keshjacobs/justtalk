@@ -1,6 +1,5 @@
 app.controller('splash', function($timeout,$state,$rootScope){
      $timeout(function(){  
-        $rootScope.play_sound("splash.wav");
         if(!$rootScope.notify){
             if(!$rootScope.t_id){
                 $rootScope.start_box.show();
@@ -9,6 +8,7 @@ app.controller('splash', function($timeout,$state,$rootScope){
             $state.go("front.talk");
         }
     }
+    $rootScope.play_sound("splash.wav");
     },4000);
 
 

@@ -1,5 +1,4 @@
-var error_connection="Check your internet connection";
-var connection_error=error_connection;
+var error_connection,connection_error="Check your internet connection";
 var voice_filters=[
 { 
   name:"normal",
@@ -78,21 +77,23 @@ var songs=[
     name:"discovery",
     src:"songs/discovery.mp3"
   }
-  ];
+]
   
+
 
 function getFormData(object) {
   const formData = new FormData();
   Object.keys(object).forEach(key => formData.append(key, object[key]));
   return formData;
-};
+}
 
-function thousands_separators(num)
-  {
+
+
+function thousands_separators(num){
     var num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return num_parts.join(".");
-  }
+}
 
 
 app.factory('account',function($http,Config){

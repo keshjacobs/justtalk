@@ -1,4 +1,4 @@
-app.run(function($ionicPlatform,socket,Upload,$cordovaMedia,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$sessionStorage,$ionicPopup){
+app.run(function($ionicPlatform,socket,Upload,$cordovaMedia,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$ionicPopup){
   $rootScope.media=Config.media;
   $rootScope.pages=1;
   $rootScope.change_bar=function(){
@@ -18,7 +18,7 @@ app.run(function($ionicPlatform,socket,Upload,$cordovaMedia,$cordovaSocialSharin
     $rootScope.settings.dark_mode=$localStorage.dark_mode;
   }
   $rootScope.prep=null;
-  $rootScope.source=null;
+  $rootScope.source={};
   $rootScope.Music={};
   $rootScope.AudioMan=null;
   $rootScope.AudioMan2=null;
@@ -140,137 +140,151 @@ $rootScope.next_message=function(){
 
 
 
-    $rootScope.play_audio=function (audio){
-      let main_cast=$rootScope.post;
-      if($rootScope.playing_message){
-        if($rootScope.playing_message.casting){
-              main_cast=$rootScope.playing_message;
-            }
-      }else if($rootScope.current_cast){
-        main_cast=$rootScope.current_cast;
-      }
-      if(!main_cast.timeLeft){
-        main_cast.timeLeft=main_cast.duration || 0;
-      }
-      if(!main_cast.filter){
-        main_cast.filter=voice_filters[0];
-      }
-      var timeLeft=parseInt(main_cast.timeLeft) || 0;
-      var ct=parseInt(main_cast.duration) - timeLeft; 
-      $rootScope.source=$rootScope.Audio(audio,
-        function () { 
-          console.log("play from media plugin...");
-          if(main_cast.music){
-            console.log("music loaded....")
-            $rootScope.connect_music(main_cast.music,ct,0.1);
-          }
-        },
-        function (e) { 
-          alert('Media Error: ' + JSON.stringify(e)); 
-        }
-        );
-        $rootScope.source.crossOrigin = "anonymous";   
-        $rootScope.source.muted = false;
-        $rootScope.source.loop=false;
-        $rootScope.source.autoplay=true;
-        $rootScope.source.seekTo(ct);
-        $rootScope.source.play();
-        $rootScope.source.setVolume('1.0');
+    // $rootScope.play_audio=function (audio){
+    //       let main_cast=$rootScope.post;
+    //   if($rootScope.playing_message){
+    //     if($rootScope.playing_message.casting){
+    //           main_cast=$rootScope.playing_message;
+    //         }
+    //   }else if($rootScope.current_cast){
+    //     main_cast=$rootScope.current_cast;
+    //   }
+    //   if(!main_cast.timeLeft){
+    //     main_cast.timeLeft=main_cast.duration || 0;
+    //   }
+    //   if(!main_cast.filter){
+    //     main_cast.filter=voice_filters[0];
+    //   }
+    //   var timeLeft=parseInt(main_cast.timeLeft) || 0;
+    //   var ct=parseInt(main_cast.duration) - timeLeft; 
+    //   if(main_cast.music){
+    //     $rootScope.connect_music(main_cast.music,ct,0.1);
+    //   }
+    //   $rootScope.source=$cordovaMedia.newMedia(audio,
+    //               function(){
+    //                 if($rootScope.Music.stop){
+    //                   $rootScope.Music.stop();
+    //                 }  
+    //                 if($rootScope.current_cast.timeLeft <= 1.1){
+    //                   $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration; 
+    //                   if($rootScope.playing_message){
+    //                     $rootScope.next_message();
+    //                     }else{
+    //                       $rootScope.next_cast();
+    //                     }
+    //                 }
+    //               },
+    //               function(err){
+    //                 console.log("Audio Error: ", err);
+    //                 // $ionicPopup.alert({template:"can not play audio at the moment"});
+    //               },
+    //               function(Media){
+    //                   if(Media==2){
+    //                     $rootScope.currentTime(main_cast);
+    //                   }
+    //               });
+    //     if($rootScope.source){
+    //       $rootScope.source.started=true;
+    //       $rootScope.source.seekTo(ct*1000);
+    //       $rootScope.source.setRate(main_cast.filter.pitch.toString());
+    //       $rootScope.source.play({ playAudioWhenScreenIsLocked : true ,numberOfLoops: 1});
+    //       $rootScope.source.setVolume("1.0");
+    //     }
+    // }
+
+
+  $rootScope.play_audio=function (audio){
+    var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
+    $rootScope.AudioMan=new Aud();
+    var source = $rootScope.AudioMan.createBufferSource();
+    const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
+    const gainNodeR = $rootScope.AudioMan.createGain();
+    const analyser = $rootScope.AudioMan.createAnalyser();
+    if($rootScope.source.stop){
+      $rootScope.source.stop();
     }
-
-
-//   $rootScope.play_audio=function (audio){
-//     var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-//     $rootScope.AudioMan=new Aud();
-//     var source = $rootScope.AudioMan.createBufferSource();
-//     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
-//     const gainNodeR = $rootScope.AudioMan.createGain();
-//     const analyser = $rootScope.AudioMan.createAnalyser();
-//     if($rootScope.source.stop){
-//       $rootScope.source.stop();
-//     }
-//     let main_cast=$rootScope.post;
-//     if($rootScope.playing_message){
-//       if($rootScope.playing_message.casting){
-//             main_cast=$rootScope.playing_message;
-//           }
-//     }else if($rootScope.current_cast){
-//       main_cast=$rootScope.current_cast;
-//     }
-//     if(!main_cast.timeLeft){
-//       main_cast.timeLeft=main_cast.duration || 0;
-//     }
-//     if(!main_cast.filter){
-//       main_cast.filter=voice_filters[0];
-//     }
-//     var timeLeft=parseInt(main_cast.timeLeft) || 0;
-//     var ct=parseInt(main_cast.duration) - timeLeft; 
-//     if(main_cast.music){
-//       $rootScope.connect_music(main_cast.music,ct,0.1);
-//     }
-//     $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
-//       $rootScope.AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
-//     if(buffer){
-//       source.src = audio;
-//       source.buffer = buffer;
-//       source.crossOrigin = "anonymous";   
-//       source.muted = false;
-//       source.loop=false;
-//       source.autoplay=true;
-//       source.channelInterpretation = "speakers";
-//       source.playbackRate.value=main_cast.filter.pitch;
-//       source.connect(biquadFilter);
-//       biquadFilter.type = main_cast.filter.type;
-//       biquadFilter.frequency.value = main_cast.filter.frequency;
-//       biquadFilter.connect(gainNodeR);
-//       gainNodeR.gain.value = 1;
-//       gainNodeR.connect(analyser);
-//       analyser.connect($rootScope.AudioMan.destination);
-//       analyser.fftSize = 256;
-//       $rootScope.bufferLength = analyser.frequencyBinCount;
-//       $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
-//       source.onended=function(){   
-//           if($rootScope.Music.stop){
-//             $rootScope.Music.stop();
-//           }  
-//           if(main_cast.timeLeft <= 1.1){
-//             main_cast.timeLeft=main_cast.duration; 
-//             if($rootScope.playing_message){
-//               $rootScope.next_message();
-//               }else{
-//                 $rootScope.next_cast();
-//               }
-//           }
-//         };
-//           if (source.start) {
-//             source.start(0,ct); 
-//             } else if (source.play) {
-//               source.play(0,ct);
-//             } else if (source.noteOn) {
-//                 source.noteOn(0,ct);
-//             }
-//             console.log("start.............");
-//             $rootScope.source=source;
-//             $rootScope.source.started=true;
-//             $rootScope.currentTime(main_cast);
-// }else{
-//   console.log("can not decode buffer............................");
-// }
-//   }).catch(function(e){  
-//     console.log("Error caught:");
-//     console.log(e);
-//     $rootScope.pause_message();
-//   });  
-// }).error(function() {
-//   if($rootScope.playing_message){
-//     console.log("ending because there was a fetch error...................!");
-//     $rootScope.pause_message();
-//   }else{
-//     console.log("ending cast or post!........................");
-//     $rootScope.pause_cast();
-//   }
-// });
-// };
+    let main_cast=$rootScope.post;
+    if($rootScope.playing_message){
+      if($rootScope.playing_message.casting){
+            main_cast=$rootScope.playing_message;
+          }
+    }else if($rootScope.current_cast){
+      main_cast=$rootScope.current_cast;
+    }
+    if(!main_cast.timeLeft){
+      main_cast.timeLeft=main_cast.duration || 0;
+    }
+    if(!main_cast.filter){
+      main_cast.filter=voice_filters[0];
+    }
+    var timeLeft=parseInt(main_cast.timeLeft) || 0;
+    var ct=parseInt(main_cast.duration) - timeLeft; 
+    if(main_cast.music){
+      $rootScope.connect_music(main_cast.music,ct,0.1);
+    }
+    $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
+      $rootScope.AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
+    if(buffer){
+      source.src = audio;
+      source.buffer = buffer;
+      source.crossOrigin = "anonymous";   
+      source.muted = false;
+      source.loop=false;
+      source.autoplay=true;
+      source.channelInterpretation = "speakers";
+      source.playbackRate.value=main_cast.filter.pitch;
+      source.connect(biquadFilter);
+      biquadFilter.type = main_cast.filter.type;
+      biquadFilter.frequency.value = main_cast.filter.frequency;
+      biquadFilter.connect(gainNodeR);
+      gainNodeR.gain.value = 1;
+      gainNodeR.connect(analyser);
+      analyser.connect($rootScope.AudioMan.destination);
+      analyser.fftSize = 256;
+      $rootScope.bufferLength = analyser.frequencyBinCount;
+      $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
+      source.onended=function(){   
+          if($rootScope.Music.stop){
+            $rootScope.Music.stop();
+          }  
+          if(main_cast.timeLeft <= 1.1){
+            main_cast.timeLeft=main_cast.duration; 
+            if($rootScope.playing_message){
+              $rootScope.next_message();
+              }else{
+                $rootScope.next_cast();
+              }
+          }
+        };
+          if (source.start) {
+            source.start(0,ct); 
+            } else if (source.play) {
+              source.play(0,ct);
+            } else if (source.noteOn) {
+                source.noteOn(0,ct);
+            }
+            console.log("start.............");
+            $rootScope.source=source;
+            $rootScope.source.started=true;
+            $rootScope.currentTime(main_cast);
+}else{
+  console.log("can not decode buffer............................");
+}
+  }).catch(function(e){  
+    console.log("Error caught:");
+    console.log(e);
+    $rootScope.pause_message();
+  });  
+}).error(function() {
+  if($rootScope.playing_message){
+    console.log("ending because there was a fetch error...................!");
+    $rootScope.pause_message();
+  }else{
+    console.log("ending cast or post!........................");
+    $rootScope.pause_cast();
+  }
+});
+};
 
 
 
@@ -279,12 +293,12 @@ $rootScope.next_message=function(){
 
 
 $rootScope.connect_music=function (audio,ct,loudness) { 
-  var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-  $rootScope.AudioMan2=new Aud();
-  const gainNodeL = $rootScope.AudioMan2.createGain();
-  var music_source = $rootScope.AudioMan2.createBufferSource();
+  var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
+  var newMedia=new Aud();
+  const gainNodeL = newMedia.createGain();
+  var music_source =newMedia.createBufferSource();
   $http.get(Config.media+audio, {responseType: "arraybuffer"}).success(function(bf) {
-    $rootScope.AudioMan2.decodeAudioData(bf).then(function(buffer) {
+    newMedia.decodeAudioData(bf).then(function(buffer) {
       if(buffer){
           music_source.src=audio;
           music_source.buffer=buffer;
@@ -294,7 +308,7 @@ $rootScope.connect_music=function (audio,ct,loudness) {
           music_source.autoplay=true;
           music_source.connect(gainNodeL);
           gainNodeL.gain.value = loudness;
-          gainNodeL.connect($rootScope.AudioMan2.destination);
+          gainNodeL.connect(newMedia.destination);
           if (music_source.start) {
               music_source.start(0,ct); 
             } else if (music_source.play) {
@@ -310,37 +324,41 @@ $rootScope.connect_music=function (audio,ct,loudness) {
 
 
 
+// $rootScope.pause_audio=function(){
+//   if($rootScope.source){
+//     $rootScope.source.started=false;
+//     $rootScope.source.stop();
+//     if($rootScope.Music.stop){
+//           $rootScope.Music.stop();
+//       }
+//   }
+// }
+
+
+
 $rootScope.pause_audio=function(){
-  if($rootScope.source){
-    $rootScope.source.pause();
+  if($rootScope.AudioMan){
+    $rootScope.source.started=false;
+    $rootScope.AudioMan.close();
+  }
+  if($rootScope.AudioMan2){
+    $rootScope.AudioMan2.close();
+  }
+  if ($rootScope.source.stop) {
+    $rootScope.source.stop();
+    }
+    if($rootScope.Music.stop){
+      $rootScope.Music.stop();
   }
 }
 
-
-
-// $rootScope.pause_audio=function(){
-//   if($rootScope.AudioMan){
-//     $rootScope.source.started=false;
-//     $rootScope.AudioMan.close();
-//   }
-//   if($rootScope.AudioMan2){
-//     $rootScope.AudioMan2.close();
-//   }
-  // if ($rootScope.source.stop) {
-  //   $rootScope.source.stop();
-  //   }
-  //   if($rootScope.Music.stop){
-  //     $rootScope.Music.stop();
-  // }
-// }
-
 $rootScope.unlock_media=function() {
-  var Aud= AudioContext || window.AudioContext || window.webkitAudioContext;
-  $rootScope.AudioMan=new Aud();
-  var source = $rootScope.AudioMan.createBufferSource();
-  var buffer = $rootScope.AudioMan.createBuffer(1, 1, 22050);
+  var Aud=  window.webkitAudioContext || AudioContext || window.AudioContext;
+  var newMedia=new Aud();
+  var source = newMedia.createBufferSource();
+  var buffer = newMedia.createBuffer(1, 1, 22050);
   source.buffer = buffer;
-  source.connect($rootScope.AudioMan.destination);
+  source.connect(newMedia.destination);
   if (source.start) {
       source.start(0);
       } else if (source.play) {
@@ -603,11 +621,14 @@ $ionicModal.fromTemplateUrl('pop-ups/mention.html', {
 
 
 
-  $rootScope.broadcasting = function() {
-    $ionicLoading.show({
-      templateUrl: 'components/broadcasting.html'
-    });
-  };
+$rootScope.broadcasting = function() {
+  $ionicLoading.show({
+    templateUrl: 'components/broadcasting.html'
+  });
+};
+$rootScope.saving = function() {
+  $ionicLoading.show({template: 'saving...'});
+};
    
   $rootScope.show=function() {
     $ionicLoading.show({
@@ -790,12 +811,9 @@ $rootScope.refresh_profile=function(){
             $rootScope.my_casts=Data.data;
           }
         }); 
-      }else{
-        console.log("could not conenct");
       }
   }).error(function(){
     $rootScope.fetching_casts=false;
-    console.log("could not conenct");
     $rootScope.hide();
   });
 },2000);
@@ -812,7 +830,7 @@ $rootScope.account_update=function(profile){
     if($localStorage.pushtoken){
     profile.pushtoken=$localStorage.pushtoken;
   }
-  profile.t_id=$localStorage.t_id;
+  profile.t_id=$rootScope.t_id;
    account.update(profile).success(function(Data){
        if(Data.status==true){
          $rootScope.refresh_profile();
@@ -1074,6 +1092,7 @@ $rootScope.like_cast=function(c){
                         _id:$rootScope.user._id,
                         t_id:$localStorage.t_id
                       });
+                      $rootScope.toast("you liked "+c.caster.user_name+"'s cast",true);
                     }
                   }
     }
@@ -1271,7 +1290,7 @@ $rootScope.like_cast=function(c){
 
 
 $rootScope.save_cast=function(cast){
-  $rootScope.show();
+  $rootScope.saving();
   var uploadUrl = Config.API + "cast/save";
   cast.t_id=$rootScope.t_id;
   cast.caster=$rootScope.user._id;
@@ -1401,7 +1420,9 @@ $rootScope.upload_cast=function(c){
 
     
   $rootScope.drop_aircast=function(){
-    $rootScope.pause_cast();
+    if($rootScope.current_cast.casting){
+      $rootScope.pause_cast();
+    }
     $rootScope.aircast_box.hide();
     $rootScope.current_cast=null; 
     $rootScope.playlist=null;
@@ -1420,6 +1441,7 @@ $rootScope.upload_cast=function(c){
 
 
       $rootScope.pause_cast=function(){
+      $rootScope.pause_audio();
         var casts=$rootScope.timeline || $rootScope.suggested_casts  || $rootScope.profile.casts || $rootScope.cast.replies || $rootScope.my_casts  || $rootScope.saved_casts;
         if(casts){
         for(var i=0;i < casts.length;i++){
@@ -1452,10 +1474,7 @@ $rootScope.upload_cast=function(c){
           this.post.cast.casting=false;
         }
       }
-      // if (MusicControls) {
-      // MusicControls.updateIsPlaying(false);
-      // }
-      $rootScope.pause_audio();
+      MusicControls.updateIsPlaying(false);
     }
 
 
@@ -1463,18 +1482,20 @@ $rootScope.upload_cast=function(c){
     
     $rootScope.clear=function(){
           console.log("clearing...");
-          $rootScope.pause_audio();
           $timeout(function(){
             $rootScope.file=null;
             $rootScope.file=null;
             $rootScope.messaging=false;
             $rootScope.post.file=null;
-            $rootScope.clear_music();
           },1000);
           $rootScope.messaging=false;
           $rootScope.file=null;
           $rootScope.file_added=false;
           $rootScope.mentions=[];
+          if($rootScope.source){
+            $rootScope.clear_music();
+          $rootScope.source.release();
+          }
     }
          
             
@@ -1644,6 +1665,8 @@ $rootScope.report_cast=function(c){
             if($rootScope.convo_track <= ($rootScope.cast_replies.length-1)){
               $rootScope.play_cast($rootScope.cast_replies[$rootScope.convo_track]);
                 $rootScope.convo_track=$rootScope.convo_track+1;
+                console.log("convo_track:");
+                console.log($rootScope.convo_track);
             }else{
               $rootScope.convo_track=0;
               $rootScope.cast_replies=[];
@@ -1807,6 +1830,7 @@ $rootScope.currentTime=function(cast) {
     $timeout(function(){
       if($rootScope.source){  
                 var timeLeft=cast.duration - cast.timeLeft;
+
                 if(timeLeft <= cast.duration){  
                   cast.timeLeft=cast.timeLeft - 1;
                   cast.bar = timeLeft;
@@ -1916,13 +1940,7 @@ $rootScope.build_playlist=function(c){
   }else if ( $location.path() === "/front/talk" ){
     $rootScope.playlist=$rootScope.timeline;
   }
-  if(c.reply){
-    $rootScope.convo_track=$rootScope.cast_replies.findIndex(function(cst){
-      if(cst){
-        return cst._id==c._id;
-      }
-    });
-  }else{
+  if(!c.reply){
     $rootScope.track=$rootScope.playlist.findIndex(function(cst){
       if(cst){
         return cst._id==c._id;
@@ -1954,8 +1972,11 @@ $rootScope.top_player=function(cast) {
     isPlaying : true,
     dismissable : true,
     duration : cast.duration,
-    hasSkipForward : true, 
-    hasSkipBackward : true,
+    hasPrev   : true,	
+	  hasNext   : true,		// show next button, optional, default: true
+    hasClose  : true,
+    hasSkipForward : false, 
+    hasSkipBackward : false,
     ticker	  : cast.caster.user_name,
     playIcon: 'media_play',
     pauseIcon: 'media_pause',
@@ -2003,11 +2024,27 @@ $rootScope.top_player=function(cast) {
     }
   });
   MusicControls.updateIsPlaying(true); 
-  MusicControls.listen(($rootScope.current_cast.duration - $rootScope.current_cast.currentTime) || 0);
+  MusicControls.listen();
 }
  
 
-
+$rootScope.toast=function(msg,success){
+  window.plugins.toast.showWithOptions({
+      message: msg,
+      duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+      position: "bottom",
+      addPixelsY: -40,  // added a negative value to move it up a bit (default 0)
+      styling: {
+        opacity: 0.75, // 0.0 (transparent) to 1.0 (opaque). Default 0.8
+        backgroundColor: (success ? '#00FF00':'#FF0000'), // make sure you use #RRGGBB. Default #333333
+        textColor: '#FFFFFF', // Ditto. Default #FFFFFF
+        textSize: 20.5, // Default is approx. 13.
+        cornerRadius: 16, // minimum is 0 (square). iOS default 20, Android default 100
+        horizontalPadding: 20, // iOS default 16, Android default 50
+        verticalPadding: 16 // iOS default 12, Android default 30
+      }
+    });
+}
 
 
 
@@ -2083,41 +2120,41 @@ img.onload = function() {
         $rootScope.pause_cast();
         }else{
           console.log("play!");
-          $rootScope.pause_cast();
-        get_color(Config.media+c.caster.photo,function(color){
-          $rootScope.color=color;
-        $timeout(function(){
-        var r=this;
-        if(r.cast){
-        r.cast.casting=true;
-          if(r.cast.recast){
-            r.cast.recast.casting=true;
+          $rootScope.pause_audio();
+          var r=this;
+          if(r.cast){
+          r.cast.casting=true;
+            if(r.cast.recast){
+              r.cast.recast.casting=true;
+            }
+        }else
+          if(r.post){
+            r.post.cast.casting=true;
           }
-      }else
-        if(r.post){
-          r.post.cast.casting=true;
-        }
-        if(c.recast){
-          $rootScope.current_cast=c.recast;
-        }else{
-          $rootScope.current_cast=c;
-        }
-        $rootScope.current_cast.casting=true;
-        if(!$rootScope.current_cast.timeLeft || $rootScope.current_cast.timeLeft < 1){
-          $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
-          $rootScope.current_cast.bar=0;
-        }
+          if(c.recast){
+            $rootScope.current_cast=c.recast;
+          }else{
+            $rootScope.current_cast=c;
+          }
+          $rootScope.current_cast.casting=true;
+          $timeout(function(){
+              if(!$rootScope.current_cast.timeLeft || $rootScope.current_cast.timeLeft < 1){
+                $rootScope.current_cast.timeLeft=$rootScope.current_cast.duration;
+                $rootScope.current_cast.bar=0;
+              }
+              get_color(Config.media+c.caster.photo,function(color){
+                $rootScope.color=color;
+              });
               $rootScope.build_playlist($rootScope.current_cast);
               if(!$rootScope.current_cast.reply){
                 $rootScope.get_replies($rootScope.current_cast._id);
               }
               if($rootScope.current_cast){
+                $rootScope.play_audio(Config.media+$rootScope.current_cast.cast);
                   $rootScope.cast_listen($rootScope.current_cast);
-                  $rootScope.play_audio(Config.media+$rootScope.current_cast.cast);
-                  // $rootScope.top_player($rootScope.current_cast);
+                  $rootScope.top_player($rootScope.current_cast);
               }
-            });
-          });
+            },1000);
         }
           };
 
@@ -2166,7 +2203,6 @@ img.onload = function() {
 
 
               $rootScope.clear_music=function(){
-                    $rootScope.pause_cast();  
                     $rootScope.post.music=null;
                     $rootScope.selected_music=null;
               }
@@ -2290,11 +2326,8 @@ console.log($rootScope.user);
       if(Data.status==true){
         $rootScope.user=Data.data; 
         $localStorage.user=$rootScope.user;
-      }else{
-        console.log("could not conenct");
       }
   }).error(function(){
-    console.log("could not conenct");
     $rootScope.hide();
   });
     }
@@ -2560,11 +2593,6 @@ $rootScope.today=date;
     document.body.addEventListener('touchstart',$rootScope.unlock_media);
 
 
-    $rootScope.Audio=function(audio,success,error){
-      console.log("Media plugin calling........:");
-      var angSound = $cordovaMedia.newMedia(audio);
-      $cordovaMedia.play(angSound).then(success,error);
-    }
 
     $rootScope.change_bar();
 
@@ -2584,9 +2612,6 @@ $rootScope.today=date;
       
       
     $cordovaDeeplinks.route({
-      '/': {
-        target: 'front.talk'
-      },
       '/cast/:id': {
         target: 'single_cast'
       },
@@ -2599,7 +2624,7 @@ $rootScope.today=date;
             $state.go(match.$route.target, {id: match.$args.id});
         }, 2000);
     }, function(nomatch) {
-      console.log('Deep Match none:', match);
+      console.log('Deep Match none:', nomatch);
     });
 
 
@@ -2677,22 +2702,20 @@ if(FirebasePlugin){
 
       });
     }
- 
+    cordova.plugins.backgroundMode.enable();
 
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-      cordova.plugins.Keyboard.disableScroll(false);
-      window.WkWebView.allowsBackForwardNavigationGestures(true);
-      Splashscreen.hide();
       cordova.plugins.backgroundMode.on('activate', function() {
         cordova.plugins.backgroundMode.disableWebViewOptimizations(); 
      });
 
-      // if (window.device.platform === 'iOS') {
+      if (device.platform == 'iOS') {
+        console.log("running on iOS!!!");
             cordova.plugins.iosrtc.registerGlobals();
             cordova.plugins.iosrtc.debug.enable('*', true);
-      // }
+      }
 
 
+      Splashscreen.hide();
 
       cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
         if(!isEnabled){

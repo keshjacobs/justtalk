@@ -1,4 +1,4 @@
-var app=angular.module('justtalk', ['ionic','ngAnimate','ionic.native','lazy-scroll', 'ngCordova', 'ngStorage','ngFileUpload','ionic-segment'])
+var app=angular.module('justtalk', ['ionic','ngCordova','ngAnimate','ionic.native','lazy-scroll','ngStorage','ngFileUpload','ionic-segment'])
 .constant('Config', {  
     API:'https://api.justtalkapp.com/user/',
     media:'https://storage.googleapis.com/justtalkstorage/',
@@ -6,6 +6,12 @@ var app=angular.module('justtalk', ['ionic','ngAnimate','ionic.native','lazy-scr
   }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.scrolling.jsScrolling(false);
   })
+  .config(function($sceDelegateProvider,Config) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'self',
+      Config.API,
+      Config.media]);
+    })
   .constant('MediaDevices',navigator.mediaDevices || window.navigator.mediaDevices)
   .factory('socket', function($rootScope,Config) {
     var socket = io(Config.API, {

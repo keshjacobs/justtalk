@@ -19,15 +19,17 @@
     "cordova": "^11.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-connectivity-monitor": "^1.2.2",
-    "cordova-plugin-add-swift-support": "2.0.2",
+    "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-deeplinks": "^1.1.1",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-filepath": "^1.5.8",
     "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^4.1.0",
+    "cordova-plugin-media": "^6.1.0",
     "cordova-plugin-media-permissions": "0.0.2",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-whitelist": "^1.3.4",
@@ -45,7 +47,6 @@
     "moment": "^2.29.1",
     "node-sass": "^4.12.0",
     "npm": "^6.14.15",
-    "opus-media-recorder": "^0.8.0",
     "rxjs": "^6.6.3",
     "update-notifier": "^5.1.0",
     "xml-js": "^1.6.11"
@@ -67,15 +68,13 @@
     "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-iosrtc": "^6.0.21",
     "cordova-plugin-keep-awake": "git+https://github.com/snuffy/cordova-plugin-keep-awake.git",
-    "cordova-plugin-media": "^6.1.0",
     "cordova-plugin-music-controls2": "git+https://github.com/ghenry22/cordova-plugin-music-controls2.git",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-proguard": "^2.2.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
     "cordova-plugin-webserver": "^1.0.4",
-    "cordova-plugin-wkwebview": "^0.6.10",
+    "cordova-plugin-x-toast": "^2.7.3",
     "cordova.plugins.diagnostic": "^6.1.1",
     "gulp": "^4.0.2",
     "shelljs": "^0.8.4",
@@ -155,7 +154,7 @@
       },
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "This App Requires Your Location to personalize your timeline experience"
+        "GPS_REQUIRED": "true"
       },
       "cordova-plugin-androidx-adapter": {},
       "cordova-android-firebase-gradle-release": {
@@ -232,16 +231,18 @@
       },
       "cordova-plugin-music-controls2": {},
       "cordova-plugin-add-swift-support": {},
-      "cordova-plugin-iosrtc": {
-        "MANUAL_INIT_AUDIO_DEVICE": "FALSE"
-      },
       "cordova-plugin-media": {
-        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+        "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "YES"
       },
       "cordova-plugin-keep-awake": {
-        "USESWIFTLANGUAGEVERSION": "4"
-      }
+        "USESWIFTLANGUAGEVERSION": "5"
+      },
+      "cordova-plugin-deeplinks": {},
+      "cordova-plugin-advanced-background-mode": {},
+      "cordova-plugin-x-toast": {}
     },
-    "platforms": []
+    "platforms": [
+      "browser"
+    ]
   }
 }

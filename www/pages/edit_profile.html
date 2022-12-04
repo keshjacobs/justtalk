@@ -19,10 +19,16 @@
   </ion-nav-bar>
   <ion-content class="bg-light" style="text-align: center;">
 
-<ion-item ui-sref="change_photo" class="text-left item-icon-right">
+<!-- <ion-item ui-sref="change_photo" class="text-left item-icon-right">
   <i class="icon ion-image dark"></i> Change Profile Photo
 </ion-item>
+ -->
 
+
+<div ui-sref="change_photo" class="profile_header3 text-center" ng-style="{'background-image':'url('+media+user.photo_header+')'}">
+</div>
+<div ui-sref="change_photo" class="profile_photo_big text-center" style="margin-top: -90px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}">
+</div> 
 
   <form ng-submit="profile_update(user)" class="list text-left">
 
