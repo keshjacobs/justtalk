@@ -342,68 +342,73 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
                    if($rootScope.source.stop){
                     $rootScope.source.stop();
                     }
-                  // cordova.file.dataDirectory
-                  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (entry) {
-                    console.log('accessing storage:',entry);
-                    $rootScope.recording=true;
-                    $rootScope.file_added=false;
-                    if(window.KeepAwake){
-                      KeepAwake.start();
-                    }
-                    count_down();  
-                    entry.getFile(Date.now() + ".wav", {
-                      create: true,
-                      exclusive: false
-                    }, function (fileEntry) {
-                              console.log('getFile', fileEntry.fullPath);
-                              $rootScope.mediaRec=$cordovaMedia.newMedia(fileEntry.fullPath,function() {
-                                                        console.log("recordAudio():Audio Success");
-                                                        $rootScope.recording=false;
-                                                        // GetFileObjectFromURL(fileEntry.fullPath, function (fileObject) {
-                                                            save_record(fileEntry.file);
-                                                          // });
-                                                    },
-                                                    function(err) {
-                                                        $rootScope.recording=false;
-                                                        $rootScope.file_added=false;
-                                                        $ionicPopup.alert({template:"Microphone failed to  connect"});
-                                                        console.log("error in mic connection");
-                                                        console.log(err);
-                                                    });
-                              $rootScope.mediaRec.startRecord();
-                          });
-                      });
-                //   MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
-                //     console.log("Mic connected successfully........");
-                //       var options = {
-                //         mimeType : 'audio/wavc'
-                //       }
-                //       mediaRec = new MediaRecorder(stream);
-                //       mediaRec.ondataavailable = function(e){
-                //         chunks.push(e.data);
-                //         };
-                //       mediaRec.onstop = function(){        
-                //         let file = new Blob(chunks,{ 'type' : 'audio/wav' });
-                //         save_record(file);
-                //       }
-                //       mediaRec.onstart = function(){
-                //         console.log("microphone started!");
-                //         var secs=$rootScope.timer*1000;
-                //         timer=$timeout(function(){
-                //           stop();
-                //         },secs);
-                //       };
-                //       $rootScope.recording=true;
-                //       mediaRec.start(secs);
-                //       count_down();
-                // }).catch(function(err) {
-                //   $rootScope.recording=false;
-                //       $rootScope.file_added=false;
-                //   $ionicPopup.alert({template:"Microphone failed to  connect"});
-                //   console.log("error in mic connection");
-                //   console.log(err);
-                //   stop();
-                // });
+
+
+                  //  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (entry) {
+                  //   console.log('accessing storage:',entry);
+                  //   $rootScope.recording=true;
+                  //   $rootScope.file_added=false;
+                  //   if(window.KeepAwake){
+                  //     KeepAwake.start();
+                  //   }
+                  //   count_down();  
+                  //   entry.getFile(Date.now() + ".wav", {
+                  //     create: true,
+                  //     exclusive: false
+                  //   }, function (fileEntry) {
+                  //             console.log('getFile', fileEntry.nativeURL);
+                  //             $rootScope.mediaRec=$cordovaMedia.newMedia(fileEntry.nativeURL,function() {
+                  //                                       console.log("recordAudio():Audio Success");
+                  //                                       $rootScope.recording=false;
+                  //                                       fileEntry.file(file => {
+                  //                                         const blob = new Blob([file],{type:'audio/wav'});
+                  //                                         save_record(blob);
+                  //                                       });
+                  //                                   },
+                  //                                   function(err) {
+                  //                                       $rootScope.recording=false;
+                  //                                       $rootScope.file_added=false;
+                  //                                       $ionicPopup.alert({template:"Microphone failed to  connect"});
+                  //                                       console.log("error in mic connection");
+                  //                                       console.log(err);
+                  //                                   });
+                  //             $rootScope.mediaRec.startRecord();
+                  //         });
+                  //     });
+
+
+
+                  MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
+                    console.log("Mic connected successfully........");
+                      var options = {
+                        mimeType : 'audio/wavc'
+                      }
+                      mediaRec = new MediaRecorder(stream);
+                      mediaRec.ondataavailable = function(e){
+                        chunks.push(e.data);
+                        };
+                      mediaRec.onstop = function(){        
+                        let file = new Blob(chunks,{ 'type' : 'audio/wav' });
+                        save_record(file);
+                      }
+                      mediaRec.onstart = function(){
+                        console.log("microphone started!");
+                        var secs=$rootScope.timer*1000;
+                        timer=$timeout(function(){
+                          stop();
+                        },secs);
+                      };
+                      $rootScope.recording=true;
+                      mediaRec.start(secs);
+                      count_down();
+                }).catch(function(err) {
+                  $rootScope.recording=false;
+                      $rootScope.file_added=false;
+                  $ionicPopup.alert({template:"Microphone failed to  connect"});
+                  console.log("error in mic connection");
+                  console.log(err);
+                  stop();
+                });
       },
 
       stop:function(){
@@ -418,13 +423,12 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
                     $timeout(function(){
                       $rootScope.hide();
                     },2000);
-                    if($rootScope.mediaRec){
-                      $rootScope.mediaRec.stopRecord();
-                    }
-                    // if(mediaRec){
-                    //   mediaRec.stop();
-                    //   }
-                    // save_record(file);
+                    // if($rootScope.mediaRec){
+                    //   $rootScope.mediaRec.stopRecord();
+                    // }
+                    if(mediaRec){
+                      mediaRec.stop();
+                      }
                     $rootScope.post.filter=voice_filters[0];
               }
     }
