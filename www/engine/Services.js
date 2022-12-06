@@ -345,7 +345,6 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
 
 
                   //  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (entry) {
-                  //   console.log('accessing storage:',entry);
                   //   $rootScope.recording=true;
                   //   $rootScope.file_added=false;
                   //   if(window.KeepAwake){
@@ -360,7 +359,11 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
                   //             $rootScope.mediaRec=$cordovaMedia.newMedia(fileEntry.nativeURL,function() {
                   //                                       console.log("recordAudio():Audio Success");
                   //                                       $rootScope.recording=false;
-                  //                                       fileEntry.file(file => {
+                  //                                        GetFileObjectFromURL(fileEntry.nativeURL,function(file){
+                  //                                         const blob = new Blob([file],{type:'audio/wav'});
+                  //                                         save_record(blob);
+                  //                                       });
+                  //                                       fileEntry.file(function(file){
                   //                                         const blob = new Blob([file],{type:'audio/wav'});
                   //                                         save_record(blob);
                   //                                       });

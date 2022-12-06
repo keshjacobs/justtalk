@@ -2644,31 +2644,32 @@ $rootScope.today=date;
 const FirebasePlugin = window.FirebasePlugin || this.firebasePlugin;
       
 if(FirebasePlugin){
-      FirebasePlugin.getToken(function(token) {
-        $rootScope.pushtoken=token;
-        $localStorage.pushtoken=token;
-       if($rootScope.user){
-        $rootScope.user.pushtoken=token;
-        $rootScope.account_update($rootScope.user);
-       }
-      FirebasePlugin.setBadgeNumber(0);
-   });
-   FirebasePlugin.requestPushPermission();
-   FirebasePlugin.grantPermission(function(hasPermission){
-    console.log("Aeby Push Permission was " + (hasPermission ? "granted" : "denied"));
-    });
-   FirebasePlugin.onTokenRefresh(function(token) {
-    console.log("...............justtalk signed fcm generated token:");
-    if(token){
-      if($rootScope.user){
-        $rootScope.pushtoken=token;
-        $localStorage.pushtoken=$rootScope.pushtoken;
-        $rootScope.user.pushtoken=$rootScope.pushtoken;
-        $rootScope.account_update($rootScope.user);
-          }
-        }
-    FirebasePlugin.setBadgeNumber(0);
-});
+
+          FirebasePlugin.getToken(function(token) {
+            $rootScope.pushtoken=token;
+            $localStorage.pushtoken=token;
+            if($rootScope.user){
+            $rootScope.user.pushtoken=token;
+            $rootScope.account_update($rootScope.user);
+            }
+          FirebasePlugin.setBadgeNumber(0);
+        });
+        FirebasePlugin.requestPushPermission();
+        FirebasePlugin.grantPermission(function(hasPermission){
+        console.log("Aeby Push Permission was " + (hasPermission ? "granted" : "denied"));
+        });
+        FirebasePlugin.onTokenRefresh(function(token) {
+        console.log("...............justtalk signed fcm generated token:");
+        if(token){
+          if($rootScope.user){
+            $rootScope.pushtoken=token;
+            $localStorage.pushtoken=$rootScope.pushtoken;
+            $rootScope.user.pushtoken=$rootScope.pushtoken;
+            $rootScope.account_update($rootScope.user);
+              }
+            }
+        FirebasePlugin.setBadgeNumber(0);
+      });
 
 
       navigator.geolocation.getCurrentPosition(function(position){
@@ -2706,22 +2707,21 @@ if(FirebasePlugin){
 
       });
     }
+
     cordova.plugins.backgroundMode.enable();
 
-      cordova.plugins.backgroundMode.on('activate', function() {
-        cordova.plugins.backgroundMode.disableWebViewOptimizations(); 
-     });
+    cordova.plugins.backgroundMode.on('activate', function() {
+      cordova.plugins.backgroundMode.disableWebViewOptimizations(); 
+    });
 
-      if (device.platform == 'iOS') {
-        console.log("running on iOS!!!");
-            cordova.plugins.iosrtc.registerGlobals();
-            cordova.plugins.iosrtc.debug.enable('*', true);
-      }
+    if (device.platform == 'iOS') {
+          cordova.plugins.iosrtc.registerGlobals();
+          cordova.plugins.iosrtc.debug.enable('*', true);
+    }
 
+    Splashscreen.hide();
 
-      Splashscreen.hide();
-
-      cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
+    cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
         if(!isEnabled){
           cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
             successCallback: function(){
@@ -2738,39 +2738,32 @@ if(FirebasePlugin){
             omitRegistration: false
           });
         }
-      });
+    });
 
 
     var permissions = cordova.plugins.permissions;
-    permissions.requestPermissions([
-      permissions.permission.RECORD_AUDIO,
-      permissions.permission.CAMERA,
-      permissions.permission.NOTIFICATIONS,
-      permissions.permission.READ_EXTERNAL_STORAGE,
-      permissions.permission.WRITE_EXTERNAL_STORAGE,
-      permissions.permission.ACCESS_FINE_LOCATION,
-      permissions.permission.ACCESS_COARSE_LOCATION
-    ],
-    function(statuses){
-      for (var permission in statuses){
-          switch(statuses[permission]){
-              case permissions.permissionStatus.GRANTED:
-                  console.log("Permission granted to use "+permission);
-                  break;
-              case permissions.permissionStatus.NOT_REQUESTED:
-                  console.log("Permission to use "+permission+" has not been requested yet");
-                  break;
-              case permissions.permissionStatus.DENIED_ONCE:
-                  console.log("Permission denied to use "+permission+" - ask again?");
-                  break;
-              case permissions.permissionStatus.DENIED_ALWAYS:
-                  console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
-                  break;
+    var list = [
+                permissions.RECORD_AUDIO,
+                permissions.CAMERA,
+                permissions.NOTIFICATIONS,
+                permissions.READ_EXTERNAL_STORAGE,
+                permissions.WRITE_EXTERNAL_STORAGE,
+                permissions.ACCESS_FINE_LOCATION,
+                permissions.ACCESS_COARSE_LOCATION,
+                permissions.GET_ACCOUNTS,
+                permissions.READ_CONTACTS
+              ];
+        permissions.hasPermission(list, function(status) {
+          if(!status.hasPermission) {
+            permissions.requestPermissions(list,
+              null
+              ,function(error){
+                  console.error("The following error occurred: "+error);
+              });
           }
-        }
-      }, function(error){
-        console.error("The following error occurred: "+error);
-      });
+        }, null);
+
+      
 
 
 

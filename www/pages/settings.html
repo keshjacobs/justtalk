@@ -1,31 +1,28 @@
 <ion-view class="bg-grey">
-  <ion-nav-bar class="bar bg-grey">
 
+  <ion-nav-bar class="bar bg-grey">
     <ion-nav-title>
       <b>Settings</b>
     </ion-nav-title>
-
-
     <ion-nav-buttons side="left">
       <button title="back" class="button button-clear" back-button nav-direction="back">
-        <i class="icon ion-ios-arrow-back dark"></i></button>
+        <i class="icon ion-ios-arrow-back dark"></i>
+      </button>
     </ion-nav-buttons>
-
   </ion-nav-bar>
 
   <ion-content>
+    <br/>
     
     <ion-item ui-sref="changepassword" class="text-left item-icon-right">
       <b><i class="icon ion-lock-combination" style="font-size: 30px !important;"></i>  Change password</b>
     </ion-item>
-
     <ion-item ng-click="delete_account()" class="text-left item-icon-right assertive">
-    <b><i class="icon ion-trash-b" style="font-size: 30px !important;"></i>  Delete account</b>
+      <b><i class="icon ion-trash-b" style="font-size: 30px !important;"></i>  Delete account</b>
     </ion-item>
-
     <ion-item ng-click="logout()" class="text-left item-icon-right assertive">
-    <b><i class="icon ion-log-out" style="font-size: 30px !important;"></i>  Logout</b>
+      <b><i class="icon ion-log-out" style="font-size: 30px !important;"></i>  Logout</b>
     </ion-item>
-
   </ion-content>
+
 </ion-view>
