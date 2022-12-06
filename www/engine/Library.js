@@ -2373,18 +2373,18 @@ $rootScope.listen_to=function(casts){
 
 $rootScope.discovery=function(){
   $rootScope.casts_loading=true;
-  cast.trending().success(function(Data){
+  cast.trending($rootScope.user.coord).success(function(Data){
     if(Data.status==true){
         $rootScope.trending_topics=$rootScope.censor_casts(Data.data);
         $rootScope.top_boys=$rootScope.listen_to($rootScope.trending_topics);
     }
 });
-account.suggestion().success(function(Data){
+account.suggestion($rootScope.user.coord).success(function(Data){
     if(Data.status==true){
         $rootScope.suggested_users=Data.data;    
     }
 });
-cast.suggestion().success(function(Data){
+cast.suggestion($rootScope.user.coord).success(function(Data){
     if(Data.status==true){
         $rootScope.suggested_casts=$rootScope.censor_casts(Data.data);    
         $rootScope.casts_loading=false;

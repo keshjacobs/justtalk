@@ -161,8 +161,8 @@ app.factory('account',function($http,Config){
      resend_code:function(data){
       return $http.get(Config.API +  "resend_code/"+data);
     },
-    suggestion:function(){
-      return $http.get(Config.API +  "suggestion");
+    suggestion:function(data){
+      return $http.post(Config.API +  "suggestion",data);
     },
     subscribe:function(data){
       return $http.post(Config.API +  "subscribe",data);
@@ -290,8 +290,8 @@ app.factory('cast',function($http,Config){
     timeline:function(data){
       return $http.get(Config.API +  "cast/timeline/"+data);
     },
-    suggestion:function(){
-      return $http.get(Config.API +  "cast/suggestion");
+    suggestion:function(data){
+      return $http.post(Config.API +  "cast/suggestion",data);
     },
     more_timeline:function(data){
       return $http.post(Config.API +  "cast/timeline",data);
@@ -299,8 +299,8 @@ app.factory('cast',function($http,Config){
     more_suggestion:function(data){
       return $http.post(Config.API +  "cast/suggestion",data);
     },
-    trending:function(){
-      return $http.get(Config.API +  "cast/trending");
+    trending:function(data){
+      return $http.post(Config.API +  "cast/trending",data);
     }
   };
 })
