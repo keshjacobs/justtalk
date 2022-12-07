@@ -302,27 +302,7 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
                 },1000);
      }
 
-    function GetFileBlobUsingURL(url, convertBlob) {
-              var xhr = new XMLHttpRequest();
-              xhr.open("GET", url);
-              xhr.responseType = "blob";
-              xhr.addEventListener('load', function() {
-                  convertBlob(xhr.response);
-              });
-              xhr.send();
-          };
-
-    function blobToFile(blob, name) {
-          blob.lastModifiedDate = new Date();
-          blob.name = name;
-          return blob;
-    };
-
-    function GetFileObjectFromURL(filePathOrUrl, convertBlob) {
-        GetFileBlobUsingURL(filePathOrUrl, function (blob) {
-            convertBlob(blobToFile(blob, 'testFile.jpg'));
-        });
-    };
+    
      
     return  {
     rec:function(secs){
@@ -383,14 +363,12 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
 
                   MediaDevices.getUserMedia({audio:true,video:false}).then(function(stream) {
                     console.log("Mic connected successfully........");
-                      var options = {
-                        mimeType : 'audio/wavc'
-                      }
                       mediaRec = new MediaRecorder(stream);
                       mediaRec.ondataavailable = function(e){
                         chunks.push(e.data);
                         };
-                      mediaRec.onstop = function(){        
+                      mediaRec.onstop = function(){      
+                        console.log("stopped recording...");  
                         let file = new Blob(chunks,{ 'type' : 'audio/wav' });
                         save_record(file);
                       }
@@ -400,10 +378,10 @@ app.factory('$cordovaMedia', ['$q', function ($q) {
                         timer=$timeout(function(){
                           stop();
                         },secs);
+                        $rootScope.recording=true;
+                        count_down();
                       };
-                      $rootScope.recording=true;
                       mediaRec.start(secs);
-                      count_down();
                 }).catch(function(err) {
                   $rootScope.recording=false;
                       $rootScope.file_added=false;

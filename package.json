@@ -245,8 +245,7 @@
       "cordova-plugin-android-permissions": {}
     },
     "platforms": [
-      "browser",
-      "android"
+      "browser"
     ]
   }
 }

@@ -196,7 +196,7 @@ $rootScope.next_message=function(){
   $rootScope.play_audio=function (audio){
     var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
     $rootScope.AudioMan=new Aud();
-    $cordovaMedia.newMedia(audio);
+    // $cordovaMedia.newMedia(audio);
     var source = $rootScope.AudioMan.createBufferSource();
     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
     const gainNodeR = $rootScope.AudioMan.createGain();
@@ -1475,7 +1475,7 @@ $rootScope.upload_cast=function(c){
           this.post.cast.casting=false;
         }
       }
-      MusicControls.updateIsPlaying(false);
+        MusicControls.updateIsPlaying(false);
     }
 
 
@@ -2111,6 +2111,10 @@ img.onload = function() {
     callback(null);
   }
 }
+
+
+
+
 
       $rootScope.play_casts=function(cs){
         $rootScope.playlist=cs.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
@@ -2753,15 +2757,15 @@ if(FirebasePlugin){
                 permissions.GET_ACCOUNTS,
                 permissions.READ_CONTACTS
               ];
-        permissions.hasPermission(list, function(status) {
-          if(!status.hasPermission) {
+        // permissions.hasPermission(list, function(status) {
+        //   if(!status.hasPermission) {
             permissions.requestPermissions(list,
               null
               ,function(error){
                   console.error("The following error occurred: "+error);
               });
-          }
-        }, null);
+        //   }
+        // }, null);
 
       
 
