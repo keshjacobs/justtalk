@@ -28,9 +28,6 @@
     <allow-intent href="*" />
     <allow-intent href="file://*/*" />
     <allow-intent href="file://*" />
-    <resources>
-        <color name="background">#290000</color>
-    </resources>
     <preference name="EnableViewportScale" value="false" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
     <preference name="GradlePluginGoogleServicesVersion" value="4.3.10" />
@@ -82,21 +79,6 @@
     <universal-links>
         <host name="justtalkapp.com" scheme="https" />
     </universal-links>
-    <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission name="com.example.towntour.permission.MAPS_RECEIVE" />
-    <uses-permission name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission name="android.permission.INTERNET" />
-    <uses-permission name="android.permission.CAMERA" />
-    <uses-permission name="android.permission.RECORD_AUDIO" />
-    <uses-permission name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-feature name="android.hardware.camera" />
-    <uses-feature name="android.hardware.camera.autofocus" />
     <cross-domain-policy>
         <site-control permitted-cross-domain-policies="all" />
         <allow-access-from domain="angular-file-upload.appspot.com" />
@@ -104,7 +86,7 @@
     </cross-domain-policy>
     <icon src="resources/icon.png" />
     <platform name="android">
-        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:usesCleartextTraffic="true" />
         </edit-config>
         <preference name="android-minSdkVersion" value="19" />
@@ -112,15 +94,32 @@
         <preference name="android-compileSdkVersion" value="31" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <activity android:exported="true" />
-            <receiver android:exported="false" />
-            <service android:exported="false" />
-            <provider android:exported="false" />
         </edit-config>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
-            <application android:networkSecurityConfig="@xml/network_security_config" />
-            <application android:requestLegacyExternalStorage="true" />
+            <receiver android:exported="false" />
+        </edit-config>
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <service android:exported="false" />
+        </edit-config>
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <provider android:exported="false" />
         </edit-config>
         <preference name="AndroidXEnabled" value="true" />
+        <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+        <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission name="com.example.towntour.permission.MAPS_RECEIVE" />
+        <uses-permission name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+        <uses-permission name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission name="android.permission.ACCESS_MOCK_LOCATION" />
+        <uses-permission name="android.permission.INTERNET" />
+        <uses-permission name="android.permission.CAMERA" />
+        <uses-permission name="android.permission.RECORD_AUDIO" />
+        <uses-permission name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-feature name="android.hardware.camera" />
+        <uses-feature name="android.hardware.camera.autofocus" />
         <allow-intent href="tel:*" />
         <allow-intent href="sms:*" />
         <allow-intent href="mailto:*" />
