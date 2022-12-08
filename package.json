@@ -59,6 +59,7 @@
     "@ionic/lab": "3.2.13",
     "@ionic/v1-toolkit": "^3.2.15",
     "bower": "^1.8.12",
+    "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
@@ -242,6 +243,10 @@
       "cordova-plugin-advanced-background-mode": {},
       "cordova-plugin-x-toast": {},
       "cordova-plugin-android-permissions": {}
-    }
+    },
+    "platforms": [
+      "android",
+      "browser"
+    ]
   }
 }

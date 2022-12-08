@@ -2745,27 +2745,27 @@ if(FirebasePlugin){
     });
 
 
-    var permissions = cordova.plugins.permissions;
-    var list = [
-                permissions.RECORD_AUDIO,
-                permissions.CAMERA,
-                permissions.NOTIFICATIONS,
-                permissions.READ_EXTERNAL_STORAGE,
-                permissions.WRITE_EXTERNAL_STORAGE,
-                permissions.ACCESS_FINE_LOCATION,
-                permissions.ACCESS_COARSE_LOCATION,
-                permissions.GET_ACCOUNTS,
-                permissions.READ_CONTACTS
-              ];
-        // permissions.hasPermission(list, function(status) {
-        //   if(!status.hasPermission) {
-            permissions.requestPermissions(list,
-              null
-              ,function(error){
-                  console.error("The following error occurred: "+error);
-              });
-        //   }
-        // }, null);
+    // var permissions = cordova.plugins.permissions;
+    // var list = [
+    //             permissions.RECORD_AUDIO,
+    //             permissions.CAMERA,
+    //             permissions.NOTIFICATIONS,
+    //             permissions.READ_EXTERNAL_STORAGE,
+    //             permissions.WRITE_EXTERNAL_STORAGE,
+    //             permissions.ACCESS_FINE_LOCATION,
+    //             permissions.ACCESS_COARSE_LOCATION,
+    //             permissions.GET_ACCOUNTS,
+    //             permissions.READ_CONTACTS
+    //           ];
+    //     permissions.hasPermission(list, function(status) {
+    //       if(!status.hasPermission) {
+    //         permissions.requestPermissions(list,
+    //           null
+    //           ,function(error){
+    //               console.error("The following error occurred: "+error);
+    //           });
+    //       }
+    //     }, null);
 
       
 
