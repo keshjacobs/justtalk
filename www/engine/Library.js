@@ -2377,18 +2377,25 @@ $rootScope.listen_to=function(casts){
 
 $rootScope.discovery=function(){
   $rootScope.casts_loading=true;
-  cast.trending($rootScope.user.coord).success(function(Data){
+  var coord={
+    lat:0,
+    long:0
+  };
+  if($rootScope.user){
+     coord=$rootScope.user.coord;
+  }
+   cast.trending(coord).success(function(Data){
     if(Data.status==true){
         $rootScope.trending_topics=$rootScope.censor_casts(Data.data);
         $rootScope.top_boys=$rootScope.listen_to($rootScope.trending_topics);
     }
 });
-account.suggestion($rootScope.user.coord).success(function(Data){
+account.suggestion(coord).success(function(Data){
     if(Data.status==true){
         $rootScope.suggested_users=Data.data;    
     }
 });
-cast.suggestion($rootScope.user.coord).success(function(Data){
+cast.suggestion(coord).success(function(Data){
     if(Data.status==true){
         $rootScope.suggested_casts=$rootScope.censor_casts(Data.data);    
         $rootScope.casts_loading=false;
@@ -2658,7 +2665,6 @@ if(FirebasePlugin){
             }
           FirebasePlugin.setBadgeNumber(0);
         });
-        FirebasePlugin.requestPushPermission();
         FirebasePlugin.grantPermission(function(hasPermission){
         console.log("Aeby Push Permission was " + (hasPermission ? "granted" : "denied"));
         });
@@ -2676,14 +2682,7 @@ if(FirebasePlugin){
       });
 
 
-      navigator.geolocation.getCurrentPosition(function(position){
-        $rootScope.user.coord={
-          lat:position.coords.latitude,
-          long:position.coords.longitude
-        };
-        $rootScope.account_update($rootScope.user);
-      });
-
+ 
 
       FirebasePlugin.onMessageReceived(function(data) {
         $rootScope.notify=true;
@@ -2712,6 +2711,161 @@ if(FirebasePlugin){
       });
     }
 
+
+function request_location(){
+  new Promise((resolve, reject) => {
+    cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+      switch(status){
+          case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+              console.log("Permission not requested");
+              break;
+          case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+              console.log("Permission denied");
+              break;
+          case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+              console.log("Permission granted always");
+              break;
+          case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+              console.log("Permission granted only when in use");
+              break;
+      }
+      resolve();
+    }, function(error){
+      console.error(error);
+      reject(err);
+    }, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS
+    , cordova.plugins.diagnostic.locationAccuracyAuthorization.REDUCED);
+  });
+}
+
+
+
+
+
+
+function request_notification(){
+  new Promise((resolve, reject) => {
+    cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
+        if(!isEnabled){
+          cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
+            successCallback: function(){
+                console.log("Successfully requested remote notifications authorization");
+                resolve();
+            },
+            errorCallback: function(err){
+              console.error("Error requesting remote notifications authorization: " + err);
+            },
+            types: [
+                cordova.plugins.diagnostic.remoteNotificationType.ALERT,
+                cordova.plugins.diagnostic.remoteNotificationType.SOUND,
+                cordova.plugins.diagnostic.remoteNotificationType.BADGE
+            ],
+            omitRegistration: false
+          });
+        }
+    },function(err){
+      reject(err);
+    });
+  });
+  }
+
+
+
+  function request_microphone(){
+    new Promise((resolve, reject) => {
+    cordova.plugins.diagnostic.isMicrophoneAuthorized(function(isEnabled){
+        if(!isEnabled){
+          cordova.plugins.diagnostic.requestMicrophoneAuthorization(
+            function(){
+                console.log("Successfully requested microphone authorization");
+                resolve();
+            },
+            function(err){
+              console.error("Error requesting microphone authorization: " + err);
+              reject(err);
+            });
+        }
+    });
+  });
+  }
+
+
+  function request_contacts(){
+    new Promise((resolve, reject) => {
+    cordova.plugins.diagnostic.isContactsAuthorized(function(isEnabled){
+        if(!isEnabled){
+          cordova.plugins.diagnostic.requestContactsAuthorization(function(){
+                console.log("Successfully requested Contacts authorization");
+                resolve();
+            },
+            function(err){
+              console.error("Error requesting Contacts authorization: " + err);
+              reject(err);
+            });
+        }
+    });
+  });
+  }
+
+  function request_storage(){
+    new Promise((resolve, reject) => {
+    cordova.plugins.diagnostic.isExternalStorageAuthorized(function(isEnabled){
+        if(!isEnabled){
+          cordova.plugins.diagnostic.requestExternalStorageAuthorization(function(){
+                console.log("Successfully requested Storage authorization");
+                resolve();
+            },function(err){
+              console.error("Error requesting Storage authorization: " + err);
+              reject(err);
+            });
+        }
+    });
+  });
+  };
+  
+  
+    // request_microphone();
+    // request_location();
+    // request_storage();  
+    // request_notification();
+    // request_contacts();
+
+
+    // $timeout(function(){
+    //   request_microphone();
+    // },1000);
+
+    // $timeout(function(){
+    //   request_location();
+    // },2000);
+
+    // $timeout(function(){
+    //   request_storage();
+    // },3000);
+
+    // $timeout(function(){
+    //   request_notification();
+    // },4000);
+
+    // $timeout(function(){
+    //   request_contacts();
+    // },5000);
+
+
+    request_microphone().then(function(){
+      request_location().then(function(){
+        request_storage().then(function(){
+          request_notification().then(function(){
+              request_contacts().then(function(){
+                console.error("All permissions authorizated!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+              });
+          });
+        });
+      });
+    });
+  
+    
+
     cordova.plugins.backgroundMode.enable();
 
     cordova.plugins.backgroundMode.on('activate', function() {
@@ -2725,53 +2879,72 @@ if(FirebasePlugin){
 
     Splashscreen.hide();
 
-    cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
-        if(!isEnabled){
-          cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
-            successCallback: function(){
-                console.log("Successfully requested remote notifications authorization");
-            },
-            errorCallback: function(err){
-              console.error("Error requesting remote notifications authorization: " + err);
-            },
-            types: [
-                cordova.plugins.diagnostic.remoteNotificationType.ALERT,
-                cordova.plugins.diagnostic.remoteNotificationType.SOUND,
-                cordova.plugins.diagnostic.remoteNotificationType.BADGE
-            ],
-            omitRegistration: false
-          });
-        }
-    });
-
-
-    // var permissions = cordova.plugins.permissions;
+    // const permissions = cordova.plugins.diagnostic;
     // var list = [
-    //             permissions.RECORD_AUDIO,
-    //             permissions.CAMERA,
-    //             permissions.NOTIFICATIONS,
-    //             permissions.READ_EXTERNAL_STORAGE,
-    //             permissions.WRITE_EXTERNAL_STORAGE,
-    //             permissions.ACCESS_FINE_LOCATION,
-    //             permissions.ACCESS_COARSE_LOCATION,
-    //             permissions.GET_ACCOUNTS,
-    //             permissions.READ_CONTACTS
+    //             permissions.permission.RECORD_AUDIO,
+    //             permissions.permission.CAMERA,
+    //             permissions.permission.NOTIFICATIONS,
+    //             permissions.permission.ACCESS_COARSE_LOCATION,
+    //             permissions.permission.READ_CONTACTS
     //           ];
-    //     permissions.hasPermission(list, function(status) {
-    //       if(!status.hasPermission) {
-    //         permissions.requestPermissions(list,
-    //           null
-    //           ,function(error){
+    //          permissions.requestRuntimePermissions(function(statuses){
+    //           for (var permission in statuses){
+    //               switch(statuses[permission]){
+    //                   case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+    //                       console.log("Permission granted to use "+permission);
+    //                       break;
+    //                   case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+    //                       console.log("Permission to use "+permission+" has not been requested yet");
+    //                       break;
+    //                   case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
+    //                       console.log("Permission denied to use "+permission+" - ask again?");
+    //                       break;
+    //                   case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+    //                       console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+    //                       break;
+    //               }
+    //           }
+    //       },function(error){
     //               console.error("The following error occurred: "+error);
-    //           });
-    //       }
-    //     }, null);
+    //           },
+    //           list);
 
-      
+  cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
+    for (var permission in statuses){
+        switch(statuses[permission]){
+            case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                console.log("Permission granted to use "+permission);
+                break;
+            case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                console.log("Permission to use "+permission+" has not been requested yet");
+                break;
+            case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
+                console.log("Permission denied to use "+permission+" - ask again?");
+                break;
+            case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+                break;
+        }
+    }
+}, function(error){
+    console.error("The following error occurred: "+error);
+},[  
+  cordova.plugins.diagnostic.permission.RECORD_AUDIO,
+  cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE
+]);
 
 
 
 
+navigator.geolocation.getCurrentPosition(function(position){
+  if($rootScope.user){
+    $rootScope.user.coord={
+      lat:position.coords.latitude,
+      long:position.coords.longitude
+    };
+    $rootScope.account_update($rootScope.user);
+  }
+});
 
 
 
