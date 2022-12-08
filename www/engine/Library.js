@@ -2712,8 +2712,7 @@ if(FirebasePlugin){
     }
 
 
-function request_location(){
-  new Promise((resolve, reject) => {
+const request_location=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
       switch(status){
           case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
@@ -2736,15 +2735,13 @@ function request_location(){
     }, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS
     , cordova.plugins.diagnostic.locationAccuracyAuthorization.REDUCED);
   });
-}
 
 
 
 
 
 
-function request_notification(){
-  new Promise((resolve, reject) => {
+const request_notification=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.isRemoteNotificationsEnabled(function(isEnabled){
         if(!isEnabled){
           cordova.plugins.diagnostic.requestRemoteNotificationsAuthorization({
@@ -2767,12 +2764,11 @@ function request_notification(){
       reject(err);
     });
   });
-  }
+  
 
 
 
-  function request_microphone(){
-    new Promise((resolve, reject) => {
+  const request_microphone=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.isMicrophoneAuthorized(function(isEnabled){
         if(!isEnabled){
           cordova.plugins.diagnostic.requestMicrophoneAuthorization(
@@ -2787,11 +2783,9 @@ function request_notification(){
         }
     });
   });
-  }
 
 
-  function request_contacts(){
-    new Promise((resolve, reject) => {
+  const request_contacts=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.isContactsAuthorized(function(isEnabled){
         if(!isEnabled){
           cordova.plugins.diagnostic.requestContactsAuthorization(function(){
@@ -2805,10 +2799,10 @@ function request_notification(){
         }
     });
   });
-  }
+  
 
-  function request_storage(){
-    new Promise((resolve, reject) => {
+
+  const request_storage=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.isExternalStorageAuthorized(function(isEnabled){
         if(!isEnabled){
           cordova.plugins.diagnostic.requestExternalStorageAuthorization(function(){
@@ -2821,7 +2815,7 @@ function request_notification(){
         }
     });
   });
-  };
+
   
   
     // request_microphone();
@@ -2852,11 +2846,11 @@ function request_notification(){
     // },5000);
 
 
-    request_microphone().then(function(){
-      request_location().then(function(){
-        request_storage().then(function(){
-          request_notification().then(function(){
-              request_contacts().then(function(){
+    request_microphone.then(function(){
+      request_location.then(function(){
+        request_storage.then(function(){
+          request_notification.then(function(){
+              request_contacts.then(function(){
                 console.error("All permissions authorizated!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
               });
           });
@@ -2876,9 +2870,6 @@ function request_notification(){
           cordova.plugins.iosrtc.registerGlobals();
           cordova.plugins.iosrtc.debug.enable('*', true);
     }
-
-    Splashscreen.hide();
-
     // const permissions = cordova.plugins.diagnostic;
     // var list = [
     //             permissions.permission.RECORD_AUDIO,
