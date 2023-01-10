@@ -197,7 +197,7 @@ $rootScope.next_message=function(){
     var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
     $rootScope.AudioMan=new Aud();
     // $cordovaMedia.newMedia(audio);
-    var source = $rootScope.AudioMan.createBufferSource();
+    const source = $rootScope.AudioMan.createBufferSource();
     const biquadFilter = $rootScope.AudioMan.createBiquadFilter();
     const gainNodeR = $rootScope.AudioMan.createGain();
     const analyser = $rootScope.AudioMan.createAnalyser();
@@ -219,9 +219,9 @@ $rootScope.next_message=function(){
       main_cast.filter=voice_filters[0];
     }
     var timeLeft=parseInt(main_cast.timeLeft) || 0;
-    var ct=parseInt(main_cast.duration) - timeLeft; 
+    const time=parseInt(main_cast.duration) - timeLeft; 
     if(main_cast.music){
-      $rootScope.connect_music(main_cast.music,ct,0.1);
+      $rootScope.connect_music(main_cast.music,time,0.2);
     }
     $http.get(audio, {responseType: "arraybuffer"}).success(function(arrayBuffer) {
       $rootScope.AudioMan.decodeAudioData(arrayBuffer).then(function(buffer) {
@@ -232,18 +232,13 @@ $rootScope.next_message=function(){
       source.muted = false;
       source.loop=false;
       source.autoplay=true;
-      source.channelInterpretation = "speakers";
       source.playbackRate.value=main_cast.filter.pitch;
-      source.connect(biquadFilter);
+      gainNodeR.gain.value = 2;
       biquadFilter.type = main_cast.filter.type;
       biquadFilter.frequency.value = main_cast.filter.frequency;
+      source.connect(biquadFilter);
       biquadFilter.connect(gainNodeR);
-      gainNodeR.gain.value = 1;
-      gainNodeR.connect(analyser);
-      analyser.connect($rootScope.AudioMan.destination);
-      analyser.fftSize = 256;
-      $rootScope.bufferLength = analyser.frequencyBinCount;
-      $rootScope.dataArray = new Uint8Array($rootScope.bufferLength);
+      gainNodeR.connect($rootScope.AudioMan.destination);
       source.onended=function(){   
           if($rootScope.Music.stop){
             $rootScope.Music.stop();
@@ -258,11 +253,11 @@ $rootScope.next_message=function(){
           }
         };
           if (source.start) {
-            source.start(0,ct); 
+            source.start(0,time); 
             } else if (source.play) {
-              source.play(0,ct);
+              source.play(0,time);
             } else if (source.noteOn) {
-                source.noteOn(0,ct);
+                source.noteOn(0,time);
             }
             console.log("start.............");
             $rootScope.source=source;
@@ -297,7 +292,7 @@ $rootScope.connect_music=function (audio,ct,loudness) {
   var Aud= window.webkitAudioContext || AudioContext || window.AudioContext;
   var newMedia=new Aud();
   const gainNodeL = newMedia.createGain();
-  var music_source =newMedia.createBufferSource();
+  const music_source =newMedia.createBufferSource();
   $http.get(Config.media+audio, {responseType: "arraybuffer"}).success(function(bf) {
     newMedia.decodeAudioData(bf).then(function(buffer) {
       if(buffer){
